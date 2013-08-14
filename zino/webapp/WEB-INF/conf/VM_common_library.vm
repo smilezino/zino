@@ -1,0 +1,37 @@
+#*
+* 全局宏
+*#
+
+##以相对路径方式嵌入动态页面
+#macro(invoke $__p_page)
+    #if($__p_page.startsWith("/"))
+		#parse($__p_page)
+    #else
+		#set($__uri = $resource.this_vm())
+		#set($__path = $__uri.substring(0, $__uri.lastIndexOf("/")))
+		#parse("$__path/$__p_page")
+    #end
+#end
+
+##分页宏
+#macro(pager $_url $_page $_size $_totle)
+	#set($_count = $_page*$_size)
+	#if($_count < $_totle)
+		#if($_page == 1)
+			#set($_next = $_page + 1)
+			#set($_p_url = $_url + "p=" + $_next)
+			<div class="pagenum"><a href="$_p_url">下一页</a></div>
+		#else
+			#set($_next = $_page + 1)
+			#set($_pre = $_page - 1)
+			#set($_p_url = $_url + "p=" + $_pre)
+			<div class="pagenum"><a href="$_p_url">上一页</a>
+			#set($_p_url = $_url + "p=" + $_next)
+			<a href="$_p_url">下一页</a></div>
+		#end
+	#elseif($_page > 1)
+		#set($_pre = $_page - 1)
+		#set($_p_url = $_url + "p=" + $_pre)
+        <div class="pagenum"><a href="$_p_url">上一页</a></div>
+	#end
+#end

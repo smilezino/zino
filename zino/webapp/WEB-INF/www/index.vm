@@ -1,0 +1,5 @@
+#if($g_user)
+	$link.redirect($g_user.role)
+#else
+	$link.redirect("/login")
+#end

@@ -1,0 +1,97 @@
+#set($layout = "_index.vm")
+#set($page_title = "登陆")
+<style>
+.l_login {position:relative;border:1px solid gray;width:360px;margin:50px auto 50px auto;}
+.l_tab {height: 32px;overflow: hidden;}
+.l_tab li {margin:0 10px;}
+.s {list-style-type: none;color: blue;font-size: 14px;line-height: 36px;cursor: pointer;font-family: "微软雅黑";float: right;}
+.f {list-style-type: none;font-size: 18px;line-height: 36px;font-weight: bold;font-family: "微软雅黑";float: left;color: #444;}
+.l_tab .a {display: none;}
+.l_login_tab {padding:0 40px;padding-top: 20px;height:180px;border-top: 1px solid gray;position:relative;}
+form {font-size: 14px;font-weight: bold;color: gray;font-family: "宋体";}
+.username,.password,.verifycode,.button {margin-top: 10px;height: 22px;position: relative;margin-left:10px;}
+.code{text-align:right;margin:0 55px 5px 0;font-family:'微软雅黑'}
+.v_left,.v_right {float:left;}
+#i_username,#i_password {width: 160px;height: 20px;line-height: 20px;border: 1px solid #CCC;	}
+#i_verifycode {width: 100px;height: 20px;line-height: 20px;border: 1px solid #CCC;	}
+.btns{position:relative;margin:20px 0}
+.btn1{float:left;margin-left:50px}
+.btn2{float:right;margin-right:70px}
+#errormsg {color:red;font-size:14px;height:20px;text-align:center;}
+</style>
+<div class="login">
+	<div class="l_login">
+		<div class="l_tab">
+    		<ul>
+    			<li class="f">教师登录</li>
+    			<li class="s"><a href="$link.link("/admin/login")">管理入口</a></li>
+    		</ul>
+        </div>
+		<div class="l_login_tab">
+			<div id="errormsg">
+			</div>
+			<form id="login" action="$link.action("user/login")" method="post">
+				<div class="username">
+					工&nbsp;&nbsp;号：
+					<input type="text" name="username" id="i_username" />
+				</div>
+				<div class="password">
+					密&nbsp;&nbsp;码：
+					<input type="password" name="password" id="i_password" />
+				</div>
+				<div class="verifycode">
+					<div class="v_left">
+						验证码：
+						<input type="text" name="verifycode" id="i_verifycode" />
+					</div>
+					<div class="v_right">
+						<img src="$link.action("file/pic")" id="img_vcode" style="cursor: hand" title="换一张" onclick="javascript:_rvi()"/>
+						<script language='javascript'>function _rvi(){document.getElementById('img_vcode').src = '$link.action("file/pic")?t='+Math.random(1000);}</script>
+					</div>
+				</div>
+				<input type="hidden" name="role" value="0" />
+				<div class="btns clear">
+				<table style="border-collapse:collapse;border:none">
+					<tr style="text-align:center">
+						<td style="width:140px"><input type="submit" id="submit" value="登录" /></td>
+						<td style="width:140px"><input type="reset" id="reset" value="清空" /></td>
+					</tr>
+				</table>
+				</div>
+				<div class="clear"></div>
+			</form>
+		</div>
+    </div>
+</div>
+<script type='text/javascript'>
+	$(function(){
+		$('#login').ajaxForm({
+			beforeSubmit: function(a,f,o) {
+				if($('#i_username').val().length == 0) {
+					$('#errormsg').html("请输入用户名");
+					return false;
+				}
+				if($('#i_password').val().length == 0) {
+					$('#errormsg').html("请输入密码");
+					return false;
+				}
+				if($('#i_verifycode').val().length == 0) {
+					$('#errormsg').html("请输入验证码");
+					return false;
+				}
+			},
+			dataType:'json',
+			success: function(msg) {
+				if(msg.error){
+    				$('#errormsg').html(msg.msg);
+					$('#i_password').val("");
+					$('#i_verifycode').val("");
+					$('#i_password').focus();
+					$('#img_vcode').attr({"src":'$link.action("file/pic")?t='+Math.random(1000)});
+				}else{
+					location.href="$link.root()";
+				}
+			}
+		});
+	});
+</script>
