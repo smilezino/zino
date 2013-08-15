@@ -6,7 +6,7 @@
 	<property name="encoding" value="UTF-8"/>
     <property name="build.classes.dir" value="webapp/WEB-INF/classes"/>
 	
-    <path id="ahut.classpath">
+    <path id="zino.classpath">
         <pathelement location="${build.classes.dir}"/>
     	<fileset dir="packages" includes="*.jar" />
     	<fileset dir="webapp/WEB-INF/lib" includes="*.jar" />
