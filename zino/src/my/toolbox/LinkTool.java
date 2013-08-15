@@ -32,18 +32,15 @@ public class LinkTool extends StrutsLinkTool{
 	public static String img(String img_uri) {
 		return _link("/img", img_uri);
 	}
-	public static String teacher(String uri) {
-		return _link("/teacher", uri);
+
+	public static String bootstrap(String url) {
+		return _link("/bootstrap", url);
 	}
-	public static String admin(String uri) {
-		return _link("/admin", uri);
-	}
-	public static String manager(String uri) {
-		return _link("/manager", uri);
-	}
+	
 	public static String link(String uri) {
 		return _link(null, uri);
 	}
+	
 	private static String _link(String base, String uri) {
 		StringBuilder url = new StringBuilder(RequestContext.getContextPath());
 		if(base != null)
@@ -54,23 +51,16 @@ public class LinkTool extends StrutsLinkTool{
 		return url.toString();
 	}
 
-	public String login(int role) throws IOException {
-		if(role == 0)
-			response.sendRedirect("/login");
-		else
-			response.sendRedirect("/admin/login");
-		return "";
+	public void login() throws IOException {
+		response.sendRedirect("/login");
 	}
 
-	public String redirect(int role) throws IOException {
-		if(role == 0)
-			response.sendRedirect("/teacher");
-		else if(role == 1)
-			response.sendRedirect("/admin");
-		else
-			response.sendRedirect("/manager");
-		return "";
-	}
+	/**
+	 * 跳转
+	 * @param url
+	 * @return
+	 * @throws IOException
+	 */
 	public String redirect(String url) throws IOException {
 		response.sendRedirect(url);
 		return "";
@@ -116,6 +106,7 @@ public class LinkTool extends StrutsLinkTool{
 	public String param(String param){
 		return request.getParameter(param);
 	}
+	
 	public static String encode_url(String url) {
 		try {
 			return URLEncoder.encode(url, "utf-8");

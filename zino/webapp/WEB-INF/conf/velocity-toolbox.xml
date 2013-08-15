@@ -12,31 +12,6 @@
 		<class>my.toolbox.ResourceTool</class>
 	</tool>
 	<tool>
-		<key>teacher</key>
-		<scope>application</scope>
-		<class>my.toolbox.TeacherTool</class>
-	</tool>
-	<tool>
-		<key>project</key>
-		<scope>application</scope>
-		<class>my.toolbox.ProjectTool</class>
-	</tool>
-	<tool>
-		<key>comment</key>
-		<scope>application</scope>
-		<class>my.toolbox.CommentTool</class>
-	</tool>
-	<tool>
-		<key>course</key>
-		<scope>application</scope>
-		<class>my.toolbox.CourseTool</class>
-	</tool>
-	<tool>
-		<key>setting</key>
-		<scope>application</scope>
-		<class>my.toolbox.SettingTool</class>
-	</tool>
-	<tool>
 		<key>format</key>
 		<scope>application</scope>
 		<class>my.toolbox.FormatTool</class>

@@ -17,7 +17,7 @@ public class User extends DBbean {
 
 	@Override
 	protected String TableName() {
-		return "admins";
+		return "z_user";
 	}
 	/**
 	 * 登陆
