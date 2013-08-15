@@ -13,6 +13,7 @@ File Encoding         : 65001
 Date: 2013-08-13 16:24:36
 */
 
+
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
@@ -21,12 +22,12 @@ SET FOREIGN_KEY_CHECKS=0;
 DROP TABLE IF EXISTS `z_blog`;
 CREATE TABLE `z_blog` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `uid` int(11) DEFAULT NULL,
-  `title` varchar(120) DEFAULT NULL,
+  `uid` int(11) NOT NULL,
+  `title` varchar(120) NOT NULL,
   `text` mediumtext,
-  `view_count` int(11) DEFAULT NULL,
-  `share_count` int(11) DEFAULT NULL,
-  `status` tinyint(4) DEFAULT NULL,
+  `view_count` int(11) DEFAULT '0',
+  `share_count` int(11) DEFAULT '0',
+  `status` tinyint(4) DEFAULT '0',
   `date` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -43,7 +44,7 @@ CREATE TABLE `z_category` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `category` varchar(120) NOT NULL,
   `type` tinyint(4) DEFAULT NULL,
-  `status` tinyint(4) DEFAULT NULL,
+  `status` tinyint(4) DEFAULT '0',
   `date` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -92,7 +93,7 @@ CREATE TABLE `z_tag` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `tag` varchar(80) NOT NULL,
   `type` tinyint(4) DEFAULT NULL,
-  `status` tinyint(4) DEFAULT NULL,
+  `status` tinyint(4) DEFAULT '0',
   `date` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -127,9 +128,9 @@ CREATE TABLE `z_todo` (
 DROP TABLE IF EXISTS `z_user`;
 CREATE TABLE `z_user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(80) DEFAULT NULL,
-  `email` varchar(120) DEFAULT NULL,
-  `pwd` varchar(80) DEFAULT NULL,
+  `name` varchar(80) NOT NULL,
+  `email` varchar(120) NOT NULL,
+  `pwd` varchar(80) NOT NULL,
   `role` tinyint(4) DEFAULT NULL,
   `ident` varchar(20) DEFAULT NULL,
   `date` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
