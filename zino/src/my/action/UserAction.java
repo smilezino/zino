@@ -23,10 +23,9 @@ public class UserAction {
 	public void login(RequestContext ctx) throws IOException {
 		String email = ctx.param("username");
 		String pwd = ctx.param("password");
-		int role = ctx.param("role",-1);
 		if(!ImageUtils.validate(ctx.request()))
 			throw ctx.error("verify_code_error");
-		User user = User.Login(email, pwd, role);
+		User user = User.Login(email, pwd);
 		if(user == null)
 			throw ctx.error("user_login_failed");
 		ctx.session().setAttribute("g_user", user);
