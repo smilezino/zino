@@ -27,12 +27,13 @@ public class FileAction {
 		ImageUtils.get(ctx);
 	}
 	
-	private void download(RequestContext ctx,File file, String url, String filename) throws IOException{
+	@SuppressWarnings("unused")
+	private void download(RequestContext ctx,File file, String path, String filename) throws IOException{
 		FileInputStream f = null;
 		try {
 			f = new FileInputStream(file);
 			ctx.response().setContentLength((int)file.length());
-			String ext = FilenameUtils.getExtension(url);
+			String ext = FilenameUtils.getExtension(path);
 			String mine_type = mime_types.get(ext);
 			if(mine_type != null)
 				ctx.response().setContentType(mine_type);
@@ -48,6 +49,7 @@ public class FileAction {
 			IOUtils.closeQuietly(f);
 		}
 	}
+	@SuppressWarnings("serial")
 	public final static HashMap<String, String> mime_types = new HashMap<String, String>()
 			{{
 				put("jar","application/java-archive");

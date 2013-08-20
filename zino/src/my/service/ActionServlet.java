@@ -26,7 +26,7 @@ public class ActionServlet extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	private final static HashMap<String, Object> actions = new HashMap<String, Object>();
 	private final static HashMap<String, Method> methods = new HashMap<String, Method>();
-	private final static ThreadLocal<Boolean> g_json_enabled = new ThreadLocal<Boolean>();
+	//private final static ThreadLocal<Boolean> g_json_enabled = new ThreadLocal<Boolean>();
 	private String packages = null;
 	
 	@Override
@@ -72,7 +72,7 @@ public class ActionServlet extends HttpServlet{
 			handleException(ctx, "unknow_error");
 			throw new ServletException(e);
 		}finally{
-			g_json_enabled.remove();
+			//g_json_enabled.remove();
 		}
 	}
 	/**
@@ -84,22 +84,18 @@ public class ActionServlet extends HttpServlet{
 	 * @throws IOException
 	 */
 	protected void handleActionException(RequestContext req, ActionException t)	throws ServletException, IOException {		
-		if(StringUtils.equalsIgnoreCase("login", t.getMessage())) {
-			req.redirect("/login");
-			return;
-		}
 		handleException(req, t.getMessage());
 	}
 	
 	protected void handleDBException(RequestContext req, DBException e) throws ServletException, IOException {
 		log("DBException in action process.", e);
-		handleException(req, ResourceUtils.getString("error", "database_exception"));
+		handleException(req, ResourceUtils.getString("error", "database_error"));
 	}
 	protected void handleException(RequestContext req, String msg) throws ServletException, IOException {
-		if(g_json_enabled.get())
+		if(StringUtils.equalsIgnoreCase("login", msg)) {
+			req.output_json(new String[]{"unlogin","msg"}, new Object[]{1,"unlogin"});
+		}else
 			req.output_json(new String[]{"error","msg"}, new Object[]{1,msg});
-		else 
-			req.print(msg);
 	}
 	private boolean _process(RequestContext ctx, boolean is_post)
 			throws  IllegalAccessException, 
@@ -108,7 +104,6 @@ public class ActionServlet extends HttpServlet{
 					IOException {
 		
 		String requestURI = ctx.uri();
-		System.out.println("Action----->" + requestURI);
 		String[] parts = StringUtils.split(requestURI, "/");
 		if(parts.length < 2) {
 			ctx.not_found();
@@ -131,7 +126,6 @@ public class ActionServlet extends HttpServlet{
 			ctx.not_found();
 			return false;
 		}
-		g_json_enabled.set(m_action.isAnnotationPresent(Annotation.JSONOutputEnabled.class));
 		
 		//调用Action方法之准备参数
 		int arg_c = m_action.getParameterTypes().length;

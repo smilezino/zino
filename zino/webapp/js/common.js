@@ -6,31 +6,13 @@ function ajax_post(the_url,the_param,succ_callback){
 		type:'POST',
 		url:the_url,
 		data:the_param,
-		success:succ_callback,
-		error:function(html){
-			alert("提交数据失败，请稍候再试");
-		}
-	});
-}
-
-function ajax_call(the_url,the_param){
-	$.ajax({
-		type:'POST',
-		url:the_url,
-		data:the_param,
-		success:function(html){alert(html);},
-		error:function(html){
-			alert("提交数据失败，请稍候再试");
-		}
-	});
-}
-
-function ajax_call_and_refresh(the_url, the_param){
-	$.ajax({
-		type:'POST',
-		url:the_url,
-		data:the_param,
-		success:function(html){location.reload();},
+		success:function(msg){
+			if(msg.unlogin) {
+				location.href = "/login";
+				return ;
+			}
+			succ_callback(msg);
+		},
 		error:function(html){
 			alert("提交数据失败，请稍候再试");
 		}

@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import my.beans.User;
 import my.service.RequestContext;
-import my.utils.ImageUtils;
 import my.service.Annotation;
 /**
  * 用户登陆注销action
@@ -21,21 +20,21 @@ public class UserAction {
 	@Annotation.PostMethod
 	@Annotation.JSONOutputEnabled
 	public void login(RequestContext ctx) throws IOException {
-		String email = ctx.param("username");
+		String username = ctx.param("username");
 		String pwd = ctx.param("password");
-		if(!ImageUtils.validate(ctx.request()))
-			throw ctx.error("verify_code_error");
-		User user = User.Login(email, pwd);
+//		if(!ImageUtils.validate(ctx.request()))
+//			throw ctx.error("verify_code_error");
+		User user = User.Login(username, pwd);
 		if(user == null)
 			throw ctx.error("user_login_failed");
-		ctx.session().setAttribute("g_user", user);
-		ctx.print(user.getId());
+		ctx.saveUserInCookie(user);
 	}
 	/**
 	 * 退出登录
 	 * @param ctx
 	 */
 	public void loginout(RequestContext ctx) {
-		ctx.session().setAttribute("g_user", null);
+		ctx.request().setAttribute(User.G_USER, null);
+		ctx.deleteUserInCookie();
 	}
 }

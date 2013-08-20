@@ -1,14 +1,19 @@
 package my.beans;
 
 import java.sql.Timestamp;
+import javax.servlet.http.HttpServletRequest;
+
 import my.db.DBbean;
 import my.db.QueryHelper;
+import my.service.RequestContext;
+import my.utils.RegexUtils;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang.RandomStringUtils;
 import org.apache.commons.lang.StringUtils;
 
 /**
- * 登陆用户资料
+ * 用户资料
  * @author smile
  * @date 2013-2-18 下午10:36:48
  */
@@ -17,10 +22,37 @@ public class User extends DBbean {
 	public final static transient User INSTANCE = new User();
 	public static int ROLE_ADMIN = 1;
 	public static int ROLE_MANAGER = 10;
+	
+	public static final String G_USER = "g_user";
+	public static final int ACTIVE_CODE_LENGTH = 40;
 
 	@Override
 	protected String TableName() {
 		return "z_user";
+	}
+	
+	@Override
+	public long Save() {
+		this.pwd = DigestUtils.shaHex(this.pwd);
+		return super.Save();
+	}
+
+	/**
+	 * 生成校验码
+	 */
+	public void createActiveCode() {
+		this.activeCode = RandomStringUtils.randomAlphanumeric(ACTIVE_CODE_LENGTH);
+		UpdateField("activeCode", this.activeCode);
+	}
+	
+	/**
+	 * 修改密码
+	 * @param pwd
+	 * @return
+	 */
+	public boolean changePwd(String pwd) {
+		this.pwd = DigestUtils.shaHex(pwd);
+		return UpdateField("pwd", this.pwd);
 	}
 	/**
 	 * 登陆
@@ -28,24 +60,38 @@ public class User extends DBbean {
 	 * @param pwd
 	 * @return
 	 */
-	public static User Login(String email, String pwd) {
-		if(StringUtils.isBlank(email) || StringUtils.isBlank(pwd)) return null;
+	public static User Login(String username, String pwd) {
+		if(StringUtils.isBlank(username) || StringUtils.isBlank(pwd)) return null;
 		User user;
-		String sql = "SELECT * FROM z_user WHERE email = ?";
-		user = (User)QueryHelper.read(User.class, sql, email);
-		if(user != null && StringUtils.equals(user.pwd, pwd)) {
+		String sql;
+		if(RegexUtils.isEmail(username))
+			sql = "SELECT * FROM z_user WHERE email = ?";
+		else
+			sql = "SELECT * FROM z_user WHERE name = ?";
+		user = (User)QueryHelper.read(User.class, sql, username);
+		if(user != null && StringUtils.equals(user.pwd, DigestUtils.shaHex(pwd))) {
 			return user;
 		}
 		return null;
 
 	}
-	
 	/**
-	 * 生成校验码
+	 * 获取登录用户
+	 * @param req
+	 * @return
 	 */
-	public void createActiveCode() {
-		this.activeCode = RandomStringUtils.randomAlphanumeric(20);
-		UpdateField("activeCode", this.activeCode);
+	public static User getUser(HttpServletRequest req) {
+		User loginUser = (User) req.getAttribute(G_USER);
+		if(loginUser == null) {
+			User cookieUser = RequestContext.get().getUserFromCookie();
+			if(cookieUser == null) return null;
+			User user = User.getUserFromActiveCode(cookieUser.getActiveCode());
+			if(user!=null && user.getId()==cookieUser.getId()) {
+				req.setAttribute(G_USER, user);
+				return user;
+			}
+		}
+		return loginUser;
 	}
 	
 	/**
@@ -53,10 +99,10 @@ public class User extends DBbean {
 	 * @param activeCode
 	 * @return
 	 */
-	public static User activeUser(String activeCode) {
-		if(StringUtils.isBlank(activeCode) || activeCode.length()!=20) return null;
-		String sql = "SELECT * FROM z_user WHERE activeCode=?";
-		return (User)QueryHelper.read(User.class, sql, activeCode);
+	public static User getUserFromActiveCode(String activeCode) {
+		if(StringUtils.isBlank(activeCode) || activeCode.length()!=ACTIVE_CODE_LENGTH) return null;
+		String sql = "SELECT * FROM z_user WHERE activeCode = ?";
+		return QueryHelper.read(User.class, sql, activeCode);
 	}
 	/**
 	 * 是否是超级管理员
@@ -70,16 +116,18 @@ public class User extends DBbean {
 	 * @return
 	 */
 	public boolean isManager(){
-		return role >= ROLE_MANAGER;
+		return role == ROLE_MANAGER;
 	}
 	
+	
+
 	private String name;
 	private String email;
 	private String pwd;
 	private int role;
 	private String ident;
 	private String activeCode;
-	private Timestamp time;
+	private Timestamp createTime;
 
 	public String getName() {
 		return name;
@@ -117,11 +165,10 @@ public class User extends DBbean {
 	public void setActiveCode(String activeCode) {
 		this.activeCode = activeCode;
 	}
-	public Timestamp getTime() {
-		return time;
+	public Timestamp getCreateTime() {
+		return createTime;
 	}
-	public void setTime(Timestamp time) {
-		this.time = time;
+	public void setCreateTime(Timestamp createTime) {
+		this.createTime = createTime;
 	}
-
 }

@@ -1,0 +1,8 @@
+body {
+    font-family: 'Microsoft YaHei', helvetica, Segeo, Arial;
+    background-image: -webkit-gradient(linear, 50% 0%, 50% 160, color-stop(62.5%, rgba(255, 255, 255, 0.5)), color-stop(100%, rgba(255, 255, 255, 0)));
+    background-image: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.5) 100px, rgba(255, 255, 255, 0) 160px);
+    background-image: -moz-linear-gradient(top, rgba(255, 255, 255, 0.5) 100px, rgba(255, 255, 255, 0) 160px);
+    background-image: -o-linear-gradient(top, rgba(255, 255, 255, 0.5) 100px, rgba(255, 255, 255, 0) 160px);
+    background-image: linear-gradient(top, rgba(255, 255, 255, 0.5) 100px, rgba(255, 255, 255, 0) 160px)
+}

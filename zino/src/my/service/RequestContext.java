@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import my.beans.User;
 import my.service.ActionException;
 import my.utils.RequestUtils;
 import my.utils.ResourceUtils;
@@ -22,8 +23,8 @@ import my.utils.ResourceUtils;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.RandomStringUtils;
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.NumberUtils;
-
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
@@ -42,6 +43,8 @@ public class RequestContext {
 	private HttpServletRequest request;
 	private HttpServletResponse response;
 	private Map<String, Cookie> cookies;
+	public final static String COOKIE_LOGIN = "zino";
+	private final static int MAX_AGE = 86400 * 365;
 	private final static String TEMP_UPLOAD_PATH_ATTR_NAME = "TEMP_UPLOAD_PATH";
 	
 	static {
@@ -176,13 +179,56 @@ public class RequestContext {
 	 * @return
 	 * @throws IOException 
 	 */
-	/*public User user() {
-		User u = (User) session().getAttribute("g_user");
+	public User user() {
+		User u = User.getUser(request);
 		if(u == null){
 			throw new ActionException("login");
 		}
 		return u;
-	}*/
+	}
+	
+	public User getUserFromCookie() {
+		try{
+			Cookie cookie = cookie(COOKIE_LOGIN);
+			if(cookie!=null && StringUtils.isNotBlank(cookie.getValue())) {
+				return getUserFromUUID(cookie.getValue());
+			}
+		}catch(Exception e) {}
+		return null;
+	}
+	
+	public User getUserFromUUID(String UUID) {
+		final String[] items = StringUtils.split(UUID,"|");
+		if(items==null || items.length!=2) return null;
+		return new User(){
+			public long getId() {
+				return Integer.parseInt(items[0]);
+			}
+			public String getActiveCode() {
+				return items[1];
+			}
+			
+		};
+	}
+	/**
+	 * 将用户存入cookie
+	 * @param user
+	 */
+	public void saveUserInCookie(User user) {
+		String value = userKeygen(user);
+		deleteCookie(COOKIE_LOGIN);
+		cookie(COOKIE_LOGIN, value, MAX_AGE);
+		
+	}
+	
+	public void deleteUserInCookie() {
+		deleteCookie(COOKIE_LOGIN);
+	}
+	private String userKeygen(User user) {
+		if(user.getActiveCode()==null || user.getActiveCode().length()!=User.ACTIVE_CODE_LENGTH)
+			user.createActiveCode();
+		return user.getId()+"|"+user.getActiveCode();
+	}
 	/**
 	 * 输出信息到浏览器
 	 * @param msg
@@ -268,4 +314,5 @@ public class RequestContext {
 		RequestUtils.setCookie(request, response, name, value, max_age);
 	}
 	public void deleteCookie(String name) { RequestUtils.deleteCookie(request, response, name); }
+	public long id() { return param("id", 0);}
 }
