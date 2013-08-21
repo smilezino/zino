@@ -68,7 +68,7 @@ public class User extends DBbean {
 			sql = "SELECT * FROM z_user WHERE email = ?";
 		else
 			sql = "SELECT * FROM z_user WHERE name = ?";
-		user = (User)QueryHelper.read(User.class, sql, username);
+		user = QueryHelper.read(User.class, sql, username);
 		if(user != null && StringUtils.equals(user.pwd, DigestUtils.shaHex(pwd))) {
 			return user;
 		}

@@ -15,6 +15,8 @@ import my.service.Annotation;
 import my.utils.ResourceUtils;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * 
@@ -24,6 +26,7 @@ import org.apache.commons.lang.StringUtils;
 public class ActionServlet extends HttpServlet{
 
 	private static final long serialVersionUID = 1L;
+	private static final Log log = LogFactory.getLog(ActionServlet.class);
 	private final static HashMap<String, Object> actions = new HashMap<String, Object>();
 	private final static HashMap<String, Method> methods = new HashMap<String, Method>();
 	//private final static ThreadLocal<Boolean> g_json_enabled = new ThreadLocal<Boolean>();
@@ -104,6 +107,7 @@ public class ActionServlet extends HttpServlet{
 					IOException {
 		
 		String requestURI = ctx.uri();
+		log.info("[ACTION] >>> " + requestURI);
 		String[] parts = StringUtils.split(requestURI, "/");
 		if(parts.length < 2) {
 			ctx.not_found();

@@ -1,5 +1,9 @@
 package my.db;
 
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Properties;
@@ -7,6 +11,8 @@ import java.util.Properties;
 import javax.sql.DataSource;
 
 import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 /**
  * 数据库管理
  * @author smile
@@ -63,7 +69,7 @@ public class DBmanager {
 			e.printStackTrace();
 			throw new DBException(e);
 		}
-		return conn;
+		return Proxy.isProxyClass(conn.getClass())?conn:new _DebugConnection(conn).getConnection();
 	}
 	/**
 	 * 关闭数据库连接
@@ -80,5 +86,36 @@ public class DBmanager {
 			throw new DBException(e);
 		}
 		conns.set(null);
+	}
+	/**
+	 * 用于跟踪执行的SQL语句
+	 * 
+	 */
+	static class _DebugConnection implements InvocationHandler {
+		
+		private final static Log log = LogFactory.getLog(_DebugConnection.class);
+		private Connection conn = null;
+		public _DebugConnection(Connection conn) {
+			this.conn = conn;
+		}
+
+		/**
+		 * Returns the conn.
+		 * @return Connection
+		 */
+		public Connection getConnection() {
+			return (Connection) Proxy.newProxyInstance(conn.getClass().getClassLoader(), conn.getClass().getInterfaces(), this);
+		}
+		public Object invoke(Object proxy, Method m, Object[] args) throws Throwable {
+			try {
+				String method = m.getName();
+				if("prepareStatement".equals(method) || "createStatement".equals(method))
+					log.info("[SQL] >>> " + args[0]);				
+				return m.invoke(conn, args);
+			} catch (InvocationTargetException e) {
+				throw e.getTargetException();
+			}
+		}
+
 	}
 }

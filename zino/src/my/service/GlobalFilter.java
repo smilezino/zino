@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
-
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -19,6 +18,8 @@ import javax.servlet.http.HttpServletResponse;
 import my.db.DBmanager;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * 全局过滤器，url映射
@@ -26,6 +27,9 @@ import org.apache.commons.lang.StringUtils;
  * @date 2013-2-4 下午10:16:54
  */
 public class GlobalFilter implements Filter {
+	
+	private static Log log = LogFactory.getLog(GlobalFilter.class);
+	
 	public final static String REQUEST_URI = "request_uri";
 	private ServletContext context;
 	private String PATH_PREFIX;
@@ -67,7 +71,6 @@ public class GlobalFilter implements Filter {
 		
 		RequestContext rc = RequestContext.begin(this.context, request, response);
 		String req_uri = rc.uri();
-		//System.out.println("URI---->"+req_uri);
 		if("HEAD".equalsIgnoreCase(request.getMethod()))
 			return ;
 		
@@ -89,7 +92,7 @@ public class GlobalFilter implements Filter {
 			String[] paths = StringUtils.split(req_uri,"/");
 			String vm = _GetTemplate(rc.request(), paths, paths.length);
 			beforeFilter(rc);
-			//System.out.println("forward----->"+vm);
+			log.info("[URI] >>> "+vm);
 			rc.forward(vm);
 			afterFilter(rc);
 			

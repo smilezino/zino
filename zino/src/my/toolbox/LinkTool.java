@@ -34,7 +34,7 @@ public class LinkTool extends StrutsLinkTool{
 	}
 
 	public static String bootstrap(String url) {
-		return _link("/bootstrap", url);
+		return _link("/css/bootstrap", url);
 	}
 	
 	public static String link(String uri) {

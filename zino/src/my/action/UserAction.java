@@ -17,7 +17,6 @@ public class UserAction {
 	 * @param ctx
 	 * @throws IOException
 	 */
-	@Annotation.PostMethod
 	@Annotation.JSONOutputEnabled
 	public void login(RequestContext ctx) throws IOException {
 		String username = ctx.param("username");
