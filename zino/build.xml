@@ -16,6 +16,7 @@
         <mkdir dir="${build.classes.dir}"/>
         <copy includeemptydirs="false" todir="${build.classes.dir}">
             <fileset dir="src" excludes="**/*.launch, **/*.java"/>
+            <fileset dir="properties" excludes="**/*.launch, **/*.java"/>
         </copy>
     </target>
 	

@@ -1,6 +1,8 @@
 package my.action;
 
 import java.io.IOException;
+import java.sql.Timestamp;
+import java.util.Calendar;
 import java.util.List;
 
 import com.google.gson.Gson;
@@ -22,6 +24,7 @@ public class TodoAction {
 		if(form==null || form.getUrl()==null || form.getUrl().length()<=0)
 			throw ctx.error("form_empty");
 		form.setUser(user.getId());
+		form.setCreateTime(new Timestamp(Calendar.getInstance().getTimeInMillis()));
 		long id = form.Save();
 		ctx.output_json("id", id);
 	}

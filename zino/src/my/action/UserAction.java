@@ -27,13 +27,16 @@ public class UserAction {
 		if(user == null)
 			throw ctx.error("user_login_failed");
 		ctx.saveUserInCookie(user);
+		ctx.output_json("id", user.getId());
 	}
 	/**
 	 * 退出登录
 	 * @param ctx
+	 * @throws IOException 
 	 */
-	public void loginout(RequestContext ctx) {
+	public void loginout(RequestContext ctx) throws IOException {
 		ctx.request().setAttribute(User.G_USER, null);
 		ctx.deleteUserInCookie();
+		ctx.output_json("success", "success");
 	}
 }

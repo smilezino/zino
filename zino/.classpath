@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
 	<classpathentry kind="src" path="properties"/>
 	<classpathentry kind="lib" path="webapp/WEB-INF/lib/c3p0-0.9.2-pre8.jar"/>
 	<classpathentry kind="lib" path="webapp/WEB-INF/lib/commons-beanutils-1.8.2.jar"/>
@@ -33,5 +32,6 @@
 	<classpathentry kind="lib" path="packages/ant.jar"/>
 	<classpathentry kind="lib" path="packages/servlet-api.jar"/>
 	<classpathentry kind="lib" path="webapp/WEB-INF/lib/commons-codec-1.4.jar"/>
-	<classpathentry kind="output" path="bin"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path="webapp/WEB-INF/classes"/>
 </classpath>

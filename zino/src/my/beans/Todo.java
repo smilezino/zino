@@ -92,4 +92,10 @@ public class Todo extends DBbean{
 	public void setCreateTime(Timestamp createTime) {
 		this.createTime = createTime;
 	}
+
+	@Override
+	protected String TableName() {
+		return "z_todo";
+	}
+	
 }
