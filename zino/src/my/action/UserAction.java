@@ -53,7 +53,7 @@ public class UserAction {
 		String p2 = ctx.param("pwd2", "");
 		if(p1==null || p2==null || !p1.equals(p2))
 			throw ctx.error("user_pwd_error");
-		if(p1.length()<6)
+		if(p1.length() < User.PWD_MIN_LENGTH)
 			throw ctx.error("user_pwd_too_short");
 		String msg = check(user);
 		if(msg!=null)

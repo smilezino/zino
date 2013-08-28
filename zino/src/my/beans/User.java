@@ -26,6 +26,7 @@ public class User extends DBbean {
 	
 	public static final String G_USER = "g_user";
 	public static final int ACTIVE_CODE_LENGTH = 40;
+	public static final int PWD_MIN_LENGTH = 6;
 
 	@Override
 	protected String TableName() {
