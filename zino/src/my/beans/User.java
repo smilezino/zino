@@ -20,8 +20,9 @@ import org.apache.commons.lang.StringUtils;
 
 public class User extends DBbean {
 	public final static transient User INSTANCE = new User();
-	public static int ROLE_ADMIN = 1;
+	public static int ROLE_ADMIN = 127;
 	public static int ROLE_MANAGER = 10;
+	public static int ROLE_USER = 1;
 	
 	public static final String G_USER = "g_user";
 	public static final int ACTIVE_CODE_LENGTH = 40;
@@ -44,7 +45,24 @@ public class User extends DBbean {
 		this.activeCode = RandomStringUtils.randomAlphanumeric(ACTIVE_CODE_LENGTH);
 		UpdateField("activeCode", this.activeCode);
 	}
-	
+	/**
+	 * 检查用户名是否存在
+	 * @param user
+	 * @return
+	 */
+	public boolean isExistName() {
+		String sql = "SELECT COUNT(*) FROM " + TableName() + " WHERE name=?";
+		return QueryHelper.stat(sql, name) > 0;
+	}
+	/**
+	 * 检查邮箱是否存在
+	 * @param email
+	 * @return
+	 */
+	public boolean isExistEmail() {
+		String sql = "SELECT * FROM "+TableName()+" WHERE email=?";
+		return QueryHelper.stat(sql, email) > 0;
+	}
 	/**
 	 * 修改密码
 	 * @param pwd

@@ -10,18 +10,6 @@
 		<link rel="stylesheet" type="text/css" href="$link.bootstrap("css/bootstrap.min.css")" />
     </head>
 	<body>
-		<div class="page">
-			<div class="context">
-				<div class="header">
-					
-				</div>
-				<div class="main">
-					${screen_content}
-                </div>
-                <div class="clear"></div>
-                <div class="footer">
-				</div>
-            </div>
-        </div>
+		${screen_content}
     </body>
 </html>

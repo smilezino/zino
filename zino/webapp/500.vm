@@ -1,39 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-	<head>
-        <title>应用程序出错</title>
-		<link rel="stylesheet" type="text/css" href="$link.css("style.css")" />
-    </head>
-	<style>
-		body {background:#fff;font-family: Verdana, Tahoma;}
-        #msg-box {margin-top:20px; font-size:0.9em;text-align:center;}
-        #msg-box .title {font-size:1.4em;font-weight:bold;margin:0 0 10px 0;}
-        #msg-box .anav {margin-top:20px;}
-    </style>
-	<body>
-		<div class="page">
-			<div class="context">
-				<div class="header">
-					<img src="$link.img("head.gif")"/>
-				</div>
-				<div class="main">
-					<div id='msg-box'>
-                        <div class='title'>您访问的页面发生错误!</div>
-                        <div class='msg'>我们已经将此错误信息记录下来，并将尽快处理，为此造成您的不便请多见谅</div>		
-                        <div class='anav'><a href="/">&gt; 返回首页 &lt;</a></div>
-                    </div>
-                </div>
-                <div class="clear"></div>
-                <div class="footer">
-					<hr/>
-					<p>&copy; 安徽工业大学 教师能力发展中心</p>
-					<p>地址：安徽省马鞍山市湖东路59号&nbsp;&nbsp;邮编：243002&nbsp;&nbsp;&nbsp;&nbsp;联系电话：0555-2311819</p>
-					<p>研发单位：计算机学院 纪滨老师工作室</p>
-				</div>
-            </div>
-        </div>
-    </body>
-</html>
-    
-</head>
-<body>
+#set($layout = "_error.vm")
+#set($page_title = "应用程序出错")
+<p><span>5</span><span>0</span><span>0</span></p>
+<p>应用程序出错啦 &gt;.&lt; </p>

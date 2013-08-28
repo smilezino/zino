@@ -87,6 +87,6 @@
 	</error-page>
 	<error-page>
 		<error-code>502</error-code>
-		<location>/502.html</location>
+		<location>/500.vm</location>
 	</error-page>
 </web-app>
