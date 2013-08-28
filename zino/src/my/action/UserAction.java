@@ -7,7 +7,6 @@ import java.util.Calendar;
 
 import my.beans.User;
 import my.service.RequestContext;
-import my.service.Annotation;
 import my.utils.RegexUtils;
 /**
  * 用户登陆注销action
