@@ -17,9 +17,9 @@
 				<span id="err-pwd" class="help-inline error"></span>
             </div>
         </div>
-            <div class="control-group">
-            <input id="login-btn" type="button" class="btn" value="登录" style="margin-right:20px">
-            <a class="btn" href="$link.link("register")">注册</a>
+            <div class="control-group" style="margin-left:90px">
+            <input id="login-btn" type="button" class="btn" value="Sign In" style="margin-right:20px">
+            <a class="btn" href="$link.link("register")">Register</a>
         </div>
     </fieldset>
 </form>

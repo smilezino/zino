@@ -58,9 +58,9 @@ public class UserAction {
 		String msg = check(user);
 		if(msg!=null)
 			throw ctx.error(msg);
-		if(user.isExistEmail())
+		if(user.existEmail())
 			throw ctx.error("user_email_exist");
-		if(user.isExistName())
+		if(user.existName())
 			throw ctx.error("user_name_exist");
 		user.setPwd(p1);
 		user.setRole(User.ROLE_USER);

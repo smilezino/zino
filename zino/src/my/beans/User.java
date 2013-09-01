@@ -51,7 +51,7 @@ public class User extends DBbean {
 	 * @param user
 	 * @return
 	 */
-	public boolean isExistName() {
+	public boolean existName() {
 		String sql = "SELECT COUNT(*) FROM " + TableName() + " WHERE name=?";
 		return QueryHelper.stat(sql, name) > 0;
 	}
@@ -60,7 +60,7 @@ public class User extends DBbean {
 	 * @param email
 	 * @return
 	 */
-	public boolean isExistEmail() {
+	public boolean existEmail() {
 		String sql = "SELECT * FROM "+TableName()+" WHERE email=?";
 		return QueryHelper.stat(sql, email) > 0;
 	}
@@ -129,14 +129,14 @@ public class User extends DBbean {
 	 * 是否是超级管理员
 	 * @return
 	 */
-	public boolean isAdmin(){
+	public boolean IsAdmin(){
 		return role == ROLE_ADMIN;
 	}
 	/**
 	 * 是否是管理员
 	 * @return
 	 */
-	public boolean isManager(){
+	public boolean IsManager(){
 		return role == ROLE_MANAGER;
 	}
 	

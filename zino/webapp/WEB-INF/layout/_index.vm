@@ -22,6 +22,16 @@
                     
                     <ul class="nav pull-right">
 						#if($g_user)
+							<li><a href="javascript:void(0);" id="loginout"><strong>loginout</strong></a></li>
+                            <script>
+								$(function(){
+									$("#loginout").click(function(){
+										ajax("$link.action("user/loginout")","",function(msg){
+											location.reload();
+										});
+									});
+								});
+							</script>
 						#else
 							<li><a href="$link.link("login")"><strong>login</strong></a></li>
 						#end
