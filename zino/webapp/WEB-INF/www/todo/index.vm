@@ -1,4 +1,7 @@
 #set($layout = "_index.vm")
 #set($page_title = "稍后阅读 - view it later")
-
-todo/index
+#if($g_user)
+	$g_user.name
+#else
+	asd
+#end

@@ -18,7 +18,8 @@ import org.apache.commons.dbutils.DbUtils;
  * @author smile
  * @date 2013-2-4 下午10:15:28
  */
-public class DBbean {
+public class DBbean implements Serializable{
+	private static final long serialVersionUID = 1L;
 	private long __key_id;
 	private String __table_name;
 	public long getId() { return __key_id; }

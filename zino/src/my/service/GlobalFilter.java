@@ -107,7 +107,11 @@ public class GlobalFilter implements Filter {
 		
 		
 	}
-	protected void beforeFilter(RequestContext ctx) throws IllegalAccessException { }
+	protected void beforeFilter(RequestContext ctx) throws IllegalAccessException {
+		try {
+			ctx.user();
+		}catch(ActionException e){}
+	}
 	protected void afterFilter(RequestContext ctx) {}
 	
 	/**

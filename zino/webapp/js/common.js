@@ -1,9 +1,10 @@
 /**
  * 使用ajax提交数据
  */
-function ajax_post(the_url,the_param,succ_callback){
+function ajax(the_url,the_param,succ_callback){
 	$.ajax({
 		type:'POST',
+		dataType:'JSON',
 		url:the_url,
 		data:the_param,
 		success:function(msg){

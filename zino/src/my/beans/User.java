@@ -104,7 +104,7 @@ public class User extends DBbean {
 		if(loginUser == null) {
 			User cookieUser = RequestContext.get().getUserFromCookie();
 			if(cookieUser == null) return null;
-			User user = User.getUserFromActiveCode(cookieUser.getActiveCode());
+			User user = cookieUser.getUserFromActiveCode(cookieUser.getActiveCode());
 			if(user!=null && user.getId()==cookieUser.getId()) {
 				req.setAttribute(G_USER, user);
 				return user;
@@ -118,10 +118,12 @@ public class User extends DBbean {
 	 * @param activeCode
 	 * @return
 	 */
-	public static User getUserFromActiveCode(String activeCode) {
+	public User getUserFromActiveCode(String activeCode) {
 		if(StringUtils.isBlank(activeCode) || activeCode.length()!=ACTIVE_CODE_LENGTH) return null;
 		String sql = "SELECT * FROM z_user WHERE activeCode = ?";
-		return QueryHelper.read(User.class, sql, activeCode);
+		return QueryHelper.read_cache(User.class, "user", getId() ,sql, activeCode);
+		//System.out.println(CacheRegion());
+		//return null;
 	}
 	/**
 	 * 是否是超级管理员

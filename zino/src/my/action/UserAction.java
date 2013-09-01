@@ -22,7 +22,7 @@ public class UserAction {
 	 */
 	public void login(RequestContext ctx) throws IOException {
 		String username = ctx.param("username");
-		String pwd = ctx.param("password");
+		String pwd = ctx.param("pwd");
 //		if(!ImageUtils.validate(ctx.request()))
 //			throw ctx.error("verify_code_error");
 		User user = User.Login(username, pwd);

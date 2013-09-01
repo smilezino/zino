@@ -1,3 +1,4 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
@@ -7,9 +8,33 @@
         <script type="text/javascript" src="$link.js("jquery.form.js")"></script>
 		<script type="text/javascript" src="$link.js("common.js")"></script>
         <script type="text/javascript" src="$link.bootstrap("js/bootstrap.min.js")"></script>
-		<link rel="stylesheet" type="text/css" href="$link.bootstrap("css/bootstrap.min.css")" />
+		<link rel="stylesheet" type="text/css" href="$link.bootstrap("css/bootstrap.css")" />
     </head>
-	<body>
+	<body data-spy="scroll" data-offset="50">
+        <div class="navbar navbar-inverse">
+            <div class="navbar-inner">
+                <div class="container">
+                    <ul class="nav">
+                        <li><a href=""><strong>Home</strong></a></li>
+                        <li><a href=""><strong>Blog</strong></a></li>
+                        <li><a href=""><strong>View</strong></a></li>
+                    </ul>
+                    
+                    <ul class="nav pull-right">
+						#if($g_user)
+						#else
+							<li><a href="$link.link("login")"><strong>login</strong></a></li>
+						#end
+                    </ul>
+                </div>
+            </div>
+        </div>
+    <div class="container">
 		${screen_content}
-    </body>
+		<div style="margin-top:50px">
+			<hr />
+			<p class="text-center">&copy; zinor.net</p>
+		</div>
+    </div>
+  </body>
 </html>
