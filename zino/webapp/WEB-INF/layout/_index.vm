@@ -1,4 +1,3 @@
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
@@ -15,9 +14,9 @@
             <div class="navbar-inner">
                 <div class="container">
                     <ul class="nav">
-                        <li><a href=""><strong>Home</strong></a></li>
-                        <li><a href=""><strong>Blog</strong></a></li>
-                        <li><a href=""><strong>View</strong></a></li>
+                        <li><a href="$link.root()"><strong>Home</strong></a></li>
+                        <li#if($active=="blog") class="active"#end><a href="$link.link("blog")"><strong>Blog</strong></a></li>
+                        <li#if($active=="view") class="active"#end><a href="$link.link("view")"><strong>View</strong></a></li>
                     </ul>
                     
                     <ul class="nav pull-right">

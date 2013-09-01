@@ -12,8 +12,8 @@ import my.db.QueryHelper;
  * @author zino
  *
  */
-public class Todo extends DBbean{
-	public static final Todo INSTANCE = new Todo();
+public class View extends DBbean{
+	public static final View INSTANCE = new View();
 	public static final byte STATUS_ALL = -1; //所有todo
 	public static final byte STATUS_UNDO = 0; //未做todo
 	public static final byte STATUS_DO = 1;   //已做todo
@@ -37,7 +37,7 @@ public class Todo extends DBbean{
 	 * @param user
 	 * @return
 	 */
-	public List<Todo> listByFilter(User user, byte status) {
+	public List<View> listByFilter(User user, byte status) {
 		StringBuffer sql = new StringBuffer("SELECT * FROM " + TableName() + " WHERE user=?");
 		List<Object> params = new ArrayList<Object>();
 		params.add(user.getId());
@@ -46,7 +46,7 @@ public class Todo extends DBbean{
 			params.add(status);
 		}
 		sql.append(" ORDER BY status ASC, sort DESC, createTime DESC");
-		return QueryHelper.query(Todo.class, sql.toString(), params.toArray());
+		return QueryHelper.query(View.class, sql.toString(), params.toArray());
 	}
 	
 	

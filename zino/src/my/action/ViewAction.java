@@ -7,11 +7,11 @@ import java.util.List;
 
 import com.google.gson.Gson;
 
-import my.beans.Todo;
+import my.beans.View;
 import my.beans.User;
 import my.service.RequestContext;
 
-public class TodoAction {
+public class ViewAction {
 	
 	/**
 	 * 添加一个todo
@@ -20,7 +20,7 @@ public class TodoAction {
 	 */
 	public void add(RequestContext ctx) throws IOException {
 		User user = ctx.user();
-		Todo form = ctx.form(Todo.class);
+		View form = ctx.form(View.class);
 		if(form==null || form.getUrl()==null || form.getUrl().length()<=0)
 			throw ctx.error("form_empty");
 		form.setUser(user.getId());
@@ -36,7 +36,7 @@ public class TodoAction {
 	public void mark(RequestContext ctx) throws IOException {
 		User user = ctx.user();
 		long id = ctx.id();
-		Todo todo = Todo.INSTANCE.Get(id);
+		View todo = View.INSTANCE.Get(id);
 		if(todo==null || todo.getUser()!=user.getId())
 			throw ctx.error("no_permission");
 		todo.mark();
@@ -50,7 +50,7 @@ public class TodoAction {
 	public void delete(RequestContext ctx) throws IOException {
 		User user = ctx.user();
 		long id = ctx.id();
-		Todo todo = Todo.INSTANCE.Get(id);
+		View todo = View.INSTANCE.Get(id);
 		if(todo==null || todo.getUser()!=user.getId())
 			throw ctx.error("no_permission");
 		todo.Delete();
@@ -64,7 +64,7 @@ public class TodoAction {
 	 */
 	public void list(RequestContext ctx) throws IOException {
 		User user = ctx.user();
-		List<Todo> list = Todo.INSTANCE.listByFilter(user, Todo.STATUS_UNDO);
+		List<View> list = View.INSTANCE.listByFilter(user, View.STATUS_UNDO);
 		ctx.print(new Gson().toJson(list));
 	}
 }

@@ -24,34 +24,41 @@
     </fieldset>
 </form>
 <script>
+	function login(){
+		var u = $("#username");
+		var p = $("#pwd");
+		if(u.val().trim().length<=0) {
+			u.parents(".control-group").addClass("error");
+			$("#err-username").html("请输入用户名或email");
+			u.focus();
+			return ;
+		}
+		if(p.val().trim().length<=0) {
+			p.parents(".control-group").addClass("error");
+			$("#err-pwd").html("请输入密码");
+			p.focus();
+			return ;
+		}
+		var params = {
+			"username":u.val(),
+			"pwd":p.val()
+		};
+		ajax("$link.action("user/login")",params,function(msg) {
+			if(msg.error) {
+				u.parents(".control-group").addClass("error");
+				$("#err-username").html(msg.msg);
+				return;
+			}
+			location.href = "$link.link("view")";
+		});
+	}
 	$(function(){
 		$("#login-btn").click(function(){
-			var u = $("#username");
-			var p = $("#pwd");
-			if(u.val().trim().length<=0) {
-				u.parents(".control-group").addClass("error");
-				$("#err-username").html("请输入用户名或email");
-				u.focus();
-				return ;
-			}
-			if(p.val().trim().length<=0) {
-				p.parents(".control-group").addClass("error");
-				$("#err-pwd").html("请输入密码");
-				p.focus();
-				return ;
-			}
-			var params = {
-				"username":u.val(),
-				"pwd":p.val()
-			};
-			ajax("$link.action("user/login")",params,function(msg) {
-				if(msg.error) {
-					u.parents(".control-group").addClass("error");
-					$("#err-username").html(msg.msg);
-					return;
-				}
-				location.href = "$link.link("todo")";
-			});
+			login();
+		});
+		$("body").keyup(function(event){
+			if(event.which==13)
+				login();
 		});
 	});
 </script>
