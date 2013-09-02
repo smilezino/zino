@@ -1,4 +1,4 @@
 #set($layout = "_index.vm")
-#set($page_title = "首页-个人网站-By smile zino")
+#set($page_title = "首页 - By smile zino")
 
 coming soon

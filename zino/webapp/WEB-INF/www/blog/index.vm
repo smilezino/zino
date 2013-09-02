@@ -1,0 +1,4 @@
+#set($layout = "_index.vm")
+#set($page_title = "Blog - By smile zino")
+#set($active = "blog")
+coming soon
