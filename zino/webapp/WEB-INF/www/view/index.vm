@@ -16,24 +16,27 @@
 </div>
 #if($g_user && $p1 == "more")
 	#set($views = $todo.listByUser($g_user, $p, $size))
+	#set($count = $todo.countByUser($g_user))
 	<div class="row">
-		<div class="span8">
+		<div class="span10">
             <h4>所有：</h4>
         	<table class="table">
         		#foreach($v in $views)
         			<tr class="view">
 						#set($num = $velocityCount + ($p - 1)*$size)
                         <td>$num</td>
-                        <td><a href="$v.url" id="$v.id" target="_blank"#if($v.status==1) class="viewed"#end>$v.title</a> <span class="pull-right">$format.date("yyyy-MM-dd HH:mm",$v.createTime)</span></td>
-                    </tr>
+                        <td class="view-url"><a href="$v.url" id="$v.id" target="_blank"#if($v.status==1) class="viewed"#end>$v.title</a> <span class="pull-right">$format.date("yyyy-MM-dd HH:mm",$v.createTime)</span></td>
+                        <td class="view-btn"><a href="#" id="$v.id" title="删除">X</a></td>
+					</tr>
         		#end
             </table>
+			#pager("",$count,$size)
         </div>
         <script>
 			$(function(){
-				$(".view a").click(function(){
+				$(".view-url a").click(function(){
 					obj = $(this);
-					var id = $(this).attr("id");
+					var id = obj.attr("id");
 					var params = {
 						"id":id
 					};
@@ -44,6 +47,18 @@
 						}
 						obj.addClass("viewed");
 					});				
+				});
+				
+				$(".view-btn a").click(function(){
+					obj = $(this);
+					var id = obj.attr("id");
+					var params = {
+						"id":id
+					};
+					ajax("$link.action("view/delete")",params,function(msg){
+						if(msg.error){alert(msg.msg);return;}
+						obj.parents("tr").remove();
+					});
 				});
 			});
 		</script>

@@ -61,6 +61,16 @@ public class View extends DBbean{
 		return QueryHelper.query_slice(View.class, sql, page, size, user.getId());
 	}
 	
+	/**
+	 * 用户todo总数
+	 * @param user
+	 * @return
+	 */
+	public long countByUser(User user) {
+		String sql = "SELECT COUNT(*) FROM " + TableName() + " WHERE user=?";
+		return QueryHelper.stat(sql, user.getId());
+	}
+	
 	
 	public long getUser() {
 		return user;

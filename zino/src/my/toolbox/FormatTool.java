@@ -14,4 +14,27 @@ public class FormatTool {
 		SimpleDateFormat  sf = new SimpleDateFormat(format);
 		return sf.format(date);
 	}
+	
+	/**
+	 * 分页数
+	 * @param recordCount
+	 * @param perPage
+	 * @return
+	 */
+	public static int pageCount(long recordCount, int perPage) {
+		int pc = (int)Math.ceil(recordCount / (double)perPage);
+		return (pc==0)?1:pc;
+	}
+	public static int pageCount(long recordCount, long perPage) {
+		int pc = (int)Math.ceil(recordCount / (double)perPage);
+		return (pc==0)?1:pc;
+	}
+	public static int pageCount(int recordCount, long perPage) {
+		int pc = (int)Math.ceil(recordCount / (double)perPage);
+		return (pc==0)?1:pc;
+	}
+	public static int pageCount(int recordCount, int perPage) {
+		int pc = (int)Math.ceil(recordCount / (double)perPage);
+		return (pc==0)?1:pc;
+	}
 }
