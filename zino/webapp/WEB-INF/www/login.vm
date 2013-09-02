@@ -48,7 +48,7 @@
 				$("#err-username").html(msg.msg);
 				return;
 			}
-			location.href = "$link.link("view")";
+			location.href = "$link.link("view/more")";
 		});
 	}
 	$(function(){

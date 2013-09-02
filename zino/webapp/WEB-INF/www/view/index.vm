@@ -1,8 +1,70 @@
 #set($layout = "_index.vm")
 #set($page_title = "稍后阅读 - view it later")
 #set($active = "view")
-#if($g_user)
-	$g_user.name
-#else
-	asd
+#set($p1 = $link.param("p1","about"))
+#set($p = $link.param("p",1))
+#set($size = 16)
+<style>
+	.page-header a:hover{color:#08c}
+	.view a{text-decoration:none;font-weight:bold}
+	.view a:hover{}
+	.view .viewed {color:#777;font-weight:normal}
+	.view .viewed:hover {color:#000}
+</style>
+<div class="page-header">
+    <a href="$link.link("view")" style="text-decoration:none"><h1>View It Later <small>稍后浏览</small></h1></a>
+</div>
+#if($g_user && $p1 == "more")
+	#set($views = $todo.listByUser($g_user, $p, $size))
+	<div class="row">
+		<div class="span8">
+            <h4>所有：</h4>
+        	<table class="table">
+        		#foreach($v in $views)
+        			<tr class="view">
+						#set($num = $velocityCount + ($p - 1)*$size)
+                        <td>$num</td>
+                        <td><a href="$v.url" id="$v.id" target="_blank"#if($v.status==1) class="viewed"#end>$v.title</a> <span class="pull-right">$format.date("yyyy-MM-dd HH:mm",$v.createTime)</span></td>
+                    </tr>
+        		#end
+            </table>
+        </div>
+        <script>
+			$(function(){
+				$(".view a").click(function(){
+					obj = $(this);
+					var id = $(this).attr("id");
+					var params = {
+						"id":id
+					};
+					ajax("$link.action("view/mark")",params,function(msg){
+						if(msg.error){
+							alert(msg.msg);
+							return ;
+						}
+						obj.addClass("viewed");
+					});				
+				});
+			});
+		</script>
+    </div>
+#elseif(!$g_user || $p1 == "about")
+    <div class="well">
+        <h3>这样一个情况：</h3>
+        <p>在网上发现比较有趣的视频，可能是工作时间不方便观看，怎么办呢？</p>
+        <h5 class="text-error">可以加入书签，回家看！</h5>
+        <p>但是书签多了管理都麻烦，书签的同步也不一定那么及时，于是就有了这个<strong><a href="$link.action("file/crx")">chrome插件</a></strong>了^.^</p>
+        <p><img src="$link.img("viewitlater.jpg")" alt="view it later"/></p>
+        <p>点击添加，就将当前页面加入view it later，等有时间了再点击浏览！</p>
+        <p>浏览过后，该项将不再显示，如果需要查看之前的，点击<strong>更多</strong>！</p>
+		
+		<hr />
+		<h3>安装</h3>
+        <p>打开google浏览器的应用拓展界面，设置--工具--拓展程序，或者在google浏览器地址栏输入 <strong>chrome://extensions/</strong></p>
+        <p>然后将下载下来的插件拖到这个界面进行安装^.^</p>
+		
+		<hr />
+		<h3>源码</h3>
+        <p>如果您对拓展程序的源码感兴趣，请移步到<a href="https://github.com/smilezino/viewitlater">https://github.com/smilezino/viewitlater</a></p>
+	</div>
 #end

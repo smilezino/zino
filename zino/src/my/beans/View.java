@@ -37,7 +37,7 @@ public class View extends DBbean{
 	 * @param user
 	 * @return
 	 */
-	public List<View> listByFilter(User user, byte status) {
+	public List<View> listByFilter(User user, int status) {
 		StringBuffer sql = new StringBuffer("SELECT * FROM " + TableName() + " WHERE user=?");
 		List<Object> params = new ArrayList<Object>();
 		params.add(user.getId());
@@ -47,6 +47,18 @@ public class View extends DBbean{
 		}
 		sql.append(" ORDER BY status ASC, sort DESC, createTime DESC");
 		return QueryHelper.query(View.class, sql.toString(), params.toArray());
+	}
+	
+	/**
+	 * 分页列出user所有todo
+	 * @param user
+	 * @param page
+	 * @param size
+	 * @return
+	 */
+	public List<View> listByUser(User user, int page, int size) {
+		String sql = "SELECT * FROM " + TableName() + " WHERE user=? ORDER BY status ASC, sort DESC, createTime DESC";
+		return QueryHelper.query_slice(View.class, sql, page, size, user.getId());
 	}
 	
 	

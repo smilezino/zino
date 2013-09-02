@@ -27,7 +27,13 @@ public class FileAction {
 		ImageUtils.get(ctx);
 	}
 	
-	@SuppressWarnings("unused")
+	public void crx(RequestContext ctx) throws IOException {
+		String path = RequestContext.root()+"files"+File.separator;
+		String name = "view.crx";
+		File file = new File(path+name);
+		download(ctx, file, path, name);
+	}
+	
 	private void download(RequestContext ctx,File file, String path, String filename) throws IOException{
 		FileInputStream f = null;
 		try {

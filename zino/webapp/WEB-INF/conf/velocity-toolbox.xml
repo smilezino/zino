@@ -16,4 +16,9 @@
 		<scope>application</scope>
 		<class>my.toolbox.FormatTool</class>
 	</tool>
+	<tool>
+		<key>todo</key>
+		<scope>application</scope>
+		<class>my.beans.View</class>
+	</tool>
 </toolbox>
