@@ -14,9 +14,9 @@
             <div class="navbar-inner">
                 <div class="container">
                     <ul class="nav">
-                        <li><a href="$link.root()"><strong>Home</strong></a></li>
-                        <li#if($active=="blog") class="active"#end><a href="$link.link("blog")"><strong>Blog</strong></a></li>
-                        <li#if($active=="view") class="active"#end><a href="$link.link("view")"><strong>View</strong></a></li>
+                        <li#if(!$active) class="active"#end><a href="$link.root()"><strong>Home</strong></a></li>
+                        <li#if($active&&$active=="blog") class="active"#end><a href="$link.link("blog")"><strong>Blog</strong></a></li>
+                        <li#if($active&&$active=="view") class="active"#end><a href="$link.link("view")"><strong>View</strong></a></li>
                     </ul>
                     
                     <ul class="nav pull-right">
