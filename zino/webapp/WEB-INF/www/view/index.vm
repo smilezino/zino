@@ -11,6 +11,7 @@
 #end
 #set($size = 8)
 <style>
+	.page-header a {text-decoration:none}
 	.page-header a:hover{color:#08c}
 	.view a{text-decoration:none;font-weight:bold}
 	.view a:hover{}
@@ -21,7 +22,7 @@
 	.table .view td {border-top:none;border-bottom:1px solid #ddd}
 </style>
 <div class="page-header">
-    <a href="$link.link("view")" style="text-decoration:none"><h1>View It Later <small>稍后浏览</small></h1></a>
+    <h1><a href="$link.link("view")">View It Later <small>稍后浏览</small></a></h1>
 </div>
 #if($g_user && $p1 == "more")
 	#set($views = $todo.listByUser($g_user, $s, $p, $size))
@@ -38,7 +39,10 @@
             			<tr class="view">
     						#set($num = $velocityCount + ($p - 1)*$size)
                             <td>$num</td>
-                            <td class="view-url"><a href="$v.url" ref="$v.id" target="_blank"#if($v.status==1) class="viewed"#elseif($v.status==8) class="archive" title="已存档"#else title="未浏览"#end>$v.title</a> <span class="pull-right">$format.date("yyyy-MM-dd HH:mm",$v.createTime)</span></td>
+                            <td class="view-url">
+								<a href="$v.url" ref="$v.id" target="_blank"#if($v.status==1) class="viewed"#elseif($v.status==8) class="archive" title="已存档"#else title="未浏览"#end>$v.title</a>
+								<span class="pull-right">$format.date("yyyy-MM-dd HH:mm",$v.createTime)</span>
+							</td>
                             <td class="view-remove"><a href="#" ref="$v.id" title="删除"><i class="icon-remove"></i></a></td>
                             <td class="view-archive">
     							#if($v.status != 8)
