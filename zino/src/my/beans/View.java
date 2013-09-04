@@ -17,7 +17,7 @@ public class View extends DBbean{
 	public static final byte STATUS_ALL = -1; //所有todo
 	public static final byte STATUS_UNDO = 0; //未做todo
 	public static final byte STATUS_DO = 1;   //已做todo
-	public static final byte STATUS_ARCHIVE=9;//收藏todo
+	public static final byte STATUS_ARCHIVE=8;//收藏todo
 	private long user;
 	private String title;
 	private String url;

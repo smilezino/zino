@@ -5,17 +5,20 @@
 #set($p = $link.param("p",1))
 #set($status = $link.param("status","all"))
 #if($status=="archive")
-	#set($s = 9)
+	#set($s = 8)
 #else
 	#set($s = -1)
 #end
-#set($size = 16)
+#set($size = 8)
 <style>
 	.page-header a:hover{color:#08c}
 	.view a{text-decoration:none;font-weight:bold}
 	.view a:hover{}
 	.view .viewed {color:#777;font-weight:normal}
 	.view .viewed:hover {color:#000}
+	.view .archive{color:#666;font-weight:normal}
+	.view .archive:hover {color:#000}
+	.table .view td {border-top:none;border-bottom:1px solid #ddd}
 </style>
 <div class="page-header">
     <a href="$link.link("view")" style="text-decoration:none"><h1>View It Later <small>稍后浏览</small></h1></a>
@@ -25,24 +28,34 @@
 	#set($count = $todo.countByUser($g_user, $s))
 	<div class="row">
 		<div class="span10">
-            <h4>所有：</h4>
-        	<table class="table">
-        		#foreach($v in $views)
-        			<tr class="view">
-						#set($num = $velocityCount + ($p - 1)*$size)
-                        <td>$num</td>
-                        <td class="view-url"><a href="$v.url" id="$v.id" target="_blank"#if($v.status==1) class="viewed"#end>$v.title</a> <span class="pull-right">$format.date("yyyy-MM-dd HH:mm",$v.createTime)</span></td>
-                        <td class="view-btn"><a href="#" id="$v.id" title="删除">X</a></td>
-					</tr>
-        		#end
-            </table>
-			#pager("",$count,$size)
+            <div class="tabbable">
+				<ul class="nav nav-tabs">
+                    <li#if($status=="all") class="active"#end><a href="?status=all">所有</a></li>
+                    <li#if($status=="archive") class="active"#end><a href="?status=archive">存档</a></li>
+                </ul>
+            	<table class="table table-hover">
+            		#foreach($v in $views)
+            			<tr class="view">
+    						#set($num = $velocityCount + ($p - 1)*$size)
+                            <td>$num</td>
+                            <td class="view-url"><a href="$v.url" ref="$v.id" target="_blank"#if($v.status==1) class="viewed"#elseif($v.status==8) class="archive" title="已存档"#else title="未浏览"#end>$v.title</a> <span class="pull-right">$format.date("yyyy-MM-dd HH:mm",$v.createTime)</span></td>
+                            <td class="view-remove"><a href="#" ref="$v.id" title="删除"><i class="icon-remove"></i></a></td>
+                            <td class="view-archive">
+    							#if($v.status != 8)
+    								<a href="#" ref="$v.id" title="存档"><i class="icon-ok"></i></a>
+    							#end
+    						</td>
+    					</tr>
+            		#end
+                </table>
+    			#pager("?status=$status",$count,$size)
+            </div>
         </div>
         <script>
 			$(function(){
 				$(".view-url a").click(function(){
 					obj = $(this);
-					var id = obj.attr("id");
+					var id = obj.attr("ref");
 					var params = {
 						"id":id
 					};
@@ -55,15 +68,27 @@
 					});				
 				});
 				
-				$(".view-btn a").click(function(){
+				$(".view-remove a").click(function(){
 					obj = $(this);
-					var id = obj.attr("id");
+					var id = obj.attr("ref");
 					var params = {
 						"id":id
 					};
 					ajax("$link.action("view/delete")",params,function(msg){
 						if(msg.error){alert(msg.msg);return;}
 						obj.parents("tr").remove();
+					});
+				});
+				
+				$(".view-archive a").click(function(){
+					obj = $(this);
+					var id = obj.attr("ref");
+					var params = {
+						"id":id
+					};
+					ajax("$link.action("view/archive")",params,function(msg){
+						if(msg.error){alert(msg.msg);return;}
+						obj.remove();
 					});
 				});
 			});
