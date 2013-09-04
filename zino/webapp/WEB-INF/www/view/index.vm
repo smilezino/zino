@@ -3,6 +3,12 @@
 #set($active = "view")
 #set($p1 = $link.param("p1","about"))
 #set($p = $link.param("p",1))
+#set($status = $link.param("status","all"))
+#if($status=="archive")
+	#set($s = 9)
+#else
+	#set($s = -1)
+#end
 #set($size = 16)
 <style>
 	.page-header a:hover{color:#08c}
@@ -15,8 +21,8 @@
     <a href="$link.link("view")" style="text-decoration:none"><h1>View It Later <small>稍后浏览</small></h1></a>
 </div>
 #if($g_user && $p1 == "more")
-	#set($views = $todo.listByUser($g_user, $p, $size))
-	#set($count = $todo.countByUser($g_user))
+	#set($views = $todo.listByUser($g_user, $s, $p, $size))
+	#set($count = $todo.countByUser($g_user, $s))
 	<div class="row">
 		<div class="span10">
             <h4>所有：</h4>

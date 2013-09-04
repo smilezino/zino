@@ -27,6 +27,11 @@ public class FileAction {
 		ImageUtils.get(ctx);
 	}
 	
+	/**
+	 * 下载chrome插件
+	 * @param ctx
+	 * @throws IOException
+	 */
 	public void crx(RequestContext ctx) throws IOException {
 		String path = RequestContext.root()+"files"+File.separator;
 		String name = "view.crx";
