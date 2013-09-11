@@ -1,74 +1,2669 @@
-var Markdown;Markdown=typeof exports==="object"&&typeof require==="function"?exports:{};
-(function(){function y(j){return j}function C(){return!1}function t(){}function o(){}t.prototype={chain:function(j,v){var o=this[j];if(!o)throw Error("unknown hook "+j);this[j]=o===y?v:function(j){return v(o(j))}},set:function(j,o){if(!this[j])throw Error("unknown hook "+j);this[j]=o},addNoop:function(j){this[j]=y},addFalse:function(j){this[j]=C}};Markdown.HookCollection=t;o.prototype={set:function(j,o){this["s_"+j]=o},get:function(j){return this["s_"+j]}};Markdown.Converter=function(){function j(a){return a=
-a.replace(/^[ ]{0,3}\[(.+)\]:[ \t]*\n?[ \t]*<?(\S+?)>?(?=\s|$)[ \t]*\n?[ \t]*((\n*)["(](.+?)[")][ \t]*)?(?:\n+)/gm,function(a,m,c,b,d,e){m=m.toLowerCase();q.set(m,g(c));if(d)return b;else e&&D.set(m,e.replace(/"/g,"&quot;"));return""})}function v(a){a=a.replace(/^(<(p|div|h[1-6]|blockquote|pre|table|dl|ol|ul|script|noscript|form|fieldset|iframe|math|ins|del)\b[^\r]*?\n<\/\2>[ \t]*(?=\n+))/gm,z);a=a.replace(/^(<(p|div|h[1-6]|blockquote|pre|table|dl|ol|ul|script|noscript|form|fieldset|iframe|math)\b[^\r]*?.*<\/\2>[ \t]*(?=\n+)\n)/gm,
-z);a=a.replace(/\n[ ]{0,3}((<(hr)\b([^<>])*?\/?>)[ \t]*(?=\n{2,}))/g,z);a=a.replace(/\n\n[ ]{0,3}(<!(--(?:|(?:[^>-]|-[^>])(?:[^-]|-[^-])*)--)>[ \t]*(?=\n{2,}))/g,z);return a=a.replace(/(?:\n\n)([ ]{0,3}(?:<([?%])[^\r]*?\2>)[ \t]*(?=\n{2,}))/g,z)}function z(a,c){var b;b=c.replace(/^\n+/,"");b=b.replace(/\n+$/g,"");return b="\n\n~K"+(H.push(b)-1)+"K\n\n"}function A(a,c){a=x(a);a=a.replace(/^[ ]{0,2}([ ]?\*[ ]?){3,}[ \t]*$/gm,"<hr />\n");a=a.replace(/^[ ]{0,2}([ ]?-[ ]?){3,}[ \t]*$/gm,"<hr />\n");a=
-a.replace(/^[ ]{0,2}([ ]?_[ ]?){3,}[ \t]*$/gm,"<hr />\n");a=F(a);a=y(a);a=d(a);a=v(a);return a=b(a,c)}function e(m){m=a(m);m=B(m);m=m.replace(/\\(\\)/g,l);m=m.replace(/\\([`*_{}\[\]()>#+-.!])/g,l);m=m.replace(/(!\[(.*?)\][ ]?(?:\n[ ]*)?\[(.*?)\])()()()()/g,r);m=m.replace(/(!\[(.*?)\]\s?\([ \t]*()<?(\S+?)>?[ \t]*((['"])(.*?)\6[ \t]*)?\))/g,r);m=m.replace(/(\[((?:\[[^\]]*\]|[^\[\]])*)\][ ]?(?:\n[ ]*)?\[(.*?)\])()()()()/g,E);m=m.replace(/(\[((?:\[[^\]]*\]|[^\[\]])*)\]\([ \t]*()<?((?:\([^)]*\)|[^()\s])*?)>?[ \t]*((['"])(.*?)\6[ \t]*)?\))/g,
-E);m=m.replace(/(\[([^\[\]]+)\])()()()()()/g,E);m=k(m);m=m.replace(/~P/g,"://");m=g(m);m=m.replace(/([\W_]|^)(\*\*|__)(?=\S)([^\r]*?\S[\*_]*)\2([\W_]|$)/g,"$1<strong>$3</strong>$4");m=m.replace(/([\W_]|^)(\*|_)(?=\S)([^\r\*_]*?\S)\2([\W_]|$)/g,"$1<em>$3</em>$4");return m=m.replace(/  +\n/g," <br>\n")}function B(a){return a=a.replace(/(<[a-z\/!$]("[^"]*"|'[^']*'|[^'">])*>|<!(--(?:|(?:[^>-]|-[^>])(?:[^-]|-[^-])*)--)>)/gi,function(a){var m=a.replace(/(.)<\/?code>(?=.)/g,"$1`");return m=p(m,a.charAt(1)==
-"!"?"\\`*_/":"\\`*_")})}function E(a,c,b,d,g,e,k,f){f==void 0&&(f="");a=b.replace(/:\/\//g,"~P");d=d.toLowerCase();if(g=="")if(d==""&&(d=a.toLowerCase().replace(/ ?\n/g," ")),q.get(d)!=void 0)g=q.get(d),D.get(d)!=void 0&&(f=D.get(d));else if(c.search(/\(\s*\)$/m)>-1)g="";else return c;g=i(g);g=p(g,"*_");c='<a href="'+g+'"';f!=""&&(f=h(f),f=p(f,"*_"),c+=' title="'+f+'"');c+=">"+a+"</a>";return c}function h(a){return a.replace(/>/g,"&gt;").replace(/</g,"&lt;").replace(/"/g,"&quot;")}function r(a,c,
-b,d,g,e,f,i){a=b;d=d.toLowerCase();i||(i="");if(g=="")if(d==""&&(d=a.toLowerCase().replace(/ ?\n/g," ")),q.get(d)!=void 0)g=q.get(d),D.get(d)!=void 0&&(i=D.get(d));else return c;a=p(h(a),"*_[]()");g=p(g,"*_");c='<img src="'+g+'" alt="'+a+'"';i=h(i);i=p(i,"*_");c+=' title="'+i+'"';c+=" />";return c}function x(a){a=a.replace(/^(.+)[ \t]*\n=+[ \t]*\n+/gm,function(a,c){return"<h1>"+e(c)+"</h1>\n\n"});a=a.replace(/^(.+)[ \t]*\n-+[ \t]*\n+/gm,function(a,c){return"<h2>"+e(c)+"</h2>\n\n"});return a=a.replace(/^(\#{1,6})[ \t]*(.+?)[ \t]*\#*\n+/gm,
-function(a,c,b){a=c.length;return"<h"+a+">"+e(b)+"</h"+a+">\n\n"})}function F(a){a+="~0";var c=/^(([ ]{0,3}([*+-]|\d+[.])[ \t]+)[^\r]+?(~0|\n{2,}(?=\S)(?![ \t]*(?:[*+-]|\d+[.])[ \t]+)))/gm;I?a=a.replace(c,function(a,c,b){a=b.search(/[*+-]/g)>-1?"ul":"ol";c=w(c,a);c=c.replace(/\s+$/,"");return"<"+a+">"+c+"</"+a+">\n"}):(c=/(\n\n|^\n?)(([ ]{0,3}([*+-]|\d+[.])[ \t]+)[^\r]+?(~0|\n{2,}(?=\S)(?![ \t]*(?:[*+-]|\d+[.])[ \t]+)))/g,a=a.replace(c,function(a,c,b,d){a=d.search(/[*+-]/g)>-1?"ul":"ol";b=w(b,a);
-return c+"<"+a+">\n"+b+"</"+a+">\n"}));return a=a.replace(/~0/,"")}function w(a,c){I++;a=a.replace(/\n{2,}$/,"\n");a+="~0";var b=K[c],d=!1,a=a.replace(RegExp("(^[ \\t]*)("+b+")[ \\t]+([^\\r]+?(\\n+))(?=(~0|\\1("+b+")[ \\t]+))","gm"),function(a,c,b,m){a=m;(c=/\n\n$/.test(a))||a.search(/\n{2,}/)>-1||d?a=A(u(a),!0):(a=F(u(a)),a=a.replace(/\n$/,""),a=e(a));d=c;return"<li>"+a+"</li>\n"}),a=a.replace(/~0/g,"");I--;return a}function y(a){a+="~0";a=a.replace(/(?:\n\n|^)((?:(?:[ ]{4}|\t).*\n+)+)(\n*[ ]{0,3}[^ \t\n]|(?=~0))/g,
-function(a,b,d){a=c(u(b));a=n(a);a=a.replace(/^\n+/g,"");a=a.replace(/\n+$/g,"");return"\n\n"+("<pre><code>"+a+"\n</code></pre>")+"\n\n"+d});return a=a.replace(/~0/,"")}function s(a){a=a.replace(/(^\n+|\n+$)/g,"");return"\n\n~K"+(H.push(a)-1)+"K\n\n"}function a(a){return a=a.replace(/(^|[^\\])(`+)([^\r]*?[^`])\2(?!`)/gm,function(a,b,d,g){a=g.replace(/^([ \t]*)/g,"");a=a.replace(/[ \t]*$/g,"");a=c(a);a=a.replace(/:\/\//g,"~P");return b+"<code>"+a+"</code>"})}function c(a){a=a.replace(/&/g,"&amp;");
-a=a.replace(/</g,"&lt;");a=a.replace(/>/g,"&gt;");return a=p(a,"*_{}[]\\",!1)}function d(a){return a=a.replace(/((^[ \t]*>[ \t]?.+\n(.+\n)*\n*)+)/gm,function(a,c){var b;b=c.replace(/^[ \t]*>[ \t]?/gm,"~0");b=b.replace(/~0/g,"");b=b.replace(/^[ \t]+$/gm,"");b=A(b);b=b.replace(/(^|\n)/g,"$1  ");b=b.replace(/(\s*<pre>[^\r]+?<\/pre>)/gm,function(a,c){var b;b=c.replace(/^  /mg,"~0");return b=b.replace(/~0/g,"")});return s("<blockquote>\n"+b+"\n</blockquote>")})}function b(a,c){for(var a=a.replace(/^\n+/g,
-""),a=a.replace(/\n+$/g,""),b=a.split(/\n{2,}/g),d=[],g=/~K(\d+)K/,q=b.length,i=0;i<q;i++){var f=b[i];g.test(f)?d.push(f):/\S/.test(f)&&(f=e(f),f=f.replace(/^([ \t]*)/g,"<p>"),f+="</p>",d.push(f))}if(!c){q=d.length;for(i=0;i<q;i++)for(var k=!0;k;)k=!1,d[i]=d[i].replace(/~K(\d+)K/g,function(a,c){k=!0;return H[c]})}return d.join("\n\n")}function g(a){a=a.replace(/&(?!#?[xX]?(?:[0-9a-fA-F]+|\w+);)/g,"&amp;");return a=a.replace(/<(?![a-z\/?\$!])/gi,"&lt;")}function k(a){a=a.replace(/(^|\s)(https?|ftp)(:\/\/[-A-Z0-9+&@#\/%?=~_|\[\]\(\)!:,\.;]*[-A-Z0-9+&@#\/%=~_|\[\]])($|\W)/gi,
-"$1<$2$3>$4");return a=a.replace(/<((https?|ftp):[^'">\s]+)>/gi,function(a,c){return'<a href="'+c+'">'+G.plainLinkText(c)+"</a>"})}function f(a){return a=a.replace(/~E(\d+)E/g,function(a,c){var b=parseInt(c);return String.fromCharCode(b)})}function u(a){a=a.replace(/^(\t|[ ]{1,4})/gm,"~0");return a=a.replace(/~0/g,"")}function n(a){if(!/\t/.test(a))return a;var c=["    ","   ","  "," "],b=0,d;return a.replace(/[\n\t]/g,function(a,g){if(a==="\n")return b=g+1,a;d=(g-b)%4;b=g+1;return c[d]})}function i(a){if(!a)return"";
-var c=a.length;return a.replace(L,function(b,d){if(b=="~D")return"%24";if(b==":"&&(d==c-1||/[0-9\/]/.test(a.charAt(d+1))))return":";return"%"+b.charCodeAt(0).toString(16)})}function p(a,c,b){c="(["+c.replace(/([\[\]\\])/g,"\\$1")+"])";b&&(c="\\\\"+c);return a=a.replace(RegExp(c,"g"),l)}function l(a,c){return"~E"+c.charCodeAt(0)+"E"}var G=this.hooks=new t;G.addNoop("plainLinkText");G.addNoop("preConversion");G.addNoop("postConversion");var q,D,H,I;this.makeHtml=function(a){if(q)throw Error("Recursive call to converter.makeHtml");
-q=new o;D=new o;H=[];I=0;a=G.preConversion(a);a=a.replace(/~/g,"~T");a=a.replace(/\$/g,"~D");a=a.replace(/\r\n/g,"\n");a=a.replace(/\r/g,"\n");a=n("\n\n"+a+"\n\n");a=a.replace(/^[ \t]+$/mg,"");a=v(a);a=j(a);a=A(a);a=f(a);a=a.replace(/~D/g,"$$");a=a.replace(/~T/g,"~");a=G.postConversion(a);H=D=q=null;return a};var K={ol:"\\d+[.]",ul:"[*+-]"},L=/(?:["'*()[\]:]|~D)/g}})();
-(function(){function y(e){return e.replace(/<[^>]*>?/gi,C)}function C(e){return e.match(v)||e.match(z)||e.match(A)?e:""}function t(e){if(e=="")return"";var j=/<\/?\w+[^>]*(\s|$|>)/g,o=e.toLowerCase().match(j),h=(o||[]).length;if(h==0)return e;for(var r,x,t,w=[],v=[],s=!1,a=0;a<h;a++)if(r=o[a].replace(/<\/?(\w+).*/,"$1"),!(w[a]||"<p><img><br><li><hr>".search("<"+r+">")>-1)){x=o[a];t=-1;if(!/^<\//.test(x))for(x=a+1;x<h;x++)if(!w[x]&&o[x]=="</"+r+">"){t=x;break}t==-1?s=v[a]=!0:w[t]=!0}if(!s)return e;
-a=0;return e=e.replace(j,function(c){c=v[a]?"":c;a++;return c})}var o,j;typeof exports==="object"&&typeof require==="function"?(o=exports,j=require("./Markdown.Converter").Converter):(o=window.Markdown,j=o.Converter);o.getSanitizingConverter=function(){var e=new j;e.hooks.chain("postConversion",y);e.hooks.chain("postConversion",t);return e};var v=/^(<\/?(b|blockquote|code|del|dd|dl|dt|em|h1|h2|h3|i|kbd|li|ol|p|pre|s|sup|sub|strong|strike|ul|table|tr|th|td)>|<(br|hr)\s?\/?>)$/i,z=/^(<a\shref="((https?|ftp):\/\/|\/)[-A-Za-z0-9+&@#\/%?=~_|!:,.;\(\)]+"(\stitle="[^"<>]+")?\s?>|<\/a>)$/i,
-A=/^(<img\ssrc="(https?:\/\/|\/)[-A-Za-z0-9+&@#\/%?=~_|!:,.;\(\)]+"(\swidth="\d{1,3}")?(\sheight="\d{1,3}")?(\salt="[^"<>]*")?(\stitle="[^"<>]*")?\s?\/?>)$/i})();
-(function(){function y(){}function C(a){this.buttonBar=h.getElementById("wmd-button-bar"+a);this.preview=h.getElementById("wmd-preview"+a);this.input=h.getElementById("wmd-input"+a)}function t(a,c){var d=this,b=[],g=0,k="none",f,h,n,i=function(a,c){k!=a&&(k=a,c||l());!w.isIE||k!="moving"?h=setTimeout(p,1):n=null},p=function(a){n=new o(c,a);h=void 0};this.setCommandMode=function(){k="command";l();h=setTimeout(p,0)};this.canUndo=function(){return g>1};this.canRedo=function(){if(b[g+1])return!0;return!1};
-this.undo=function(){d.canUndo()&&(f?(f.restore(),f=null):(b[g]=new o(c),b[--g].restore(),a&&a()));k="none";c.input.focus();p()};this.redo=function(){d.canRedo()&&(b[++g].restore(),a&&a());k="none";c.input.focus();p()};var l=function(){var d=n||new o(c);if(!d)return!1;k=="moving"?f||(f=d):(f&&(b[g-1].text!=f.text&&(b[g++]=f),f=null),b[g++]=d,b[g+1]=null,a&&a())},j=function(a){var c=!1;if(a.ctrlKey||a.metaKey)switch(String.fromCharCode(a.charCode||a.keyCode)){case "y":d.redo();c=!0;break;case "z":a.shiftKey?
-d.redo():d.undo(),c=!0}if(c&&(a.preventDefault&&a.preventDefault(),window.event))window.event.returnValue=!1},q=function(a){if(!a.ctrlKey&&!a.metaKey)a=a.keyCode,a>=33&&a<=40||a>=63232&&a<=63235?i("moving"):a==8||a==46||a==127?i("deleting"):a==13?i("newlines"):a==27?i("escape"):(a<16||a>20)&&a!=91&&i("typing")};(function(){e.addEvent(c.input,"keypress",function(a){(a.ctrlKey||a.metaKey)&&(a.keyCode==89||a.keyCode==90)&&a.preventDefault()});var a=function(){if((w.isIE||n&&n.text!=c.input.value)&&h==
-void 0)k="paste",l(),p()};e.addEvent(c.input,"keydown",j);e.addEvent(c.input,"keydown",q);e.addEvent(c.input,"mousedown",function(){i("moving")});c.input.onpaste=a;c.input.ondrop=a})();p(!0);l()}function o(a,c){var d=this,b=a.input;this.init=function(){if(e.isVisible(b)&&(c||!(h.activeElement&&h.activeElement!==b)))if(this.setInputAreaSelectionStartEnd(),this.scrollTop=b.scrollTop,!this.text&&b.selectionStart||b.selectionStart===0)this.text=b.value};this.setInputAreaSelection=function(){if(e.isVisible(b))if(b.selectionStart!==
-void 0&&!w.isOpera)b.focus(),b.selectionStart=d.start,b.selectionEnd=d.end,b.scrollTop=d.scrollTop;else if(h.selection&&!(h.activeElement&&h.activeElement!==b)){b.focus();var a=b.createTextRange();a.moveStart("character",-b.value.length);a.moveEnd("character",-b.value.length);a.moveEnd("character",d.end);a.moveStart("character",d.start);a.select()}};this.setInputAreaSelectionStartEnd=function(){if(!a.ieCachedRange&&(b.selectionStart||b.selectionStart===0))d.start=b.selectionStart,d.end=b.selectionEnd;
-else if(h.selection){d.text=e.fixEolChars(b.value);var c=a.ieCachedRange||h.selection.createRange(),k=e.fixEolChars(c.text),f="\u0007"+k+"\u0007";c.text=f;var u=e.fixEolChars(b.value);c.moveStart("character",-f.length);c.text=k;d.start=u.indexOf("\u0007");d.end=u.lastIndexOf("\u0007")-1;if(f=d.text.length-e.fixEolChars(b.value).length){for(c.moveStart("character",-k.length);f--;)k+="\n",d.end+=1;c.text=k}if(a.ieCachedRange)d.scrollTop=a.ieCachedScrollTop;a.ieCachedRange=null;this.setInputAreaSelection()}};
-this.restore=function(){if(d.text!=void 0&&d.text!=b.value)b.value=d.text;this.setInputAreaSelection();b.scrollTop=d.scrollTop};this.getChunks=function(){var a=new y;a.before=e.fixEolChars(d.text.substring(0,d.start));a.startTag="";a.selection=e.fixEolChars(d.text.substring(d.start,d.end));a.endTag="";a.after=e.fixEolChars(d.text.substring(d.end));a.scrollTop=d.scrollTop;return a};this.setChunks=function(a){a.before+=a.startTag;a.after=a.endTag+a.after;this.start=a.before.length;this.end=a.before.length+
-a.selection.length;this.text=a.before+a.selection+a.after;this.scrollTop=a.scrollTop};this.init()}function j(a,c,d){var b,g,k,f=function(){var a=0;if(window.innerHeight)a=window.pageYOffset;else if(h.documentElement&&h.documentElement.scrollTop)a=h.documentElement.scrollTop;else if(h.body)a=h.body.scrollTop;return a},u=function(){if(c.preview){var b=c.input.value;if(!(b&&b==k)){k=b;var d=(new Date).getTime(),b=a.makeHtml(b);g=(new Date).getTime()-d;o(b)}}},n=function(){b&&(clearTimeout(b),b=void 0);
-var a=0,a=g;a>3E3&&(a=3E3);b=setTimeout(u,a)},i=function(a){if(a.scrollHeight<=a.clientHeight)return 1;return a.scrollTop/(a.scrollHeight-a.clientHeight)};this.refresh=function(a){a?(k="",u()):n()};this.processingTime=function(){return g};var p=!0,l=function(a){var b=c.preview,d=b.parentNode,q=b.nextSibling;d.removeChild(b);b.innerHTML=a;q?d.insertBefore(b,q):d.appendChild(b)},j=function(a){c.preview.innerHTML=a},q,D=function(a){if(q)return q(a);try{j(a),q=j}catch(c){q=l,q(a)}},o=function(a){var b=
-B.getTop(c.input)-f();c.preview&&(D(a),d());if(c.preview)c.preview.scrollTop=(c.preview.scrollHeight-c.preview.clientHeight)*i(c.preview);if(p)p=!1;else{var q=B.getTop(c.input)-f();w.isIE?setTimeout(function(){window.scrollBy(0,q-b)},0):window.scrollBy(0,q-b)}};(function(a,c){e.addEvent(a,"input",c);a.onpaste=c;a.ondrop=c;e.addEvent(a,"keypress",c);e.addEvent(a,"keydown",c)})(c.input,n);u();if(c.preview)c.preview.scrollTop=0}function v(a,c,d,b,g,k){function f(a){p.focus();if(a.textOp){d&&d.setCommandMode();
-var g=new o(c);if(!g)return;var i=g.getChunks(),f=function(){p.focus();i&&g.setChunks(i);g.restore();b.refresh()};a.textOp(i,f)||f()}a.execute&&a.execute(d)}function u(a,b){var d=a.getElementsByTagName("span")[0];if(b){d.style.backgroundPosition=a.XShift+" 0px";a.onmouseover=function(){d.style.backgroundPosition=this.XShift+" -40px"};a.onmouseout=function(){d.style.backgroundPosition=this.XShift+" 0px"};if(w.isIE)a.onmousedown=function(){if(!(h.activeElement&&h.activeElement!==c.input))c.ieCachedRange=
-document.selection.createRange(),c.ieCachedScrollTop=c.input.scrollTop};if(!a.isHelp)a.onclick=function(){if(this.onmouseout)this.onmouseout();f(this);return!1}}else d.style.backgroundPosition=a.XShift+" -20px",a.onmouseover=a.onmouseout=a.onclick=function(){}}function n(a){typeof a==="string"&&(a=g[a]);return function(){a.apply(g,arguments)}}function i(){d&&(u(l.undo,d.canUndo()),u(l.redo,d.canRedo()))}var p=c.input,l={};(function(){var b=c.buttonBar,d=document.createElement("ul");d.id="wmd-button-row"+
-a;d.className="wmd-button-row";var d=b.appendChild(d),g=0,b=function(b,c,f,i){var e=document.createElement("li");e.className="wmd-button";e.style.left=g+"px";g+=25;var k=document.createElement("span");e.id=b+a;e.appendChild(k);e.title=c;e.XShift=f;if(i)e.textOp=i;u(e,!0);d.appendChild(e);return e},f=function(b){var c=document.createElement("li");c.className="wmd-spacer wmd-spacer"+b;c.id="wmd-spacer"+b+a;d.appendChild(c);g+=25};l.bold=b("wmd-bold-button","\u7c97\u4f53 <strong> Ctrl+B","0px",n("doBold"));
-l.italic=b("wmd-italic-button","\u659c\u4f53 <em> Ctrl+I","-20px",n("doItalic"));f(1);l.link=b("wmd-link-button","\u8d85\u7ea7\u94fe\u63a5 <a> Ctrl+L","-40px",n(function(a,b){return this.doLinkOrImage(a,b,!1)}));l.quote=b("wmd-quote-button","\u5f15\u7528\u6587\u5b57 <blockquote> Ctrl+Q","-60px",n("doBlockquote"));l.code=b("wmd-code-button","\u4ee3\u7801 <pre><code> Ctrl+K","-80px",n("doCode"));l.image=b("wmd-image-button","\u56fe\u7247 <img> Ctrl+G","-100px",n(function(a,b){return this.doLinkOrImage(a,
-b,!0)}));f(2);l.olist=b("wmd-olist-button","\u7f16\u53f7 <ol> Ctrl+O","-120px",n(function(a,b){this.doList(a,b,!0)}));l.ulist=b("wmd-ulist-button","\u9879\u76ee\u7b26\u53f7 <ul> Ctrl+U","-140px",n(function(a,b){this.doList(a,b,!1)}));l.heading=b("wmd-heading-button","\u6807\u9898 <h1>/<h2> Ctrl+H","-160px",n("doHeading"));l.hr=b("wmd-hr-button","\u6c34\u5e73\u7ebf <hr> Ctrl+R","-180px",n("doHorizontalRule"));f(3);l.undo=b("wmd-undo-button","\u540e\u9000 - Ctrl+Z","-200px",null);l.undo.execute=function(a){a&&
-a.undo()};f=/win/.test(x.platform.toLowerCase())?"\u524d\u8fdb - Ctrl+Y":"\u524d\u8fdb - Ctrl+Shift+Z";l.redo=b("wmd-redo-button",f,"-220px",null);l.redo.execute=function(a){a&&a.redo()};if(k)b=document.createElement("li"),f=document.createElement("span"),b.appendChild(f),b.className="wmd-button wmd-help-button",b.id="wmd-help-button"+a,b.XShift="-240px",b.isHelp=!0,b.style.right="0px",b.title=k.title||J,b.onclick=k.handler,u(b,!0),d.appendChild(b),l.help=b;i()})();var j="keydown";w.isOpera&&(j="keypress");
-e.addEvent(p,j,function(a){if((a.ctrlKey||a.metaKey)&&!a.altKey&&!a.shiftKey){switch(String.fromCharCode(a.charCode||a.keyCode).toLowerCase()){case "b":f(l.bold);break;case "i":f(l.italic);break;case "l":f(l.link);break;case "q":f(l.quote);break;case "k":f(l.code);break;case "g":f(l.image);break;case "o":f(l.olist);break;case "u":f(l.ulist);break;case "h":f(l.heading);break;case "r":f(l.hr);break;case "y":f(l.redo);break;case "z":a.shiftKey?f(l.redo):f(l.undo);break;default:return}a.preventDefault&&
-a.preventDefault();if(window.event)window.event.returnValue=!1}});e.addEvent(p,"keyup",function(a){if(a.shiftKey&&!a.ctrlKey&&!a.metaKey&&(a.charCode||a.keyCode)===13)a={},a.textOp=n("doAutoindent"),f(a)});e.addEvent(p,j,function(a){var b=a.charCode||a.keyCode;if(!a.ctrlKey&&!a.metaKey&&!a.altKey&&b==9){b={};b.textOp=a.shiftKey?n("doAutoShiftTab"):n("doAutoTab");f(b);if(w.isIE)a.returnValue=!1;a.preventDefault&&a.preventDefault()}});w.isIE&&e.addEvent(p,"keydown",function(a){if(a.keyCode===27)return!1});
-this.setUndoRedoButtonStates=i}function z(a){this.hooks=a}function A(a){return a.replace(/^\s*(.*?)(?:\s+"(.+)")?\s*$/,function(a,d,b){d=d.replace(/\?.*$/,function(a){return a.replace(/\+/g," ")});d=decodeURIComponent(d);d=encodeURI(d).replace(/'/g,"%27").replace(/\(/g,"%28").replace(/\)/g,"%29");d=d.replace(/\?.*$/,function(a){return a.replace(/\+/g,"%2b")});b&&(b=b.trim?b.trim():b.replace(/^\s*/,"").replace(/\s*$/,""),b=b.replace(/"/g,"quot;").replace(/\(/g,"&#40;").replace(/\)/g,"&#41;").replace(/</g,
-"&lt;").replace(/>/g,"&gt;"));return b?d+' "'+b+'"':d})}var e={},B={},E={},h=window.document,r=window.RegExp,x=window.navigator,F={lineLength:72},w={isIE:/msie/.test(x.userAgent.toLowerCase()),isIE_5or6:/msie 6/.test(x.userAgent.toLowerCase())||/msie 5/.test(x.userAgent.toLowerCase()),isOpera:/opera/.test(x.userAgent.toLowerCase())},J="Markdown \u7f16\u8f91\u5668\u5e2e\u52a9";Markdown.Editor=function(a,c,d){var c=c||"",b=this.hooks=new Markdown.HookCollection;b.addNoop("onPreviewRefresh");b.addNoop("postBlockquoteCreation");
-b.addFalse("insertImageDialog");this.getConverter=function(){return a};var g=this,e;this.run=function(){if(!e){e=new C(c);var f=new z(b),u=new j(a,e,function(){b.onPreviewRefresh()}),n,i;if(!/\?noundo/.test(h.location.href))n=new t(function(){u.refresh();i&&i.setUndoRedoButtonStates()},e),this.textOperation=function(a){n.setCommandMode();a();g.refreshPreview()};i=new v(c,e,n,u,f,d);i.setUndoRedoButtonStates();(g.refreshPreview=function(){u.refresh(!0)})()}}};y.prototype.findTags=function(a,c){var d=
-this,b;if(a)b=e.extendRegExp(a,"","$"),this.before=this.before.replace(b,function(a){d.startTag+=a;return""}),b=e.extendRegExp(a,"^",""),this.selection=this.selection.replace(b,function(a){d.startTag+=a;return""});if(c)b=e.extendRegExp(c,"","$"),this.selection=this.selection.replace(b,function(a){d.endTag=a+d.endTag;return""}),b=e.extendRegExp(c,"^",""),this.after=this.after.replace(b,function(a){d.endTag=a+d.endTag;return""})};y.prototype.trimWhitespace=function(a){var c,d=this;a?a=c="":(a=function(a){d.before+=
-a;return""},c=function(a){d.after=a+d.after;return""});this.selection=this.selection.replace(/^(\s*)/,a).replace(/(\s*)$/,c)};y.prototype.skipLines=function(a,c,d){a===void 0&&(a=1);c===void 0&&(c=1);a++;c++;var b,g;navigator.userAgent.match(/Chrome/)&&"X".match(/()./);this.selection=this.selection.replace(/(^\n*)/,"");this.startTag+=r.$1;this.selection=this.selection.replace(/(\n*$)/,"");this.endTag+=r.$1;this.startTag=this.startTag.replace(/(^\n*)/,"");this.before+=r.$1;this.endTag=this.endTag.replace(/(\n*$)/,
-"");this.after+=r.$1;if(this.before){for(b=g="";a--;)b+="\\n?",g+="\n";d&&(b="\\n*");this.before=this.before.replace(new r(b+"$",""),g)}if(this.after){for(b=g="";c--;)b+="\\n?",g+="\n";d&&(b="\\n*");this.after=this.after.replace(new r(b,""),g)}};e.isVisible=function(a){if(window.getComputedStyle)return window.getComputedStyle(a,null).getPropertyValue("display")!=="none";else if(a.currentStyle)return a.currentStyle.display!=="none"};e.addEvent=function(a,c,d){a.attachEvent?a.attachEvent("on"+c,d):
-a.addEventListener(c,d,!1)};e.removeEvent=function(a,c,d){a.detachEvent?a.detachEvent("on"+c,d):a.removeEventListener(c,d,!1)};e.fixEolChars=function(a){a=a.replace(/\r\n/g,"\n");return a=a.replace(/\r/g,"\n")};e.extendRegExp=function(a,c,d){if(c===null||c===void 0)c="";if(d===null||d===void 0)d="";var a=a.toString(),b,a=a.replace(/\/([gim]*)$/,function(a,c){b=c;return""}),a=a.replace(/(^\/|\/$)/g,"");return new r(c+a+d,b)};B.getTop=function(a,c){var d=a.offsetTop;if(!c)for(;a=a.offsetParent;)d+=
-a.offsetTop;return d};B.getHeight=function(a){return a.offsetHeight||a.scrollHeight};B.getWidth=function(a){return a.offsetWidth||a.scrollWidth};B.getPageSize=function(){var a,c,d,b;self.innerHeight&&self.scrollMaxY?(a=h.body.scrollWidth,c=self.innerHeight+self.scrollMaxY):h.body.scrollHeight>h.body.offsetHeight?(a=h.body.scrollWidth,c=h.body.scrollHeight):(a=h.body.offsetWidth,c=h.body.offsetHeight);if(self.innerHeight)d=self.innerWidth,b=self.innerHeight;else if(h.documentElement&&h.documentElement.clientHeight)d=
-h.documentElement.clientWidth,b=h.documentElement.clientHeight;else if(h.body)d=h.body.clientWidth,b=h.body.clientHeight;return[Math.max(a,d),Math.max(c,b),d,b]};E.createBackground=function(){var a=h.createElement("div"),c=a.style;a.className="wmd-prompt-background";c.position="absolute";c.top="0";c.zIndex="1000";w.isIE?c.filter="alpha(opacity=50)":c.opacity="0.5";var d=B.getPageSize();c.height=d[1]+"px";c.left="0";c.width="100%";h.body.appendChild(a);return a};E.prompt=function(a,c,d){var b,g;c===
-void 0&&(c="");var k=function(a){(a.charCode||a.keyCode)===27&&f(!0)},f=function(a){e.removeEvent(h.body,"keydown",k);var c=g.value;a?c=null:(c=c.replace(/^http:\/\/(https?|ftp):\/\//,"$1://"),/^(?:https?|ftp):\/\//.test(c)||(c="http://"+c));b.parentNode.removeChild(b);d(c);return!1},j=function(){b=h.createElement("div");b.className="wmd-prompt-dialog";b.style.padding="10px;";b.style.position="fixed";b.style.width="400px";b.style.zIndex="1001";var d=h.createElement("div");d.innerHTML=a;d.style.padding=
-"5px";b.appendChild(d);var d=h.createElement("form"),i=d.style;d.onsubmit=function(){return f(!1)};i.padding="0";i.margin="0";i.cssFloat="left";i.width="100%";i.textAlign="center";i.position="relative";b.appendChild(d);g=h.createElement("input");g.type="text";g.value=c;i=g.style;i.display="block";i.width="80%";i.marginLeft=i.marginRight="auto";d.appendChild(g);var p=h.createElement("input");p.type="button";p.onclick=function(){return f(!1)};p.value="\u786e\u5b9a";i=p.style;i.margin="10px";i.display=
-"inline";i.width="7em";var l=h.createElement("input");l.type="button";l.onclick=function(){return f(!0)};l.value="\u53d6\u6d88";i=l.style;i.margin="10px";i.display="inline";i.width="7em";d.appendChild(p);d.appendChild(l);e.addEvent(h.body,"keydown",k);b.style.top="50%";b.style.left="50%";b.style.display="block";if(w.isIE_5or6)b.style.position="absolute",b.style.top=h.documentElement.scrollTop+200+"px",b.style.left="50%";h.body.appendChild(b);b.style.marginTop=-(B.getHeight(b)/2)+"px";b.style.marginLeft=
--(B.getWidth(b)/2)+"px"};setTimeout(function(){j();var a=c.length;if(g.selectionStart!==void 0)g.selectionStart=0,g.selectionEnd=a;else if(g.createTextRange){var b=g.createTextRange();b.collapse(!1);b.moveStart("character",-a);b.moveEnd("character",a);b.select()}g.focus()},0)};var s=z.prototype;s.prefixes="(?:\\s{4,}|\\s*>|\\s*-\\s+|\\s*\\d+\\.|=|\\+|-|_|\\*|#|\\s*\\[[^\n]]+\\]:)";s.unwrap=function(a){var c=new r("([^\\n])\\n(?!(\\n|"+this.prefixes+"))","g");a.selection=a.selection.replace(c,"$1 $2")};
-s.wrap=function(a,c){this.unwrap(a);var d=new r("(.{1,"+c+"})( +|$\\n?)","gm"),b=this;a.selection=a.selection.replace(d,function(a,c){if((new r("^"+b.prefixes,"")).test(a))return a;return c+"\n"});a.selection=a.selection.replace(/\s+$/,"")};s.doBold=function(a,c){return this.doBorI(a,c,2,"strong text")};s.doItalic=function(a,c){return this.doBorI(a,c,1,"emphasized text")};s.doBorI=function(a,c,d,b){a.trimWhitespace();a.selection=a.selection.replace(/\n{2,}/g,"\n");var e=/(\**$)/.exec(a.before)[0],
-c=/(^\**)/.exec(a.after)[0],e=Math.min(e.length,c.length);if(e>=d&&(e!=2||d!=1))a.before=a.before.replace(r("[*]{"+d+"}$",""),""),a.after=a.after.replace(r("^[*]{"+d+"}",""),"");else if(!a.selection&&c)a.after=a.after.replace(/^([*_]*)/,""),a.before=a.before.replace(/(\s?)$/,""),a.before=a.before+c+r.$1;else{if(!a.selection&&!c)a.selection=b;d=d<=1?"*":"**";a.before+=d;a.after=d+a.after}};s.stripLinkDefs=function(a,c){return a=a.replace(/^[ ]{0,3}\[(\d+)\]:[ \t]*\n?[ \t]*<?(\S+?)>?[ \t]*\n?[ \t]*(?:(\n*)["(](.+?)[")][ \t]*)?(?:\n+|$)/gm,
-function(a,b,e,k,f){c[b]=a.replace(/\s*$/,"");if(k)return c[b]=a.replace(/["(](.+?)[")]$/,""),k+f;return""})};s.addLinkDef=function(a,c){var d=0,b={};a.before=this.stripLinkDefs(a.before,b);a.selection=this.stripLinkDefs(a.selection,b);a.after=this.stripLinkDefs(a.after,b);var e="",k=/(\[)((?:\[[^\]]*\]|[^\[\]])*)(\][ ]?(?:\n[ ]*)?\[)(\d+)(\])/g,f=function(a){d++;a=a.replace(/^[ ]{0,3}\[(\d+)\]:/,"  ["+d+"]:");e+="\n"+a},h=function(a,c,e,g,n,j){e=e.replace(k,h);if(b[n])return f(b[n]),c+e+g+d+j;return a};
-a.before=a.before.replace(k,h);c?f(c):a.selection=a.selection.replace(k,h);var n=d;a.after=a.after.replace(k,h);if(a.after)a.after=a.after.replace(/\n*$/,"");if(!a.after)a.selection=a.selection.replace(/\n*$/,"");a.after+="\n\n"+e;return n};s.doLinkOrImage=function(a,c,d){a.trimWhitespace();a.findTags(/\s*!?\[/,/\][ ]?(?:\n[ ]*)?(\[.*?\])?/);var b;if(a.endTag.length>1&&a.startTag.length>0)a.startTag=a.startTag.replace(/!?\[/,""),a.endTag="",this.addLinkDef(a,null);else if(a.selection=a.startTag+a.selection+
-a.endTag,a.startTag=a.endTag="",/\n\n/.test(a.selection))this.addLinkDef(a,null);else{var e=this,k=function(f){b.parentNode.removeChild(b);if(f!==null&&(a.selection=(" "+a.selection).replace(/([^\\](?:\\\\)*)(?=[[\]])/g,"$1\\").substr(1),f=" [999]: "+A(f),f=e.addLinkDef(a,f),a.startTag=d?"![":"[",a.endTag="]["+f+"]",!a.selection))a.selection=d?"\u5728\u6b64\u8f93\u5165\u56fe\u7247\u63cf\u8ff0":"\u5728\u6b64\u8f93\u5165\u94fe\u63a5\u63cf\u8ff0";c()};b=E.createBackground();d?this.hooks.insertImageDialog(k)||
-E.prompt('<p><b>\u63d2\u5165\u56fe\u7247</b></p><p>http://example.com/images/diagram.jpg "optional title"<br></p>',"http://",k):E.prompt('<p><b>\u63d2\u5165\u94fe\u63a5</b></p><p>http://example.com/ "optional title"</p>',"http://",k);return!0}};s.doAutoindent=function(a){var c=!1;a.before=a.before.replace(/(\n|^)[ ]{0,3}([*+-]|\d+[.])[ \t]*\n$/,"\n\n");a.before=a.before.replace(/(\n|^)[ ]{0,3}>[ \t]*\n$/,"\n\n");a.before=a.before.replace(/(\n|^)[ \t]+\n$/,"\n\n");if(!a.selection&&!/^[ \t]*(?:\n|$)/.test(a.after))a.after=
-a.after.replace(/^[^\n]*/,function(c){a.selection=c;return""}),c=!0;/(\n|^)[ ]{0,3}([*+-]|\d+[.])[ \t]+.*\n$/.test(a.before)&&this.doList&&this.doList(a);/(\n|^)[ ]{0,3}>[ \t]+.*\n$/.test(a.before)&&this.doBlockquote&&this.doBlockquote(a);if(/(\n|^)(\t|[ ]{4,}).*\n$/.test(a.before)&&this.doCode)a.startTag="    ",a.selection="\u5728\u6b64\u8f93\u5165\u4ee3\u7801";if(c)a.after=a.selection+a.after,a.selection=""};s.doAutoTab=function(a){var c=/\S[ ]*$/.test(a.before);if(!/^[ ]*\S/.test(a.after)&&!c||
-/\n/.test(a.selection))/\n/.test(a.selection)?a.selection=a.selection.replace(/^/gm,"    "):a.before+="    ";else if(a.startTag="    ",a.selection)a.selection=""};s.doAutoShiftTab=function(a){if(a.selection)a.selection=a.selection.replace(/^[ ]{4}/gm,""),a.before=a.before.replace(/[ ]{4}$/,"")};s.doBlockquote=function(a){a.selection=a.selection.replace(/^(\n*)([^\r]+?)(\n*)$/,function(b,c,d,e){a.before+=c;a.after=e+a.after;return d});a.before=a.before.replace(/(>[ \t]*)$/,function(b,c){a.selection=
-c+a.selection;return""});a.selection=a.selection.replace(/^(\s|>)+$/,"");a.selection=a.selection||"\u5f15\u7528\u6587\u5b57";var c="",d="",b;if(a.before){for(var e=a.before.replace(/\n$/,"").split("\n"),k=!1,f=0;f<e.length;f++){var h=!1;b=e[f];k=k&&b.length>0;/^>/.test(b)?(h=!0,!k&&b.length>1&&(k=!0)):h=/^[ \t]*$/.test(b)?!0:k;h?c+=b+"\n":(d+=c+b,c="\n")}/(^|\n)>/.test(c)||(d+=c,c="")}a.startTag=c;a.before=d;if(a.after)a.after=a.after.replace(/^\n?/,"\n");a.after=a.after.replace(/^(((\n|^)(\n[ \t]*)*>(.+\n)*.*)+(\n[ \t]*)*)/,
-function(b){a.endTag=b;return""});c=function(b){var c=b?"> ":"";if(a.startTag)a.startTag=a.startTag.replace(/\n((>|\s)*)\n$/,function(a,b){return"\n"+b.replace(/^[ ]{0,3}>?[ \t]*$/gm,c)+"\n"});if(a.endTag)a.endTag=a.endTag.replace(/^\n((>|\s)*)\n/,function(a,b){return"\n"+b.replace(/^[ ]{0,3}>?[ \t]*$/gm,c)+"\n"})};if(/^(?![ ]{0,3}>)/m.test(a.selection))this.wrap(a,F.lineLength-2),a.selection=a.selection.replace(/^/gm,"> "),c(!0),a.skipLines();else{a.selection=a.selection.replace(/^[ ]{0,3}> ?/gm,
-"");this.unwrap(a);c(!1);if(!/^(\n|^)[ ]{0,3}>/.test(a.selection)&&a.startTag)a.startTag=a.startTag.replace(/\n{0,2}$/,"\n\n");if(!/(\n|^)[ ]{0,3}>.*$/.test(a.selection)&&a.endTag)a.endTag=a.endTag.replace(/^\n{0,2}/,"\n\n")}a.selection=this.hooks.postBlockquoteCreation(a.selection);if(!/\n/.test(a.selection))a.selection=a.selection.replace(/^(> *)/,function(b,c){a.startTag+=c;return""})};s.doCode=function(a,c){var d=/\S[ ]*$/.test(a.before),b=function(a){var b=$('<div class="wmd-prompt-background" style="position: absolute; top: 0px; z-index: 1000; filter:alpha(opacity=50); opacity: 0.5; height: '+
-$(document).height()+'px; left: 0px; width: 100%; "></div>'),d=$('         \t\t\t<div style="top: 50%; left: 50%; display: block; position: fixed; width:400px; z-index:1001" class="wmd-prompt-dialog">         \t\t\t<p><strong>\u7a0b\u5e8f\u4ee3\u7801\u6216\u811a\u672c</strong></p>         \t\t\t<p style="margin:10px;">         \t\t\t<select id="ic_lang" name="lang"> \t                    <option value="">[\u9009\u62e9\u7f16\u7a0b\u8bed\u8a00]</option> \t                \t<option value="java">Java</option> \t            \t\t<option value="cpp">C/C++/Objective-C</option> \t            \t\t<option value="c#">C#</option> \t            \t\t<option value="js">JavaScript</option> \t            \t\t<option value="php">PHP</option> \t            \t\t<option value="perl">Perl</option> \t            \t\t<option value="python">Python</option> \t            \t\t<option value="ruby">Ruby</option> \t            \t\t<option value="html">HTML</option> \t            \t\t<option value="xml">XML</option> \t            \t\t<option value="css">CSS</option> \t            \t\t<option value="vb">ASP/Basic</option> \t            \t\t<option value="pascal">Delphi/Pascal</option> \t            \t\t<option value="scala">Scala</option> \t            \t\t<option value="groovy">Groovy</option> \t            \t\t<option value="lua">Lua</option> \t            \t\t<option value="sql">SQL</option> \t            \t\t<option value="cpp">Google Go</option> \t            \t\t<option value="as3">Flash/ActionScript/Flex</option> \t            \t\t<option value="xml">WPF/SliverLight</option> \t            \t\t<option value="shell">Shell/\u6279\u5904\u7406</option> \t            \t</select> \u4ee5\u4fbf\u7cfb\u7edf\u8fdb\u884c\u6b63\u786e\u7684\u8bed\u6cd5\u7740\u8272        \t\t\t</p>         \t\t\t<p id="dialog-message" style="padding-top: 10px; margin:0; line-height: 16px;display:none;"></p>         \t\t\t<div style="text-align: center; position: relative;">         \t\t\t<input type="button" value="\u786e\u5b9a" id="ok-image-button" style="width: 7em; margin:10px 0 10px 0;" />         \t        <input type="button" value="\u53d6\u6d88" class="close-dialog-button" style="width: 7em; margin:10px 0 10px 10px;" />         \t\t\t</div>         \t\t\t</div>        \t\t'),
-e=function(){$(document).unbind("keydown",g);d.remove();b.remove()},g=function(a){(a.charCode||a.keyCode)===27&&e()};setTimeout(function(){b.appendTo("body");d.appendTo("body");d.css({"margin-top":-(d.height()/2)+"px","margin-left":-(d.width()/2)+"px"});$(document).keydown(g);$(".close-dialog-button").click(function(){e()});$("#ok-image-button").click(function(){var b=$("#ic_lang").val();b==""?$("#dialog-message").css({color:"red","font-weight":"bold"}).show().text("\u8bf7\u9009\u62e9\u7f16\u7a0b\u8bed\u8a00\uff01"):
-(a(b),e(),c())})},0)};if(!/^[ ]*\S/.test(a.after)&&!d||/\n/.test(a.selection)){a.before=a.before.replace(/[ ]{4}$/,function(b){a.selection=b+a.selection;return""});var e=d=1;/(\n|^)(\t|[ ]{4,}).*\n$/.test(a.before)&&(d=0);/^\n(\t|[ ]{4,})/.test(a.after)&&(e=0);a.skipLines(d,e);a.selection?/^[ ]{0,3}\S/m.test(a.selection)?b(function(b){b="    <\!-- lang: "+b+" --\>\n    ";/\n/.test(a.selection)?a.selection=a.selection.replace(/^/gm,b):a.before+=b}):a.selection=a.selection.replace(/^[ ]{4}/gm,""):b(function(b){a.startTag=
-"    <\!-- lang: "+b+" --\>\n    ";a.selection="\u5728\u6b64\u8f93\u5165\u4ee3\u7801"})}else if(a.trimWhitespace(),a.findTags(/`/,/`/),!a.startTag&&!a.endTag){if(a.startTag=a.endTag="`",!a.selection)a.selection="\u5728\u6b64\u8f93\u5165\u4ee3\u7801"}else a.endTag&&!a.startTag?(a.before+=a.endTag,a.endTag=""):a.startTag=a.endTag=""};s.doList=function(a,c,d){var c=/^\n*(([ ]{0,3}([*+-]|\d+[.])[ \t]+.*)(\n.+|\n{2,}([*+-].*|\d+[.])[ \t]+.*|\n{2,}[ \t]+\S.*)*)\n*/,b="-",e=1,h=function(){var a;d?(a=" "+
-e+". ",e++):a=" "+b+" ";return a},f=function(a){d===void 0&&(d=/^\s*\d/.test(a));return a=a.replace(/^[ ]{0,3}([*+-]|\d+[.])\s/gm,function(){return h()})};a.findTags(/(\n|^)*[ ]{0,3}([*+-]|\d+[.])\s+/,null);if(a.before&&!/\n$/.test(a.before)&&!/^\n/.test(a.startTag))a.before+=a.startTag,a.startTag="";if(a.startTag){var j=/\d+[.]/.test(a.startTag);a.startTag="";a.selection=a.selection.replace(/\n[ ]{4}/g,"\n");this.unwrap(a);a.skipLines();if(j)a.after=a.after.replace(c,f);if(d==j)return}var n=1;a.before=
-a.before.replace(/(\n|^)(([ ]{0,3}([*+-]|\d+[.])[ \t]+.*)(\n.+|\n{2,}([*+-].*|\d+[.])[ \t]+.*|\n{2,}[ \t]+\S.*)*)\n*$/,function(a){if(/^\s*([*+-])/.test(a))b=r.$1;n=/[^\n]\n\n[^\n]/.test(a)?1:0;return f(a)});if(!a.selection)a.selection="\u5217\u8868";var j=h(),i=1;a.after=a.after.replace(c,function(a){i=/[^\n]\n\n[^\n]/.test(a)?1:0;return f(a)});a.trimWhitespace(!0);a.skipLines(n,i,!0);a.startTag=j;c=j.replace(/./g," ");this.wrap(a,F.lineLength-c.length);a.selection=a.selection.replace(/\n/g,"\n"+
-c)};s.doHeading=function(a){a.selection=a.selection.replace(/\s+/g," ");a.selection=a.selection.replace(/(^\s+|\s+$)/g,"");if(a.selection){var c=0;a.findTags(/#+[ ]*/,/[ ]*#+/);if(/#+/.test(a.startTag))c=r.lastMatch.length;a.startTag=a.endTag="";a.findTags(null,/\s?(-+|=+)/);/=+/.test(a.endTag)&&(c=1);/-+/.test(a.endTag)&&(c=2);a.startTag=a.endTag="";a.skipLines(1,1);c=c==0?2:c-1;if(c>0){var c=c>=2?"-":"=",d=a.selection.length;if(d>F.lineLength)d=F.lineLength;for(a.endTag="\n";d--;)a.endTag+=c}}else a.startTag=
-"## ",a.selection="\u6807\u9898",a.endTag=" ##"};s.doHorizontalRule=function(a){a.startTag="----------\n";a.selection="";a.skipLines(2,1,!0)}})();
-function doInsertImage(y){var C="upload-iframe-"+(new Date).getTime(),t=$(' \t<div style="top: 50%; left: 50%; display: block; position: fixed; width:400px; z-index:1001" class="wmd-prompt-dialog">        <div style="padding: 10px;"> \t   <p><b>\u63d2\u5165\u56fe\u7247</b></p>        <p id="tab_switcher" style="padding-top: 10px;"><a href="javascript:;" class="wmd-mini-button selected" id="switch-image-url">\u7f51\u7edc\u56fe\u7247</a><a href="javascript:;" class="wmd-mini-button" id="switch-upload-image">\u672c\u5730\u4e0a\u4f20</a></p>        </div> \t   <div id="tabUrl" style="text-align: center; position: relative;"> \t     <div style="position: relative;"><input type="text" name="imageurl" id="imageurl-input" value="http://" style="width:80%; margin:auto;" /></div> \t\t <p style="padding-top: 10px; margin:0; line-height: 16px;">\u7c98\u8d34\u6216\u8f93\u5165\u7f51\u7edc\u56fe\u7247\u5730\u5740</p> \t\t <input type="button" value="\u786e\u5b9a" id="image-url-button" style="width: 7em; margin:10px 0 10px 0;" />          <input type="button" value="\u53d6\u6d88" class="close-dialog-button" style="width: 7em; margin: 10px 0 10px 10px;" /> \t   </div> \t   <div id="tabFile" style="text-align: center; position: relative; display:none;"> \t   <iframe id="'+C+
-'" style="display:none;" src="about:blank" name="'+C+'"></iframe>        <form action="/action/blog/uploadImg" method="post" enctype="multipart/form-data">         <input type="file" name="imgFile" id="filename-input" style="width:80%; margin:auto;" />         <p id="upload-message" style="padding-top: 10px; margin:0; line-height: 16px;">\u6d4f\u89c8\u5e76\u9009\u62e9\u672c\u5730\u6587\u4ef6</p>         <div class="ac_loading" id="image-upload-progress" style="background-color: transparent; display:none;">\u6b63\u5728\u4e0a\u4f20 ...</div> \t    <input type="submit" value="\u4e0a\u4f20" id="upload-image-button" style="width: 7em;margin:10px 0 10px 0;" />         <input type="button" value="\u53d6\u6d88" class="close-dialog-button" style="width: 7em; margin: 10px 0 10px 10px;" />        </form> \t   </div> \t</div> \t'),
-o=t.find("form"),j=t.find("iframe"),v=function(e){$(document).unbind("keydown",z);j.unbind("load");o.unbind("submit");$("#imageurl-input").val("http://");y(e);t.remove()},z=function(e){(e.charCode||e.keyCode)===27&&v(null)},A=function(e){$("#image-upload-progress").hide();$("#upload-message").css({color:"red","font-weight":"bold"}).show().text(e)};setTimeout(function(){t.appendTo("body");t.css({"margin-top":-(t.height()/2)+"px","margin-left":-(t.width()/2)+"px"});$(document).keydown(z);$(".close-dialog-button").click(function(){v(null)});
-$("#tab_switcher a").click(function(){$("#tabUrl").toggle();$("#tabFile").toggle();$("#switch-image-url").toggleClass("selected");$("#switch-upload-image").toggleClass("selected")});$("#image-url-button").click(function(){var e=$("#imageurl-input").val();e.length==0?($("#imageurl-input").focus(),alert("\u8bf7\u8f93\u5165\u56fe\u7247URL\uff01")):(/^(?:https?|ftp):\/\//.test(e)||(e="http://"+e),v(e))});o.submit(function(){if($("#filename-input").val().length==0)return alert("\u8bf7\u9009\u62e9\u6587\u4ef6\uff01"),
-$("#filename-input").focus(),!1;$("#upload-message").hide();$("#image-upload-progress").show();this.target=C;j.bind("load",function(){o[0].reset();var e=(this.contentDocument||this.contentWindow.document).body.innerHTML;if(e==void 0||e.length==0)A("\u4e0a\u4f20\u5931\u8d25\uff01");else{var j;try{j=eval("("+e+")")}catch(t){A(e);return}j&&(j.error==0?(A("\u4e0a\u4f20\u6210\u529f\uff01"),v(j.url)):A(j.message))}});return!0})},0);return!0};
+var Attacklab = Attacklab || {};
+
+Attacklab.wmdBase = function(){
+
+	// A few handy aliases for readability.
+	var wmd  = top.Attacklab;
+	var doc  = top.document;
+	var re   = top.RegExp;
+	var nav  = top.navigator;
+	
+	// Some namespaces.
+	wmd.Util = {};
+	wmd.Position = {};
+	wmd.Command = {};
+	wmd.Global = {};
+	
+	var util = wmd.Util;
+	var position = wmd.Position;
+	var command = wmd.Command;
+	var global = wmd.Global;
+	
+	
+	// Used to work around some browser bugs where we can't use feature testing.
+	global.isIE 		= /msie/.test(nav.userAgent.toLowerCase());
+	global.isIE_5or6 	= /msie 6/.test(nav.userAgent.toLowerCase()) || /msie 5/.test(nav.userAgent.toLowerCase());
+	global.isIE_7plus 	= global.isIE && !global.isIE_5or6;
+	global.isOpera 		= /opera/.test(nav.userAgent.toLowerCase());
+	global.isKonqueror 	= /konqueror/.test(nav.userAgent.toLowerCase());
+	
+	
+	// -------------------------------------------------------------------
+	//  YOUR CHANGES GO HERE
+	//
+	// I've tried to localize the things you are likely to change to 
+	// this area.
+	// -------------------------------------------------------------------
+	
+	// The text that appears on the upper part of the dialog box when
+	// entering links.
+	var imageUploadDialogText = "<p style='margin-top: 0px'><b>Choose a image file.</b></p>";
+	var imageDialogText = "<p style='margin-top: 0px'><b>Enter the image URL.</b></p>";
+	var linkDialogText = "<p style='margin-top: 0px'><b>Enter the web address.</b></p>";
+	
+	// The default text that appears in the dialog input box when entering
+	// links.
+	var imageDefaultText = "";
+	var linkDefaultText = "";
+	
+	// The location of your button images relative to the base directory.
+	var imageDirectory = "";
+	
+	// Some intervals in ms.  These can be adjusted to reduce the control's load.
+	var previewPollInterval = 500;
+	var pastePollInterval = 100;
+	
+	// The link and title for the help button
+	var helpLink = "http://wmd-editor.com/";
+	var helpHoverTitle = "WMD website";
+	var helpTarget = "_blank";
+	
+	// -------------------------------------------------------------------
+	//  END OF YOUR CHANGES
+	// -------------------------------------------------------------------
+	
+	// A collection of the important regions on the page.
+	// Cached so we don't have to keep traversing the DOM.
+	wmd.PanelCollection = function(){
+		this.buttonBar = doc.getElementById("wmd-button-bar");
+		this.preview = doc.getElementById("wmd-preview");
+		this.output = doc.getElementById("wmd-output");
+		this.input = doc.getElementById("wmd-input");
+	};
+	
+	// This PanelCollection object can't be filled until after the page
+	// has loaded.
+	wmd.panels = undefined;
+	
+	// Internet explorer has problems with CSS sprite buttons that use HTML
+	// lists.  When you click on the background image "button", IE will 
+	// select the non-existent link text and discard the selection in the
+	// textarea.  The solution to this is to cache the textarea selection
+	// on the button's mousedown event and set a flag.  In the part of the
+	// code where we need to grab the selection, we check for the flag
+	// and, if it's set, use the cached area instead of querying the
+	// textarea.
+	//
+	// This ONLY affects Internet Explorer (tested on versions 6, 7
+	// and 8) and ONLY on button clicks.  Keyboard shortcuts work
+	// normally since the focus never leaves the textarea.
+	wmd.ieCachedRange = null;		// cached textarea selection
+	wmd.ieRetardedClick = false;	// flag
+	
+	// Returns true if the DOM element is visible, false if it's hidden.
+	// Checks if display is anything other than none.
+	util.isVisible = function (elem) {
+	
+	    if (window.getComputedStyle) {
+	        // Most browsers
+			return window.getComputedStyle(elem, null).getPropertyValue("display") !== "none";
+		}
+		else if (elem.currentStyle) {
+		    // IE
+			return elem.currentStyle["display"] !== "none";
+		}
+	};
+	
+	
+	// Adds a listener callback to a DOM element which is fired on a specified
+	// event.
+	util.addEvent = function(elem, event, listener){
+		if (elem.attachEvent) {
+			// IE only.  The "on" is mandatory.
+			elem.attachEvent("on" + event, listener);
+		}
+		else {
+			// Other browsers.
+			elem.addEventListener(event, listener, false);
+		}
+	};
+
+	
+	// Removes a listener callback from a DOM element which is fired on a specified
+	// event.
+	util.removeEvent = function(elem, event, listener){
+		if (elem.detachEvent) {
+			// IE only.  The "on" is mandatory.
+			elem.detachEvent("on" + event, listener);
+		}
+		else {
+			// Other browsers.
+			elem.removeEventListener(event, listener, false);
+		}
+	};
+
+	// Converts \r\n and \r to \n.
+	util.fixEolChars = function(text){
+		text = text.replace(/\r\n/g, "\n");
+		text = text.replace(/\r/g, "\n");
+		return text;
+	};
+
+	// Extends a regular expression.  Returns a new RegExp
+	// using pre + regex + post as the expression.
+	// Used in a few functions where we have a base
+	// expression and we want to pre- or append some
+	// conditions to it (e.g. adding "$" to the end).
+	// The flags are unchanged.
+	//
+	// regex is a RegExp, pre and post are strings.
+	util.extendRegExp = function(regex, pre, post){
+		
+		if (pre === null || pre === undefined)
+		{
+			pre = "";
+		}
+		if(post === null || post === undefined)
+		{
+			post = "";
+		}
+		
+		var pattern = regex.toString();
+		var flags = "";
+		
+		// Replace the flags with empty space and store them.
+		// Technically, this can match incorrect flags like "gmm".
+		var result = pattern.match(/\/([gim]*)$/);
+		if (result === null) {
+			flags = result[0];
+		}
+		else {
+			flags = "";
+		}
+		
+		// Remove the flags and slash delimiters from the regular expression.
+		pattern = pattern.replace(/(^\/|\/[gim]*$)/g, "");
+		pattern = pre + pattern + post;
+		
+		return new RegExp(pattern, flags);
+	}
+
+	
+	// Sets the image for a button passed to the WMD editor.
+	// Returns a new element with the image attached.
+	// Adds several style properties to the image.
+	util.createImage = function(img){
+		
+		var imgPath = imageDirectory + img;
+		
+		var elem = doc.createElement("img");
+		elem.className = "wmd-button";
+		elem.src = imgPath;
+
+		return elem;
+	};
+	
+
+	// This simulates a modal dialog box and asks for the URL when you
+	// click the hyperlink or image buttons.
+	//
+	// text: The html for the input box.
+	// defaultInputText: The default value that appears in the input box.
+	// makeLinkMarkdown: The function which is executed when the prompt is dismissed, either via OK or Cancel
+	util.prompt = function(text, defaultInputText, makeLinkMarkdown){
+	
+		// These variables need to be declared at this level since they are used
+		// in multiple functions.
+		var dialog;			// The dialog box.
+		var background;		// The background beind the dialog box.
+		var input;			// The text box where you enter the hyperlink.
+		
+
+		if (defaultInputText === undefined) {
+			defaultInputText = "";
+		}
+		
+		// Used as a keydown event handler. Esc dismisses the prompt.
+		// Key code 27 is ESC.
+		var checkEscape = function(key){
+			var code = (key.charCode || key.keyCode);
+			if (code === 27) {
+				close(true);
+			}
+		};
+		
+		// Dismisses the hyperlink input box.
+		// isCancel is true if we don't care about the input text.
+		// isCancel is false if we are going to keep the text.
+		var close = function(isCancel){
+			util.removeEvent(doc.body, "keydown", checkEscape);
+			var text = input.value;
+
+			if (isCancel){
+				text = null;
+			}
+			else{
+				// Fixes common pasting errors.
+				text = text.replace('http://http://', 'http://');
+				text = text.replace('http://https://', 'https://');
+				text = text.replace('http://ftp://', 'ftp://');
+				
+				if (text.indexOf('http://') === -1 && text.indexOf('ftp://') === -1 && text.indexOf('https://') === -1) {
+					text = 'http://' + text;
+				}
+			}
+			
+			dialog.parentNode.removeChild(dialog);
+			background.parentNode.removeChild(background);
+			makeLinkMarkdown(text);
+			return false;
+		};
+		
+		// Creates the background behind the hyperlink text entry box.
+		// Most of this has been moved to CSS but the div creation and
+		// browser-specific hacks remain here.
+		var createBackground = function(){
+		
+			background = doc.createElement("div");
+			background.className = "wmd-prompt-background";
+			style = background.style;
+			style.position = "absolute";
+			style.top = "0";
+			
+			style.zIndex = "1000";
+			
+			// Some versions of Konqueror don't support transparent colors
+			// so we make the whole window transparent.
+			//
+			// Is this necessary on modern konqueror browsers?
+			if (global.isKonqueror){
+				style.backgroundColor = "transparent";
+			}
+			else if (global.isIE){
+				style.filter = "alpha(opacity=50)";
+			}
+			else {
+				style.opacity = "0.5";
+			}
+			
+			var pageSize = position.getPageSize();
+			style.height = pageSize[1] + "px";
+			
+			if(global.isIE){
+				style.left = doc.documentElement.scrollLeft;
+				style.width = doc.documentElement.clientWidth;
+			}
+			else {
+				style.left = "0";
+				style.width = "100%";
+			}
+			
+			doc.body.appendChild(background);
+		};
+		
+		// Create the text input box form/window.
+		var createDialog = function(){
+		
+			// The main dialog box.
+			dialog = doc.createElement("div");
+			dialog.className = "wmd-prompt-dialog";
+			dialog.style.padding = "10px;";
+			dialog.style.position = "fixed";
+			dialog.style.width = "400px";
+			dialog.style.zIndex = "1001";
+			
+			// The dialog text.
+			var question = doc.createElement("div");
+			question.innerHTML = text;
+			question.style.padding = "5px";
+			dialog.appendChild(question);
+			
+			// The web form container for the text box and buttons.
+			var form = doc.createElement("form");
+			form.onsubmit = function(){ return close(false); };
+			style = form.style;
+			style.padding = "0";
+			style.margin = "0";
+			style.cssFloat = "left";
+			style.width = "100%";
+			style.textAlign = "center";
+			style.position = "relative";
+			dialog.appendChild(form);
+			
+			// The input text box
+			input = doc.createElement("input");
+			input.type = "text";
+			input.value = defaultInputText;
+			style = input.style;
+			style.display = "block";
+			style.width = "80%";
+			style.marginLeft = style.marginRight = "auto";
+			form.appendChild(input);
+			
+			// The ok button
+			var okButton = doc.createElement("input");
+			okButton.type = "button";
+			okButton.onclick = function(){ return close(false); };
+			okButton.value = "OK";
+			style = okButton.style;
+			style.margin = "10px";
+			style.display = "inline";
+			style.width = "7em";
+
+			
+			// The cancel button
+			var cancelButton = doc.createElement("input");
+			cancelButton.type = "button";
+			cancelButton.onclick = function(){ return close(true); };
+			cancelButton.value = "Cancel";
+			style = cancelButton.style;
+			style.margin = "10px";
+			style.display = "inline";
+			style.width = "7em";
+
+			// The order of these buttons is different on macs.
+			if (/mac/.test(nav.platform.toLowerCase())) {
+				form.appendChild(cancelButton);
+				form.appendChild(okButton);
+			}
+			else {
+				form.appendChild(okButton);
+				form.appendChild(cancelButton);
+			}
+
+			util.addEvent(doc.body, "keydown", checkEscape);
+			dialog.style.top = "50%";
+			dialog.style.left = "50%";
+			dialog.style.display = "block";
+			if(global.isIE_5or6){
+				dialog.style.position = "absolute";
+				dialog.style.top = doc.documentElement.scrollTop + 200 + "px";
+				dialog.style.left = "50%";
+			}
+			doc.body.appendChild(dialog);
+			
+			// This has to be done AFTER adding the dialog to the form if you
+			// want it to be centered.
+			dialog.style.marginTop = -(position.getHeight(dialog) / 2) + "px";
+			dialog.style.marginLeft = -(position.getWidth(dialog) / 2) + "px";
+			
+		};
+		
+		createBackground();
+		
+		// Why is this in a zero-length timeout?
+		// Is it working around a browser bug?
+		top.setTimeout(function(){
+		
+			createDialog();
+
+			var defTextLen = defaultInputText.length;
+			if (input.selectionStart !== undefined) {
+				input.selectionStart = 0;
+				input.selectionEnd = defTextLen;
+			}
+			else if (input.createTextRange) {
+				var range = input.createTextRange();
+				range.collapse(false);
+				range.moveStart("character", -defTextLen);
+				range.moveEnd("character", defTextLen);
+				range.select();
+			}
+			
+			input.focus();
+		}, 0);
+	};
+	
+
+	//add upload img
+	util.promptImg = function(text, defaultInputText, makeLinkMarkdown){
+	
+		var dialog;			// The dialog box.
+		var background;		// The background beind the dialog box.
+		var input;			// The text box where you enter the hyperlink.
+		
+
+		if (defaultInputText === undefined) {
+			defaultInputText = "";
+		}
+		
+		// Key code 27 is ESC.
+		var checkEscape = function(key){
+			var code = (key.charCode || key.keyCode);
+			if (code === 27) {
+				close(true);
+			}
+		};
+		
+		// Dismisses the hyperlink input box.
+		// isCancel is true if we don't care about the input text.
+		// isCancel is false if we are going to keep the text.
+		var close = function(isCancel, text){
+			util.removeEvent(doc.body, "keydown", checkEscape);
+
+			if (isCancel){
+				text = null;
+			}
+			else{
+				// Fixes common pasting errors.
+				text = text.replace('http://http://', 'http://');
+				text = text.replace('http://https://', 'https://');
+				text = text.replace('http://ftp://', 'ftp://');
+				
+				if (text.indexOf('http://') === -1 && text.indexOf('ftp://') === -1 && text.indexOf('https://') === -1) {
+					text = 'http://' + text;
+				}
+			}
+			
+			dialog.parentNode.removeChild(dialog);
+			background.parentNode.removeChild(background);
+			makeLinkMarkdown(text);
+			return false;
+		};
+		
+		// Creates the background behind the hyperlink text entry box.
+		// Most of this has been moved to CSS but the div creation and
+		// browser-specific hacks remain here.
+		var createBackground = function(){
+		
+			background = doc.createElement("div");
+			background.className = "wmd-prompt-background";
+			style = background.style;
+			style.position = "absolute";
+			style.top = "0";
+			
+			style.zIndex = "1000";
+			
+			// Some versions of Konqueror don't support transparent colors
+			// so we make the whole window transparent.
+			//
+			// Is this necessary on modern konqueror browsers?
+			if (global.isKonqueror){
+				style.backgroundColor = "transparent";
+			}
+			else if (global.isIE){
+				style.filter = "alpha(opacity=50)";
+			}
+			else {
+				style.opacity = "0.5";
+			}
+			
+			var pageSize = position.getPageSize();
+			style.height = pageSize[1] + "px";
+			
+			if(global.isIE){
+				style.left = doc.documentElement.scrollLeft;
+				style.width = doc.documentElement.clientWidth;
+			}
+			else {
+				style.left = "0";
+				style.width = "100%";
+			}
+			
+			doc.body.appendChild(background);
+		};
+		
+		// Create the text input box form/window.
+		var createDialog = function(){
+		
+			// The main dialog box.
+			dialog = doc.createElement("div");
+			dialog.className = "wmd-prompt-dialog";
+			dialog.style.padding = "10px;";
+			dialog.style.position = "fixed";
+			dialog.style.width = "400px";
+			dialog.style.zIndex = "1001";
+			
+			//upload text
+			var upload = doc.createElement("div");
+			upload.innerHTML = imageUploadDialogText;
+			upload.style.padding = "5px";
+			dialog.appendChild(upload);
+
+			var uploadForm = doc.createElement("form");
+			/*uploadForm.onsubmit = function(){
+				var options = {
+					url:"/action/upload/img",
+					dataType:"json",
+					beforeSubmit:function(){},
+					success:function(msg){
+						if(msg.error){alert(msg.msg);return;};
+						input.value = msg.msg;
+					}
+				};
+				$("#imgUpload").submit(options); 
+				return close(false); 
+			};*/
+			uploadForm.setAttribute("id","imgUpload");
+			style = uploadForm.style;
+			style.padding = "0";
+			style.margin = "0";
+			style.cssFloat = "left";
+			style.width = "100%";
+			style.textAlign = "center";
+			style.position = "relative";
+			dialog.appendChild(uploadForm);
+
+			// The input text box
+			var fileInput = doc.createElement("input");
+			fileInput.type = "file";
+			fileInput.name = "img";
+			style = fileInput.style;
+			style.display = "block";
+			style.width = "80%";
+			style.marginLeft = style.marginRight = "auto";
+			uploadForm.appendChild(fileInput);
+
+			// The ok button
+			var okButton = doc.createElement("input");
+			okButton.type = "button";
+			okButton.onclick = function(){ 
+				var options = {
+					url:"/action/file/uploadImg",
+					dataType:"json",
+					type:"POST",
+					beforeSubmit:function(){
+					},
+					success:function(msg){
+						if(msg.error){alert(msg.msg);return;};
+						close(false, msg.url);
+					},
+					error:function(){
+						alert("net work error");
+					}
+				};
+				$("#imgUpload").ajaxSubmit(options); 
+				//close(false, input.value); 
+			};
+			okButton.value = "OK";
+			style = okButton.style;
+			style.margin = "10px";
+			style.display = "inline";
+			style.width = "7em";
+
+			
+			// The cancel button
+			var cancelButton = doc.createElement("input");
+			cancelButton.type = "button";
+			cancelButton.onclick = function(){ return close(true, ""); };
+			cancelButton.value = "Cancel";
+			style = cancelButton.style;
+			style.margin = "10px";
+			style.display = "inline";
+			style.width = "7em";
+
+			// The order of these buttons is different on macs.
+			if (/mac/.test(nav.platform.toLowerCase())) {
+				uploadForm.appendChild(cancelButton);
+				uploadForm.appendChild(okButton);
+			}
+			else {
+				uploadForm.appendChild(okButton);
+				uploadForm.appendChild(cancelButton);
+			}
+
+
+			// The dialog text.
+			var question = doc.createElement("div");
+			question.innerHTML = text;
+			question.style.padding = "5px";
+			dialog.appendChild(question);
+			
+			// The web form container for the text box and buttons.
+			var form = doc.createElement("form");
+			form.onsubmit = function(){ return close(false, input.value); };
+			style = form.style;
+			style.padding = "0";
+			style.margin = "0";
+			style.cssFloat = "left";
+			style.width = "100%";
+			style.textAlign = "center";
+			style.position = "relative";
+			dialog.appendChild(form);
+			
+			// The input text box
+			input = doc.createElement("input");
+			input.type = "text";
+			input.value = defaultInputText;
+			style = input.style;
+			style.display = "block";
+			style.width = "80%";
+			style.marginLeft = style.marginRight = "auto";
+			form.appendChild(input);
+			
+			// The ok button
+			var okButton = doc.createElement("input");
+			okButton.type = "button";
+			okButton.onclick = function(){ return close(false, input.value); };
+			okButton.value = "OK";
+			style = okButton.style;
+			style.margin = "10px";
+			style.display = "inline";
+			style.width = "7em";
+
+			
+			// The cancel button
+			var cancelButton = doc.createElement("input");
+			cancelButton.type = "button";
+			cancelButton.onclick = function(){ return close(true, ""); };
+			cancelButton.value = "Cancel";
+			style = cancelButton.style;
+			style.margin = "10px";
+			style.display = "inline";
+			style.width = "7em";
+
+			// The order of these buttons is different on macs.
+			if (/mac/.test(nav.platform.toLowerCase())) {
+				form.appendChild(cancelButton);
+				form.appendChild(okButton);
+			}
+			else {
+				form.appendChild(okButton);
+				form.appendChild(cancelButton);
+			}
+
+			util.addEvent(doc.body, "keydown", checkEscape);
+			dialog.style.top = "50%";
+			dialog.style.left = "50%";
+			dialog.style.display = "block";
+			if(global.isIE_5or6){
+				dialog.style.position = "absolute";
+				dialog.style.top = doc.documentElement.scrollTop + 200 + "px";
+				dialog.style.left = "50%";
+			}
+			doc.body.appendChild(dialog);
+			
+			// This has to be done AFTER adding the dialog to the form if you
+			// want it to be centered.
+			dialog.style.marginTop = -(position.getHeight(dialog) / 2) + "px";
+			dialog.style.marginLeft = -(position.getWidth(dialog) / 2) + "px";
+			
+		};
+		
+		createBackground();
+		
+		// Why is this in a zero-length timeout?
+		// Is it working around a browser bug?
+		top.setTimeout(function(){
+		
+			createDialog();
+
+			var defTextLen = defaultInputText.length;
+			if (input.selectionStart !== undefined) {
+				input.selectionStart = 0;
+				input.selectionEnd = defTextLen;
+			}
+			else if (input.createTextRange) {
+				var range = input.createTextRange();
+				range.collapse(false);
+				range.moveStart("character", -defTextLen);
+				range.moveEnd("character", defTextLen);
+				range.select();
+			}
+			
+			input.focus();
+		}, 0);
+	};
+	
+	// UNFINISHED
+	// The assignment in the while loop makes jslint cranky.
+	// I'll change it to a better loop later.
+	position.getTop = function(elem, isInner){
+		var result = elem.offsetTop;
+		if (!isInner) {
+			while (elem = elem.offsetParent) {
+				result += elem.offsetTop;
+			}
+		}
+		return result;
+	};
+	
+	position.getHeight = function (elem) {
+		return elem.offsetHeight || elem.scrollHeight;
+	};
+
+	position.getWidth = function (elem) {
+		return elem.offsetWidth || elem.scrollWidth;
+	};
+
+	position.getPageSize = function(){
+		
+		var scrollWidth, scrollHeight;
+		var innerWidth, innerHeight;
+		
+		// It's not very clear which blocks work with which browsers.
+		if(self.innerHeight && self.scrollMaxY){
+			scrollWidth = doc.body.scrollWidth;
+			scrollHeight = self.innerHeight + self.scrollMaxY;
+		}
+		else if(doc.body.scrollHeight > doc.body.offsetHeight){
+			scrollWidth = doc.body.scrollWidth;
+			scrollHeight = doc.body.scrollHeight;
+		}
+		else{
+			scrollWidth = doc.body.offsetWidth;
+			scrollHeight = doc.body.offsetHeight;
+		}
+		
+		if(self.innerHeight){
+			// Non-IE browser
+			innerWidth = self.innerWidth;
+			innerHeight = self.innerHeight;
+		}
+		else if(doc.documentElement && doc.documentElement.clientHeight){
+			// Some versions of IE (IE 6 w/ a DOCTYPE declaration)
+			innerWidth = doc.documentElement.clientWidth;
+			innerHeight = doc.documentElement.clientHeight;
+		}
+		else if(doc.body){
+			// Other versions of IE
+			innerWidth = doc.body.clientWidth;
+			innerHeight = doc.body.clientHeight;
+		}
+		
+        var maxWidth = Math.max(scrollWidth, innerWidth);
+        var maxHeight = Math.max(scrollHeight, innerHeight);
+        return [maxWidth, maxHeight, innerWidth, innerHeight];
+	};
+	
+	// Watches the input textarea, polling at an interval and runs
+	// a callback function if anything has changed.
+	wmd.inputPoller = function(callback, interval){
+	
+		var pollerObj = this;
+		var inputArea = wmd.panels.input;
+		
+		// Stored start, end and text.  Used to see if there are changes to the input.
+		var lastStart;
+		var lastEnd;
+		var markdown;
+		
+		var killHandle; // Used to cancel monitoring on destruction.
+		// Checks to see if anything has changed in the textarea.
+		// If so, it runs the callback.
+		this.tick = function(){
+		
+			if (!util.isVisible(inputArea)) {
+				return;
+			}
+			
+			// Update the selection start and end, text.
+			if (inputArea.selectionStart || inputArea.selectionStart === 0) {
+				var start = inputArea.selectionStart;
+				var end = inputArea.selectionEnd;
+				if (start != lastStart || end != lastEnd) {
+					lastStart = start;
+					lastEnd = end;
+					
+					if (markdown != inputArea.value) {
+						markdown = inputArea.value;
+						return true;
+					}
+				}
+			}
+			return false;
+		};
+		
+		
+		var doTickCallback = function(){
+		
+			if (!util.isVisible(inputArea)) {
+				return;
+			}
+			
+			// If anything has changed, call the function.
+			if (pollerObj.tick()) {
+				callback();
+			}
+		};
+		
+		// Set how often we poll the textarea for changes.
+		var assignInterval = function(){
+			// previewPollInterval is set at the top of the namespace.
+			killHandle = top.setInterval(doTickCallback, interval);
+		};
+		
+		this.destroy = function(){
+			top.clearInterval(killHandle);
+		};
+		
+		assignInterval();
+	};
+	
+	// Handles pushing and popping TextareaStates for undo/redo commands.
+	// I should rename the stack variables to list.
+	wmd.undoManager = function(callback){
+	
+		var undoObj = this;
+		var undoStack = []; // A stack of undo states
+		var stackPtr = 0; // The index of the current state
+		var mode = "none";
+		var lastState; // The last state
+		var poller;
+		var timer; // The setTimeout handle for cancelling the timer
+		var inputStateObj;
+		
+		// Set the mode for later logic steps.
+		var setMode = function(newMode, noSave){
+		
+			if (mode != newMode) {
+				mode = newMode;
+				if (!noSave) {
+					saveState();
+				}
+			}
+			
+			if (!global.isIE || mode != "moving") {
+				timer = top.setTimeout(refreshState, 1);
+			}
+			else {
+				inputStateObj = null;
+			}
+		};
+		
+		var refreshState = function(){
+			inputStateObj = new wmd.TextareaState();
+			poller.tick();
+			timer = undefined;
+		};
+		
+		this.setCommandMode = function(){
+			mode = "command";
+			saveState();
+			timer = top.setTimeout(refreshState, 0);
+		};
+		
+		this.canUndo = function(){
+			return stackPtr > 1;
+		};
+		
+		this.canRedo = function(){
+			if (undoStack[stackPtr + 1]) {
+				return true;
+			}
+			return false;
+		};
+		
+		// Removes the last state and restores it.
+		this.undo = function(){
+		
+			if (undoObj.canUndo()) {
+				if (lastState) {
+					// What about setting state -1 to null or checking for undefined?
+					lastState.restore();
+					lastState = null;
+				}
+				else {
+					undoStack[stackPtr] = new wmd.TextareaState();
+					undoStack[--stackPtr].restore();
+					
+					if (callback) {
+						callback();
+					}
+				}
+			}
+			
+			mode = "none";
+			wmd.panels.input.focus();
+			refreshState();
+		};
+		
+		// Redo an action.
+		this.redo = function(){
+		
+			if (undoObj.canRedo()) {
+			
+				undoStack[++stackPtr].restore();
+				
+				if (callback) {
+					callback();
+				}
+			}
+			
+			mode = "none";
+			wmd.panels.input.focus();
+			refreshState();
+		};
+		
+		// Push the input area state to the stack.
+		var saveState = function(){
+		
+			var currState = inputStateObj || new wmd.TextareaState();
+			
+			if (!currState) {
+				return false;
+			}
+			if (mode == "moving") {
+				if (!lastState) {
+					lastState = currState;
+				}
+				return;
+			}
+			if (lastState) {
+				if (undoStack[stackPtr - 1].text != lastState.text) {
+					undoStack[stackPtr++] = lastState;
+				}
+				lastState = null;
+			}
+			undoStack[stackPtr++] = currState;
+			undoStack[stackPtr + 1] = null;
+			if (callback) {
+				callback();
+			}
+		};
+		
+		var handleCtrlYZ = function(event){
+		
+			var handled = false;
+			
+			if (event.ctrlKey || event.metaKey) {
+			
+				// IE and Opera do not support charCode.
+				var keyCode = event.charCode || event.keyCode;
+				var keyCodeChar = String.fromCharCode(keyCode);
+				
+				switch (keyCodeChar) {
+				
+					case "y":
+						undoObj.redo();
+						handled = true;
+						break;
+						
+					case "z":
+						if (!event.shiftKey) {
+							undoObj.undo();
+						}
+						else {
+							undoObj.redo();
+						}
+						handled = true;
+						break;
+				}
+			}
+			
+			if (handled) {
+				if (event.preventDefault) {
+					event.preventDefault();
+				}
+				if (top.event) {
+					top.event.returnValue = false;
+				}
+				return;
+			}
+		};
+		
+		// Set the mode depending on what is going on in the input area.
+		var handleModeChange = function(event){
+		
+			if (!event.ctrlKey && !event.metaKey) {
+			
+				var keyCode = event.keyCode;
+				
+				if ((keyCode >= 33 && keyCode <= 40) || (keyCode >= 63232 && keyCode <= 63235)) {
+					// 33 - 40: page up/dn and arrow keys
+					// 63232 - 63235: page up/dn and arrow keys on safari
+					setMode("moving");
+				}
+				else if (keyCode == 8 || keyCode == 46 || keyCode == 127) {
+					// 8: backspace
+					// 46: delete
+					// 127: delete
+					setMode("deleting");
+				}
+				else if (keyCode == 13) {
+					// 13: Enter
+					setMode("newlines");
+				}
+				else if (keyCode == 27) {
+					// 27: escape
+					setMode("escape");
+				}
+				else if ((keyCode < 16 || keyCode > 20) && keyCode != 91) {
+					// 16-20 are shift, etc. 
+					// 91: left window key
+					// I think this might be a little messed up since there are
+					// a lot of nonprinting keys above 20.
+					setMode("typing");
+				}
+			}
+		};
+		
+		var setEventHandlers = function(){
+		
+			util.addEvent(wmd.panels.input, "keypress", function(event){
+				// keyCode 89: y
+				// keyCode 90: z
+				if ((event.ctrlKey || event.metaKey) && (event.keyCode == 89 || event.keyCode == 90)) {
+					event.preventDefault();
+				}
+			});
+			
+			var handlePaste = function(){
+				if (global.isIE || (inputStateObj && inputStateObj.text != wmd.panels.input.value)) {
+					if (timer == undefined) {
+						mode = "paste";
+						saveState();
+						refreshState();
+					}
+				}
+			};
+			
+			// pastePollInterval is specified at the beginning of this namespace.
+			poller = new wmd.inputPoller(handlePaste, pastePollInterval);
+			
+			util.addEvent(wmd.panels.input, "keydown", handleCtrlYZ);
+			util.addEvent(wmd.panels.input, "keydown", handleModeChange);
+			
+			util.addEvent(wmd.panels.input, "mousedown", function(){
+				setMode("moving");
+			});
+			wmd.panels.input.onpaste = handlePaste;
+			wmd.panels.input.ondrop = handlePaste;
+		};
+		
+		var init = function(){
+			setEventHandlers();
+			refreshState();
+			saveState();
+		};
+		
+		this.destroy = function(){
+			if (poller) {
+				poller.destroy();
+			}
+		};
+		
+		init();
+	};
+	
+	// I think my understanding of how the buttons and callbacks are stored in the array is incomplete.
+	wmd.editor = function(previewRefreshCallback){
+	
+		if (!previewRefreshCallback) {
+			previewRefreshCallback = function(){};
+		}
+		
+		var inputBox = wmd.panels.input;
+		
+		var offsetHeight = 0;
+		
+		var editObj = this;
+		
+		var mainDiv;
+		var mainSpan;
+		
+		var div; // This name is pretty ambiguous.  I should rename this.
+		
+		// Used to cancel recurring events from setInterval.
+		var creationHandle;
+		
+		var undoMgr; // The undo manager
+		
+		// Perform the button's action.
+		var doClick = function(button){
+		
+			inputBox.focus();
+			
+			if (button.textOp) {
+				
+				if (undoMgr) {
+					undoMgr.setCommandMode();
+				}
+				
+				var state = new wmd.TextareaState();
+				
+				if (!state) {
+					return;
+				}
+				
+				var chunks = state.getChunks();
+				
+				// Some commands launch a "modal" prompt dialog.  Javascript
+				// can't really make a modal dialog box and the WMD code
+				// will continue to execute while the dialog is displayed.
+				// This prevents the dialog pattern I'm used to and means
+				// I can't do something like this:
+				//
+				// var link = CreateLinkDialog();
+				// makeMarkdownLink(link);
+				// 
+				// Instead of this straightforward method of handling a
+				// dialog I have to pass any code which would execute
+				// after the dialog is dismissed (e.g. link creation)
+				// in a function parameter.
+				//
+				// Yes this is awkward and I think it sucks, but there's
+				// no real workaround.  Only the image and link code
+				// create dialogs and require the function pointers.
+				var fixupInputArea = function(){
+				
+					inputBox.focus();
+					
+					if (chunks) {
+						state.setChunks(chunks);
+					}
+					
+					state.restore();
+					previewRefreshCallback();
+				};
+				
+				var useDefaultText = true;
+				var noCleanup = button.textOp(chunks, fixupInputArea, useDefaultText);
+				
+				if(!noCleanup) {
+					fixupInputArea();
+				}
+				
+			}
+			
+			if (button.execute) {
+				button.execute(editObj);
+			}
+		};
+			
+		var setUndoRedoButtonStates = function(){
+			if(undoMgr){
+				setupButton(document.getElementById("wmd-undo-button"), undoMgr.canUndo());
+				setupButton(document.getElementById("wmd-redo-button"), undoMgr.canRedo());
+			}
+		};
+		
+		var setupButton = function(button, isEnabled) {
+		
+			var normalYShift = "0px";
+			var disabledYShift = "-20px";
+			var highlightYShift = "-40px";
+			
+			if(isEnabled) {
+				button.style.backgroundPosition = button.XShift + " " + normalYShift;
+				button.onmouseover = function(){
+					this.style.backgroundPosition = this.XShift + " " + highlightYShift;
+				};
+							
+				button.onmouseout = function(){
+					this.style.backgroundPosition = this.XShift + " " + normalYShift;
+				};
+				
+				// IE tries to select the background image "button" text (it's
+				// implemented in a list item) so we have to cache the selection
+				// on mousedown.
+				if(global.isIE) {
+					button.onmousedown =  function() { 
+						wmd.ieRetardedClick = true;
+						wmd.ieCachedRange = document.selection.createRange(); 
+					};
+				}
+				
+				if (!button.isHelp)
+				{
+					button.onclick = function() {
+						if (this.onmouseout) {
+							this.onmouseout();
+						}
+						doClick(this);
+						return false;
+					}
+				}
+			}
+			else {
+				button.style.backgroundPosition = button.XShift + " " + disabledYShift;
+				button.onmouseover = button.onmouseout = button.onclick = function(){};
+			}
+		}
+	
+		var makeSpritedButtonRow = function(){
+		 	
+			var buttonBar = document.getElementById("wmd-button-bar");
+ 	
+			var normalYShift = "0px";
+			var disabledYShift = "-20px";
+			var highlightYShift = "-40px";
+			
+			var buttonRow = document.createElement("ul");
+			buttonRow.id = "wmd-button-row";
+			buttonRow = buttonBar.appendChild(buttonRow);
+
+			
+			var boldButton = document.createElement("li");
+			boldButton.className = "wmd-button";
+			boldButton.id = "wmd-bold-button";
+			boldButton.title = "Strong <strong> Ctrl+B";
+			boldButton.XShift = "0px";
+			boldButton.textOp = command.doBold;
+			setupButton(boldButton, true);
+			buttonRow.appendChild(boldButton);
+			
+			var italicButton = document.createElement("li");
+			italicButton.className = "wmd-button";
+			italicButton.id = "wmd-italic-button";
+			italicButton.title = "Emphasis <em> Ctrl+I";
+			italicButton.XShift = "-20px";
+			italicButton.textOp = command.doItalic;
+			setupButton(italicButton, true);
+			buttonRow.appendChild(italicButton);
+
+			var spacer1 = document.createElement("li");
+			spacer1.className = "wmd-spacer";
+			spacer1.id = "wmd-spacer1";
+			buttonRow.appendChild(spacer1); 
+
+			var linkButton = document.createElement("li");
+			linkButton.className = "wmd-button";
+			linkButton.id = "wmd-link-button";
+			linkButton.title = "Hyperlink <a> Ctrl+L";
+			linkButton.XShift = "-40px";
+			linkButton.textOp = function(chunk, postProcessing, useDefaultText){
+				return command.doLinkOrImage(chunk, postProcessing, false);
+			};
+			setupButton(linkButton, true);
+			buttonRow.appendChild(linkButton);
+
+			var quoteButton = document.createElement("li");
+			quoteButton.className = "wmd-button";
+			quoteButton.id = "wmd-quote-button";
+			quoteButton.title = "Blockquote <blockquote> Ctrl+Q";
+			quoteButton.XShift = "-60px";
+			quoteButton.textOp = command.doBlockquote;
+			setupButton(quoteButton, true);
+			buttonRow.appendChild(quoteButton);
+			
+			var codeButton = document.createElement("li");
+			codeButton.className = "wmd-button";
+			codeButton.id = "wmd-code-button";
+			codeButton.title = "Code Sample <pre><code> Ctrl+K";
+			codeButton.XShift = "-80px";
+			codeButton.textOp = command.doCode;
+			setupButton(codeButton, true);
+			buttonRow.appendChild(codeButton);
+
+			var imageButton = document.createElement("li");
+			imageButton.className = "wmd-button";
+			imageButton.id = "wmd-image-button";
+			imageButton.title = "Image <img> Ctrl+G";
+			imageButton.XShift = "-100px";
+			imageButton.textOp = function(chunk, postProcessing, useDefaultText){
+				return command.doLinkOrImage(chunk, postProcessing, true);
+			};
+			setupButton(imageButton, true);
+			buttonRow.appendChild(imageButton);
+
+			var spacer2 = document.createElement("li");
+			spacer2.className = "wmd-spacer";
+			spacer2.id = "wmd-spacer2";
+			buttonRow.appendChild(spacer2); 
+
+			var olistButton = document.createElement("li");
+			olistButton.className = "wmd-button";
+			olistButton.id = "wmd-olist-button";
+			olistButton.title = "Numbered List <ol> Ctrl+O";
+			olistButton.XShift = "-120px";
+			olistButton.textOp = function(chunk, postProcessing, useDefaultText){
+				command.doList(chunk, postProcessing, true, useDefaultText);
+			};
+			setupButton(olistButton, true);
+			buttonRow.appendChild(olistButton);
+			
+			var ulistButton = document.createElement("li");
+			ulistButton.className = "wmd-button";
+			ulistButton.id = "wmd-ulist-button";
+			ulistButton.title = "Bulleted List <ul> Ctrl+U";
+			ulistButton.XShift = "-140px";
+			ulistButton.textOp = function(chunk, postProcessing, useDefaultText){
+				command.doList(chunk, postProcessing, false, useDefaultText);
+			};
+			setupButton(ulistButton, true);
+			buttonRow.appendChild(ulistButton);
+			
+			var headingButton = document.createElement("li");
+			headingButton.className = "wmd-button";
+			headingButton.id = "wmd-heading-button";
+			headingButton.title = "Heading <h1>/<h2> Ctrl+H";
+			headingButton.XShift = "-160px";
+			headingButton.textOp = command.doHeading;
+			setupButton(headingButton, true);
+			buttonRow.appendChild(headingButton); 
+			
+			var hrButton = document.createElement("li");
+			hrButton.className = "wmd-button";
+			hrButton.id = "wmd-hr-button";
+			hrButton.title = "Horizontal Rule <hr> Ctrl+R";
+			hrButton.XShift = "-180px";
+			hrButton.textOp = command.doHorizontalRule;
+			setupButton(hrButton, true);
+			buttonRow.appendChild(hrButton); 
+			
+			var spacer3 = document.createElement("li");
+			spacer3.className = "wmd-spacer";
+			spacer3.id = "wmd-spacer3";
+			buttonRow.appendChild(spacer3); 
+			
+			var undoButton = document.createElement("li");
+			undoButton.className = "wmd-button";
+			undoButton.id = "wmd-undo-button";
+			undoButton.title = "Undo - Ctrl+Z";
+			undoButton.XShift = "-200px";
+			undoButton.execute = function(manager){
+				manager.undo();
+			};
+			setupButton(undoButton, true);
+			buttonRow.appendChild(undoButton); 
+			
+			var redoButton = document.createElement("li");
+			redoButton.className = "wmd-button";
+			redoButton.id = "wmd-redo-button";
+			redoButton.title = "Redo - Ctrl+Y";
+			if (/win/.test(nav.platform.toLowerCase())) {
+				redoButton.title = "Redo - Ctrl+Y";
+			}
+			else {
+				// mac and other non-Windows platforms
+				redoButton.title = "Redo - Ctrl+Shift+Z";
+			}
+			redoButton.XShift = "-220px";
+			redoButton.execute = function(manager){
+				manager.redo();
+			};
+			setupButton(redoButton, true);
+			buttonRow.appendChild(redoButton); 
+			
+			var helpButton = document.createElement("li");
+			helpButton.className = "wmd-button";
+			helpButton.id = "wmd-help-button";
+			helpButton.XShift = "-240px";
+			helpButton.isHelp = true;
+			
+			var helpAnchor = document.createElement("a");
+			helpAnchor.href = helpLink;
+			helpAnchor.target = helpTarget
+			helpAnchor.title = helpHoverTitle;
+			helpButton.appendChild(helpAnchor);
+			
+			setupButton(helpButton, true);
+			buttonRow.appendChild(helpButton);
+			
+			setUndoRedoButtonStates();
+		}
+		
+		var setupEditor = function(){
+		
+			if (/\?noundo/.test(doc.location.href)) {
+				wmd.nativeUndo = true;
+			}
+			
+			if (!wmd.nativeUndo) {
+				undoMgr = new wmd.undoManager(function(){
+					previewRefreshCallback();
+					setUndoRedoButtonStates();
+				});
+			}
+			
+			makeSpritedButtonRow();
+			
+			
+			var keyEvent = "keydown";
+			if (global.isOpera) {
+				keyEvent = "keypress";
+			}
+			
+			util.addEvent(inputBox, keyEvent, function(key){
+				
+				// Check to see if we have a button key and, if so execute the callback.
+				if (key.ctrlKey || key.metaKey) {
+			
+					var keyCode = key.charCode || key.keyCode;
+					var keyCodeStr = String.fromCharCode(keyCode).toLowerCase();
+					
+					switch(keyCodeStr) {
+						case "b":
+							doClick(document.getElementById("wmd-bold-button"));
+							break;
+						case "i":
+							doClick(document.getElementById("wmd-italic-button"));
+							break;
+						case "l":
+							doClick(document.getElementById("wmd-link-button"));
+							break;
+						case "q":
+							doClick(document.getElementById("wmd-quote-button"));
+							break;
+						case "k":
+							doClick(document.getElementById("wmd-code-button"));
+							break;
+						case "g":
+							doClick(document.getElementById("wmd-image-button"));
+							break;
+						case "o":
+							doClick(document.getElementById("wmd-olist-button"));
+							break;
+						case "u":
+							doClick(document.getElementById("wmd-ulist-button"));
+							break;
+						case "h":
+							doClick(document.getElementById("wmd-heading-button"));
+							break;
+						case "r":
+							doClick(document.getElementById("wmd-hr-button"));
+							break;
+						case "y":
+							doClick(document.getElementById("wmd-redo-button"));
+							break;
+						case "z":
+							if(key.shiftKey) {
+								doClick(document.getElementById("wmd-redo-button"));
+							}
+							else {
+								doClick(document.getElementById("wmd-undo-button"));
+							}
+							break;
+						default:
+							return;
+					}
+					
+
+					if (key.preventDefault) {
+						key.preventDefault();
+					}
+					
+					if (top.event) {
+						top.event.returnValue = false;
+					}
+				}
+			});
+			
+			// Auto-continue lists, code blocks and block quotes when
+			// the enter key is pressed.
+			util.addEvent(inputBox, "keyup", function(key){
+				if (!key.shiftKey && !key.ctrlKey && !key.metaKey) {
+					var keyCode = key.charCode || key.keyCode;
+					// Key code 13 is Enter
+					if (keyCode === 13) {
+						fakeButton = {};
+						fakeButton.textOp = command.doAutoindent;
+						doClick(fakeButton);
+					}
+				}
+			});
+			
+			// Disable ESC clearing the input textarea on IE
+			if (global.isIE) {
+				util.addEvent(inputBox, "keydown", function(key){
+					var code = key.keyCode;
+					// Key code 27 is ESC
+					if (code === 27) {
+						return false;
+					}
+				});
+			}
+			
+			if (inputBox.form) {
+				var submitCallback = inputBox.form.onsubmit;
+				inputBox.form.onsubmit = function(){
+					convertToHtml();
+					if (submitCallback) {
+						return submitCallback.apply(this, arguments);
+					}
+				};
+			}
+		};
+		
+		// Convert the contents of the input textarea to HTML in the output/preview panels.
+		var convertToHtml = function(){
+		
+			if (wmd.showdown) {
+				var markdownConverter = new wmd.showdown.converter();
+			}
+			var text = inputBox.value;
+			
+			var callback = function(){
+				inputBox.value = text;
+			};
+			
+			if (!/markdown/.test(wmd.wmd_env.output.toLowerCase())) {
+				if (markdownConverter) {
+					inputBox.value = markdownConverter.makeHtml(text);
+					top.setTimeout(callback, 0);
+				}
+			}
+			return true;
+		};
+		
+		
+		this.undo = function(){
+			if (undoMgr) {
+				undoMgr.undo();
+			}
+		};
+		
+		this.redo = function(){
+			if (undoMgr) {
+				undoMgr.redo();
+			}
+		};
+		
+		// This is pretty useless.  The setupEditor function contents
+		// should just be copied here.
+		var init = function(){
+			setupEditor();
+		};
+		
+		this.destroy = function(){
+			if (undoMgr) {
+				undoMgr.destroy();
+			}
+			if (div.parentNode) {
+				div.parentNode.removeChild(div);
+			}
+			if (inputBox) {
+				inputBox.style.marginTop = "";
+			}
+			top.clearInterval(creationHandle);
+		};
+		
+		init();
+	};
+	
+	// The input textarea state/contents.
+	// This is used to implement undo/redo by the undo manager.
+	wmd.TextareaState = function(){
+	
+		// Aliases
+		var stateObj = this;
+		var inputArea = wmd.panels.input;
+		
+		this.init = function() {
+		
+			if (!util.isVisible(inputArea)) {
+				return;
+			}
+				
+			this.setInputAreaSelectionStartEnd();
+			this.scrollTop = inputArea.scrollTop;
+			if (!this.text && inputArea.selectionStart || inputArea.selectionStart === 0) {
+				this.text = inputArea.value;
+			}
+			
+		}
+		
+		// Sets the selected text in the input box after we've performed an
+		// operation.
+		this.setInputAreaSelection = function(){
+		
+			if (!util.isVisible(inputArea)) {
+				return;
+			}
+			
+			if (inputArea.selectionStart !== undefined && !global.isOpera) {
+			
+				inputArea.focus();
+				inputArea.selectionStart = stateObj.start;
+				inputArea.selectionEnd = stateObj.end;
+				inputArea.scrollTop = stateObj.scrollTop;
+			}
+			else if (doc.selection) {
+				
+				if (doc.activeElement && doc.activeElement !== inputArea) {
+					return;
+				}
+					
+				inputArea.focus();
+				var range = inputArea.createTextRange();
+				range.moveStart("character", -inputArea.value.length);
+				range.moveEnd("character", -inputArea.value.length);
+				range.moveEnd("character", stateObj.end);
+				range.moveStart("character", stateObj.start);
+				range.select();
+			}
+		};
+		
+		this.setInputAreaSelectionStartEnd = function(){
+		
+			if (inputArea.selectionStart || inputArea.selectionStart === 0) {
+			
+				stateObj.start = inputArea.selectionStart;
+				stateObj.end = inputArea.selectionEnd;
+			}
+			else if (doc.selection) {
+				
+				stateObj.text = util.fixEolChars(inputArea.value);
+				
+				// IE loses the selection in the textarea when buttons are
+				// clicked.  On IE we cache the selection and set a flag
+				// which we check for here.
+				var range;
+				if(wmd.ieRetardedClick && wmd.ieCachedRange) {
+					range = wmd.ieCachedRange;
+					wmd.ieRetardedClick = false;
+				}
+				else {
+					range = doc.selection.createRange();
+				}
+
+				var fixedRange = util.fixEolChars(range.text);
+				var marker = "\x07";
+				var markedRange = marker + fixedRange + marker;
+				range.text = markedRange;
+				var inputText = util.fixEolChars(inputArea.value);
+					
+				range.moveStart("character", -markedRange.length);
+				range.text = fixedRange;
+
+				stateObj.start = inputText.indexOf(marker);
+				stateObj.end = inputText.lastIndexOf(marker) - marker.length;
+					
+				var len = stateObj.text.length - util.fixEolChars(inputArea.value).length;
+					
+				if (len) {
+					range.moveStart("character", -fixedRange.length);
+					while (len--) {
+						fixedRange += "\n";
+						stateObj.end += 1;
+					}
+					range.text = fixedRange;
+				}
+					
+				this.setInputAreaSelection();
+			}
+		};
+		
+		// Restore this state into the input area.
+		this.restore = function(){
+		
+			if (stateObj.text != undefined && stateObj.text != inputArea.value) {
+				inputArea.value = stateObj.text;
+			}
+			this.setInputAreaSelection();
+			inputArea.scrollTop = stateObj.scrollTop;
+		};
+		
+		// Gets a collection of HTML chunks from the inptut textarea.
+		this.getChunks = function(){
+		
+			var chunk = new wmd.Chunks();
+			
+			chunk.before = util.fixEolChars(stateObj.text.substring(0, stateObj.start));
+			chunk.startTag = "";
+			chunk.selection = util.fixEolChars(stateObj.text.substring(stateObj.start, stateObj.end));
+			chunk.endTag = "";
+			chunk.after = util.fixEolChars(stateObj.text.substring(stateObj.end));
+			chunk.scrollTop = stateObj.scrollTop;
+			
+			return chunk;
+		};
+		
+		// Sets the TextareaState properties given a chunk of markdown.
+		this.setChunks = function(chunk){
+		
+			chunk.before = chunk.before + chunk.startTag;
+			chunk.after = chunk.endTag + chunk.after;
+			
+			if (global.isOpera) {
+				chunk.before = chunk.before.replace(/\n/g, "\r\n");
+				chunk.selection = chunk.selection.replace(/\n/g, "\r\n");
+				chunk.after = chunk.after.replace(/\n/g, "\r\n");
+			}
+			
+			this.start = chunk.before.length;
+			this.end = chunk.before.length + chunk.selection.length;
+			this.text = chunk.before + chunk.selection + chunk.after;
+			this.scrollTop = chunk.scrollTop;
+		};
+
+		this.init();
+	};
+	
+	// before: contains all the text in the input box BEFORE the selection.
+	// after: contains all the text in the input box AFTER the selection.
+	wmd.Chunks = function(){
+	};
+	
+	// startRegex: a regular expression to find the start tag
+	// endRegex: a regular expresssion to find the end tag
+	wmd.Chunks.prototype.findTags = function(startRegex, endRegex){
+	
+		var chunkObj = this;
+		var regex;
+		
+		if (startRegex) {
+			
+			regex = util.extendRegExp(startRegex, "", "$");
+			
+			this.before = this.before.replace(regex, 
+				function(match){
+					chunkObj.startTag = chunkObj.startTag + match;
+					return "";
+				});
+			
+			regex = util.extendRegExp(startRegex, "^", "");
+			
+			this.selection = this.selection.replace(regex, 
+				function(match){
+					chunkObj.startTag = chunkObj.startTag + match;
+					return "";
+				});
+		}
+		
+		if (endRegex) {
+			
+			regex = util.extendRegExp(endRegex, "", "$");
+			
+			this.selection = this.selection.replace(regex,
+				function(match){
+					chunkObj.endTag = match + chunkObj.endTag;
+					return "";
+				});
+
+			regex = util.extendRegExp(endRegex, "^", "");
+			
+			this.after = this.after.replace(regex,
+				function(match){
+					chunkObj.endTag = match + chunkObj.endTag;
+					return "";
+				});
+		}
+	};
+	
+	// If remove is false, the whitespace is transferred
+	// to the before/after regions.
+	//
+	// If remove is true, the whitespace disappears.
+	wmd.Chunks.prototype.trimWhitespace = function(remove){
+	
+		this.selection = this.selection.replace(/^(\s*)/, "");
+		
+		if (!remove) {
+			this.before += re.$1;
+		}
+		
+		this.selection = this.selection.replace(/(\s*)$/, "");
+		
+		if (!remove) {
+			this.after = re.$1 + this.after;
+		}
+	};
+	
+	
+	wmd.Chunks.prototype.addBlankLines = function(nLinesBefore, nLinesAfter, findExtraNewlines){
+	
+		if (nLinesBefore === undefined) {
+			nLinesBefore = 1;
+		}
+		
+		if (nLinesAfter === undefined) {
+			nLinesAfter = 1;
+		}
+		
+		nLinesBefore++;
+		nLinesAfter++;
+		
+		var regexText;
+		var replacementText;
+		
+		this.selection = this.selection.replace(/(^\n*)/, "");
+		this.startTag = this.startTag + re.$1;
+		this.selection = this.selection.replace(/(\n*$)/, "");
+		this.endTag = this.endTag + re.$1;
+		this.startTag = this.startTag.replace(/(^\n*)/, "");
+		this.before = this.before + re.$1;
+		this.endTag = this.endTag.replace(/(\n*$)/, "");
+		this.after = this.after + re.$1;
+		
+		if (this.before) {
+		
+			regexText = replacementText = "";
+			
+			while (nLinesBefore--) {
+				regexText += "\\n?";
+				replacementText += "\n";
+			}
+			
+			if (findExtraNewlines) {
+				regexText = "\\n*";
+			}
+			this.before = this.before.replace(new re(regexText + "$", ""), replacementText);
+		}
+		
+		if (this.after) {
+		
+			regexText = replacementText = "";
+			
+			while (nLinesAfter--) {
+				regexText += "\\n?";
+				replacementText += "\n";
+			}
+			if (findExtraNewlines) {
+				regexText = "\\n*";
+			}
+			
+			this.after = this.after.replace(new re(regexText, ""), replacementText);
+		}
+	};
+	
+	// The markdown symbols - 4 spaces = code, > = blockquote, etc.
+	command.prefixes = "(?:\\s{4,}|\\s*>|\\s*-\\s+|\\s*\\d+\\.|=|\\+|-|_|\\*|#|\\s*\\[[^\n]]+\\]:)";
+	
+	// Remove markdown symbols from the chunk selection.
+	command.unwrap = function(chunk){
+		var txt = new re("([^\\n])\\n(?!(\\n|" + command.prefixes + "))", "g");
+		chunk.selection = chunk.selection.replace(txt, "$1 $2");
+	};
+	
+	command.wrap = function(chunk, len){
+		command.unwrap(chunk);
+		var regex = new re("(.{1," + len + "})( +|$\\n?)", "gm");
+		
+		chunk.selection = chunk.selection.replace(regex, function(line, marked){
+			if (new re("^" + command.prefixes, "").test(line)) {
+				return line;
+			}
+			return marked + "\n";
+		});
+		
+		chunk.selection = chunk.selection.replace(/\s+$/, "");
+	};
+	
+	command.doBold = function(chunk, postProcessing, useDefaultText){
+		return command.doBorI(chunk, 2, "strong text");
+	};
+	
+	command.doItalic = function(chunk, postProcessing, useDefaultText){
+		return command.doBorI(chunk, 1, "emphasized text");
+	};
+	
+	// chunk: The selected region that will be enclosed with */**
+	// nStars: 1 for italics, 2 for bold
+	// insertText: If you just click the button without highlighting text, this gets inserted
+	command.doBorI = function(chunk, nStars, insertText){
+	
+		// Get rid of whitespace and fixup newlines.
+		chunk.trimWhitespace();
+		chunk.selection = chunk.selection.replace(/\n{2,}/g, "\n");
+		
+		// Look for stars before and after.  Is the chunk already marked up?
+		chunk.before.search(/(\**$)/);
+		var starsBefore = re.$1;
+		
+		chunk.after.search(/(^\**)/);
+		var starsAfter = re.$1;
+		
+		var prevStars = Math.min(starsBefore.length, starsAfter.length);
+		
+		// Remove stars if we have to since the button acts as a toggle.
+		if ((prevStars >= nStars) && (prevStars != 2 || nStars != 1)) {
+			chunk.before = chunk.before.replace(re("[*]{" + nStars + "}$", ""), "");
+			chunk.after = chunk.after.replace(re("^[*]{" + nStars + "}", ""), "");
+		}
+		else if (!chunk.selection && starsAfter) {
+			// It's not really clear why this code is necessary.  It just moves
+			// some arbitrary stuff around.
+			chunk.after = chunk.after.replace(/^([*_]*)/, "");
+			chunk.before = chunk.before.replace(/(\s?)$/, "");
+			var whitespace = re.$1;
+			chunk.before = chunk.before + starsAfter + whitespace;
+		}
+		else {
+		
+			// In most cases, if you don't have any selected text and click the button
+			// you'll get a selected, marked up region with the default text inserted.
+			if (!chunk.selection && !starsAfter) {
+				chunk.selection = insertText;
+			}
+			
+			// Add the true markup.
+			var markup = nStars <= 1 ? "*" : "**"; // shouldn't the test be = ?
+			chunk.before = chunk.before + markup;
+			chunk.after = markup + chunk.after;
+		}
+		
+		return;
+	};
+	
+	command.stripLinkDefs = function(text, defsToAdd){
+	
+		text = text.replace(/^[ ]{0,3}\[(\d+)\]:[ \t]*\n?[ \t]*<?(\S+?)>?[ \t]*\n?[ \t]*(?:(\n*)["(](.+?)[")][ \t]*)?(?:\n+|$)/gm, 
+			function(totalMatch, id, link, newlines, title){	
+				defsToAdd[id] = totalMatch.replace(/\s*$/, "");
+				if (newlines) {
+					// Strip the title and return that separately.
+					defsToAdd[id] = totalMatch.replace(/["(](.+?)[")]$/, "");
+					return newlines + title;
+				}
+				return "";
+			});
+		
+		return text;
+	};
+	
+	command.addLinkDef = function(chunk, linkDef){
+	
+		var refNumber = 0; // The current reference number
+		var defsToAdd = {}; //
+		// Start with a clean slate by removing all previous link definitions.
+		chunk.before = command.stripLinkDefs(chunk.before, defsToAdd);
+		chunk.selection = command.stripLinkDefs(chunk.selection, defsToAdd);
+		chunk.after = command.stripLinkDefs(chunk.after, defsToAdd);
+		
+		var defs = "";
+		var regex = /(\[(?:\[[^\]]*\]|[^\[\]])*\][ ]?(?:\n[ ]*)?\[)(\d+)(\])/g;
+		
+		var addDefNumber = function(def){
+			refNumber++;
+			def = def.replace(/^[ ]{0,3}\[(\d+)\]:/, "  [" + refNumber + "]:");
+			defs += "\n" + def;
+		};
+		
+		var getLink = function(wholeMatch, link, id, end){
+		
+			if (defsToAdd[id]) {
+				addDefNumber(defsToAdd[id]);
+				return link + refNumber + end;
+				
+			}
+			return wholeMatch;
+		};
+		
+		chunk.before = chunk.before.replace(regex, getLink);
+		
+		if (linkDef) {
+			addDefNumber(linkDef);
+		}
+		else {
+			chunk.selection = chunk.selection.replace(regex, getLink);
+		}
+		
+		var refOut = refNumber;
+		
+		chunk.after = chunk.after.replace(regex, getLink);
+		
+		if (chunk.after) {
+			chunk.after = chunk.after.replace(/\n*$/, "");
+		}
+		if (!chunk.after) {
+			chunk.selection = chunk.selection.replace(/\n*$/, "");
+		}
+		
+		chunk.after += "\n\n" + defs;
+		
+		return refOut;
+	};
+	
+	command.doLinkOrImage = function(chunk, postProcessing, isImage){
+	
+		chunk.trimWhitespace();
+		chunk.findTags(/\s*!?\[/, /\][ ]?(?:\n[ ]*)?(\[.*?\])?/);
+		
+		if (chunk.endTag.length > 1) {
+		
+			chunk.startTag = chunk.startTag.replace(/!?\[/, "");
+			chunk.endTag = "";
+			command.addLinkDef(chunk, null);
+			
+		}
+		else {
+		
+			if (/\n\n/.test(chunk.selection)) {
+				command.addLinkDef(chunk, null);
+				return;
+			}
+			
+			// The function to be executed when you enter a link and press OK or Cancel.
+			// Marks up the link and adds the ref.
+			var makeLinkMarkdown = function(link){
+			
+				if (link !== null) {
+				
+					chunk.startTag = chunk.endTag = "";
+					var linkDef = " [999]: " + link;
+					
+					var num = command.addLinkDef(chunk, linkDef);
+					chunk.startTag = isImage ? "![" : "[";
+					chunk.endTag = "][" + num + "]";
+					
+					if (!chunk.selection) {
+						if (isImage) {
+							chunk.selection = "alt text";
+						}
+						else {
+							chunk.selection = "link text";
+						}
+					}
+				}
+				postProcessing();
+			};
+			
+			if (isImage) {
+				util.promptImg(imageDialogText, imageDefaultText, makeLinkMarkdown);
+			}
+			else {
+				util.prompt(linkDialogText, linkDefaultText, makeLinkMarkdown);
+			}
+			return true;
+		}
+	};
+	
+	util.makeAPI = function(){
+		wmd.wmd = {};
+		wmd.wmd.editor = wmd.editor;
+		wmd.wmd.previewManager = wmd.previewManager;
+	};
+	
+	util.startEditor = function(){
+	
+		if (wmd.wmd_env.autostart === false) {
+			util.makeAPI();
+			return;
+		}
+
+		var edit;		// The editor (buttons + input + outputs) - the main object.
+		var previewMgr;	// The preview manager.
+		
+		// Fired after the page has fully loaded.
+		var loadListener = function(){
+		
+			wmd.panels = new wmd.PanelCollection();
+			
+			previewMgr = new wmd.previewManager();
+			var previewRefreshCallback = previewMgr.refresh;
+						
+			edit = new wmd.editor(previewRefreshCallback);
+			
+			previewMgr.refresh(true);
+			
+		};
+		
+		util.addEvent(top, "load", loadListener);
+	};
+	
+	wmd.previewManager = function(){
+		
+		var managerObj = this;
+		var converter;
+		var poller;
+		var timeout;
+		var elapsedTime;
+		var oldInputText;
+		var htmlOut;
+		var maxDelay = 3000;
+		var startType = "delayed"; // The other legal value is "manual"
+		
+		// Adds event listeners to elements and creates the input poller.
+		var setupEvents = function(inputElem, listener){
+		
+			util.addEvent(inputElem, "input", listener);
+			inputElem.onpaste = listener;
+			inputElem.ondrop = listener;
+			
+			util.addEvent(inputElem, "keypress", listener);
+			util.addEvent(inputElem, "keydown", listener);
+			// previewPollInterval is set at the top of this file.
+			poller = new wmd.inputPoller(listener, previewPollInterval);
+		};
+		
+		var getDocScrollTop = function(){
+		
+			var result = 0;
+			
+			if (top.innerHeight) {
+				result = top.pageYOffset;
+			}
+			else 
+				if (doc.documentElement && doc.documentElement.scrollTop) {
+					result = doc.documentElement.scrollTop;
+				}
+				else 
+					if (doc.body) {
+						result = doc.body.scrollTop;
+					}
+			
+			return result;
+		};
+		
+		var makePreviewHtml = function(){
+		
+			// If there are no registered preview and output panels
+			// there is nothing to do.
+			if (!wmd.panels.preview && !wmd.panels.output) {
+				return;
+			}
+			
+			var text = wmd.panels.input.value;
+			if (text && text == oldInputText) {
+				return; // Input text hasn't changed.
+			}
+			else {
+				oldInputText = text;
+			}
+			
+			var prevTime = new Date().getTime();
+			
+			if (!converter && wmd.showdown) {
+				converter = new wmd.showdown.converter();
+			}
+			
+			if (converter) {
+				text = converter.makeHtml(text);
+			}
+			
+			// Calculate the processing time of the HTML creation.
+			// It's used as the delay time in the event listener.
+			var currTime = new Date().getTime();
+			elapsedTime = currTime - prevTime;
+			
+			pushPreviewHtml(text);
+			htmlOut = text;
+		};
+		
+		// setTimeout is already used.  Used as an event listener.
+		var applyTimeout = function(){
+		
+			if (timeout) {
+				top.clearTimeout(timeout);
+				timeout = undefined;
+			}
+			
+			if (startType !== "manual") {
+			
+				var delay = 0;
+				
+				if (startType === "delayed") {
+					delay = elapsedTime;
+				}
+				
+				if (delay > maxDelay) {
+					delay = maxDelay;
+				}
+				timeout = top.setTimeout(makePreviewHtml, delay);
+			}
+		};
+		
+		var getScaleFactor = function(panel){
+			if (panel.scrollHeight <= panel.clientHeight) {
+				return 1;
+			}
+			return panel.scrollTop / (panel.scrollHeight - panel.clientHeight);
+		};
+		
+		var setPanelScrollTops = function(){
+		
+			if (wmd.panels.preview) {
+				wmd.panels.preview.scrollTop = (wmd.panels.preview.scrollHeight - wmd.panels.preview.clientHeight) * getScaleFactor(wmd.panels.preview);
+				;
+			}
+			
+			if (wmd.panels.output) {
+				wmd.panels.output.scrollTop = (wmd.panels.output.scrollHeight - wmd.panels.output.clientHeight) * getScaleFactor(wmd.panels.output);
+				;
+			}
+		};
+		
+		this.refresh = function(requiresRefresh){
+		
+			if (requiresRefresh) {
+				oldInputText = "";
+				makePreviewHtml();
+			}
+			else {
+				applyTimeout();
+			}
+		};
+		
+		this.processingTime = function(){
+			return elapsedTime;
+		};
+		
+		// The output HTML
+		this.output = function(){
+			return htmlOut;
+		};
+		
+		// The mode can be "manual" or "delayed"
+		this.setUpdateMode = function(mode){
+			startType = mode;
+			managerObj.refresh();
+		};
+		
+		var isFirstTimeFilled = true;
+		
+		var pushPreviewHtml = function(text){
+		
+			var emptyTop = position.getTop(wmd.panels.input) - getDocScrollTop();
+			
+			// Send the encoded HTML to the output textarea/div.
+			if (wmd.panels.output) {
+				// The value property is only defined if the output is a textarea.
+				if (wmd.panels.output.value !== undefined) {
+					wmd.panels.output.value = text;
+					wmd.panels.output.readOnly = true;
+				}
+				// Otherwise we are just replacing the text in a div.
+				// Send the HTML wrapped in <pre><code>
+				else {
+					var newText = text.replace(/&/g, "&amp;");
+					newText = newText.replace(/</g, "&lt;");
+					wmd.panels.output.innerHTML = "<pre><code>" + newText + "</code></pre>";
+				}
+			}
+			
+			if (wmd.panels.preview) {
+				wmd.panels.preview.innerHTML = text;
+			}
+			
+			setPanelScrollTops();
+			
+			if (isFirstTimeFilled) {
+				isFirstTimeFilled = false;
+				return;
+			}
+			
+			var fullTop = position.getTop(wmd.panels.input) - getDocScrollTop();
+			
+			if (global.isIE) {
+				top.setTimeout(function(){
+					top.scrollBy(0, fullTop - emptyTop);
+				}, 0);
+			}
+			else {
+				top.scrollBy(0, fullTop - emptyTop);
+			}
+		};
+		
+		var init = function(){
+		
+			setupEvents(wmd.panels.input, applyTimeout);
+			makePreviewHtml();
+			
+			if (wmd.panels.preview) {
+				wmd.panels.preview.scrollTop = 0;
+			}
+			if (wmd.panels.output) {
+				wmd.panels.output.scrollTop = 0;
+			}
+		};
+		
+		this.destroy = function(){
+			if (poller) {
+				poller.destroy();
+			}
+		};
+		
+		init();
+	};
+
+	// Moves the cursor to the next line and continues lists, quotes and code.
+	command.doAutoindent = function(chunk, postProcessing, useDefaultText){
+		
+		chunk.before = chunk.before.replace(/(\n|^)[ ]{0,3}([*+-]|\d+[.])[ \t]*\n$/, "\n\n");
+		chunk.before = chunk.before.replace(/(\n|^)[ ]{0,3}>[ \t]*\n$/, "\n\n");
+		chunk.before = chunk.before.replace(/(\n|^)[ \t]+\n$/, "\n\n");
+		
+		useDefaultText = false;
+		
+		if(/(\n|^)[ ]{0,3}([*+-])[ \t]+.*\n$/.test(chunk.before)){
+			if(command.doList){
+				command.doList(chunk, postProcessing, false, true);
+			}
+		}
+		if(/(\n|^)[ ]{0,3}(\d+[.])[ \t]+.*\n$/.test(chunk.before)){
+			if(command.doList){
+				command.doList(chunk, postProcessing, true, true);
+			}
+		}
+		if(/(\n|^)[ ]{0,3}>[ \t]+.*\n$/.test(chunk.before)){
+			if(command.doBlockquote){
+				command.doBlockquote(chunk, postProcessing, useDefaultText);
+			}
+		}
+		if(/(\n|^)(\t|[ ]{4,}).*\n$/.test(chunk.before)){
+			if(command.doCode){
+				command.doCode(chunk, postProcessing, useDefaultText);
+			}
+		}
+	};
+	
+	command.doBlockquote = function(chunk, postProcessing, useDefaultText){
+		
+		chunk.selection = chunk.selection.replace(/^(\n*)([^\r]+?)(\n*)$/,
+			function(totalMatch, newlinesBefore, text, newlinesAfter){
+				chunk.before += newlinesBefore;
+				chunk.after = newlinesAfter + chunk.after;
+				return text;
+			});
+			
+		chunk.before = chunk.before.replace(/(>[ \t]*)$/,
+			function(totalMatch, blankLine){
+				chunk.selection = blankLine + chunk.selection;
+				return "";
+			});
+		
+		var defaultText = useDefaultText ? "Blockquote" : "";
+		chunk.selection = chunk.selection.replace(/^(\s|>)+$/ ,"");
+		chunk.selection = chunk.selection || defaultText;
+		
+		if(chunk.before){
+			chunk.before = chunk.before.replace(/\n?$/,"\n");
+		}
+		if(chunk.after){
+			chunk.after = chunk.after.replace(/^\n?/,"\n");
+		}
+		
+		chunk.before = chunk.before.replace(/(((\n|^)(\n[ \t]*)*>(.+\n)*.*)+(\n[ \t]*)*$)/,
+			function(totalMatch){
+				chunk.startTag = totalMatch;
+				return "";
+			});
+			
+		chunk.after = chunk.after.replace(/^(((\n|^)(\n[ \t]*)*>(.+\n)*.*)+(\n[ \t]*)*)/,
+			function(totalMatch){
+				chunk.endTag = totalMatch;
+				return "";
+			});
+		
+		var replaceBlanksInTags = function(useBracket){
+			
+			var replacement = useBracket ? "> " : "";
+			
+			if(chunk.startTag){
+				chunk.startTag = chunk.startTag.replace(/\n((>|\s)*)\n$/,
+					function(totalMatch, markdown){
+						return "\n" + markdown.replace(/^[ ]{0,3}>?[ \t]*$/gm, replacement) + "\n";
+					});
+			}
+			if(chunk.endTag){
+				chunk.endTag = chunk.endTag.replace(/^\n((>|\s)*)\n/,
+					function(totalMatch, markdown){
+						return "\n" + markdown.replace(/^[ ]{0,3}>?[ \t]*$/gm, replacement) + "\n";
+					});
+			}
+		};
+		
+		if(/^(?![ ]{0,3}>)/m.test(chunk.selection)){
+			command.wrap(chunk, wmd.wmd_env.lineLength - 2);
+			chunk.selection = chunk.selection.replace(/^/gm, "> ");
+			replaceBlanksInTags(true);
+			chunk.addBlankLines();
+		}
+		else{
+			chunk.selection = chunk.selection.replace(/^[ ]{0,3}> ?/gm, "");
+			command.unwrap(chunk);
+			replaceBlanksInTags(false);
+			
+			if(!/^(\n|^)[ ]{0,3}>/.test(chunk.selection) && chunk.startTag){
+				chunk.startTag = chunk.startTag.replace(/\n{0,2}$/, "\n\n");
+			}
+			
+			if(!/(\n|^)[ ]{0,3}>.*$/.test(chunk.selection) && chunk.endTag){
+				chunk.endTag=chunk.endTag.replace(/^\n{0,2}/, "\n\n");
+			}
+		}
+		
+		if(!/\n/.test(chunk.selection)){
+			chunk.selection = chunk.selection.replace(/^(> *)/,
+			function(wholeMatch, blanks){
+				chunk.startTag += blanks;
+				return "";
+			});
+		}
+	};
+
+	command.doCode = function(chunk, postProcessing, useDefaultText){
+		
+		var hasTextBefore = /\S[ ]*$/.test(chunk.before);
+		var hasTextAfter = /^[ ]*\S/.test(chunk.after);
+		
+		// Use 'four space' markdown if the selection is on its own
+		// line or is multiline.
+		if((!hasTextAfter && !hasTextBefore) || /\n/.test(chunk.selection)){
+			
+			chunk.before = chunk.before.replace(/[ ]{4}$/,
+				function(totalMatch){
+					chunk.selection = totalMatch + chunk.selection;
+					return "";
+				});
+				
+			var nLinesBefore = 1;
+			var nLinesAfter = 1;
+			
+			
+			if(/\n(\t|[ ]{4,}).*\n$/.test(chunk.before) || chunk.after === ""){
+				nLinesBefore = 0; 
+			}
+			if(/^\n(\t|[ ]{4,})/.test(chunk.after)){
+				nLinesAfter = 0; // This needs to happen on line 1
+			}
+			
+			chunk.addBlankLines(nLinesBefore, nLinesAfter);
+			
+			if(!chunk.selection){
+				chunk.startTag = "    ";
+				chunk.selection = useDefaultText ? "enter code here" : "";
+			}
+			else {
+				if(/^[ ]{0,3}\S/m.test(chunk.selection)){
+					chunk.selection = chunk.selection.replace(/^/gm, "    ");
+				}
+				else{
+					chunk.selection = chunk.selection.replace(/^[ ]{4}/gm, "");
+				}
+			}
+		}
+		else{
+			// Use backticks (`) to delimit the code block.
+			
+			chunk.trimWhitespace();
+			chunk.findTags(/`/, /`/);
+			
+			if(!chunk.startTag && !chunk.endTag){
+				chunk.startTag = chunk.endTag="`";
+				if(!chunk.selection){
+					chunk.selection = useDefaultText ? "enter code here" : "";
+				}
+			}
+			else if(chunk.endTag && !chunk.startTag){
+				chunk.before += chunk.endTag;
+				chunk.endTag = "";
+			}
+			else{
+				chunk.startTag = chunk.endTag="";
+			}
+		}
+	};
+	
+	command.doList = function(chunk, postProcessing, isNumberedList, useDefaultText){
+				
+		// These are identical except at the very beginning and end.
+		// Should probably use the regex extension function to make this clearer.
+		var previousItemsRegex = /(\n|^)(([ ]{0,3}([*+-]|\d+[.])[ \t]+.*)(\n.+|\n{2,}([*+-].*|\d+[.])[ \t]+.*|\n{2,}[ \t]+\S.*)*)\n*$/;
+		var nextItemsRegex = /^\n*(([ ]{0,3}([*+-]|\d+[.])[ \t]+.*)(\n.+|\n{2,}([*+-].*|\d+[.])[ \t]+.*|\n{2,}[ \t]+\S.*)*)\n*/;
+		
+		// The default bullet is a dash but others are possible.
+		// This has nothing to do with the particular HTML bullet,
+		// it's just a markdown bullet.
+		var bullet = "-";
+		
+		// The number in a numbered list.
+		var num = 1;
+		
+		// Get the item prefix - e.g. " 1. " for a numbered list, " - " for a bulleted list.
+		var getItemPrefix = function(){
+			var prefix;
+			if(isNumberedList){
+				prefix = " " + num + ". ";
+				num++;
+			}
+			else{
+				prefix = " " + bullet + " ";
+			}
+			return prefix;
+		};
+		
+		// Fixes the prefixes of the other list items.
+		var getPrefixedItem = function(itemText){
+		
+			// The numbering flag is unset when called by autoindent.
+			if(isNumberedList === undefined){
+				isNumberedList = /^\s*\d/.test(itemText);
+			}
+			
+			// Renumber/bullet the list element.
+			itemText = itemText.replace(/^[ ]{0,3}([*+-]|\d+[.])\s/gm,
+				function( _ ){
+					return getItemPrefix();
+				});
+				
+			return itemText;
+		};
+		
+		chunk.findTags(/(\n|^)*[ ]{0,3}([*+-]|\d+[.])\s+/, null);
+		
+		if(chunk.before && !/\n$/.test(chunk.before) && !/^\n/.test(chunk.startTag)){
+			chunk.before += chunk.startTag;
+			chunk.startTag = "";
+		}
+		
+		if(chunk.startTag){
+			
+			var hasDigits = /\d+[.]/.test(chunk.startTag);
+			chunk.startTag = "";
+			chunk.selection = chunk.selection.replace(/\n[ ]{4}/g, "\n");
+			command.unwrap(chunk);
+			chunk.addBlankLines();
+			
+			if(hasDigits){
+				// Have to renumber the bullet points if this is a numbered list.
+				chunk.after = chunk.after.replace(nextItemsRegex, getPrefixedItem);
+			}
+			if(isNumberedList == hasDigits){
+				return;
+			}
+		}
+		
+		var nLinesBefore = 1;
+		
+		chunk.before = chunk.before.replace(previousItemsRegex,
+			function(itemText){
+				if(/^\s*([*+-])/.test(itemText)){
+					bullet = re.$1;
+				}
+				nLinesBefore = /[^\n]\n\n[^\n]/.test(itemText) ? 1 : 0;
+				return getPrefixedItem(itemText);
+			});
+			
+		if(!chunk.selection){
+			chunk.selection = useDefaultText ? "List item" : " ";
+		}
+		
+		var prefix = getItemPrefix();
+		
+		var nLinesAfter = 1;
+		
+		chunk.after = chunk.after.replace(nextItemsRegex,
+			function(itemText){
+				nLinesAfter = /[^\n]\n\n[^\n]/.test(itemText) ? 1 : 0;
+				return getPrefixedItem(itemText);
+			});
+			
+		chunk.trimWhitespace(true);
+		chunk.addBlankLines(nLinesBefore, nLinesAfter, true);
+		chunk.startTag = prefix;
+		var spaces = prefix.replace(/./g, " ");
+		command.wrap(chunk, wmd.wmd_env.lineLength - spaces.length);
+		chunk.selection = chunk.selection.replace(/\n/g, "\n" + spaces);
+		
+	};
+	
+	command.doHeading = function(chunk, postProcessing, useDefaultText){
+		
+		// Remove leading/trailing whitespace and reduce internal spaces to single spaces.
+		chunk.selection = chunk.selection.replace(/\s+/g, " ");
+		chunk.selection = chunk.selection.replace(/(^\s+|\s+$)/g, "");
+		
+		// If we clicked the button with no selected text, we just
+		// make a level 2 hash header around some default text.
+		if(!chunk.selection){
+			chunk.startTag = "## ";
+			chunk.selection = "Heading";
+			chunk.endTag = " ##";
+			return;
+		}
+		
+		var headerLevel = 0;		// The existing header level of the selected text.
+		
+		// Remove any existing hash heading markdown and save the header level.
+		chunk.findTags(/#+[ ]*/, /[ ]*#+/);
+		if(/#+/.test(chunk.startTag)){
+			headerLevel = re.lastMatch.length;
+		}
+		chunk.startTag = chunk.endTag = "";
+		
+		// Try to get the current header level by looking for - and = in the line
+		// below the selection.
+		chunk.findTags(null, /\s?(-+|=+)/);
+		if(/=+/.test(chunk.endTag)){
+			headerLevel = 1;
+		}
+		if(/-+/.test(chunk.endTag)){
+			headerLevel = 2;
+		}
+		
+		// Skip to the next line so we can create the header markdown.
+		chunk.startTag = chunk.endTag = "";
+		chunk.addBlankLines(1, 1);
+
+		// We make a level 2 header if there is no current header.
+		// If there is a header level, we substract one from the header level.
+		// If it's already a level 1 header, it's removed.
+		var headerLevelToCreate = headerLevel == 0 ? 2 : headerLevel - 1;
+		
+		if(headerLevelToCreate > 0){
+			
+			// The button only creates level 1 and 2 underline headers.
+			// Why not have it iterate over hash header levels?  Wouldn't that be easier and cleaner?
+			var headerChar = headerLevelToCreate >= 2 ? "-" : "=";
+			var len = chunk.selection.length;
+			if(len > wmd.wmd_env.lineLength){
+				len = wmd.wmd_env.lineLength;
+			}
+			chunk.endTag = "\n";
+			while(len--){
+				chunk.endTag += headerChar;
+			}
+		}
+	};	
+	
+	command.doHorizontalRule = function(chunk, postProcessing, useDefaultText){
+		chunk.startTag = "----------\n";
+		chunk.selection = "";
+		chunk.addBlankLines(2, 1, true);
+	}
+};
+
+
+Attacklab.wmd_env = {};
+Attacklab.account_options = {};
+Attacklab.wmd_defaults = {version:1, output:"HTML", lineLength:40, delayLoad:false};
+
+if(!Attacklab.wmd)
+{
+	Attacklab.wmd = function()
+	{
+		Attacklab.loadEnv = function()
+		{
+			var mergeEnv = function(env)
+			{
+				if(!env)
+				{
+					return;
+				}
+			
+				for(var key in env)
+				{
+					Attacklab.wmd_env[key] = env[key];
+				}
+			};
+			
+			mergeEnv(Attacklab.wmd_defaults);
+			mergeEnv(Attacklab.account_options);
+			mergeEnv(top["wmd_options"]);
+			Attacklab.full = true;
+			
+			var defaultButtons = "bold italic link blockquote code image ol ul heading hr";
+			Attacklab.wmd_env.buttons = Attacklab.wmd_env.buttons || defaultButtons;
+		};
+		Attacklab.loadEnv();
+
+	};
+	
+	Attacklab.wmd();
+	Attacklab.wmdBase();
+	Attacklab.Util.startEditor();
+};
+

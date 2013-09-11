@@ -39,6 +39,10 @@ public class FileAction {
 		download(ctx, file, path, name);
 	}
 	
+	public void uploadImg(RequestContext ctx) throws IOException {
+		ctx.output_json("url", "uploads/asd.jpg");
+	}
+	
 	private void download(RequestContext ctx,File file, String path, String filename) throws IOException{
 		FileInputStream f = null;
 		try {
