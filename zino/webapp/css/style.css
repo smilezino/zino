@@ -5,4 +5,5 @@ body {
     background-image: -moz-linear-gradient(top, rgba(255, 255, 255, 0.5) 100px, rgba(255, 255, 255, 0) 160px);
     background-image: -o-linear-gradient(top, rgba(255, 255, 255, 0.5) 100px, rgba(255, 255, 255, 0) 160px);
     background-image: linear-gradient(top, rgba(255, 255, 255, 0.5) 100px, rgba(255, 255, 255, 0) 160px)
+	
 }
