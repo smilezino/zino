@@ -17,8 +17,13 @@
 		<class>my.toolbox.FormatTool</class>
 	</tool>
 	<tool>
-		<key>todo</key>
+		<key>Todo</key>
 		<scope>application</scope>
 		<class>my.beans.View</class>
+	</tool>
+	<tool>
+		<key>Blog</key>
+		<scope>application</scope>
+		<class>my.beans.Blog</class>
 	</tool>
 </toolbox>

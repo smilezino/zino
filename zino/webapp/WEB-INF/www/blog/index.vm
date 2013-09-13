@@ -2,6 +2,9 @@
 #set($page_title = "Blog - By smile zino")
 #set($active = "blog")
 
+#set($id = $link.lparam("id",0))
+#set($blog = $Blog.Get($id))
+
 <style>
 	.content {margin-top:90px;overflow:hidden}
 </style>
@@ -21,120 +24,16 @@
 			</ul>
         </div>
         <div class="span9">
-			<div class="page-header">
-                <h1><a href="$link.link("view")">View It Later <small>稍后浏览</small></a></h1>
-            </div>
-			<p>aasdasfasf</p>
-			<p>aasdasfasf</p>
-			<p>aasdasfasf</p>
-			<p>aasdasfasf</p>
-			<p>aasdasfasf</p>
-			<p>aasdasfasf</p>
-			<p>aasdasfasf</p>
-			<p>aasdasfasf</p>
-			<p>aasdasfasf</p>
-			<p>aasdasfasf</p>
-			<p>aasdasfasf</p>
-			<p>aasdasfasf</p>
-			<p>aasdasfasf</p>
-			<p>aasdasfasf</p>
-			<p>aasdasfasf</p>
-			<p>aasdasfasf</p>
-			<p>aasdasfasf</p>
-			<p>aasdasfasf</p>
-			<h1 id="1">1</h1>
-			<p>aasdasfasf</p>
-			<p>aasdasfasf</p>
-			<p>aasdasfasf</p>
-			<p>aasdasfasf</p>
-			<p>aasdasfasf</p>
-			<p>aasdasfasf</p>
-			<p>aasdasfasf</p>
-			<p>aasdasfasf</p>
-			<p>aasdasfasf</p>
-			<p>aasdasfasf</p>
-			<p>aasdasfasf</p>
-			<p>aasdasfasf</p>
-			<p>aasdasfasf</p>
-			<p>aasdasfasf</p>
-			<p>aasdasfasf</p>
-			<p>aasdasfasf</p>
-			<p>aasdasfasf</p>
-			<p>aasdasfasf</p>
-			<p>aasdasfasf</p>
-			<p>aasdasfasf</p>
-			<p>aasdasfasf</p>
-			<p>aasdasfasf</p>
-			<p>aasdasfasf</p>
-			<p>aasdasfasf</p>
-			<p>aasdasfasf</p>
-			<p>aasdasfasf</p>
-			<p>aasdasfasf</p>
-			<p>aasdasfasf</p>
-			<p>aasdasfasf</p>
-			<p>aasdasfasf</p>
-			<p>aasdasfasf</p>
-			<p>aasdasfasf</p>
-			<h1 id="2">2</h1>
-			<p>aasdasfasf</p>
-			<p>aasdasfasf</p>
-			<p>aasdasfasf</p>
-			<p>aasdasfasf</p>
-			<p>aasdasfasf</p>
-			<p>aasdasfasf</p>
-			<p>aasdasfasf</p>
-			<p>aasdasfasf</p>
-			<p>aasdasfasf</p>
-			<p>aasdasfasf</p>
-			<p>aasdasfasf</p>
-			<p>aasdasfasf</p>
-			<p>aasdasfasf</p>
-			<p>aasdasfasf</p>
-			<p>aasdasfasf</p>
-			<p>aasdasfasf</p>
-			<p>aasdasfasf</p>
-			<p>aasdasfasf</p>
-			<p>aasdasfasf</p>
-			<p>aasdasfasf</p>
-			<p>aasdasfasf</p>
-			<p>aasdasfasf</p>
-			<p>aasdasfasf</p>
-			<p>aasdasfasf</p>
-			<p>aasdasfasf</p>
-			<p>aasdasfasf</p>
-			<p>aasdasfasf</p>
-			<p>aasdasfasf</p>
-			<p>aasdasfasf</p>
-			<p>aasdasfasf</p>
-			<p>aasdasfasf</p>
-			<h1 id="3">3</h1>
-			<p>aasdasfasf</p>
-			<p>aasdasfasf</p>
-			<p>aasdasfasf</p>
-			<p>aasdasfasf</p>
-			<p>aasdasfasf</p>
-			<p>aasdasfasf</p>
-			<p>aasdasfasf</p>
-			<p>aasdasfasf</p>
-			<p>aasdasfasf</p>
-			<p>aasdasfasf</p>
-			<p>aasdasfasf</p>
-			<p>aasdasfasf</p>
-			<p>aasdasfasf</p>
-			<p>aasdasfasf</p>
-			<p>aasdasfasf</p>
-			<p>aasdasfasf</p>
-			<p>aasdasfasf</p>
-			<p>aasdasfasf</p>
-			<p>aasdasfasf</p>
-			<p>aasdasfasf</p>
-			<p>aasdasfasf</p>
-			<p>aasdasfasf</p>
-			<p>aasdasfasf</p>
-			<p>aasdasfasf</p>
-			<p>aasdasfasf</p>
-			<p>aasdasfasf</p>
-			<p>aasdasfasf</p>
+			#if($blog)
+    			<div class="page-header">
+                    <h1>$blog.title</h1>
+                </div>
+    			<div class="blog-content">
+    				$blog.text
+                </div>
+			#else
+				
+			#end
         </div>
     </div>
 </div>
