@@ -13,6 +13,7 @@
 <link href='$link.js("markdown/wmd.css")' rel='stylesheet' type='text/css'/>
 <script src='$link.js("markdown/wmd.js")' type='text/javascript'></script>
 <script src='$link.js("markdown/showdown.js")' type='text/javascript'></script>
+<script src='$link.js("markdown/Markdown.Sanitizer.js")' type='text/javascript'></script>
 
 <form id="blog-form">
 <div class="row">

@@ -2,6 +2,9 @@ package my.beans;
 
 import java.sql.Timestamp;
 
+import org.markdownj.MarkdownProcessor;
+
+
 import my.db.DBbean;
 import my.db.QueryHelper;
 
@@ -17,6 +20,15 @@ public class Blog extends DBbean{
 	public long update() {
 		String sql = "UPDATE " + TableName() + " SET title=?,text=?,draft=?";
 		return QueryHelper.update(sql, title, text, draft);
+	}
+	
+	/**
+	 * 处理markdown格式
+	 * @return
+	 */
+	public String markdown() {
+		MarkdownProcessor m = new MarkdownProcessor();
+		return m.markdown(text);
 	}
 	/**
 	 * 博客浏览数+1
