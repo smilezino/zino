@@ -137,7 +137,7 @@ public class User extends DBbean {
 	 * @return
 	 */
 	public boolean IsManager(){
-		return role == ROLE_MANAGER;
+		return role >= ROLE_MANAGER;
 	}
 	
 	

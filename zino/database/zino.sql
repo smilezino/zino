@@ -15,6 +15,23 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
+
+DROP TABLE IF EXISTS `z_files`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `z_files` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user` int(11) NOT NULL,
+  `filename` varchar(120) NOT NULL,
+  `filepath` varchar(120) NOT NULL,
+  `downloadCount` int(11) DEFAULT '0',
+  `status` tinyint(4) DEFAULT '0',
+  `type` tinyint(4) DEFAULT '0',
+  `createTime` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
 --
 -- Table structure for table `z_blog`
 --

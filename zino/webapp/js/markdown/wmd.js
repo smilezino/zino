@@ -428,7 +428,7 @@ Attacklab.wmdBase = function(){
 		// Dismisses the hyperlink input box.
 		// isCancel is true if we don't care about the input text.
 		// isCancel is false if we are going to keep the text.
-		var close = function(isCancel, text){
+		var close = function(isCancel, text, upload){
 			util.removeEvent(doc.body, "keydown", checkEscape);
 
 			if (isCancel){
@@ -440,9 +440,10 @@ Attacklab.wmdBase = function(){
 				text = text.replace('http://https://', 'https://');
 				text = text.replace('http://ftp://', 'ftp://');
 				
-				if (text.indexOf('http://') === -1 && text.indexOf('ftp://') === -1 && text.indexOf('https://') === -1) {
-					text = 'http://' + text;
-				}
+				if(!upload)
+					if (text.indexOf('http://') === -1 && text.indexOf('ftp://') === -1 && text.indexOf('https://') === -1) {
+						text = 'http://' + text;
+					}
 			}
 			
 			dialog.parentNode.removeChild(dialog);
@@ -525,6 +526,7 @@ Attacklab.wmdBase = function(){
 				return close(false); 
 			};*/
 			uploadForm.setAttribute("id","imgUpload");
+			uploadForm.setAttribute("enctype","multipart/form-data");
 			style = uploadForm.style;
 			style.padding = "0";
 			style.margin = "0";
@@ -556,7 +558,7 @@ Attacklab.wmdBase = function(){
 					},
 					success:function(msg){
 						if(msg.error){alert(msg.msg);return;};
-						close(false, msg.url);
+						close(false, msg.url, true);
 					},
 					error:function(){
 						alert("net work error");
@@ -601,7 +603,7 @@ Attacklab.wmdBase = function(){
 			
 			// The web form container for the text box and buttons.
 			var form = doc.createElement("form");
-			form.onsubmit = function(){ return close(false, input.value); };
+			form.onsubmit = function(){ return close(false, input.value, false); };
 			style = form.style;
 			style.padding = "0";
 			style.margin = "0";
@@ -624,7 +626,7 @@ Attacklab.wmdBase = function(){
 			// The ok button
 			var okButton = doc.createElement("input");
 			okButton.type = "button";
-			okButton.onclick = function(){ return close(false, input.value); };
+			okButton.onclick = function(){ return close(false, input.value, false); };
 			okButton.value = "OK";
 			style = okButton.style;
 			style.margin = "10px";
@@ -635,7 +637,7 @@ Attacklab.wmdBase = function(){
 			// The cancel button
 			var cancelButton = doc.createElement("input");
 			cancelButton.type = "button";
-			cancelButton.onclick = function(){ return close(true, ""); };
+			cancelButton.onclick = function(){ return close(true, "", false); };
 			cancelButton.value = "Cancel";
 			style = cancelButton.style;
 			style.margin = "10px";

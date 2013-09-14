@@ -41,6 +41,7 @@
         </div>
     <div class="container">
 		${screen_content}
+        <div class="clearfix"></div>
 		<div style="margin:50px 0">
 			<hr />
 			<p class="text-center">&copy; zinor.net</p>

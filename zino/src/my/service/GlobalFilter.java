@@ -108,9 +108,7 @@ public class GlobalFilter implements Filter {
 		
 	}
 	protected void beforeFilter(RequestContext ctx) throws IllegalAccessException {
-		try {
-			ctx.user();
-		}catch(ActionException e){}
+		ctx.user();
 	}
 	protected void afterFilter(RequestContext ctx) {}
 	

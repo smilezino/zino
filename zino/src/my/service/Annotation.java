@@ -15,18 +15,19 @@ public class Annotation {
 	/**
 	 * 只允许使用POST方式执行的Action
 	 */
-	@Target(ElementType.METHOD)
+	@Target({ElementType.METHOD, ElementType.TYPE})
 	@Retention(RetentionPolicy.RUNTIME)
 	public static @interface PostMethod {
 
 	}
 	
 	/**
-	 * 输出JSON格式的提示信息
+	 * 若在类上注解，则该类下所有方法必须是登录用户才能执行
+	 * 若在方法上注解，则该方法必须是登录用户才能执行
 	 */
-	@Target(ElementType.METHOD)
+	@Target({ElementType.METHOD, ElementType.TYPE})
 	@Retention(RetentionPolicy.RUNTIME)
-	public @interface JSONOutputEnabled {
-
+	public @interface User {
+		
 	}
 }

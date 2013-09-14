@@ -17,6 +17,11 @@
 		<class>my.toolbox.FormatTool</class>
 	</tool>
 	<tool>
+		<key>User</key>
+		<scope>application</scope>
+		<class>my.beans.User</class>
+	</tool>
+	<tool>
 		<key>Todo</key>
 		<scope>application</scope>
 		<class>my.beans.View</class>

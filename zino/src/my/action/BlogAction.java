@@ -5,14 +5,18 @@ import java.sql.Timestamp;
 import java.util.Calendar;
 
 import my.beans.Blog;
+import my.beans.Tag;
 import my.beans.User;
 import my.service.RequestContext;
+import my.service.Annotation;
 
 /**
  * Blog 操作
  * @author zino
  *
  */
+
+@Annotation.PostMethod
 public class BlogAction {
 	
 	/**
@@ -23,13 +27,21 @@ public class BlogAction {
 	public void post(RequestContext ctx) throws IOException {
 		User user = ctx.user();
 		Blog form = ctx.form(Blog.class);
+		String[] tags = ctx.params("tag");
 		String result = checkBlog(form);
 		if(result!=null)
 			throw ctx.error(result);
-		form.setUser(user.getId());
+		if(user==null) {
+			form.setUser(0);
+			form.setStatus(Blog.STATUS_POST);
+		}else{
+			form.setUser(user.getId());
+		}
 		form.setDraft(Blog.UNDRAFT);
 		form.setCreateTime(new Timestamp(Calendar.getInstance().getTimeInMillis()));
 		long id = form.Save();
+		//处理标签
+		Tag.INSTANCE.add(tags, Tag.TYPE_BLOG, id);
 		ctx.output_json("id", id);
 	}
 	/**
@@ -37,6 +49,7 @@ public class BlogAction {
 	 * @param ctx
 	 * @throws IOException
 	 */
+	@Annotation.User
 	public void draft(RequestContext ctx) throws IOException {
 		User user = ctx.user();
 		Blog draft = ctx.form(Blog.class);
@@ -47,6 +60,9 @@ public class BlogAction {
 		draft.setDraft(Blog.DRAFT);
 		draft.setCreateTime(new Timestamp(Calendar.getInstance().getTimeInMillis()));
 		long id = draft.Save();
+		//处理标签
+		String[] tags = ctx.params("tag");
+		Tag.INSTANCE.add(tags, Tag.TYPE_BLOG, id);
 		ctx.output_json("id", id);
 	}
 	
@@ -54,15 +70,21 @@ public class BlogAction {
 	 * 修改草稿
 	 * @param ctx
 	 */
+	@Annotation.User
 	public void update_draft(RequestContext ctx) {
-		Blog draft = ctx.form(Blog.class);
+		long id = ctx.id();
+		Blog draft = Blog.INSTANCE.Get(id);
 		draft.setDraft(Blog.DRAFT);
 		update(ctx, draft);
+		//处理标签
+		String[] tags = ctx.params("tag");
+		Tag.INSTANCE.add(tags, Tag.TYPE_BLOG, id);
 	}
 	/**
 	 * 修改博客
 	 * @param ctx
 	 */
+	@Annotation.User
 	public void update_post(RequestContext ctx) {
 		Blog bean = ctx.form(Blog.class);
 		bean.setDraft(Blog.UNDRAFT);
@@ -73,6 +95,7 @@ public class BlogAction {
 	 * 从草稿发表博客
 	 * @param ctx
 	 */
+	@Annotation.User
 	public void post_form_draft(RequestContext ctx) {
 		Blog bean = ctx.form(Blog.class);
 		bean.setDraft(Blog.UNDRAFT);
@@ -84,6 +107,7 @@ public class BlogAction {
 	 * @param ctx
 	 * @throws IOException
 	 */
+	@Annotation.User
 	public void delete(RequestContext ctx) throws IOException {
 		User user = ctx.user();
 		long id = ctx.id();
@@ -101,6 +125,7 @@ public class BlogAction {
 	 * @param blog
 	 * @return
 	 */
+	@Annotation.User
 	private long update(RequestContext ctx, Blog blog) {
 		User user = ctx.user();
 		Blog bean = Blog.INSTANCE.Get(blog.getId());

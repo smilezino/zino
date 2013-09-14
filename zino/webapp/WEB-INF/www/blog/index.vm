@@ -4,9 +4,15 @@
 
 #set($id = $link.lparam("id",0))
 #set($blog = $Blog.Get($id))
+#if($blog && ($blog.status==0 || $g_user.IsManager()))
 
+#set($user = $User.Get($blog.user))
 <style>
-	.content {margin-top:90px;overflow:hidden}
+	.content {overflow-x:hidden}
+	#content {text-align:center}
+	#content a {font-size:16px;cursor:default; color:black}
+	#content a:hover {color:black}
+	.nav-header {padding:20px 0 5px 0;text-align:center;font-size:16px}
 </style>
 <link href='$link.css("prettify/prettify.css")' rel='stylesheet' type='text/css'/>
 <script src='$link.css("prettify/prettify.js")' type='text/javascript'></script>
@@ -14,28 +20,30 @@
     <div class="row-fluid">
         <div class="span3 bs-docs-sidebar content">
 			<ul class="nav nav-list bs-docs-sidenav affix">
-                <li><a href="#1">asdasdas<i class="icon-chevron-right"></i></a></li>
-                <li><a href="#2">asdasdas<i class="icon-chevron-right"></i></a></li>
-                <li><a href="#3">asdasdas<i class="icon-chevron-right"></i></a></li>
-                <li><a href="#4">asdasdas<i class="icon-chevron-right"></i></a></li>
-                <li><a href="#5">asdasdas<i class="icon-chevron-right"></i></a></li>
-                <li><a href="#6">asdasdas<i class="icon-chevron-right"></i></a></li>
-                <li><a href="#7">asdasdas<i class="icon-chevron-right"></i></a></li>
-                <li><a href="#8">asdasdas<i class="icon-chevron-right"></i></a></li>
-                <li><a href="#9">asdasdas<i class="icon-chevron-right"></i></a></li>
+				<li class="nav-header">目录</li>
+                $blog.htmlContent()
+			
+				<li class="nav-header"></li>
+                
+				#if($g_user && ($g_user.IsManager() || $g_user.id == $blog.user))
+                    <li><a href="$link.link("blog/edit?id=")$blog.id">修改</a></li>
+				#else
+					<li><a href="$link.link("blog/post")">投稿</a></li>
+				#end
 			</ul>
         </div>
         <div class="span9">
-			#if($blog)
+			
     			<div class="page-header">
                     <h1>$blog.title</h1>
+                    <div>
+						<strong>$user.name</strong>发表于 $format.date("yyyy-MM-dd HH:mm",$blog.createTime)
+					</div>
                 </div>
     			<div class="blog-content">
-    				$blog.markdown()
+    				$blog.htmlAnchor()
 				</div>
-			#else
-				
-			#end
+			
         </div>
     </div>
 </div>
@@ -43,3 +51,62 @@
 <script>
 	prettyPrint();
 </script>
+
+#else
+	<style>
+	.content {}
+	#content {text-align:center}
+	#content a {font-size:16px;cursor:default; color:black}
+	#content a:hover {color:black}
+	.nav-header {padding:20px 0 5px 0;text-align:center;font-size:16px}
+</style>
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span3 bs-docs-sidebar content">
+			<ul class="nav nav-list bs-docs-sidenav">
+				<li class="nav-header"></li>
+                
+				#if($g_user)
+                    <li><a href="$link.link("blog/new")">发表博文</a></li>
+				#else
+					<li><a href="$link.link("blog/post")">投稿</a></li>
+				#end
+				<li class="nav-header">标签</li>
+                <li>
+					<a href="#">asadasfd</a>
+				</li>
+			</ul>
+        </div>
+        <div class="span9">
+			
+    			<div class="page-header">
+                    <h1>列表</h1>
+                </div>
+    			<div class="blog-list">
+					<li><a href="$link.link("blog?id=2")">asdaasfasfas</a></li>
+					<li><a href="$link.link("blog?id=2")">asdaasfasfas</a></li>
+					<li><a href="$link.link("blog?id=2")">asdaasfasfas</a></li>
+					<li><a href="$link.link("blog?id=2")">asdaasfasfas</a></li>
+					<li><a href="$link.link("blog?id=2")">asdaasfasfas</a></li>
+					<li><a href="$link.link("blog?id=2")">asdaasfasfas</a></li>
+					<li><a href="$link.link("blog?id=2")">asdaasfasfas</a></li>
+					<li><a href="$link.link("blog?id=2")">asdaasfasfas</a></li>
+					<li><a href="$link.link("blog?id=2")">asdaasfasfas</a></li>
+					<li><a href="$link.link("blog?id=2")">asdaasfasfas</a></li>
+					<li><a href="$link.link("blog?id=2")">asdaasfasfas</a></li>
+					<li><a href="$link.link("blog?id=2")">asdaasfasfas</a></li>
+					<li><a href="$link.link("blog?id=2")">asdaasfasfas</a></li>
+					<li><a href="$link.link("blog?id=2")">asdaasfasfas</a></li>
+					<li><a href="$link.link("blog?id=2")">asdaasfasfas</a></li>
+					<li><a href="$link.link("blog?id=2")">asdaasfasfas</a></li>
+					<li><a href="$link.link("blog?id=2")">asdaasfasfas</a></li>
+					<li><a href="$link.link("blog?id=2")">asdaasfasfas</a></li>
+					<li><a href="$link.link("blog?id=2")">asdaasfasfas</a></li>
+					<li><a href="$link.link("blog?id=2")">asdaasfasfas</a></li>
+					<li><a href="$link.link("blog?id=2")">asdaasfasfas</a></li>
+				</div>
+			
+        </div>
+    </div>
+</div>			
+#end

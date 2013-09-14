@@ -3,8 +3,10 @@ package my.service;
 import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
@@ -25,6 +27,7 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.RandomStringUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.NumberUtils;
+
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
@@ -160,6 +163,24 @@ public class RequestContext {
 	public byte param(String name, byte def_value) {
 		return (byte)NumberUtils.toInt(param(name), def_value);
 	}
+	public String[] params(String name) {
+		return request.getParameterValues(name);
+	}
+
+	public long[] lparams(String name){
+		String[] values = params(name);
+		if(values==null) return null;
+		List<Long> lvs = new ArrayList<Long>();
+		for(String v : values) {
+			long lv = NumberUtils.toLong(v, Long.MIN_VALUE);
+			if(lv != Long.MIN_VALUE && !lvs.contains(lvs))
+				lvs.add(lv);
+		}
+		long [] llvs = new long[lvs.size()];
+		for(int i=0;i<lvs.size();i++)
+			llvs[i] = lvs.get(i);
+		return llvs;
+	}
 	/**
 	 * 将HTTP请求参数映射到bean对象中
 	 * @param beanClass
@@ -180,11 +201,7 @@ public class RequestContext {
 	 * @throws IOException 
 	 */
 	public User user() {
-		User u = User.getUser(request);
-		if(u == null){
-			throw new ActionException("login");
-		}
-		return u;
+		return User.getUser(request);
 	}
 	
 	public User getUserFromCookie() {
