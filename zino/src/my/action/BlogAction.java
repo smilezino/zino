@@ -27,7 +27,6 @@ public class BlogAction {
 	public void post(RequestContext ctx) throws IOException {
 		User user = ctx.user();
 		Blog form = ctx.form(Blog.class);
-		String[] tags = ctx.params("tag");
 		String result = checkBlog(form);
 		if(result!=null)
 			throw ctx.error(result);
@@ -41,7 +40,7 @@ public class BlogAction {
 		form.setCreateTime(new Timestamp(Calendar.getInstance().getTimeInMillis()));
 		long id = form.Save();
 		//处理标签
-		Tag.INSTANCE.add(tags, Tag.TYPE_BLOG, id);
+		addtags(ctx, id);
 		ctx.output_json("id", id);
 	}
 	/**
@@ -60,46 +59,37 @@ public class BlogAction {
 		draft.setDraft(Blog.DRAFT);
 		draft.setCreateTime(new Timestamp(Calendar.getInstance().getTimeInMillis()));
 		long id = draft.Save();
-		//处理标签
-		String[] tags = ctx.params("tag");
-		Tag.INSTANCE.add(tags, Tag.TYPE_BLOG, id);
+		addtags(ctx, id);
 		ctx.output_json("id", id);
 	}
 	
 	/**
 	 * 修改草稿
 	 * @param ctx
+	 * @throws IOException 
 	 */
 	@Annotation.User
-	public void update_draft(RequestContext ctx) {
-		long id = ctx.id();
-		Blog draft = Blog.INSTANCE.Get(id);
-		draft.setDraft(Blog.DRAFT);
-		update(ctx, draft);
-		//处理标签
-		String[] tags = ctx.params("tag");
-		Tag.INSTANCE.add(tags, Tag.TYPE_BLOG, id);
+	public void update_draft(RequestContext ctx) throws IOException {
+		update(ctx, Blog.DRAFT);
 	}
 	/**
 	 * 修改博客
 	 * @param ctx
+	 * @throws IOException 
 	 */
 	@Annotation.User
-	public void update_post(RequestContext ctx) {
-		Blog bean = ctx.form(Blog.class);
-		bean.setDraft(Blog.UNDRAFT);
-		update(ctx, bean);
+	public void update_post(RequestContext ctx) throws IOException {
+		update(ctx, Blog.UNDRAFT);
 	}
 	
 	/**
 	 * 从草稿发表博客
 	 * @param ctx
+	 * @throws IOException 
 	 */
 	@Annotation.User
-	public void post_form_draft(RequestContext ctx) {
-		Blog bean = ctx.form(Blog.class);
-		bean.setDraft(Blog.UNDRAFT);
-		update(ctx, bean);
+	public void post_form_draft(RequestContext ctx) throws IOException {
+		update(ctx, Blog.UNDRAFT);
 	}
 	
 	/**
@@ -112,7 +102,9 @@ public class BlogAction {
 		User user = ctx.user();
 		long id = ctx.id();
 		Blog blog = Blog.INSTANCE.Get(id);
-		if(blog==null || user.getId()!=blog.getUser())
+		if(blog==null)
+			throw ctx.error("form_empty");
+		if(user.getId()!=blog.getUser() || !user.IsManager())
 			throw ctx.error("no_permission");
 		blog.Delete();
 		ctx.output_json("id", blog.getId());
@@ -124,16 +116,25 @@ public class BlogAction {
 	 * @param user
 	 * @param blog
 	 * @return
+	 * @throws IOException 
 	 */
-	@Annotation.User
-	private long update(RequestContext ctx, Blog blog) {
+	private long update(RequestContext ctx, byte type) throws IOException {
 		User user = ctx.user();
-		Blog bean = Blog.INSTANCE.Get(blog.getId());
-		if(bean==null || bean.getUser()!=user.getId())
+		long id = ctx.id();
+		Blog blog = Blog.INSTANCE.Get(id);
+		if(blog==null)
+			throw ctx.error("form_empty");
+		if(!user.IsManager() || user.getId()!=blog.getUser())
 			throw ctx.error("no_permission");
-		String result = checkBlog(blog);
+		Blog form = ctx.form(Blog.class);
+		String result = checkBlog(form);
 		if(result!=null)
 			throw ctx.error(result);
+		blog.setText(form.getText());
+		blog.setTitle(form.getTitle());
+		blog.setDraft(type);
+		addtags(ctx, id);
+		ctx.output_json("id", id);
 		return blog.update();
 	}
 	/**
@@ -144,12 +145,29 @@ public class BlogAction {
 	 */
 	private String checkBlog(Blog blog) {
 		String code = null;
-		if(blog.getTitle()==null)
+		if(blog.getTitle()==null || blog.getTitle().length()<1)
 			code = "blog_title_not_null";
 		else if(blog.getTitle().length()>120)
 			code = "blog_title_too_long";
-		if(blog.getText()==null)
+		if(blog.getText()==null || blog.getText().length()<1)
 			code = "blog_text_not_null";
 		return code;
+	}
+	
+	/**
+	 * 添加标签
+	 * @param ctx
+	 * @param id
+	 */
+	private void addtags(RequestContext ctx, long id) {
+		//处理标签
+		String[] tags = ctx.params("tag");
+		if(tags==null)
+			return;
+		for(String t : tags) {
+			if(t.length()>80)
+				throw ctx.error("tag_too_long");
+		}
+		Tag.INSTANCE.add(tags, Tag.TYPE_BLOG, id);
 	}
 }

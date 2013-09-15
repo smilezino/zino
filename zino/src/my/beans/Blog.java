@@ -40,8 +40,8 @@ public class Blog extends DBbean{
 	 * @return
 	 */
 	public long update() {
-		String sql = "UPDATE " + TableName() + " SET title=?,text=?,draft=?";
-		return QueryHelper.update(sql, title, text, draft);
+		String sql = "UPDATE " + TableName() + " SET title=?,text=?,draft=? WHERE id=?";
+		return QueryHelper.update(sql, title, text, draft, getId());
 	}
 	
 	/**
@@ -124,7 +124,29 @@ public class Blog extends DBbean{
 			params.add(tag);
 			params.add(Tag.TYPE_BLOG);
 		}
+		sql.append(" ORDER BY status DESC, id DESC");
 		return QueryHelper.query_slice(Blog.class, sql.toString(), page, count, params.toArray());
+	}
+	
+	/**
+	 * 
+	 * @param status
+	 * @param tag
+	 * @return
+	 */
+	public static long countByFilter(int status, String tag) {
+		StringBuffer sql = new StringBuffer("SELECT COUNT(*) FROM z_blog WHERE 1=1");
+		List<Object> params = new ArrayList<Object>();
+		if(status!=STATUS_ALL) {
+			sql.append(" AND status=?");
+			params.add(status);
+		}
+		if(tag!=null && tag.length()>0) {
+			sql.append(" AND id IN(SELECT obj FROM z_obj_tag WHERE tag IN(SEELCT id FROM z_tag WHERE tag=? AND type=?))");
+			params.add(tag);
+			params.add(Tag.TYPE_BLOG);
+		}
+		return QueryHelper.stat(sql.toString(), params.toArray());
 	}
 	private long user;
 	private String title;

@@ -779,12 +779,12 @@ form.bs-docs-example {
   margin: 30px 0 0;
   padding: 0;
   background-color: #fff;
-  -webkit-border-radius: 6px;
+/*   -webkit-border-radius: 6px;
      -moz-border-radius: 6px;
           border-radius: 6px;
   -webkit-box-shadow: 0 1px 4px rgba(0,0,0,.065);
      -moz-box-shadow: 0 1px 4px rgba(0,0,0,.065);
-          box-shadow: 0 1px 4px rgba(0,0,0,.065);
+          box-shadow: 0 1px 4px rgba(0,0,0,.065); */
 }
 .bs-docs-sidenav > li > a {
   display: block;
@@ -900,7 +900,7 @@ form.bs-docs-example {
   /* Adjust sidenav width */
   .bs-docs-sidenav {
     width: 166px;
-    margin-top: 20px;
+    margin-top: 75px;
   }
   .bs-docs-sidenav.affix {
     top: 0;

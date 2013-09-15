@@ -1,5 +1,7 @@
 package my.beans;
 
+import java.util.List;
+
 import my.db.DBbean;
 import my.db.QueryHelper;
 
@@ -47,6 +49,15 @@ public class ObjTag extends DBbean {
 		return QueryHelper.update(sql, obj, type);
 	}
 	
+	/**
+	 * 获取一类型的所有标签
+	 * @param type
+	 * @return
+	 */
+	public static List<ObjTag> listByFilter(int type) {
+		String sql = "SELECT * FROM z_obj_tag WHERE type=?";
+		return QueryHelper.query(ObjTag.class, sql, type);
+	}
 	public long getObj() {
 		return obj;
 	}

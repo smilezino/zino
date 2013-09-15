@@ -4,16 +4,21 @@
 
 #set($id = $link.lparam("id",0))
 #set($blog = $Blog.Get($id))
-#if($blog && ($blog.status==0 || $g_user.IsManager()))
-
-#set($user = $User.Get($blog.user))
 <style>
 	.content {overflow-x:hidden}
 	#content {text-align:center}
 	#content a {font-size:16px;cursor:default; color:black}
 	#content a:hover {color:black}
-	.nav-header {padding:20px 0 5px 0;text-align:center;font-size:16px}
+	.nav-header {padding:20px 0 5px 0;text-align:center;font-size:16px;color:#666}
+	.badge {padding:4px 15px;background:#888;color:white}
+	.badge:hover {background:#08c}
+	.tag>a {text-decoration:none; color:black}
+	.badgeNum {line-height:20px;margin-left:5px}
+	.tag {dispaly:block;float:left;margin:10px 10px 0 0}
 </style>
+#if($blog && ($blog.status==0 || $g_user.IsManager()))
+
+#set($user = $User.Get($blog.user))
 <link href='$link.css("prettify/prettify.css")' rel='stylesheet' type='text/css'/>
 <script src='$link.css("prettify/prettify.js")' type='text/javascript'></script>
 <div class="container-fluid">
@@ -22,7 +27,6 @@
 			<ul class="nav nav-list bs-docs-sidenav affix">
 				<li class="nav-header">目录</li>
                 $blog.htmlContent()
-			
 				<li class="nav-header"></li>
                 
 				#if($g_user && ($g_user.IsManager() || $g_user.id == $blog.user))
@@ -53,19 +57,32 @@
 </script>
 
 #else
-	<style>
-	.content {}
-	#content {text-align:center}
-	#content a {font-size:16px;cursor:default; color:black}
-	#content a:hover {color:black}
-	.nav-header {padding:20px 0 5px 0;text-align:center;font-size:16px}
+<style>
+	.blog-list {font-size:16px}
+	.blog-list ul {margin-left:0}
+	.blog-list li {list-style:none;border-bottom:1px dashed #ccc;padding:10px 0}
+	.blog-list li:hover {background:#eee;}
+	.blog-list li a {margin-left:5px}
+	.blog-list .pull-right {font-size:14px}
 </style>
+#set($p = $link.param("p",1))
+#set($size = 16)
+#if($g_user.IsManager())
+	#set($blogs = $Blog.listByFilter(-1, "", $p, $size))
+	#set($count = $Blog.countByFilter(-1, ""))
+#else
+	#set($blogs = $Blog.listByFilter(0, "", $p, $size))
+	#set($count = $Blog.countByFilter(0, ""))
+#end
+
+##blog的tag Type为1
+#set($tags = $Tag.listByFilter(1, 1))
+
 <div class="container-fluid">
     <div class="row-fluid">
         <div class="span3 bs-docs-sidebar content">
 			<ul class="nav nav-list bs-docs-sidenav">
 				<li class="nav-header"></li>
-                
 				#if($g_user)
                     <li><a href="$link.link("blog/new")">发表博文</a></li>
 				#else
@@ -73,40 +90,71 @@
 				#end
 				<li class="nav-header">标签</li>
                 <li>
-					<a href="#">asadasfd</a>
+					#foreach($tag in $tags)
+						#set($tag_count = $Tag.countByFilter($tag.id, 1))
+						<span class="tag"><a href="$link.link("blog/tag/")$format.encode_url($tag.tag)"><span class="badge">$format.html($tag.tag)</span><span class="badgeNum">x $tag_count</span></a></span>
+					#end
 				</li>
 			</ul>
         </div>
         <div class="span9">
-			
     			<div class="page-header">
                     <h1>列表</h1>
                 </div>
     			<div class="blog-list">
-					<li><a href="$link.link("blog?id=2")">asdaasfasfas</a></li>
-					<li><a href="$link.link("blog?id=2")">asdaasfasfas</a></li>
-					<li><a href="$link.link("blog?id=2")">asdaasfasfas</a></li>
-					<li><a href="$link.link("blog?id=2")">asdaasfasfas</a></li>
-					<li><a href="$link.link("blog?id=2")">asdaasfasfas</a></li>
-					<li><a href="$link.link("blog?id=2")">asdaasfasfas</a></li>
-					<li><a href="$link.link("blog?id=2")">asdaasfasfas</a></li>
-					<li><a href="$link.link("blog?id=2")">asdaasfasfas</a></li>
-					<li><a href="$link.link("blog?id=2")">asdaasfasfas</a></li>
-					<li><a href="$link.link("blog?id=2")">asdaasfasfas</a></li>
-					<li><a href="$link.link("blog?id=2")">asdaasfasfas</a></li>
-					<li><a href="$link.link("blog?id=2")">asdaasfasfas</a></li>
-					<li><a href="$link.link("blog?id=2")">asdaasfasfas</a></li>
-					<li><a href="$link.link("blog?id=2")">asdaasfasfas</a></li>
-					<li><a href="$link.link("blog?id=2")">asdaasfasfas</a></li>
-					<li><a href="$link.link("blog?id=2")">asdaasfasfas</a></li>
-					<li><a href="$link.link("blog?id=2")">asdaasfasfas</a></li>
-					<li><a href="$link.link("blog?id=2")">asdaasfasfas</a></li>
-					<li><a href="$link.link("blog?id=2")">asdaasfasfas</a></li>
-					<li><a href="$link.link("blog?id=2")">asdaasfasfas</a></li>
-					<li><a href="$link.link("blog?id=2")">asdaasfasfas</a></li>
+					<ul class="">
+					#foreach($b in $blogs)
+						<li>
+							<i class="icon-stop"></i>
+							<a href="$link.link("blog?id=")$b.id">$format.html($b.title)</a>
+							<span class="pull-right">
+								<span>$format.date("yyyy-MM-dd HH:mm", $b.createTime)</span>
+								#if($g_user.IsManager())
+									#if($b.status==1)
+										<a class="blog-accept" href="#" title="采纳" ref="$b.id"><i class="icon-ok"></i></a>
+									#end
+									<a class="blog-edit" href="$link.link("blog/edit?id=")$b.id" title="编辑" ref="$b.id"><i class="icon-edit"></i></a>
+									<a class="blog-delete" href="#" title="删除" ref="$b.id"><i class="icon-remove"></i></a>
+								#end
+							</span>
+						</li>
+					#end
+					</ul>
 				</div>
-			
+				#pager("",$count,$size)
         </div>
     </div>
-</div>			
+</div>
+
+#if($g_user.IsManager())
+<script>
+	$(function(){
+		$(".blog-accept").click(function(){
+			var id = $(this).attr("ref");
+			var params = {
+				"id":id
+			};
+			ajax("$link.action("blog/accept")",params,function(msg){
+				if(msg.error){alert(msg.msg);return;}
+				location.reload();
+			})
+		});
+		
+		$(".blog-delete").click(function(){
+			var id = $(this).attr("ref");
+			var params = {
+				"id":id
+			};
+			if(confirm("确定删除？")) {
+				ajax("$link.action("blog/delete")",params,function(msg){
+					if(msg.error){alert(msg.msg);return;}
+					location.reload();
+				});
+			
+			}
+		});
+	});
+</script>
+	
+#end
 #end

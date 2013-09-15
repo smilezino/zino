@@ -31,4 +31,9 @@
 		<scope>application</scope>
 		<class>my.beans.Blog</class>
 	</tool>
+	<tool>
+		<key>Tag</key>
+		<scope>application</scope>
+		<class>my.beans.Tag</class>
+	</tool>
 </toolbox>

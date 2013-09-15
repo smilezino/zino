@@ -1,6 +1,7 @@
 package my.beans;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -19,6 +20,8 @@ public class Tag extends DBbean{
 	 * @param obj
 	 */
 	public void add(String[] tags, byte type, long obj) {
+		if(tags==null)
+			return;
 		ObjTag.delete(obj, type);
 		List<Tag> Tags = all();
 		for(String tag : tags) {
@@ -67,6 +70,35 @@ public class Tag extends DBbean{
 		return QueryHelper.query(Tag.class, sql);
 	}
 	
+	/**
+	 * 列出固定个数的某类tag,tag数由高到低排列
+	 * @param type
+	 * @param count
+	 * @return
+	 */
+	public List<Tag> listByFilter(int type, int count) {
+		List<Object> params = new ArrayList<Object>();
+		StringBuffer sql = new StringBuffer("SELECT * FROM z_tag WHERE id IN (SELECT tag FROM (SELECT * FROM z_obj_tag WHERE type=? GROUP BY tag ORDER BY COUNT(tag) DESC");
+		params.add(type);
+		if(count!=-1) {
+			sql.append(" LIMIT ?) AS t)");
+			params.add(count);
+		}else
+			sql.append(") AS t)");
+		
+		return QueryHelper.query(Tag.class, sql.toString(), params.toArray());
+	}
+	
+	/**
+	 * 某一类标签个数
+	 * @param tag
+	 * @param type
+	 * @return
+	 */
+	public long countByFilter(long tag, int type) {
+		String sql = "SELECT COUNT(*) FROM z_obj_tag WHERE tag=? AND type=?";
+		return QueryHelper.stat(sql, tag, type);
+	}
 	private String tag;
 	private byte type;
 	private byte status;
