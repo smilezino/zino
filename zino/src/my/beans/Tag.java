@@ -71,6 +71,14 @@ public class Tag extends DBbean{
 	}
 	
 	/**
+	 * 列出所有blog的tag，按tag数由高到低排列
+	 * @param count
+	 * @return
+	 */
+	public List<Tag> listTagByBlog(int count) {
+		return listByFilter(Tag.TYPE_BLOG, count);
+	}
+	/**
 	 * 列出固定个数的某类tag,tag数由高到低排列
 	 * @param type
 	 * @param count
@@ -90,6 +98,25 @@ public class Tag extends DBbean{
 	}
 	
 	/**
+	 * 获取一篇blog的所有tag
+	 * @param id
+	 * @return
+	 */
+	public List<Tag> listByBlog(long id) {
+		return listByType(id, Tag.TYPE_BLOG);
+	}
+	/**
+	 * 获取某一对象的所有tag
+	 * @param obj
+	 * @param type
+	 * @return
+	 */
+	public List<Tag> listByType(long obj, int type) {
+		String sql = "SELECT * FROM z_tag WHERE id IN(SELECT tag FROM z_obj_tag WHERE obj=? AND type=?)";
+		return QueryHelper.query(Tag.class, sql, obj, type);
+	}
+	
+	/**
 	 * 某一类标签个数
 	 * @param tag
 	 * @param type
@@ -98,6 +125,15 @@ public class Tag extends DBbean{
 	public long countByFilter(long tag, int type) {
 		String sql = "SELECT COUNT(*) FROM z_obj_tag WHERE tag=? AND type=?";
 		return QueryHelper.stat(sql, tag, type);
+	}
+	
+	/**
+	 * 计算blog某一标签的总数
+	 * @param tag
+	 * @return
+	 */
+	public long countByBlogTag(long tag) {
+		return countByFilter(tag, TYPE_BLOG);
 	}
 	private String tag;
 	private byte type;
