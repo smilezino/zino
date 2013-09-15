@@ -21,7 +21,8 @@ import org.apache.commons.lang.StringUtils;
 public class User extends DBbean {
 	public final static transient User INSTANCE = new User();
 	public static int ROLE_ADMIN = 127;
-	public static int ROLE_MANAGER = 10;
+	public static int ROLE_MANAGER = 64;
+	public static int ROLE_BLOG = 10;
 	public static int ROLE_USER = 1;
 	
 	public static final String G_USER = "g_user";
@@ -137,10 +138,16 @@ public class User extends DBbean {
 	 * @return
 	 */
 	public boolean IsManager(){
-		return role == ROLE_MANAGER;
+		return role >= ROLE_MANAGER;
 	}
 	
-	
+	/**
+	 * 是否可写blog
+	 * @return
+	 */
+	public boolean IsBlog() {
+		return role >= ROLE_BLOG;
+	}
 
 	private String name;
 	private String email;

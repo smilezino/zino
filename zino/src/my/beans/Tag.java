@@ -1,12 +1,104 @@
 package my.beans;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 
 import my.db.DBbean;
+import my.db.QueryHelper;
 
 public class Tag extends DBbean{
 	public static final Tag  INSTANCE = new Tag();
+	public static final byte TYPE_BLOG = 1;
+	public static final byte TYPE_TODO = 2;
 	
+	/**
+	 * 添加标签
+	 * @param tags
+	 * @param type
+	 * @param obj
+	 */
+	public void add(String[] tags, byte type, long obj) {
+		if(tags==null)
+			return;
+		ObjTag.delete(obj, type);
+		List<Tag> Tags = all();
+		for(String tag : tags) {
+			Tag t = exist(Tags, tag);
+			if(t!=null) {
+				ObjTag.addOne(obj, t.getId(), type);
+			}else{
+				long id = addOne(tag);
+				ObjTag.addOne(obj, id, type);
+			}
+		}
+		
+	}
+	
+	/**
+	 * 判断tag是否存在
+	 * @param tag
+	 * @return
+	 */
+	public Tag exist(List<Tag> tags, String tag) {
+		for(Tag t : tags) {
+			if(t.getTag().equalsIgnoreCase(tag))
+				return t;
+		}
+		return null;
+	}
+	
+	/**
+	 * 添加标签
+	 * @param tag
+	 * @return
+	 */
+	public long addOne(String tag) {
+		Tag t = new Tag();
+		t.setTag(tag);
+		t.setCreateTime(new Timestamp(Calendar.getInstance().getTimeInMillis()));
+		return Save();
+	}
+	
+	/**
+	 * 获取所有的tag
+	 * @return
+	 */
+	public List<Tag> all() {
+		String sql = "SELECT * FROM z_tag";
+		return QueryHelper.query(Tag.class, sql);
+	}
+	
+	/**
+	 * 列出固定个数的某类tag,tag数由高到低排列
+	 * @param type
+	 * @param count
+	 * @return
+	 */
+	public List<Tag> listByFilter(int type, int count) {
+		List<Object> params = new ArrayList<Object>();
+		StringBuffer sql = new StringBuffer("SELECT * FROM z_tag WHERE id IN (SELECT tag FROM (SELECT * FROM z_obj_tag WHERE type=? GROUP BY tag ORDER BY COUNT(tag) DESC");
+		params.add(type);
+		if(count!=-1) {
+			sql.append(" LIMIT ?) AS t)");
+			params.add(count);
+		}else
+			sql.append(") AS t)");
+		
+		return QueryHelper.query(Tag.class, sql.toString(), params.toArray());
+	}
+	
+	/**
+	 * 某一类标签个数
+	 * @param tag
+	 * @param type
+	 * @return
+	 */
+	public long countByFilter(long tag, int type) {
+		String sql = "SELECT COUNT(*) FROM z_obj_tag WHERE tag=? AND type=?";
+		return QueryHelper.stat(sql, tag, type);
+	}
 	private String tag;
 	private byte type;
 	private byte status;

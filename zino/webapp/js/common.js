@@ -8,9 +8,8 @@ function ajax(the_url,the_param,succ_callback){
 		url:the_url,
 		data:the_param,
 		success:function(msg){
-			if(msg.unlogin) {
+			if(unLogin(msg)) {
 				location.href = "/login";
-				return ;
 			}
 			succ_callback(msg);
 		},
@@ -19,7 +18,11 @@ function ajax(the_url,the_param,succ_callback){
 		}
 	});
 }
-
+function unLogin(msg) {
+	if(msg.unlogin)
+		return true;
+	return false;
+}
 function ltrim(str){
     var whitespace = new String(" \t\n\r");
     var s = new String(str);

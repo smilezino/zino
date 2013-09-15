@@ -1,0 +1,2 @@
+#set($layout = "_admin.vm")
+#set($page_title = "admin")

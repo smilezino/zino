@@ -5,11 +5,13 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.HashMap;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import my.beans.User;
 import my.db.DBException;
 import my.service.Annotation;
 import my.utils.ResourceUtils;
@@ -29,7 +31,6 @@ public class ActionServlet extends HttpServlet{
 	private static final Log log = LogFactory.getLog(ActionServlet.class);
 	private final static HashMap<String, Object> actions = new HashMap<String, Object>();
 	private final static HashMap<String, Method> methods = new HashMap<String, Method>();
-	//private final static ThreadLocal<Boolean> g_json_enabled = new ThreadLocal<Boolean>();
 	private String packages = null;
 	
 	@Override
@@ -75,7 +76,6 @@ public class ActionServlet extends HttpServlet{
 			handleException(ctx, "unknow_error");
 			throw new ServletException(e);
 		}finally{
-			//g_json_enabled.remove();
 		}
 	}
 	/**
@@ -107,6 +107,7 @@ public class ActionServlet extends HttpServlet{
 					IOException {
 		
 		String requestURI = ctx.uri();
+		User user = ctx.user();
 		log.info("[ACTION] >>> " + requestURI);
 		String[] parts = StringUtils.split(requestURI, "/");
 		if(parts.length < 2) {
@@ -118,6 +119,17 @@ public class ActionServlet extends HttpServlet{
 			ctx.not_found();
 			return false;
 		}
+		//类上注解，该方法的执行必须是post方式
+		if (!is_post && action.getClass().isAnnotationPresent(Annotation.PostMethod.class)) {
+			ctx.not_found();
+			return false;
+		}
+		// 类上注解，方法执行必须是登录用户
+		if(user==null && action.getClass().isAnnotationPresent(Annotation.User.class)) {
+			ctx.output_json(new String[]{"unlogin","msg"}, new Object[]{1,"unlogin"});
+			return false;
+		}
+		
 		String action_method_name = parts.length>2?parts[2]:"index";
 		Method m_action = _GetActionMethod(action, action_method_name);
 		if(m_action == null){
@@ -128,6 +140,12 @@ public class ActionServlet extends HttpServlet{
 		//判断action方法是否只支持POST
 		if (!is_post && m_action.isAnnotationPresent(Annotation.PostMethod.class)){
 			ctx.not_found();
+			return false;
+		}
+		
+		//登录用户操作
+		if(user==null && m_action.isAnnotationPresent(Annotation.User.class)) {
+			ctx.output_json(new String[]{"unlogin","msg"}, new Object[]{1,"unlogin"});
 			return false;
 		}
 		

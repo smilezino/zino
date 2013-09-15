@@ -42,6 +42,21 @@ public class ViewAction {
 		todo.mark();
 		ctx.output_json("id", todo.getId());
 	}
+	
+	/**
+	 * 存档
+	 * @param ctx
+	 * @throws IOException
+	 */
+	public void archive(RequestContext ctx) throws IOException {
+		User user = ctx.user();
+		long id = ctx.id();
+		View todo = View.INSTANCE.Get(id);
+		if(todo==null || todo.getUser()!=user.getId())
+			throw ctx.error("no_permission");
+		todo.archive();
+		ctx.output_json("id", todo.getId());
+	}
 	/**
 	 * 删除
 	 * @param ctx

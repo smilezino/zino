@@ -17,6 +17,7 @@ public class View extends DBbean{
 	public static final byte STATUS_ALL = -1; //所有todo
 	public static final byte STATUS_UNDO = 0; //未做todo
 	public static final byte STATUS_DO = 1;   //已做todo
+	public static final byte STATUS_ARCHIVE=8;//收藏todo
 	private long user;
 	private String title;
 	private String url;
@@ -29,7 +30,13 @@ public class View extends DBbean{
 	 * 标记为已做
 	 */
 	public void mark() {
-		UpdateField("status", 1);
+		UpdateField("status", STATUS_DO);
+	}
+	/**
+	 * 收藏
+	 */
+	public void archive() {
+		UpdateField("status", STATUS_ARCHIVE);
 	}
 	
 	/**
@@ -56,9 +63,16 @@ public class View extends DBbean{
 	 * @param size
 	 * @return
 	 */
-	public List<View> listByUser(User user, int page, int size) {
-		String sql = "SELECT * FROM " + TableName() + " WHERE user=? ORDER BY status ASC, sort DESC, createTime DESC";
-		return QueryHelper.query_slice(View.class, sql, page, size, user.getId());
+	public List<View> listByUser(User user, int status, int page, int size) {
+		StringBuffer sql = new StringBuffer("SELECT * FROM " + TableName() + " WHERE user=?");
+		List<Object> params = new ArrayList<Object>();
+		params.add(user.getId());
+		if(status != STATUS_ALL) {
+			sql.append(" AND status=?");
+			params.add(status);
+		}
+		sql.append(" ORDER BY status ASC, sort DESC, createTime DESC");
+		return QueryHelper.query_slice(View.class, sql.toString(), page, size, params.toArray());
 	}
 	
 	/**
@@ -66,9 +80,15 @@ public class View extends DBbean{
 	 * @param user
 	 * @return
 	 */
-	public long countByUser(User user) {
-		String sql = "SELECT COUNT(*) FROM " + TableName() + " WHERE user=?";
-		return QueryHelper.stat(sql, user.getId());
+	public long countByUser(User user, int status) {
+		StringBuffer sql = new StringBuffer("SELECT COUNT(*) FROM " + TableName() + " WHERE user=?");
+		List<Object> params = new ArrayList<Object>();
+		params.add(user.getId());
+		if(status != STATUS_ALL) {
+			sql.append(" AND status=?");
+			params.add(status);
+		}
+		return QueryHelper.stat(sql.toString(), params.toArray());
 	}
 	
 	

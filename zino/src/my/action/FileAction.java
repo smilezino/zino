@@ -4,16 +4,23 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.HashMap;
+import java.sql.Timestamp;
+import java.util.Calendar;
+
 import my.toolbox.LinkTool;
 
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
+
+import my.beans.Files;
+import my.beans.User;
 import my.service.RequestContext;
+import my.service.Annotation;
 import my.utils.ImageUtils;
+import my.utils.StorageUtils;
 
 /**
- * 下载文件
+ * 上传下载文件
  * @author smile
  * @date 2013-2-22 下午5:40:02
  */
@@ -27,20 +34,108 @@ public class FileAction {
 		ImageUtils.get(ctx);
 	}
 	
+	/**
+	 * 下载chrome插件
+	 * @param ctx
+	 * @throws IOException
+	 */
 	public void crx(RequestContext ctx) throws IOException {
 		String path = RequestContext.root()+"files"+File.separator;
 		String name = "view.crx";
 		File file = new File(path+name);
-		download(ctx, file, path, name);
+		download(ctx, file, name);
 	}
 	
-	private void download(RequestContext ctx,File file, String path, String filename) throws IOException{
+	/**
+	 * 上传图片
+	 * @param ctx
+	 * @throws IOException
+	 */
+	@Annotation.PostMethod
+	public void uploadImg(RequestContext ctx) throws IOException {
+		File file = ctx.file("img");
+		if(file==null)
+			throw ctx.error("choose_a_file");
+		if(!StorageUtils.isLegalImg(file.getName()))
+			throw ctx.error("img_not_allow");
+		String path = StorageUtils.Image.save(file);
+		ctx.output_json("url", "/"+path);
+	}
+	
+	/**
+	 * 上传文档
+	 * @param ctx
+	 * @throws IOException
+	 */
+	@Annotation.User
+	@Annotation.PostMethod
+	public void uploadDoc(RequestContext ctx) throws IOException {
+		User user = ctx.user();
+		File file = ctx.file("doc");
+		if(file==null)
+			throw ctx.error("choose_a_file");
+		if(!StorageUtils.isLegalFile(file.getName()))
+			throw ctx.error("file_not_allow");
+		Files f = new Files();
+		f.setUser(user.getId());
+		f.setCreateTime(new Timestamp(Calendar.getInstance().getTimeInMillis()));
+		String filename = ctx.param("filename", file.getName());
+		f.setFilename(filename);
+		f.setFilepath(StorageUtils.DOC.save(file));
+		long id = f.Save();
+		ctx.output_json("id", id);
+	}
+	/**
+	 * 下载文件
+	 * @param ctx
+	 * @throws IOException 
+	 */
+	public void download(RequestContext ctx) throws IOException {
+		long id = ctx.id();
+		Files file = Files.INSTANCE.Get(id);
+		if(file==null)
+			throw ctx.error("form_empty");
+		File f = StorageUtils.INSTANCE.read(file.getFilepath());
+		if(f!=null) {
+			download(ctx, f, file.getFilename());
+			file.count();
+		}
+	}
+	
+	/**
+	 * 删除文件
+	 * @param ctx
+	 * @throws IOException
+	 */
+	@Annotation.User
+	public void delete(RequestContext ctx) throws IOException {
+		User user = ctx.user();
+		if(!user.IsManager())
+			throw ctx.error("no_permission");
+		long id = ctx.id();
+		Files file = Files.INSTANCE.Get(id);
+		if(file==null)
+			throw ctx.error("form_empty");
+		StorageUtils.INSTANCE.delete(file.getFilepath());
+		file.Delete();
+		ctx.output_json("id", file.getId());
+	}
+	
+	/**
+	 * 下载文件 <br>
+	 * filename 下文要显示的文件名
+	 * @param ctx
+	 * @param file
+	 * @param filename
+	 * @throws IOException
+	 */
+	private void download(RequestContext ctx, File file, String filename) throws IOException{
 		FileInputStream f = null;
 		try {
 			f = new FileInputStream(file);
 			ctx.response().setContentLength((int)file.length());
-			String ext = FilenameUtils.getExtension(path);
-			String mine_type = mime_types.get(ext);
+			String ext = FilenameUtils.getExtension(file.getName());
+			String mine_type = StorageUtils.mime_types.get(ext);
 			if(mine_type != null)
 				ctx.response().setContentType(mine_type);
 			String ua = ctx.header("user-agent");
@@ -55,58 +150,4 @@ public class FileAction {
 			IOUtils.closeQuietly(f);
 		}
 	}
-	@SuppressWarnings("serial")
-	public final static HashMap<String, String> mime_types = new HashMap<String, String>()
-			{{
-				put("jar","application/java-archive");
-				put("jad","text/vnd.sun.j2me.app-descriptor");
-				put("sis","application/vnd.symbian.install");
-				put("sisx","x-epoc/x-sisx-app");
-				put("thm","application/vnd.eri.thm");
-				put("nth","application/vnd.nok-s40theme");
-				put("zip","application/zip");
-				put("rar","application/octet-stream");
-				put("cab","application/octet-stream");
-				put("gz","application/x-gzip");
-				put("bz2","application/bzip2");
-				put("tar","application/x-tar");
-				
-				put("gif","image/gif");
-				put("jpg","image/jpeg");
-				put("jpeg","image/jpeg");
-				put("png","image/png");
-				put("bmp","image/bmp");
-
-				put("avi","video/x-msvideo");
-				put("rm","application/vnd.rn-realmedia"); 
-				put("3gp","video/3gpp");
-				put("wmv","video/x-ms-wmv");
-				put("mpg","video/mpg");
-				put("asf","video/x-ms-asf");
-				put("flv","video/x-flv");
-				put("mp4","video/mp4");
-
-				put("wma","audio/x-ms-wma"); 
-				put("mp3","audio/mp3");
-				put("arm","audio/amr");
-				put("mid","audio/x-midi");
-				put("aac","audio/aac");
-				put("imy","audio/imelody");
-
-				put("swf", "application/x-shockwave-flash");
-
-				put("txt","text/plain");
-				put("htm","text/html");
-				put("html","text/html");
-				put("pdf","application/pdf");
-				put("doc","application/msword");
-				put("rtf","application/msword");
-				put("docx","application/msword");
-				put("xls","application/vnd.ms-excel");
-				put("ppt","application/vnd.ms-powerpoint");
-				put("pps","application/vnd.ms-pps");
-				put("xlsx","application/vnd.ms-excel");
-				put("pptx","application/vnd.ms-powerpoint");
-				put("chm","application/octet-stream");
-			}};
 }
