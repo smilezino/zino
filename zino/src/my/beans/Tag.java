@@ -25,6 +25,7 @@ public class Tag extends DBbean{
 		ObjTag.delete(obj, type);
 		List<Tag> Tags = all();
 		for(String tag : tags) {
+			System.out.println(tag);
 			Tag t = exist(Tags, tag);
 			if(t!=null) {
 				ObjTag.addOne(obj, t.getId(), type);
@@ -56,9 +57,11 @@ public class Tag extends DBbean{
 	 */
 	public long addOne(String tag) {
 		Tag t = new Tag();
+		//t.setId(0);
 		t.setTag(tag);
+		System.out.println("add-->"+tag);
 		t.setCreateTime(new Timestamp(Calendar.getInstance().getTimeInMillis()));
-		return Save();
+		return t.Save();
 	}
 	
 	/**

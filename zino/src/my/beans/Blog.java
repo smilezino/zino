@@ -93,15 +93,15 @@ public class Blog extends DBbean{
 	 * 博客浏览数+1
 	 * @return
 	 */
-	public boolean addViewCount() {
-		return UpdateField("viewCount", viewCount+1);
+	public void addViewCount() {
+		UpdateField("viewCount", viewCount+1);
 	}
 	/**
 	 * 分享次数+1
 	 * @return
 	 */
-	public boolean addShareCount() {
-		return UpdateField("shareCount", shareCount+1);
+	public void addShareCount() {
+		UpdateField("shareCount", shareCount+1);
 	}
 
 	/**
