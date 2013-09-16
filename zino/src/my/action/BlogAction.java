@@ -48,7 +48,7 @@ public class BlogAction {
 	 * @param ctx
 	 * @throws IOException
 	 */
-	@Annotation.User
+	@Annotation.UserRequired
 	public void draft(RequestContext ctx) throws IOException {
 		User user = ctx.user();
 		Blog draft = ctx.form(Blog.class);
@@ -68,7 +68,7 @@ public class BlogAction {
 	 * @param ctx
 	 * @throws IOException 
 	 */
-	@Annotation.User
+	@Annotation.UserRequired
 	public void update_draft(RequestContext ctx) throws IOException {
 		update(ctx, Blog.DRAFT);
 	}
@@ -77,7 +77,7 @@ public class BlogAction {
 	 * @param ctx
 	 * @throws IOException 
 	 */
-	@Annotation.User
+	@Annotation.UserRequired
 	public void update_post(RequestContext ctx) throws IOException {
 		update(ctx, Blog.UNDRAFT);
 	}
@@ -87,7 +87,7 @@ public class BlogAction {
 	 * @param ctx
 	 * @throws IOException 
 	 */
-	@Annotation.User
+	@Annotation.UserRequired
 	public void post_form_draft(RequestContext ctx) throws IOException {
 		update(ctx, Blog.UNDRAFT);
 	}
@@ -97,7 +97,7 @@ public class BlogAction {
 	 * @param ctx
 	 * @throws IOException
 	 */
-	@Annotation.User
+	@Annotation.UserRequired
 	public void delete(RequestContext ctx) throws IOException {
 		User user = ctx.user();
 		long id = ctx.id();

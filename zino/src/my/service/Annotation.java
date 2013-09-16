@@ -5,6 +5,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import my.beans.User;
+
 /**
  * 注解
  * @author smile
@@ -22,12 +24,13 @@ public class Annotation {
 	}
 	
 	/**
-	 * 若在类上注解，则该类下所有方法必须是登录用户才能执行
-	 * 若在方法上注解，则该方法必须是登录用户才能执行
+	 * 若在类上注解，则该类下所有方法必须是登录用户才能执行 <br>
+	 * 若在方法上注解，则该方法必须是登录用户才能执行 <br>
+	 * (role=User.role) 限定user类型
 	 */
 	@Target({ElementType.METHOD, ElementType.TYPE})
 	@Retention(RetentionPolicy.RUNTIME)
-	public @interface User {
-		
+	public @interface UserRequired {
+		public int role() default User.ROLE_USER ;
 	}
 }

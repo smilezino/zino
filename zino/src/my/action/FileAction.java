@@ -67,7 +67,7 @@ public class FileAction {
 	 * @param ctx
 	 * @throws IOException
 	 */
-	@Annotation.User
+	@Annotation.UserRequired
 	@Annotation.PostMethod
 	public void uploadDoc(RequestContext ctx) throws IOException {
 		User user = ctx.user();
@@ -107,7 +107,7 @@ public class FileAction {
 	 * @param ctx
 	 * @throws IOException
 	 */
-	@Annotation.User
+	@Annotation.UserRequired(role=User.ROLE_MANAGER)
 	public void delete(RequestContext ctx) throws IOException {
 		User user = ctx.user();
 		if(!user.IsManager())

@@ -20,10 +20,10 @@ import org.apache.commons.lang.StringUtils;
 
 public class User extends DBbean {
 	public final static transient User INSTANCE = new User();
-	public static int ROLE_ADMIN = 127;
-	public static int ROLE_MANAGER = 64;
-	public static int ROLE_BLOG = 10;
-	public static int ROLE_USER = 1;
+	public static final int ROLE_ADMIN = 127;
+	public static final int ROLE_MANAGER = 64;
+	public static final int ROLE_BLOG = 10;
+	public static final int ROLE_USER = 1;
 	
 	public static final String G_USER = "g_user";
 	public static final int ACTIVE_CODE_LENGTH = 40;

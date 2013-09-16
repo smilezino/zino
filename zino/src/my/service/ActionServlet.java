@@ -125,9 +125,14 @@ public class ActionServlet extends HttpServlet{
 			return false;
 		}
 		// 类上注解，方法执行必须是登录用户
-		if(user==null && action.getClass().isAnnotationPresent(Annotation.User.class)) {
-			ctx.output_json(new String[]{"unlogin","msg"}, new Object[]{1,"unlogin"});
-			return false;
+		if(action.getClass().isAnnotationPresent(Annotation.UserRequired.class)) {
+			if(user==null) {
+				ctx.output_json(new String[]{"unlogin","msg"}, new Object[]{1,"unlogin"});
+				return false;
+			}else if(user.getRole() < (action.getClass().getAnnotation(Annotation.UserRequired.class).role())){
+				ctx.error("no_permission");
+				return false;
+			}
 		}
 		
 		String action_method_name = parts.length>2?parts[2]:"index";
@@ -144,9 +149,14 @@ public class ActionServlet extends HttpServlet{
 		}
 		
 		//登录用户操作
-		if(user==null && m_action.isAnnotationPresent(Annotation.User.class)) {
-			ctx.output_json(new String[]{"unlogin","msg"}, new Object[]{1,"unlogin"});
-			return false;
+		if(m_action.isAnnotationPresent(Annotation.UserRequired.class)) {
+			if(user==null) {
+				ctx.output_json(new String[]{"unlogin","msg"}, new Object[]{1,"unlogin"});
+				return false;
+			}else if(user.getRole() < (m_action.getAnnotation(Annotation.UserRequired.class).role())){
+				ctx.error("no_permission");
+				return false;
+			}
 		}
 		
 		//调用Action方法之准备参数
@@ -159,6 +169,7 @@ public class ActionServlet extends HttpServlet{
 			m_action.invoke(action, ctx);
 			break;
 		default:
+			ctx.not_found();
 			return false;
 		}
 		return true;
