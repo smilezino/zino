@@ -10,7 +10,11 @@ import com.google.gson.Gson;
 import my.beans.View;
 import my.beans.User;
 import my.service.RequestContext;
+import my.service.Annotation;
 
+
+@Annotation.UserRequired
+@Annotation.PostMethod
 public class ViewAction {
 	
 	/**
