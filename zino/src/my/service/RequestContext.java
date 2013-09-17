@@ -6,6 +6,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -14,6 +15,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletRequestWrapper;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -90,10 +92,85 @@ public class RequestContext {
 			try {
 				auto_encoding_req.setCharacterEncoding(UTF_8);
 			} catch (UnsupportedEncodingException e) {}
+		}else{
+			auto_encoding_req = new RequestProxy(req, UTF_8);
 		}
 		return auto_encoding_req;
 	}
-	
+	/**
+	 * 自动解码
+	 * @author liudong
+	 */
+	private static class RequestProxy extends HttpServletRequestWrapper {
+		private String uri_encoding; 
+		RequestProxy(HttpServletRequest request, String encoding){
+			super(request);
+			this.uri_encoding = encoding;
+		}
+		
+		/**
+		 * 重载getParameter
+		 */
+		public String getParameter(String paramName) {
+			String value = super.getParameter(paramName);
+			return _DecodeParamValue(value);
+		}
+
+		/**
+		 * 重载getParameterMap
+		 */
+		@SuppressWarnings({ "unchecked", "rawtypes" })
+		public Map getParameterMap() {
+			Map params = super.getParameterMap();
+			HashMap<String, Object> new_params = new HashMap<String, Object>();
+			Iterator<String> iter = params.keySet().iterator();
+			while(iter.hasNext()){
+				String key = (String)iter.next();
+				Object oValue = params.get(key);
+				if(oValue.getClass().isArray()){
+					String[] values = (String[])params.get(key);
+					String[] new_values = new String[values.length];
+					for(int i=0;i<values.length;i++)
+						new_values[i] = _DecodeParamValue(values[i]);
+					
+					new_params.put(key, new_values);
+				}
+				else{
+					String value = (String)params.get(key);
+					String new_value = _DecodeParamValue(value);
+					if(new_value!=null)
+						new_params.put(key,new_value);
+				}
+			}
+			return new_params;
+		}
+
+		/**
+		 * 重载getParameterValues
+		 */
+		public String[] getParameterValues(String arg0) {
+			String[] values = super.getParameterValues(arg0);
+			for(int i=0;values!=null&&i<values.length;i++)
+				values[i] = _DecodeParamValue(values[i]);
+			return values;
+		}
+
+		/**
+		 * 参数转码
+		 * @param value
+		 * @return
+		 */
+		private String _DecodeParamValue(String value){
+			if (StringUtils.isBlank(value) || StringUtils.isBlank(uri_encoding)
+					|| StringUtils.isNumeric(value))
+				return value;		
+			try{
+				return new String(value.getBytes("8859_1"), uri_encoding);
+			}catch(Exception e){}
+			return value;
+		}
+
+	}
 	public File file(String name) {
 		if(request instanceof MultipartRequest) {
 			return ((MultipartRequest) request).getFile(name);

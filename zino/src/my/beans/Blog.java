@@ -113,18 +113,18 @@ public class Blog extends DBbean{
 	 * @return
 	 */
 	public static List<Blog> listByFilter(int status, String tag, int page, int count) {
-		StringBuffer sql = new StringBuffer("SELECT * FROM z_blog WHERE 1=1");
+		StringBuffer sql = new StringBuffer("SELECT * FROM z_blog AS b WHERE 1=1");
 		List<Object> params = new ArrayList<Object>();
 		if(status!=STATUS_ALL) {
-			sql.append(" AND status=?");
+			sql.append(" AND b.status=?");
 			params.add(status);
 		}
 		if(tag!=null && tag.length()>0) {
-			sql.append(" AND id IN(SELECT obj FROM z_obj_tag WHERE tag IN(SEELCT id FROM z_tag WHERE tag=? AND type=?))");
-			params.add(tag);
+			sql.append(" AND b.id IN(SELECT obj FROM z_obj_tag AS o WHERE o.type=? AND o.tag IN(SELECT t.id FROM z_tag AS t WHERE t.tag=?))");
 			params.add(Tag.TYPE_BLOG);
+			params.add(tag);
 		}
-		sql.append(" ORDER BY status DESC, id DESC");
+		sql.append(" ORDER BY b.status DESC, b.id DESC");
 		return QueryHelper.query_slice(Blog.class, sql.toString(), page, count, params.toArray());
 	}
 	
@@ -142,9 +142,9 @@ public class Blog extends DBbean{
 			params.add(status);
 		}
 		if(tag!=null && tag.length()>0) {
-			sql.append(" AND id IN(SELECT obj FROM z_obj_tag WHERE tag IN(SEELCT id FROM z_tag WHERE tag=? AND type=?))");
-			params.add(tag);
+			sql.append(" AND id IN(SELECT obj FROM z_obj_tag WHERE type=? AND tag IN(SELECT id FROM z_tag WHERE tag=?))");
 			params.add(Tag.TYPE_BLOG);
+			params.add(tag);
 		}
 		return QueryHelper.stat(sql.toString(), params.toArray());
 	}

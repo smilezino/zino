@@ -5,6 +5,7 @@ import java.sql.Timestamp;
 import java.util.Calendar;
 
 import my.beans.Blog;
+import my.beans.ObjTag;
 import my.beans.Tag;
 import my.beans.User;
 import my.service.RequestContext;
@@ -106,6 +107,8 @@ public class BlogAction {
 			throw ctx.error("form_empty");
 		if(user.getId()!=blog.getUser() || !user.IsManager())
 			throw ctx.error("no_permission");
+		//删除blog的标签
+		ObjTag.delete(id, Tag.TYPE_BLOG);
 		blog.Delete();
 		ctx.output_json("id", blog.getId());
 	}

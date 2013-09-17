@@ -1,5 +1,5 @@
 #set($layout = "_index.vm")
-#set($page_title = "Blog - By smile zino")
+#set($page_title = "Blog - zinor.net")
 #set($active = "blog")
 
 #set($id = $link.lparam("id",0))
@@ -19,6 +19,7 @@
 #if($blog && ($blog.status==0 || $g_user.IsManager()))
 $blog.addViewCount()
 #set($user = $User.Get($blog.user))
+#set($page_title = $format.html($blog.title) + " - Blog")
 <link href='$link.css("prettify/prettify.css")' rel='stylesheet' type='text/css'/>
 <script src='$link.css("prettify/prettify.js")' type='text/javascript'></script>
 <div class="container-fluid">
@@ -48,7 +49,12 @@ $blog.addViewCount()
     			<div class="blog-content">
     				$blog.htmlAnchor()
 				</div>
-			
+				#set($blog-tags = $Tag.listByBlog($blog.id))
+				<div>
+					#foreach($tag in $blog-tags)
+						<span class="tag"><a href="$link.link("blog/tag/")$format.encode_url($tag.tag)"><span class="badge">$format.html($tag.tag)</span></a></span>
+					#end
+				</div>
         </div>
     </div>
 </div>
