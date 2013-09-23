@@ -42,7 +42,7 @@ $blog.addViewCount()
     			<div class="page-header">
                     <h1>$blog.title</h1>
                     <div>
-						<strong>$user.name</strong>发表于 $format.date("yyyy-MM-dd HH:mm",$blog.createTime)
+						<strong>#if($user.name)$user.name#else佚名#end</strong>发表于 $format.date("yyyy-MM-dd HH:mm",$blog.createTime)
 						##<span style="margin-left:20px">浏览次数：$blog.viewCount</span>
 					</div>
                 </div>

@@ -71,8 +71,8 @@ public class User extends DBbean {
 	 * @return
 	 */
 	public boolean changePwd(String pwd) {
-		this.pwd = DigestUtils.shaHex(pwd);
-		return UpdateField("pwd", this.pwd);
+		this.pwd = pwd;
+		return UpdateField("pwd", DigestUtils.shaHex(this.pwd));
 	}
 	/**
 	 * 登陆

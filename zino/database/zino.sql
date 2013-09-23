@@ -15,6 +15,17 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
+DROP TABLE IF EXISTS `z_blog_collection`;
+CREATE TABLE `z_blog_collection` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user` int(11) NOT NULL,
+  `name` varchar(80) NOT NULL,
+  `description` varchar(512) DEFAULT NULL,
+  `status` tinyint(4) DEFAULT '0',
+  `type` tinyint(4) DEFAULT '0',
+  `createTime` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `z_files`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -42,6 +53,7 @@ DROP TABLE IF EXISTS `z_blog`;
 CREATE TABLE `z_blog` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user` int(11) NOT NULL,
+  `collection` int(11) DEFAULT '0',
   `title` varchar(120) NOT NULL,
   `text` mediumtext NOT NULL,
   `viewCount` int(11) DEFAULT '0',

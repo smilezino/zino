@@ -2,7 +2,6 @@
 #set($page_title = "发表 Blog - By smile zino")
 #set($active = "blog")
 
-#if($g_user.IsBlog())
 <style>
 	#md-help {margin-top:10px;}
 	#md-help li{line-height:180%}
@@ -55,8 +54,8 @@
 		<h4>预览：</h4>
 		<div id="wmd-preview" class="wmd-panel"></div>
         <div class="cmd-btn">
-			<input id="btn-post" class="btn btn-primary input-btn" type="button" value="发表博客" />
-			<input id="btn-draft" class="btn btn-primary input-btn" type="button" value="存为草稿" />
+			<input id="btn-post" class="btn btn-primary input-btn" type="button" value="投递" />
+			##<input id="btn-draft" class="btn btn-primary input-btn" type="button" value="存为草稿" />
 			
 			##<input class="tag-input" type="text" placeholder="标签"/>
             ##<a href="#">添加</a>
@@ -143,7 +142,3 @@
 		}
 	}
 </script>
-
-#else
-	$link.redirect("/blog/post")
-#end

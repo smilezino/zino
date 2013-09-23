@@ -5,6 +5,7 @@ import java.sql.Timestamp;
 import java.util.Calendar;
 
 import my.beans.Blog;
+import my.beans.BlogCollection;
 import my.beans.ObjTag;
 import my.beans.Tag;
 import my.beans.User;
@@ -31,17 +32,32 @@ public class BlogAction {
 		String result = checkBlog(form);
 		if(result!=null)
 			throw ctx.error(result);
-		if(user==null) {
-			form.setUser(0);
+		if(user==null || !user.IsBlog()) {
+			form.setUser(user==null?0:user.getId());
 			form.setStatus(Blog.STATUS_POST);
 		}else{
 			form.setUser(user.getId());
 		}
 		form.setDraft(Blog.UNDRAFT);
 		form.setCreateTime(new Timestamp(Calendar.getInstance().getTimeInMillis()));
-		long id = form.Save();
+		long id = form.save();
 		//处理标签
 		addtags(ctx, id);
+		ctx.output_json("id", id);
+	}
+	
+	/**
+	 * 采纳投稿
+	 * @param ctx
+	 * @throws IOException 
+	 */
+	@Annotation.UserRequired(role=User.ROLE_MANAGER)
+	public void accept(RequestContext ctx) throws IOException {
+		long id = ctx.id();
+		Blog bean = Blog.INSTANCE.Get(id);
+		if(bean==null)
+			throw ctx.error("form_empty");
+		bean.UpdateField("status", Blog.STATUS_NORMAL);
 		ctx.output_json("id", id);
 	}
 	/**
@@ -59,7 +75,7 @@ public class BlogAction {
 		draft.setUser(user.getId());
 		draft.setDraft(Blog.DRAFT);
 		draft.setCreateTime(new Timestamp(Calendar.getInstance().getTimeInMillis()));
-		long id = draft.Save();
+		long id = draft.save();
 		addtags(ctx, id);
 		ctx.output_json("id", id);
 	}
@@ -111,6 +127,27 @@ public class BlogAction {
 		ObjTag.delete(id, Tag.TYPE_BLOG);
 		blog.Delete();
 		ctx.output_json("id", blog.getId());
+	}
+	
+	/**
+	 * 添加合集
+	 * @param ctx
+	 * @throws IOException 
+	 */
+	@Annotation.UserRequired
+	public void collect(RequestContext ctx) throws IOException {
+		User user = ctx.user();
+		String name = ctx.param("name", "");
+		if(name=="")
+			throw ctx.error("blog_collection_not_null");
+		if(name.length()>80)
+			throw ctx.error("blog_collection_too_long");
+		BlogCollection bean = new BlogCollection();
+		bean.setName(name);
+		bean.setUser(user.getId());
+		bean.setCreateTime(new Timestamp(Calendar.getInstance().getTimeInMillis()));
+		long id = bean.Save();
+		ctx.output_json("id", id);
 	}
 	
 	/**

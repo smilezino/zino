@@ -67,7 +67,7 @@
 		<h4>预览：</h4>
 		<div id="wmd-preview" class="wmd-panel"></div>
         <div class="cmd-btn">
-			<input id="btn-post" class="btn btn-primary input-btn" type="button" value="发表博客" />
+			<input id="btn-post" class="btn btn-primary input-btn" type="button" value="保存修改" />
 			#if($blog.draft==1)
 				<input id="btn-draft" class="btn btn-primary input-btn" type="button" value="存为草稿" />
 			#end

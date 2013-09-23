@@ -35,13 +35,20 @@ public class Blog extends DBbean{
 		add("h6");
 	}};
 	
+	public long save() {
+		if(user!=0 && collection!=0 && !BlogCollection.exist(user, collection))
+			collection = 0;
+		return super.Save();
+	}
 	/**
 	 * 修改博客
 	 * @return
 	 */
 	public long update() {
-		String sql = "UPDATE " + TableName() + " SET title=?,text=?,draft=? WHERE id=?";
-		return QueryHelper.update(sql, title, text, draft, getId());
+		if(user!=0 && collection!=0 && !BlogCollection.exist(user, collection))
+			collection = 0;
+		String sql = "UPDATE " + TableName() + " SET collection=?,title=?,text=?,draft=? WHERE id=?";
+		return QueryHelper.update(sql, collection, title, text, draft, getId());
 	}
 	
 	/**
@@ -148,7 +155,28 @@ public class Blog extends DBbean{
 		}
 		return QueryHelper.stat(sql.toString(), params.toArray());
 	}
+	
+	/**
+	 * 列出合集里的所有blog
+	 * @param collection
+	 * @return
+	 */
+	public static List<Blog> listCollections(long collection) {
+		String sql = "SELECT * FROM z_blog WHERE collection=?";
+		return QueryHelper.query(Blog.class, sql, collection);
+	}
+	
+	/**
+	 * 获取用户的所有合集
+	 * @param user
+	 * @return
+	 */
+	public static List<BlogCollection> listByUser(long user) {
+		String sql = "SELECT * FROM z_blog_collection";
+		return QueryHelper.query(BlogCollection.class, sql, user);
+	}
 	private long user;
+	private long collection;
 	private String title;
 	private String text;
 	private int viewCount;
@@ -161,6 +189,12 @@ public class Blog extends DBbean{
 	}
 	public void setUser(long user) {
 		this.user = user;
+	}
+	public long getCollection() {
+		return collection;
+	}
+	public void setCollection(long collection) {
+		this.collection = collection;
 	}
 	public String getTitle() {
 		return title;
