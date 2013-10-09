@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="packages">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/zino/packages/ant-launcher.jar!/" />
+      <root url="jar://$PROJECT_DIR$/zino/packages/ant.jar!/" />
+      <root url="jar://$PROJECT_DIR$/zino/packages/servlet-api.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
