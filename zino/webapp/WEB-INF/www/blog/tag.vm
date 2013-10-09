@@ -60,16 +60,18 @@
 	
 #if($g_user.IsManager())
 	##参数1：是否列出投稿的blog,-1是 0否
-	##参数2：标签，空列出所有标签
-	##参数3: 页码
-	##参数4: 每页个数
-	#set($blogs = $Blog.listByFilter(-1, $t, $p, $size))
+	##参数2：是否根据合集id筛选，-1否
+	##参数3：标签，空列出所有标签
+	##参数4: 页码
+	##参数5: 每页个数
+	#set($blogs = $Blog.listByFilter(-1, -1, $t, $p, $size))
 	##参数1：是否投稿的blog,-1是 0否
-	##参数2：标签，空 所有标签
-	#set($count = $Blog.countByFilter(-1, $t))
+	##参数2：是否根据合集id筛选，-1否
+	##参数3：标签，空 所有标签
+	#set($count = $Blog.countByFilter(-1, -1, $t))
 #else
-	#set($blogs = $Blog.listByFilter(0, $t, $p, $size))
-	#set($count = $Blog.countByFilter(0, $t))
+	#set($blogs = $Blog.listByFilter(0, -1, $t, $p, $size))
+	#set($count = $Blog.countByFilter(0, -1, $t))
 #end
 ##blog的tag Type为1
 #set($tags = $Tag.listTagByBlog(10))

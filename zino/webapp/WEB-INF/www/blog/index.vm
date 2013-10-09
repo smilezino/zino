@@ -68,7 +68,7 @@ $blog.addViewCount()
 	.blog-list {font-size:16px}
 	.blog-list ul {margin-left:0}
 	.blog-list li {list-style:none;border-bottom:1px dashed #ccc;padding:10px 0}
-	.blog-list li:hover {background:#eee;}
+	##.blog-list li:hover {background:#eee;}
 	.blog-list li a {margin-left:5px}
 	.blog-list .pull-right {font-size:14px}
 </style>
@@ -76,16 +76,18 @@ $blog.addViewCount()
 #set($size = 16)
 #if($g_user.IsManager())
 	##参数1：是否列出投稿的blog,-1是 0否
-	##参数2：标签，空列出所有标签
-	##参数3: 页码
-	##参数4: 每页个数
-	#set($blogs = $Blog.listByFilter(-1, "", $p, $size))
+	##参数2：是否根据合集id筛选，-1否
+	##参数3：标签，空列出所有标签
+	##参数4: 页码
+	##参数5: 每页个数
+	#set($blogs = $Blog.listByFilter(-1, -1, "", $p, $size))
 	##参数1：是否投稿的blog,-1是 0否
-	##参数2：标签，空 所有标签
-	#set($count = $Blog.countByFilter(-1, ""))
+	##参数2：是否根据合集id筛选，-1否
+	##参数3：标签，空 所有标签
+	#set($count = $Blog.countByFilter(-1, -1, ""))
 #else
-	#set($blogs = $Blog.listByFilter(0, "", $p, $size))
-	#set($count = $Blog.countByFilter(0, ""))
+	#set($blogs = $Blog.listByFilter(0, -1, "", $p, $size))
+	#set($count = $Blog.countByFilter(0, -1, ""))
 #end
 
 ##blog的tag Type为1

@@ -2,8 +2,12 @@ package my.beans;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 import my.db.DBbean;
 import my.db.QueryHelper;
@@ -22,8 +26,9 @@ public class Tag extends DBbean{
 	public void add(String[] tags, byte type, long obj) {
 		if(tags==null)
 			return;
-		ObjTag.delete(obj, type);
+		tags = Unique(tags);
 		List<Tag> Tags = all();
+		ObjTag.delete(obj, type);
 		for(String tag : tags) {
 			Tag t = exist(Tags, tag);
 			if(t!=null) {
@@ -135,6 +140,32 @@ public class Tag extends DBbean{
 	 */
 	public long countByBlogTag(long tag) {
 		return countByFilter(tag, TYPE_BLOG);
+	}
+	
+	/**
+	 * 查询以key开头的tag
+	 * @param key
+	 * @return
+	 */
+	public List<String> find(String key) {
+		String sql = "SELECT tag FROM z_tag WHERE tag LIKE ?";
+		return QueryHelper.query(String.class, sql, key+"%");
+	}
+	
+	/**
+	 * remove same string from array
+	 * @param a
+	 * @return
+	 */
+	private static String[] Unique(String[] a) {
+		List<String> list = new LinkedList<String>();
+		for (int i = 0; i < a.length; i++) {
+			String str = a[i].trim();
+			if (!list.contains(str) && !(str.length()>0)) {
+				list.add(str);
+			}
+		}
+		return (String[]) list.toArray(new String[list.size()]);
 	}
 	private String tag;
 	private byte type;

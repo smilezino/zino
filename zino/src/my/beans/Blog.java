@@ -35,6 +35,10 @@ public class Blog extends DBbean{
 		add("h6");
 	}};
 	
+	/**
+	 * 保存blog
+	 * @return
+	 */
 	public long save() {
 		if(user!=0 && collection!=0 && !BlogCollection.exist(user, collection))
 			collection = 0;
@@ -113,18 +117,23 @@ public class Blog extends DBbean{
 
 	/**
 	 * 根据条件分页列出blog列表
-	 * @param status
-	 * @param tag
+	 * @param status  -1：所有，1：投稿，0：正常博客
+	 * @param collection 合集
+	 * @param tag	标签
 	 * @param page
 	 * @param count
 	 * @return
 	 */
-	public static List<Blog> listByFilter(int status, String tag, int page, int count) {
+	public static List<Blog> listByFilter(int status,int collection, String tag, int page, int count) {
 		StringBuffer sql = new StringBuffer("SELECT * FROM z_blog AS b WHERE 1=1");
 		List<Object> params = new ArrayList<Object>();
 		if(status!=STATUS_ALL) {
 			sql.append(" AND b.status=?");
 			params.add(status);
+		}
+		if(collection>0) {
+			sql.append(" AND collection=?");
+			params.add(collection);
 		}
 		if(tag!=null && tag.length()>0) {
 			sql.append(" AND b.id IN(SELECT obj FROM z_obj_tag AS o WHERE o.type=? AND o.tag IN(SELECT t.id FROM z_tag AS t WHERE t.tag=?))");
@@ -136,17 +145,21 @@ public class Blog extends DBbean{
 	}
 	
 	/**
-	 * 
+	 * @param collection
 	 * @param status
 	 * @param tag
 	 * @return
 	 */
-	public static long countByFilter(int status, String tag) {
+	public static long countByFilter(int collection, int status, String tag) {
 		StringBuffer sql = new StringBuffer("SELECT COUNT(*) FROM z_blog WHERE 1=1");
 		List<Object> params = new ArrayList<Object>();
 		if(status!=STATUS_ALL) {
 			sql.append(" AND status=?");
 			params.add(status);
+		}
+		if(collection>0) {
+			sql.append(" AND collection=?");
+			params.add(collection);
 		}
 		if(tag!=null && tag.length()>0) {
 			sql.append(" AND id IN(SELECT obj FROM z_obj_tag WHERE type=? AND tag IN(SELECT id FROM z_tag WHERE tag=?))");
@@ -161,20 +174,11 @@ public class Blog extends DBbean{
 	 * @param collection
 	 * @return
 	 */
-	public static List<Blog> listCollections(long collection) {
+	public static List<Blog> listByCollections(long collection) {
 		String sql = "SELECT * FROM z_blog WHERE collection=?";
 		return QueryHelper.query(Blog.class, sql, collection);
 	}
 	
-	/**
-	 * 获取用户的所有合集
-	 * @param user
-	 * @return
-	 */
-	public static List<BlogCollection> listByUser(long user) {
-		String sql = "SELECT * FROM z_blog_collection";
-		return QueryHelper.query(BlogCollection.class, sql, user);
-	}
 	private long user;
 	private long collection;
 	private String title;

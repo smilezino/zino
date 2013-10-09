@@ -1,6 +1,7 @@
 package my.beans;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import my.db.DBbean;
 import my.db.QueryHelper;
@@ -14,7 +15,7 @@ public class BlogCollection extends DBbean {
 	private Timestamp createTime;
 	
 	/**
-	 * 判断user是否有集合
+	 * 判断user是否有合集
 	 * @param user
 	 * @param id
 	 * @return
@@ -22,6 +23,16 @@ public class BlogCollection extends DBbean {
 	public static boolean exist(long user, long id) {
 		String sql = "SEELCT COUNT(*) FROM z_blog_collection WHERE user=? AND id=?";
 		return QueryHelper.stat(sql, user, id) > 0;
+	}
+	
+	/**
+	 * 获取用户的所有合集
+	 * @param user
+	 * @return
+	 */
+	public static List<BlogCollection> listByUser(long user) {
+		String sql = "SELECT * FROM z_blog_collection";
+		return QueryHelper.query(BlogCollection.class, sql, user);
 	}
 	
 	@Override

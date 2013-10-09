@@ -3,14 +3,17 @@ package my.action;
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.Calendar;
+import java.util.List;
+
+import com.google.gson.Gson;
 
 import my.beans.Blog;
 import my.beans.BlogCollection;
 import my.beans.ObjTag;
 import my.beans.Tag;
 import my.beans.User;
-import my.service.RequestContext;
 import my.service.Annotation;
+import my.service.RequestContext;
 
 /**
  * Blog 操作
@@ -18,7 +21,7 @@ import my.service.Annotation;
  *
  */
 
-@Annotation.PostMethod
+//@Annotation.PostMethod
 public class BlogAction {
 	
 	/**
@@ -150,6 +153,16 @@ public class BlogAction {
 		ctx.output_json("id", id);
 	}
 	
+	/**
+	 * 返回相关tags的json数据
+	 * @param ctx
+	 * @throws IOException
+	 */
+	public void tags(RequestContext ctx) throws IOException {
+		String key = ctx.param("key", "");
+		List<String> tags = Tag.INSTANCE.find(key);
+		ctx.print(new Gson().toJson(tags));
+	}
 	/**
 	 * 更新blog
 	 * @param ctx
