@@ -124,7 +124,7 @@ public class BlogAction {
 		Blog blog = Blog.INSTANCE.Get(id);
 		if(blog==null)
 			throw ctx.error("form_empty");
-		if(user.getId()!=blog.getUser() || !user.IsManager())
+		if(!(user.getId()==blog.getUser() || user.IsManager()))
 			throw ctx.error("no_permission");
 		//删除blog的标签
 		ObjTag.delete(id, Tag.TYPE_BLOG);
@@ -177,7 +177,7 @@ public class BlogAction {
 		Blog blog = Blog.INSTANCE.Get(id);
 		if(blog==null)
 			throw ctx.error("form_empty");
-		if(!user.IsManager() || user.getId()!=blog.getUser())
+		if(!(user.IsManager() || user.getId()==blog.getUser()))
 			throw ctx.error("no_permission");
 		Blog form = ctx.form(Blog.class);
 		String result = checkBlog(form);
@@ -186,6 +186,7 @@ public class BlogAction {
 		blog.setText(form.getText());
 		blog.setTitle(form.getTitle());
 		blog.setDraft(type);
+		blog.setCollection(form.getCollection());
 		addtags(ctx, id);
 		ctx.output_json("id", id);
 		return blog.update();

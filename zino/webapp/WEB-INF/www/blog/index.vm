@@ -5,8 +5,8 @@
 #set($id = $link.lparam("id",0))
 #set($blog = $Blog.Get($id))
 <style>
-	.content {overflow-x:hidden}
-	#content {text-align:center}
+	##.content {overflow-x:hidden}
+	#content {text-align:center;position:relative}
 	#content a {font-size:16px;cursor:default; color:black}
 	#content a:hover {color:black}
 	.nav-header {padding:20px 0 5px 0;text-align:center;font-size:16px;color:#666}
@@ -15,6 +15,15 @@
 	.tag>a {text-decoration:none; color:black}
 	.badgeNum {line-height:20px;margin-left:5px}
 	.tag {dispaly:block;float:left;margin:10px 10px 0 0}
+	.collection-active a {color:black;background:#eee;}
+	.nav-list>li>a {display:block;margin:0 0 -1px 0;border:1px solid #e5e5e5;padding: 5px 14px;}
+	.nav-list>li:last-child>a{margin:1px 0 0 0}
+	.nav-list>li{overflow:hidden}
+	.content-fixed {position:fixed; top:20px; width:181px}
+	@media (min-width: 1200px) {
+		.content-fixed {position:fixed; top:20px; width:231px}
+	}
+	
 </style>
 #if($blog && ($blog.status==0 || $g_user.IsManager()))
 $blog.addViewCount()
@@ -25,9 +34,7 @@ $blog.addViewCount()
 <div class="container-fluid">
     <div class="row-fluid">
         <div class="span3 bs-docs-sidebar content">
-			<ul class="nav nav-list bs-docs-sidenav affix">
-				<li class="nav-header">目录</li>
-                $blog.htmlContent()
+			<ul class="nav nav-list">
 				<li class="nav-header"></li>
                 
 				#if($g_user && ($g_user.IsManager() || $g_user.id == $blog.user))
@@ -36,6 +43,25 @@ $blog.addViewCount()
 					<li><a href="$link.link("blog/post")">投稿</a></li>
 				#end
 			</ul>
+			
+			#set($c-blogs = $Blog.listByCollection($blog.collection))
+			#if($c-blogs && $c-blogs.size()>0)
+				#set($c = $BlogCollection.Get($blog.collection))
+    			<ul class="nav nav-list">
+    				<li class="nav-header">$format.html($c.name)</li>
+					#foreach($b in $c-blogs)
+						<li #if($b.id==$blog.id)class="collection-active"#end><a href="$link.link("blog")?id=$b.id">$format.html($b.title)</a></li>
+                    #end
+                </ul>
+			#end
+			
+			#set($content = $blog.htmlContent())
+			#if($content && $content.length()>0)
+    			<ul class="nav nav-list bs-docs-sidenav" id="ul-content">
+    				<li class="nav-header">目录</li>
+                    $content
+                </ul>
+			#end
         </div>
         <div class="span9">
 			
@@ -61,6 +87,9 @@ $blog.addViewCount()
 	
 <script>
 	prettyPrint();
+	$(function(){
+		$("#ul-content").floatScroll({css:"content-fixed"});
+	});
 </script>
 
 #else
@@ -95,14 +124,16 @@ $blog.addViewCount()
 
 <div class="container-fluid">
     <div class="row-fluid">
-        <div class="span3 bs-docs-sidebar content">
-			<ul class="nav nav-list bs-docs-sidenav">
+        <div class="span3 content">
+			<ul class="nav nav-list">
 				<li class="nav-header"></li>
 				#if($g_user)
                     <li><a href="$link.link("blog/new")">发表博文</a></li>
 				#else
 					<li><a href="$link.link("blog/post")">投稿</a></li>
 				#end
+            </ul>
+			<ul class="nav nav-list">
 				<li class="nav-header">标签</li>
                 <li>
 					#foreach($tag in $tags)

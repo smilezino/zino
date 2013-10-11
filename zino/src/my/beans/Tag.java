@@ -161,7 +161,7 @@ public class Tag extends DBbean{
 		List<String> list = new LinkedList<String>();
 		for (int i = 0; i < a.length; i++) {
 			String str = a[i].trim();
-			if (!list.contains(str) && !(str.length()>0)) {
+			if (!list.contains(str) && str.length()>0) {
 				list.add(str);
 			}
 		}

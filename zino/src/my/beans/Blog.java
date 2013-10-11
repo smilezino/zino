@@ -174,7 +174,9 @@ public class Blog extends DBbean{
 	 * @param collection
 	 * @return
 	 */
-	public static List<Blog> listByCollections(long collection) {
+	public static List<Blog> listByCollection(long collection) {
+		if(collection==0)
+			return null;
 		String sql = "SELECT * FROM z_blog WHERE collection=?";
 		return QueryHelper.query(Blog.class, sql, collection);
 	}

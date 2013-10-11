@@ -1,5 +1,5 @@
 #set($layout = "_index.vm")
-#set($page_title = "稍后阅读 - view it later")
+#set($page_title = "稍后浏览 - view it later")
 #set($active = "view")
 #set($p1 = $link.param("p1","about"))
 #set($p = $link.param("p",1))
@@ -101,7 +101,7 @@
 #elseif(!$g_user || $p1 == "about")
     <div class="well">
         <h3>这样一个情况：</h3>
-        <p>在网上发现比较有趣的视频，可能是工作时间不方便观看，怎么办呢？</p>
+        <p>在网上发现比较有趣的视频或者有用的资料，由于工作时间不方便观看，怎么办呢？</p>
         <h5 class="text-error">可以加入书签，回家看！</h5>
         <p>但是书签多了管理都麻烦，书签的同步也不一定那么及时，于是就有了这个<strong><a href="$link.action("file/crx")">chrome插件</a></strong>了^.^</p>
         <p><img src="$link.img("viewitlater.jpg")" alt="view it later"/></p>

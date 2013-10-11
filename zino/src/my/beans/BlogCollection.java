@@ -21,7 +21,7 @@ public class BlogCollection extends DBbean {
 	 * @return
 	 */
 	public static boolean exist(long user, long id) {
-		String sql = "SEELCT COUNT(*) FROM z_blog_collection WHERE user=? AND id=?";
+		String sql = "SELECT COUNT(*) FROM z_blog_collection WHERE user=? AND id=?";
 		return QueryHelper.stat(sql, user, id) > 0;
 	}
 	
@@ -31,7 +31,7 @@ public class BlogCollection extends DBbean {
 	 * @return
 	 */
 	public static List<BlogCollection> listByUser(long user) {
-		String sql = "SELECT * FROM z_blog_collection";
+		String sql = "SELECT * FROM z_blog_collection WHERE user=?";
 		return QueryHelper.query(BlogCollection.class, sql, user);
 	}
 	
