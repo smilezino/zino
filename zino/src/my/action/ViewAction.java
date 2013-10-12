@@ -70,7 +70,7 @@ public class ViewAction {
 		User user = ctx.user();
 		long id = ctx.id();
 		View todo = View.INSTANCE.Get(id);
-		if(todo==null || todo.getUser()!=user.getId())
+		if(todo==null || !(todo.getUser()==user.getId() || user.IsManager()))
 			throw ctx.error("no_permission");
 		todo.Delete();
 		ctx.output_json("id", todo.getId());
@@ -83,7 +83,7 @@ public class ViewAction {
 	 */
 	public void list(RequestContext ctx) throws IOException {
 		User user = ctx.user();
-		List<View> list = View.INSTANCE.listByFilter(user, View.STATUS_UNDO);
+		List<View> list = View.INSTANCE.listByUser(user.getId(), View.STATUS_UNDO);
 		ctx.print(new Gson().toJson(list));
 	}
 }

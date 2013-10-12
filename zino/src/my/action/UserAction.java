@@ -6,6 +6,7 @@ import java.util.Calendar;
 
 
 import my.beans.User;
+import my.service.Annotation;
 import my.service.RequestContext;
 import my.utils.RegexUtils;
 /**
@@ -68,6 +69,17 @@ public class UserAction {
 		long id = user.Save();
 		ctx.saveUserInCookie(user);
 		ctx.output_json("id", id);
+	}
+	
+	/**
+	 * 删除用户
+	 * @param ctx
+	 * @throws IOException 
+	 */
+	@Annotation.UserRequired(role=User.ROLE_ADMIN)
+	@Annotation.PostMethod
+	public void delete(RequestContext ctx) throws IOException {
+		//TODO 删除用户的所有资料
 	}
 	
 	/**

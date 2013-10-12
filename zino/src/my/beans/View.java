@@ -44,10 +44,10 @@ public class View extends DBbean{
 	 * @param user
 	 * @return
 	 */
-	public List<View> listByFilter(User user, int status) {
+	public List<View> listByUser(long user, int status) {
 		StringBuffer sql = new StringBuffer("SELECT * FROM " + TableName() + " WHERE user=?");
 		List<Object> params = new ArrayList<Object>();
-		params.add(user.getId());
+		params.add(user);
 		if(status != STATUS_ALL) {
 			sql.append(" AND status=?");
 			params.add(status);
@@ -63,10 +63,13 @@ public class View extends DBbean{
 	 * @param size
 	 * @return
 	 */
-	public List<View> listByUser(User user, int status, int page, int size) {
-		StringBuffer sql = new StringBuffer("SELECT * FROM " + TableName() + " WHERE user=?");
+	public List<View> listByFilter(long user, int status, int page, int size) {
+		StringBuffer sql = new StringBuffer("SELECT * FROM " + TableName() + " WHERE 1=1");
 		List<Object> params = new ArrayList<Object>();
-		params.add(user.getId());
+		if(user>0){
+			sql.append(" AND user=?");
+			params.add(user);
+		}
 		if(status != STATUS_ALL) {
 			sql.append(" AND status=?");
 			params.add(status);
@@ -80,10 +83,13 @@ public class View extends DBbean{
 	 * @param user
 	 * @return
 	 */
-	public long countByUser(User user, int status) {
-		StringBuffer sql = new StringBuffer("SELECT COUNT(*) FROM " + TableName() + " WHERE user=?");
+	public long countByFilter(long user, int status) {
+		StringBuffer sql = new StringBuffer("SELECT COUNT(*) FROM " + TableName() + " WHERE 1=1");
 		List<Object> params = new ArrayList<Object>();
-		params.add(user.getId());
+		if(user>0) {
+			sql.append(" AND user=?");
+			params.add(user);
+		}
 		if(status != STATUS_ALL) {
 			sql.append(" AND status=?");
 			params.add(status);
@@ -91,6 +97,22 @@ public class View extends DBbean{
 		return QueryHelper.stat(sql.toString(), params.toArray());
 	}
 	
+	/**
+	 * 分页列出所有view
+	 * @return
+	 */
+	public List<View> list(int page, int size) {
+		String sql = "SELECT * FROM " + TableName();
+		return QueryHelper.query_slice(View.class, sql, page, size);
+	}
+	/**
+	 * 所有view个数
+	 * @return
+	 */
+	public long count() {
+		String sql = "SELECT COUNT(*) FROM " + TableName();
+		return QueryHelper.stat(sql);
+	}
 	
 	public long getUser() {
 		return user;

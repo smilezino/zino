@@ -1,0 +1,77 @@
+#set($layout = "_admin.vm")
+#set($page_title = "admin")
+
+#set($p = $link.param("p",1))
+#set($size = 16)
+
+<style>
+	.table th {text-align:center;background:#ccc}
+</style>
+##参数1：是否列出投稿的blog,-1是 0否
+##参数2：是否根据合集id筛选，-1否
+##参数3：标签，空列出所有标签
+##参数4: 页码
+##参数5: 每页个数
+#set($blogs = $Blog.listByFilter(-1, -1, "", $p, $size))
+##参数1：是否投稿的blog,-1是 0否
+##参数2：是否根据合集id筛选，-1否
+##参数3：标签，空 所有标签
+#set($count = $Blog.countByFilter(-1, -1, ""))
+<table class="table table-condensed table-bordered">
+    <thead><tr>
+        <th>id</th>
+		<th>标题</th>
+        <th>用户</th>
+        <th>浏览量</th>
+		<th>操作</th>
+	</tr></thead>
+    <tbody>
+	#foreach($b in $blogs)
+		<tr>
+            <td>$b.id</td>
+            <td><a href="$link.link("blog?id=")$b.id">$format.html($b.title)</a></td>
+			#set($user = $User.Get($b.user))
+            <td>
+				#if($user)$format.html($user.name)#else佚名#end
+			</td>
+            <td>$b.viewCount</td>
+            <td>
+				<a class="blog-edit" href="$link.link("blog/edit?id=")$b.id" title="编辑" ref="$b.id"><i class="icon-edit"></i></a>
+				<a class="blog-delete" href="#" title="删除" ref="$b.id"><i class="icon-remove"></i></a>
+				#if($b.status==1)
+					<a class="blog-accept" href="#" title="采纳" ref="$b.id"><i class="icon-ok"></i></a>
+				#end
+			</td>
+        </tr>
+	#end
+	</tbody>
+</table>
+#pager("",$count,$size)	
+<script>
+	$(function(){
+		$(".blog-accept").click(function(){
+			var id = $(this).attr("ref");
+			var params = {
+				"id":id
+			};
+			ajax("$link.action("blog/accept")",params,function(msg){
+				if(msg.error){alert(msg.msg);return;}
+				location.reload();
+			})
+		});
+		
+		$(".blog-delete").click(function(){
+			var id = $(this).attr("ref");
+			var params = {
+				"id":id
+			};
+			if(confirm("确定删除？")) {
+				ajax("$link.action("blog/delete")",params,function(msg){
+					if(msg.error){alert(msg.msg);return;}
+					location.reload();
+				});
+			
+			}
+		});
+	});
+</script>

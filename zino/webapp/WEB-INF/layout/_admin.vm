@@ -1,4 +1,4 @@
-#if(!$g_user || !$g_user.IsAdmin())
+#if(!$g_user || !$g_user.IsManager())
 	$link.login();
 #end
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -12,7 +12,43 @@
         <script type="text/javascript" src="$link.bootstrap("js/bootstrap.min.js")"></script>
 		<link rel="stylesheet" type="text/css" href="$link.bootstrap("css/bootstrap.css")" />
     </head>
-	<body data-spy="scroll" data-offset="50">
+	<body data-spy="scroll" data-target=".bs-docs-sidebar">
+        <div class="navbar navbar-inverse">
+            <div class="navbar-inner">
+                <div class="container">
+                    <ul class="nav">
+                        <li><a href="$link.link("/")"><strong>Home</strong></a></li>
+                        <li><a href="$link.link("admin/user")"><strong>User</strong></a></li>
+                        <li><a href="$link.link("admin/blog")"><strong>Blog</strong></a></li>
+                        <li><a href="$link.link("admin/view")"><strong>View</strong></a></li>
+                    </ul>
+                    
+                    <ul class="nav pull-right">
+						#if($g_user)
+							<li><a href="javascript:void(0);" id="loginout"><strong>loginout</strong></a></li>
+                            <script>
+								$(function(){
+									$("#loginout").click(function(){
+										ajax("$link.action("user/loginout")","",function(msg){
+											location.reload();
+										});
+									});
+								});
+							</script>
+						#else
+							<li><a href="$link.link("login")"><strong>login</strong></a></li>
+						#end
+                    </ul>
+                </div>
+            </div>
+        </div>
+    <div class="container">
 		${screen_content}
+        <div class="clearfix"></div>
+		<div style="margin:50px 0">
+			<hr />
+			<p class="text-center">&copy; zinor.net</p>
+		</div>
+    </div>
   </body>
 </html>

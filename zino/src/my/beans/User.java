@@ -1,6 +1,7 @@
 package my.beans;
 
 import java.sql.Timestamp;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import my.db.DBbean;
@@ -148,7 +149,40 @@ public class User extends DBbean {
 	public boolean IsBlog() {
 		return role >= ROLE_BLOG;
 	}
+	
+	/**
+	 * 列出所有用户
+	 * @param page
+	 * @param size
+	 * @return
+	 */
+	public List<User> list(int page, int size) {
+		String sql = "SELECT * FROM " + TableName() + " ORDER BY role";
+		return QueryHelper.query_slice(User.class, sql, page, size);
+	}
+	/**
+	 * 用户个数
+	 * @return
+	 */
+	public long count() { 
+		String sql = "SELECT COUNT(*) FROM " + TableName();
+		return QueryHelper.stat(sql);
+	}
 
+	/**
+	 * 用户角色
+	 * @param role
+	 * @return
+	 */
+	public static String roleName(int role) {
+		switch(role) {
+		case User.ROLE_ADMIN:return "超级管理员";
+		case User.ROLE_MANAGER: return "管理员";
+		case User.ROLE_BLOG:return "可写Blog";
+		case User.ROLE_USER:
+		default: return "普通用户";
+		}
+	}
 	private String name;
 	private String email;
 	private String pwd;

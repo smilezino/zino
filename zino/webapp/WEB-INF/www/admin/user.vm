@@ -1,0 +1,49 @@
+#set($layout = "_admin.vm")
+#set($page_title = "admin")
+
+#set($p = $link.param("p",1))
+#set($size = 16)
+
+<style>
+	.table th {text-align:center;background:#ccc}
+</style>
+##参数1 用户id， -1所有
+##参数2 是否归档， -1所有
+#set($users = $User.list($p, $size))
+#set($count = $User.count())
+<table class="table table-condensed table-bordered">
+    <thead><tr>
+        <th>id</th>
+        <th>用户名</th>
+        <th>邮箱</th>
+        <th>角色</th>
+		<th>操作</th>
+	</tr></thead>
+    <tbody>
+	#foreach($u in $users)
+		<tr class="view">
+            <td>$u.id</td>
+            <td>#if($u)$format.html($u.name)#end</td>
+            <td>#if($u.email)$format.html($u.email)#end</td>
+            <td>$User.roleName($u.role)</td>
+            <td class="view-remove"><a href="#" ref="$u.id" title="删除"><i class="icon-remove"></i></a></td>
+		</tr>
+	#end
+	</tbody>
+</table>
+#pager("",$count,$size)	
+<script>
+	$(function(){
+		$(".view-remove a").click(function(){
+			obj = $(this);
+			var id = obj.attr("ref");
+			var params = {
+				"id":id
+			};
+			ajax("$link.action("user/delete")",params,function(msg){
+				if(msg.error){alert(msg.msg);return;}
+				obj.parents("tr").remove();
+			});
+		});
+	});
+</script>
