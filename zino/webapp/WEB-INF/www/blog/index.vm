@@ -64,23 +64,22 @@ $blog.addViewCount()
 			#end
         </div>
         <div class="span9">
-			
-    			<div class="page-header">
-                    <h1>$blog.title</h1>
-                    <div>
-						<strong>#if($user.name)$user.name#else佚名#end</strong>发表于 $format.date("yyyy-MM-dd HH:mm",$blog.createTime)
-						##<span style="margin-left:20px">浏览次数：$blog.viewCount</span>
-					</div>
-                </div>
-    			<div class="blog-content">
-    				$blog.htmlAnchor()
+			<div class="page-header">
+                <h1>$blog.title</h1>
+                <div>
+					<strong>#if($user.name)$user.name#else佚名#end</strong>发表于 $format.date("yyyy-MM-dd HH:mm",$blog.createTime)
+					##<span style="margin-left:20px">浏览次数：$blog.viewCount</span>
 				</div>
-				#set($blog-tags = $Tag.listByBlog($blog.id))
-				<div>
-					#foreach($tag in $blog-tags)
-						<span class="tag"><a href="$link.link("blog/tag/")$format.encode_url($tag.tag)"><span class="badge">$format.html($tag.tag)</span></a></span>
-					#end
-				</div>
+            </div>
+			<div class="blog-content">
+				$blog.htmlAnchor()
+			</div>
+			#set($blog-tags = $Tag.listByBlog($blog.id))
+			<div>
+				#foreach($tag in $blog-tags)
+					<span class="tag"><a href="$link.link("blog/tag/")$format.encode_url($tag.tag)"><span class="badge">$format.html($tag.tag)</span></a></span>
+				#end
+			</div>
         </div>
     </div>
 </div>
@@ -100,6 +99,7 @@ $blog.addViewCount()
 	##.blog-list li:hover {background:#eee;}
 	.blog-list li a {margin-left:5px}
 	.blog-list .pull-right {font-size:14px}
+	.blog-date em{font-weight:bold;font-style:normal;display:block;text-align:center}
 </style>
 #set($p = $link.param("p",1))
 #set($size = 16)
@@ -154,7 +154,7 @@ $blog.addViewCount()
 							<i class="icon-stop"></i>
 							<a href="$link.link("blog?id=")$b.id">$format.html($b.title)</a>
 							<span class="pull-right">
-								<span>$format.date("yyyy-MM-dd HH:mm", $b.createTime)</span>
+                                <span>$format.date("yyyy-MM-dd", $b.createTime)</span>
 								#if($g_user.IsManager())
 									#if($b.status==1)
 										<a class="blog-accept" href="#" title="采纳" ref="$b.id"><i class="icon-ok"></i></a>
@@ -163,6 +163,7 @@ $blog.addViewCount()
 									<a class="blog-delete" href="#" title="删除" ref="$b.id"><i class="icon-remove"></i></a>
 								#end
 							</span>
+                            <div class="clearfix"></div>
 						</li>
 					#end
 					</ul>
