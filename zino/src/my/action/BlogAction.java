@@ -21,7 +21,7 @@ import my.service.RequestContext;
  *
  */
 
-//@Annotation.PostMethod
+@Annotation.PostMethod
 public class BlogAction {
 	
 	/**
