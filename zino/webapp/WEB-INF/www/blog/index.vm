@@ -85,8 +85,8 @@ $blog.addViewCount()
 </div>
 	
 <script>
-	prettyPrint();
 	$(function(){
+		prettyPrint();
 		$("#ul-content").floatScroll({css:"content-fixed"});
 	});
 </script>
@@ -150,6 +150,7 @@ $blog.addViewCount()
     			<div class="blog-list">
 					<ul class="">
 					#foreach($b in $blogs)
+					#if($blog.draft!=1 || $g_user.IsManager())
 						<li>
 							<i class="icon-stop"></i>
 							<a href="$link.link("blog?id=")$b.id">$format.html($b.title)</a>
@@ -165,6 +166,7 @@ $blog.addViewCount()
 							</span>
                             <div class="clearfix"></div>
 						</li>
+					#end
 					#end
 					</ul>
 				</div>
