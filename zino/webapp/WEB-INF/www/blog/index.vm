@@ -150,7 +150,7 @@ $blog.addViewCount()
     			<div class="blog-list">
 					<ul class="">
 					#foreach($b in $blogs)
-					#if($blog.draft!=1 || $g_user.IsManager())
+					#if($b.draft!=1 || $g_user.IsManager())
 						<li>
 							<i class="icon-stop"></i>
 							<a href="$link.link("blog?id=")$b.id">$format.html($b.title)</a>
