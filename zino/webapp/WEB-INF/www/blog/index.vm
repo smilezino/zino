@@ -14,7 +14,7 @@
 	.badge:hover {background:#08c}
 	.tag>a {text-decoration:none; color:black}
 	.badgeNum {line-height:20px;margin-left:5px}
-	.tag {dispaly:block;float:left;margin:10px 10px 0 0}
+	.tag {display:block;float:left;margin:10px 10px 0 0}
 	.collection-active a {color:black;background:#eee;}
 	.nav-list>li>a {display:block;margin:0 0 -1px 0;border:1px solid #e5e5e5;padding: 5px 14px;}
 	.nav-list>li:last-child>a{margin:1px 0 0 0}
@@ -104,19 +104,21 @@ $blog.addViewCount()
 #set($p = $link.param("p",1))
 #set($size = 16)
 #if($g_user.IsManager())
-	##参数1：是否列出投稿的blog,-1是 0否
-	##参数2：是否根据合集id筛选，-1否
-	##参数3：标签，空列出所有标签
-	##参数4: 页码
-	##参数5: 每页个数
-	#set($blogs = $Blog.listByFilter(-1, -1, "", $p, $size))
-	##参数1：是否投稿的blog,-1是 0否
-	##参数2：是否根据合集id筛选，-1否
-	##参数3：标签，空 所有标签
-	#set($count = $Blog.countByFilter(-1, -1, ""))
+	##参数1：-1所有，1草稿，0正常
+	##参数2：-1所有，1投稿，0正常
+	##参数3：是否根据合集id筛选，-1否
+	##参数4：标签，空列出所有标签
+	##参数5: 页码
+	##参数6: 每页个数
+	#set($blogs = $Blog.listByFilter(-1, -1, -1, "", $p, $size))
+	##参数1：-1所有，1草稿，0正常
+	##参数2：-1所有，1投稿，0正常
+	##参数3：是否根据合集id筛选，-1否
+	##参数4：标签，空 所有标签
+	#set($count = $Blog.countByFilter(-1, -1, -1, ""))
 #else
-	#set($blogs = $Blog.listByFilter(0, -1, "", $p, $size))
-	#set($count = $Blog.countByFilter(0, -1, ""))
+	#set($blogs = $Blog.listByFilter(0, 0, -1, "", $p, $size))
+	#set($count = $Blog.countByFilter(0, 0, -1, ""))
 #end
 
 ##blog的tag Type为1
@@ -150,10 +152,17 @@ $blog.addViewCount()
     			<div class="blog-list">
 					<ul class="">
 					#foreach($b in $blogs)
-					#if($b.draft!=1 || $g_user.IsManager())
 						<li>
 							<i class="icon-stop"></i>
-							<a href="$link.link("blog?id=")$b.id">$format.html($b.title)</a>
+							#if($b.draft == 1)
+                            <span>(草稿)</span>
+							#end
+							#set($collect = $BlogCollection.Get($b.collection))
+							#if($collect)
+								<a href="$link.link("blog?id=")$b.id">$format.html($collect.name) -- $format.html($b.title)</a>
+							#else
+								<a href="$link.link("blog?id=")$b.id">$format.html($b.title)</a>
+							#end
 							<span class="pull-right">
                                 <span>$format.date("yyyy-MM-dd", $b.createTime)</span>
 								#if($g_user.IsManager())
@@ -166,7 +175,6 @@ $blog.addViewCount()
 							</span>
                             <div class="clearfix"></div>
 						</li>
-					#end
 					#end
 					</ul>
 				</div>

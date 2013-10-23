@@ -59,19 +59,21 @@
 #else
 	
 #if($g_user.IsManager())
-	##参数1：是否列出投稿的blog,-1是 0否
-	##参数2：是否根据合集id筛选，-1否
-	##参数3：标签，空列出所有标签
-	##参数4: 页码
-	##参数5: 每页个数
-	#set($blogs = $Blog.listByFilter(-1, -1, $t, $p, $size))
-	##参数1：是否投稿的blog,-1是 0否
-	##参数2：是否根据合集id筛选，-1否
-	##参数3：标签，空 所有标签
-	#set($count = $Blog.countByFilter(-1, -1, $t))
+	##参数1：-1所有，1草稿，0正常
+	##参数2：-1所有，1投稿，0正常
+	##参数3：是否根据合集id筛选，-1否
+	##参数4：标签，空列出所有标签
+	##参数5: 页码
+	##参数6: 每页个数
+	#set($blogs = $Blog.listByFilter(-1, -1, -1, $t, $p, $size))
+	##参数1：-1所有，1草稿，0正常
+	##参数2：-1所有，1投稿，0正常
+	##参数3：是否根据合集id筛选，-1否
+	##参数4：标签，空 所有标签
+	#set($count = $Blog.countByFilter(-1, -1, -1, $t))
 #else
-	#set($blogs = $Blog.listByFilter(0, -1, $t, $p, $size))
-	#set($count = $Blog.countByFilter(0, -1, $t))
+	#set($blogs = $Blog.listByFilter(0, 0, -1, $t, $p, $size))
+	#set($count = $Blog.countByFilter(0, 0, -1, $t))
 #end
 ##blog的tag Type为1
 #set($tags = $Tag.listTagByBlog(10))
@@ -104,7 +106,15 @@
 					#foreach($b in $blogs)
 						<li>
 							<i class="icon-stop"></i>
-							<a href="$link.link("blog?id=")$b.id">$format.html($b.title)</a>
+							#if($b.draft == 1)
+                            <span>(草稿)</span>
+							#end
+							#set($collect = $BlogCollection.Get($b.collection))
+							#if($collect)
+								<a href="$link.link("blog?id=")$b.id">$format.html($collect.name) -- $format.html($b.title)</a>
+							#else
+								<a href="$link.link("blog?id=")$b.id">$format.html($b.title)</a>
+							#end
 							<span class="pull-right">
 								<span>$format.date("yyyy-MM-dd HH:mm", $b.createTime)</span>
 								#if($g_user.IsManager())

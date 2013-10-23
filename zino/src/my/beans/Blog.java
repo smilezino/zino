@@ -40,7 +40,7 @@ public class Blog extends DBbean{
 	 * @return
 	 */
 	public long save() {
-		if(user!=0 && collection!=0 && !BlogCollection.exist(user, collection))
+		if(!BlogCollection.exist(user, collection))
 			collection = 0;
 		return super.Save();
 	}
@@ -49,7 +49,7 @@ public class Blog extends DBbean{
 	 * @return
 	 */
 	public long update() {
-		if(user!=0 && collection!=0 && !BlogCollection.exist(user, collection))
+		if(!BlogCollection.exist(user, collection))
 			collection = 0;
 		String sql = "UPDATE " + TableName() + " SET collection=?,title=?,text=?,draft=? WHERE id=?";
 		return QueryHelper.update(sql, collection, title, text, draft, getId());
@@ -117,6 +117,7 @@ public class Blog extends DBbean{
 
 	/**
 	 * 根据条件分页列出blog列表
+	 * @param draft -1:所有，1：草稿，0：正常博客
 	 * @param status  -1：所有，1：投稿，0：正常博客
 	 * @param collection 合集
 	 * @param tag	标签
@@ -124,9 +125,13 @@ public class Blog extends DBbean{
 	 * @param count
 	 * @return
 	 */
-	public static List<Blog> listByFilter(int status,int collection, String tag, int page, int count) {
+	public static List<Blog> listByFilter(int draft, int status,int collection, String tag, int page, int count) {
 		StringBuffer sql = new StringBuffer("SELECT * FROM z_blog AS b WHERE 1=1");
 		List<Object> params = new ArrayList<Object>();
+		if(draft!=STATUS_ALL) {
+			sql.append(" AND draft=?");
+			params.add(draft);
+		}
 		if(status!=STATUS_ALL) {
 			sql.append(" AND b.status=?");
 			params.add(status);
@@ -145,14 +150,19 @@ public class Blog extends DBbean{
 	}
 	
 	/**
+	 * @param draft -1:所有，1：草稿，0：正常博客
 	 * @param collection
 	 * @param status
 	 * @param tag
 	 * @return
 	 */
-	public static long countByFilter(int collection, int status, String tag) {
+	public static long countByFilter(int draft, int collection, int status, String tag) {
 		StringBuffer sql = new StringBuffer("SELECT COUNT(*) FROM z_blog WHERE 1=1");
 		List<Object> params = new ArrayList<Object>();
+		if(draft!=STATUS_ALL) {
+			sql.append(" AND draft=?");
+			params.add(draft);
+		}
 		if(status!=STATUS_ALL) {
 			sql.append(" AND status=?");
 			params.add(status);
@@ -177,8 +187,8 @@ public class Blog extends DBbean{
 	public static List<Blog> listByCollection(long collection) {
 		if(collection==0)
 			return null;
-		String sql = "SELECT * FROM z_blog WHERE collection=?";
-		return QueryHelper.query(Blog.class, sql, collection);
+		String sql = "SELECT * FROM z_blog WHERE collection=? AND draft=?";
+		return QueryHelper.query(Blog.class, sql, collection, UNDRAFT);
 	}
 	
 	private long user;
