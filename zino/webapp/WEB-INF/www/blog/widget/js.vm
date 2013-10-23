@@ -26,6 +26,8 @@
 			input.val("");
 			input.focus();
 		});
+		
+		/*
 		$("#input-tag").keyup(function(event){
 			if(event.which==13){
     			var tag = $(this).val();
@@ -35,7 +37,7 @@
     			$(this).val("");
     			$(this).focus();
 			}
-		});
+		});*/
 		
 		$(".tag .tag-close").live("click", function(){
 			$(this).parent().remove();

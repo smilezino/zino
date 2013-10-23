@@ -67,9 +67,11 @@
 		<h4>预览：</h4>
 		<div id="wmd-preview" class="wmd-panel"></div>
         <div class="cmd-btn">
-			<input id="btn-post" class="btn btn-primary input-btn" type="button" value="保存修改" />
 			#if($blog.draft==1)
+				<input id="btn-post" class="btn btn-primary input-btn" type="button" value="发布博客" />
 				<input id="btn-draft" class="btn btn-primary input-btn" type="button" value="存为草稿" />
+			#else
+				<input id="btn-post" class="btn btn-primary input-btn" type="button" value="保存修改" />
 			#end
 		</div>
     </div>
@@ -98,7 +100,7 @@
 		#if($blog.draft==1)
     		$("#btn-draft").click(function(){
     			var options = {
-        			url:"$link.action("blog/draft")",
+        			url:"$link.action("blog/update_draft")",
         			dataType:"json",
         			type:"POST",
         			beforeSubmit:function(){},
