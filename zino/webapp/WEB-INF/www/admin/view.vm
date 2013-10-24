@@ -1,5 +1,6 @@
 #set($layout = "_admin.vm")
 #set($page_title = "admin")
+#set($active = "view")
 
 #set($p = $link.param("p",1))
 #set($size = 16)

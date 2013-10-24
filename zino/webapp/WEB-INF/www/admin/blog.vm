@@ -1,41 +1,48 @@
 #set($layout = "_admin.vm")
 #set($page_title = "admin")
+#set($active = "blog")
 
 #set($p = $link.param("p",1))
 #set($size = 16)
 
 <style>
 	.table th {text-align:center;background:#ccc}
+	.width10 {width:10%}
+	.width50 {width:50%}
 </style>
-##参数1：是否列出投稿的blog,-1是 0否
-##参数2：是否根据合集id筛选，-1否
-##参数3：标签，空列出所有标签
-##参数4: 页码
-##参数5: 每页个数
-#set($blogs = $Blog.listByFilter(-1, -1, "", $p, $size))
-##参数1：是否投稿的blog,-1是 0否
-##参数2：是否根据合集id筛选，-1否
-##参数3：标签，空 所有标签
-#set($count = $Blog.countByFilter(-1, -1, ""))
+##参数1：-1所有，1草稿，0正常
+##参数2：-1所有，1投稿，0正常
+##参数3：是否根据合集id筛选，-1否
+##参数4：标签，空列出所有标签
+##参数5: 页码
+##参数6: 每页个数
+#set($blogs = $Blog.listByFilter(-1, -1, -1, "", $p, $size))
+##参数1：-1所有，1草稿，0正常
+##参数2：-1所有，1投稿，0正常
+##参数3：是否根据合集id筛选，-1否
+##参数4：标签，空 所有标签
+#set($count = $Blog.countByFilter(-1, -1, -1, ""))
 <table class="table table-condensed table-bordered">
     <thead><tr>
-        <th>id</th>
-		<th>标题</th>
-        <th>用户</th>
-        <th>浏览量</th>
-		<th>操作</th>
+        <th class="width10">id</th>
+		<th class="width50">标题</th>
+        <th class="width10">用户</th>
+        <th class="width10">状态</th>
+        <th class="width10">浏览量</th>
+		<th class="width10">操作</th>
 	</tr></thead>
     <tbody>
 	#foreach($b in $blogs)
 		<tr>
-            <td>$b.id</td>
-            <td><a href="$link.link("blog?id=")$b.id">$format.html($b.title)</a></td>
+            <td class="width10">$b.id</td>
+            <td class="width50"><a href="$link.link("blog?id=")$b.id">$format.html($b.title)</a></td>
 			#set($user = $User.Get($b.user))
-            <td>
+            <td class="width10">
 				#if($user)$format.html($user.name)#else佚名#end
 			</td>
-            <td>$b.viewCount</td>
-            <td>
+            <td class="width10">#if($b.draft==1)<a class="blog-edit" href="$link.link("blog/edit?id=")$b.id" title="编辑" ref="$b.id">草稿</a>#end #if($b.status==1)投稿#end</td>
+            <td class="width10">$b.viewCount</td>
+            <td class="width10">
 				<a class="blog-edit" href="$link.link("blog/edit?id=")$b.id" title="编辑" ref="$b.id"><i class="icon-edit"></i></a>
 				<a class="blog-delete" href="#" title="删除" ref="$b.id"><i class="icon-remove"></i></a>
 				#if($b.status==1)
