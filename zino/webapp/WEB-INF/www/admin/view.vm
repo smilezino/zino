@@ -10,8 +10,8 @@
 </style>
 ##参数1 用户id， -1所有
 ##参数2 是否归档， -1所有
-#set($views = $Todo.listByFilter(-1, -1, $p, $size))
-#set($count = $Todo.countByFilter(-1, -1))
+#set($views = $Todo.list($p, $size))
+#set($count = $Todo.count())
 <table class="table table-condensed table-bordered">
     <thead><tr>
         <th>id</th>
