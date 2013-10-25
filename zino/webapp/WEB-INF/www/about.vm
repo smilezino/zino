@@ -19,7 +19,8 @@
         <li>了解Shell编程，了解Makefile的编写</li>
         <li>了解TCP/IP协议，熟悉基于C的Socket及多线程编程</li>
         <li>熟悉J2EE规范下JSP、servlet编程，熟悉Struts2，Spring，Hibernate框架</li>
-        <li>熟悉Javascript及Jquery框架</li>
+        <li>熟悉HTML，CSS，Javascript及jQuery框架</li>
+        <li>熟悉git版本控制工具</li>
         <li>英语CET4级, 能够流畅地阅读英文技术文档，及进行简单的英语会话</li>
     </div>
     <p></p>
@@ -38,7 +39,7 @@
     <div class="iwell">
         <p>使用C语言编写，界面采用GTK+库</p>
 	</div>
-    <p>3. <strong>其他</strong></p>
+    <p>4. <strong>其他</strong></p>
     <div class="iwell">
         <p><a href="http://www.zinor.net/view" target="_blank">view it later</a>，chrome浏览器插件</p>
         <p>在校期间还做过很多小工具：用MFC编写的定时关机工具，批量修改文件名工具，局域网查询本机IP地址工具，贪吃蛇小游戏等等。</p>
