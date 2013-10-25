@@ -41,4 +41,9 @@
 		<scope>application</scope>
 		<class>my.beans.Tag</class>
 	</tool>
+	<tool>
+		<key>Doc</key>
+		<scope>application</scope>
+		<class>my.beans.Files</class>
+	</tool>
 </toolbox>
