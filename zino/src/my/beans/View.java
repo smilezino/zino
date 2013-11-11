@@ -102,7 +102,7 @@ public class View extends DBbean{
 	 * @return
 	 */
 	public List<View> list(int page, int size) {
-		String sql = "SELECT * FROM " + TableName();
+		String sql = "SELECT * FROM " + TableName() + " ORDER BY id DESC";
 		return QueryHelper.query_slice(View.class, sql, page, size);
 	}
 	/**
