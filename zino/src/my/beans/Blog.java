@@ -46,11 +46,13 @@ public class Blog extends DBbean{
 	}
 	/**
 	 * 修改博客
+	 * @param admin
 	 * @return
 	 */
-	public long update() {
-		if(!BlogCollection.exist(user, collection))
+	public long update(boolean admin) {
+		if(!(admin || BlogCollection.exist(user, collection)))
 			collection = 0;
+		System.out.println(BlogCollection.exist(user, collection)+","+user);
 		String sql = "UPDATE " + TableName() + " SET collection=?,title=?,text=?,draft=? WHERE id=?";
 		return QueryHelper.update(sql, collection, title, text, draft, getId());
 	}

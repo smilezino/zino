@@ -58,6 +58,7 @@ CREATE TABLE `z_blog` (
   `text` mediumtext NOT NULL,
   `viewCount` int(11) DEFAULT '0',
   `shareCount` int(11) DEFAULT '0',
+  `likeCount` int(11) DEFAULT '0',
   `status` tinyint(4) DEFAULT '0',
   `draft` tinyint(4) DEFAULT '0',
   `createTime` timestamp NULL DEFAULT NULL,
@@ -236,6 +237,17 @@ INSERT INTO `z_user` VALUES (1,'zino','smile.zino@gmail.com','12e42382da44fb13cb
 /*!40000 ALTER TABLE `z_user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+
+CREATE TABLE `z_notes` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user` int(11) NOT NULL,
+  `title` varchar(120) NOT NULL,
+  `text` mediumtext NOT NULL,
+  `status` tinyint(4) DEFAULT '0',
+  `createTime` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

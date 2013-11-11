@@ -166,8 +166,7 @@ public class BlogAction {
 	/**
 	 * 更新blog
 	 * @param ctx
-	 * @param user
-	 * @param blog
+	 * @param type
 	 * @return
 	 * @throws IOException 
 	 */
@@ -189,7 +188,7 @@ public class BlogAction {
 		blog.setCollection(form.getCollection());
 		addtags(ctx, id);
 		ctx.output_json("id", id);
-		return blog.update();
+		return blog.update(user.IsManager()?true:false);
 	}
 	/**
 	 * blog 格式验证

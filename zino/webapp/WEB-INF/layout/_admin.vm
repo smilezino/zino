@@ -20,6 +20,7 @@
                         <li><a href="$link.link("/")"><strong>Home</strong></a></li>
                         <li#if($active&&$active=="user") class="active"#end><a href="$link.link("admin/user")"><strong>User</strong></a></li>
                         <li#if($active&&$active=="blog") class="active"#end><a href="$link.link("admin/blog")"><strong>Blog</strong></a></li>
+                        <li#if($active&&$active=="note") class="active"#end><a href="$link.link("admin/note")"><strong>Note</strong></a></li>
                         <li#if($active&&$active=="view") class="active"#end><a href="$link.link("admin/view")"><strong>View</strong></a></li>
                     </ul>
                     

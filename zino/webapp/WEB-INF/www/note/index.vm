@@ -1,0 +1,3 @@
+#set($layout = "_index.vm")
+#set($page_title = "Note 记事本 - zinor.net")
+#set($active = "note")
