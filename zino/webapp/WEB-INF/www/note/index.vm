@@ -1,3 +1,77 @@
 #set($layout = "_index.vm")
 #set($page_title = "Note 记事本 - zinor.net")
 #set($active = "note")
+<style>
+	.nav-header {padding:20px 0 5px 0;text-align:center;font-size:16px;color:#666}
+	.nav-list>li>a {display:block;margin:0 0 -1px 0;border:1px solid #e5e5e5;padding: 5px 14px;}
+	.nav-list>li:last-child>a{border-bottom:2px solid #e5e5e5}
+	.nav-list>li{overflow:hidden}
+	.note-list ul {margin-left:0}
+	.note-line {font-size:16px;margin-left:5px;display:inline-block;vertical-align:bottom}
+	.pull-right a{text-decoration:none;margin-left:8px}
+	.pull-right .edit:hover{color:black}
+	.note-list li {padding:15px 5px;border-bottom:1px dashed #ccc;border-top:none;list-style:none}
+	.badge {padding:5px 10px}
+	.edit {padding: 2px 4px;color: gray;background-color: #f7f7f9;border: 1px solid #e1e1e8;
+		font-family: Monaco, Menlo, Consolas, "Courier New", monospace;
+        font-size: 12px;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        border-radius: 3px;}
+</style>
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span3">
+            <ul class="nav nav-list">
+				<li class="nav-header"></li>
+				<li><a href="$link.link("note/new")">新建记事本</a></li>
+			</ul>
+        </div>
+		<div class="span9">
+			<div class="page-header">
+                <h1>列表</h1>
+            </div>
+			<div class="note-list">
+				<ul class="">
+                    <li>
+						<span class="pull-right">
+                            <a class="note-edit" href="#" title="编辑" ref="$b.id"><span class="edit">编辑</span></a>
+                            <a class="note-del" href="#" title="编辑" ref="$b.id"><span class="edit">删除</span></a>
+                        </span>
+						<span class="badge">2013-10-13</span>
+                        <span class="note-line">
+                            <a href="">邮箱 QQ 银行卡号</a>
+						</span><br/>
+                        <span></span>
+						
+					</li>
+					<li>
+						<span class="pull-right">
+                            <a class="note-edit" href="#" title="编辑" ref="$b.id"><span class="edit">编辑</span></a>
+                            <a class="note-del" href="#" title="编辑" ref="$b.id"><span class="edit">删除</span></a>
+                        </span>
+						<span class="badge">2013-10-13</span>
+                        <span class="note-line">
+                            <a href="">邮箱 QQ 银行卡号</a>
+						</span><br/>
+                        <span></span>
+						
+					</li>
+					<li>
+						<span class="pull-right">
+                            <a class="note-edit" href="#" title="编辑" ref="$b.id"><span class="edit">编辑</span></a>
+                            <a class="note-del" href="#" title="编辑" ref="$b.id"><span class="edit">删除</span></a>
+                        </span>
+						<span class="badge">2013-10-13</span>
+                        <span class="note-line">
+                            <a href="">邮箱 QQ 银行卡号</a>
+						</span><br/>
+                        <span></span>
+						
+					</li>
+				</ul>
+			</div>
+			#pager("",$count,$size)
+        </div>
+    </div>
+</div>
