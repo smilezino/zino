@@ -192,7 +192,15 @@ public class DBbean implements Serializable{
 		String sql = "SELECT * FROM " + TableName() + " WHERE " + filter;
 		return QueryHelper.query_slice(getClass(), sql, page, size);
 	}
-	
+	/**
+	 * 获取此对象的记录数
+	 * @param filter
+	 * @return
+	 */
+	public long Count() {
+		String sql = "SELECT COUNT(*) FROM " +TableName();
+		return QueryHelper.stat(sql);
+	}
 	/**
 	 * 获取此对象的记录数
 	 * @param filter

@@ -14,7 +14,6 @@
 	.note-list li {padding:15px 5px;border-bottom:1px dashed #ccc;border-top:none;list-style:none}
 	.badge {padding:5px 10px}
 	.edit {padding: 2px 4px;color: gray;background-color: #f7f7f9;border: 1px solid #e1e1e8;
-		font-family: Monaco, Menlo, Consolas, "Courier New", monospace;
         font-size: 12px;
         -webkit-border-radius: 3px;
         -moz-border-radius: 3px;
