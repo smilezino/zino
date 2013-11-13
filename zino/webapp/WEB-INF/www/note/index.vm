@@ -23,7 +23,7 @@
 	#set($id = $link.param("id",0))
 	#set($note = $Note.Get($id))
 	#set($notes = $Note.list($g_user.id,1,5))
-	#if($note && ($n.user==$g_user.id || $g_user.IsManager()))
+	#if($note && ($note.user==$g_user.id || $g_user.IsManager()))
 		#set($user = $User.Get($note.user))
 		<div class="container-fluid">
             <div class="row-fluid bs-docs-sidebar">
