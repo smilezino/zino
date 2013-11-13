@@ -36,6 +36,27 @@ public class FormatTool {
 		html = StringUtils.replace(html, ">", "&gt;");
 		return html;
 	}
+	
+	/**
+	 * 截取字符串长度
+	 * @param text
+	 * @param length
+	 * @return
+	 */
+	public static String prefix(String text, int length) {
+		int count = 0;
+		StringBuffer res = new StringBuffer();
+		for (int i = 0; i < text.length(); i++) {
+			int j = text.charAt(i);
+			if ((j & 0xff00 >>> 8) != 0)
+				count++;
+			if (count <= length)
+				res.append((char) j);
+			else
+				break;
+		}
+		return res.toString();
+	}
 	/**
 	 * URL编码
 	 * 

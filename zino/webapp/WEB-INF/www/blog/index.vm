@@ -18,7 +18,7 @@
 	.collection-active a {color:black;background:#eee;}
 	.nav-list>li>a {display:block;margin:0 0 -1px 0;border:1px solid #e5e5e5;padding: 5px 14px;}
 	.nav-list>li:last-child>a{border-bottom:2px solid #e5e5e5}
-	.nav-list>li{overflow:hidden}
+	.nav-list>li{overflow:hidden;white-space: nowrap}
 	.content-fixed {position:fixed; top:20px; width:181px}
 	@media (min-width: 1200px) {
 		.content-fixed {position:fixed; top:20px; width:231px}

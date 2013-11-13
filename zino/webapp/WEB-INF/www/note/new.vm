@@ -1,0 +1,61 @@
+#set($layout = "_index.vm")
+#set($page_title = "新建 Note - By zinor.net")
+#set($active = "note")
+
+#if($g_user)
+<style>
+	.cmd-btn {padding:20px 0;}
+	.cmd-btn .input-btn {padding:8px 18px;font-weight:bold}
+	.fixed {width:100%;position:fixed; bottom:0;border-top:1px solid #ccc;background:#eee}
+	.nav-header {padding:20px 0 5px 0;text-align:center;font-size:16px;color:#666}
+	.nav-list>li>a {display:block;margin:0 0 -1px 0;border:1px solid #e5e5e5;padding: 5px 14px;}
+	.nav-list>li:last-child>a{border-bottom:2px solid #e5e5e5}
+	.nav-list>li{overflow:hidden}
+	textarea {height: 260px;width:100%;background-color: #FFF;}
+</style>
+#set($notes = $Note.list($g_user.id,1,5))
+<form id="note-form">
+<div class="container-fluid">
+    <div class="row-fluid">
+		<div class="span3">
+			<ul class="nav nav-list">
+				<li class="nav-header">最近记事</li>
+				#foreach($n in $notes)
+                    <li><a href="$link.link("note?id=")$n.id">$format.html($format.prefix($n.prefixText(),15))</a></li>
+				#end
+            </ul>
+	     </div>
+    	<div class="span6">
+    		<textarea name="text"></textarea>		
+            <div class="cmd-btn">
+    			<input id="btn-post" class="btn btn-primary input-btn" type="button" value="保存" />
+    		</div>
+        </div>
+    </div>
+</div>
+</form>
+<script>
+	$(function(){
+		$(".cmd-btn").floatScroll({direction:"bottom"});
+		$("#btn-post").click(function(){
+			var options = {
+    			url:"$link.action("note/add")",
+    			dataType:"json",
+    			type:"POST",
+    			beforeSubmit:function(){},
+    			success:function(msg){
+    				if(unLogin(msg)) {
+						location.href = "/login";
+						return ;
+					}
+    				if(msg.error){alert(msg.msg);return;}
+    				location.href = "$link.link("note?id=")"+msg.id;
+    			}
+    		};
+			$("#note-form").ajaxSubmit(options);
+		});
+	});
+</script>
+#else
+	$link.redirect($link.link("login"))
+#end

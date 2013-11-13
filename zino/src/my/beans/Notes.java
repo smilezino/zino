@@ -4,6 +4,9 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
+import org.markdownj.MarkdownProcessor;
+
 import my.db.DBbean;
 import my.db.QueryHelper;
 
@@ -21,6 +24,23 @@ public class Notes extends DBbean {
 	private int status;
 	private Timestamp createTime;
 	
+	/**
+	 * 解析note文本
+	 * @return
+	 */
+	public String markdown() {
+		MarkdownProcessor m = new MarkdownProcessor();
+		return m.markdown(text);
+	}
+	
+	/**
+	 * 解析要显示的title文本
+	 * @return
+	 */
+	public String prefixText() {
+		String[] strs = StringUtils.split(text, "\n");
+		return strs[0].length()>0?strs[0]:"记事";
+	}
 	/**
 	 * 统计note个数
 	 * @param user
@@ -50,6 +70,7 @@ public class Notes extends DBbean {
 			sql.append(" AND user=?");
 			params.add(user);
 		}
+		sql.append(" ORDER BY id DESC");
 		return QueryHelper.query_slice(Notes.class, sql.toString(), page, count, params.toArray());
 	}
 	
