@@ -9,6 +9,7 @@
         <script type="text/javascript" src="$link.bootstrap("js/bootstrap.js")"></script>
 		<script type="text/javascript" src='$link.js("floatScroll.js")'></script>
 		<link rel="stylesheet" type="text/css" href="$link.bootstrap("css/bootstrap.css")" />
+		<link rel="stylesheet" type="text/css" href="$link.css("style.css")" />
 		<link rel="stylesheet" type="text/css" href="$link.css("docs.css")" />
 	</head>
 	<body data-spy="scroll" data-target=".bs-docs-sidebar">

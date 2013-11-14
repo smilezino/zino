@@ -11,6 +11,7 @@
 		<script type="text/javascript" src="$link.js("common.js")"></script>
         <script type="text/javascript" src="$link.bootstrap("js/bootstrap.min.js")"></script>
 		<link rel="stylesheet" type="text/css" href="$link.bootstrap("css/bootstrap.css")" />
+		<link rel="stylesheet" type="text/css" href="$link.css("style.css")" />
     </head>
 	<body data-spy="scroll" data-target=".bs-docs-sidebar">
         <div class="navbar navbar-inverse">

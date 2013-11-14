@@ -34,7 +34,7 @@
         			<ul class="nav nav-list">
         				<li class="nav-header">最近记事</li>
         				#foreach($n in $notes)
-                            <li><a href="$link.link("note?id=")$n.id">$format.html($format.prefix($n.prefixText(),15))</a></li>
+                            <li><a href="$link.link("note?id=")$n.id">$format.html($format.prefix($n.prefixText(),14))</a></li>
         				#end
                     </ul>
         	     </div>
@@ -42,7 +42,7 @@
         			<div class="page-header">
                         <h1>$note.title <small>$format.prefix($format.html($note.prefixText()),25)</small></h1>
                         <div>
-        					<strong>#if($user.name)$user.name#else佚名#end</strong>发表于 $format.date("yyyy-MM-dd HH:mm",$note.createTime)
+        					<strong>#if($user.name)$user.name#else佚名#end</strong> 记于 $format.date("yyyy-MM-dd HH:mm",$note.createTime)
         				</div>
                     </div>
 					
@@ -78,7 +78,7 @@
                                     </span>
             						<span class="badge">$n.title</span>
                                     <span class="note-line">
-                                        <a href="$link.link("note?id=")$n.id">$format.html($format.prefix($n.prefixText(),50))</a>
+                                        <a href="$link.link("note?id=")$n.id">$format.html($format.prefix($n.prefixText(),35))</a>
             						</span><br/>
                                 </li>
         					#end

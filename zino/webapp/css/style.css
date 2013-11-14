@@ -7,3 +7,5 @@ body {
     background-image: linear-gradient(top, rgba(255, 255, 255, 0.5) 100px, rgba(255, 255, 255, 0) 160px)
 	
 }
+
+p {text-indent:2em}

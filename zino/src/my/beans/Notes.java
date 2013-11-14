@@ -30,7 +30,7 @@ public class Notes extends DBbean {
 	 */
 	public String markdown() {
 		MarkdownProcessor m = new MarkdownProcessor();
-		return m.markdown(text);
+		return m.markdown(text.replaceAll("\n", "\n\n"));
 	}
 	
 	/**
