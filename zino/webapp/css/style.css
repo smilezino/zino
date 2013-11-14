@@ -9,3 +9,7 @@ body {
 }
 
 p {text-indent:2em}
+
+.blog-content img {
+	border: 1px solid #e5e5e5;
+}
