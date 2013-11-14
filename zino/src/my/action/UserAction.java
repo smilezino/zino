@@ -24,8 +24,10 @@ public class UserAction {
 	public void login(RequestContext ctx) throws IOException {
 		String username = ctx.param("username");
 		String pwd = ctx.param("pwd");
-//		if(!ImageUtils.validate(ctx.request()))
+		
+//		if(!ImageUtils.validate(ctx.request())) // 验证码(未使用)
 //			throw ctx.error("verify_code_error");
+		
 		User user = User.Login(username, pwd);
 		if(user == null)
 			throw ctx.error("user_login_failed");
@@ -72,16 +74,15 @@ public class UserAction {
 	}
 	
 	/**
-	 * 删除用户
+	 * 修改密码
 	 * @param ctx
-	 * @throws IOException 
+	 * @throws IOException
 	 */
-	@Annotation.UserRequired(role=User.ROLE_ADMIN)
+	@Annotation.UserRequired
 	@Annotation.PostMethod
-	public void delete(RequestContext ctx) throws IOException {
-		//TODO 删除用户的所有资料
+	public void changePwd(RequestContext ctx) throws IOException {
+		//TODO: 实现
 	}
-	
 	/**
 	 * 用户信息格式检查
 	 * @param user

@@ -7,11 +7,15 @@
 
 <style>
 	.table th {text-align:center;background:#ccc}
+	.edit {float:right;}
+	select { width:auto;margin-bottom:0;float:right;margin-right:10px}
+	table td.view-remove {text-align:right}
 </style>
 ##参数1 用户id， -1所有
 ##参数2 是否归档， -1所有
 #set($users = $User.list($p, $size))
 #set($count = $User.count())
+#set($roles = [1,10,64,127])
 <table class="table table-condensed table-bordered">
     <thead><tr>
         <th>id</th>
@@ -26,8 +30,20 @@
             <td>$u.id</td>
             <td>#if($u)$format.html($u.name)#end</td>
             <td>#if($u.email)$format.html($u.email)#end</td>
-            <td>$User.roleName($u.role)</td>
-            <td class="view-remove"><a href="#" ref="$u.id" title="删除"><i class="icon-remove"></i></a></td>
+            <td style="width:300px">		
+                <span id="r$u.id">$User.roleName($u.role)</span>
+                #if($g_user.IsAdmin())
+				<a href="javascript:;" class="edit" ref="$u.id">修改</a>
+				<select id="$u.id" style="display:none">
+					#foreach($r in $roles)
+                        <option #if($u.role==$r)selected#end value="$r">$User.roleName($r)</option>
+					#end
+                </select>
+				#end
+			</td>
+            <td class="view-remove">
+				##<a href="javascript:;" ref="$u.id" title="删除"><i class="icon-remove"></i></a>
+			</td>
 		</tr>
 	#end
 	</tbody>
@@ -41,10 +57,42 @@
 			var params = {
 				"id":id
 			};
-			ajax("$link.action("user/delete")",params,function(msg){
-				if(msg.error){alert(msg.msg);return;}
-				obj.parents("tr").remove();
+			if(confirm("确定删除？")){
+    			ajax("$link.action("admin/delete")",params,function(msg){
+    				if(msg.error){alert(msg.msg);return;}
+    				obj.parents("tr").remove();
+    			});
+			}
+		});
+		
+		$(".edit").click(function(){
+			obj = $(this);
+			var id = obj.attr("ref");
+			obj.hide();
+			var select = $("#"+id);
+			var span = $("#r"+id);
+			select.live("blur",function(){
+				$(this).hide();
+				$(".edit").show();
+			})
+			select.live("change",function(){
+				var tip = $(this).find("option:selected").text();
+				var role = $(this).val();
+				changeRole(id,role);
+				$(this).hide();
+				span.html(tip);
 			});
+			select.show();
+			select.focus();
 		});
 	});
+	function changeRole(id, role) {
+		var params = {
+			"id":id,
+			"role":role
+		};
+		ajax("$link.action("admin/changeRole")",params,function(msg){
+			if(msg.error){alert(msg.msg);return;};
+		});
+	}
 </script>
