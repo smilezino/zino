@@ -67,7 +67,7 @@ public class FileAction {
 	 * @param ctx
 	 * @throws IOException
 	 */
-	@Annotation.UserRequired
+	@Annotation.UserRequired(role=User.ROLE_MANAGER)
 	@Annotation.PostMethod
 	public void uploadDoc(RequestContext ctx) throws IOException {
 		User user = ctx.user();
@@ -85,6 +85,24 @@ public class FileAction {
 		long id = f.Save();
 		ctx.output_json("id", id);
 	}
+	
+	/**
+	 * 设置文件下载权限
+	 * @param ctx
+	 * @throws IOException
+	 */
+	@Annotation.PostMethod
+	@Annotation.UserRequired(role=User.ROLE_MANAGER)
+	public void changeDocAuth(RequestContext ctx) throws IOException{
+		byte status = ctx.param("s", Files.STATUS_UNLOCK);
+		long id = ctx.id();
+		Files file = Files.INSTANCE.Get(id);
+		if(file==null) {
+			throw ctx.error("form_empty");
+		}
+		file.UpdateField("status", status);
+		ctx.output_json("id", id);
+	}
 	/**
 	 * 下载文件
 	 * @param ctx
@@ -95,6 +113,11 @@ public class FileAction {
 		Files file = Files.INSTANCE.Get(id);
 		if(file==null)
 			throw ctx.error("form_empty");
+		User user = ctx.user();
+		if(file.getStatus()==Files.STATUS_LOCK && (user==null || !user.IsManager())) {
+			ctx.print("文件不允许下载");
+			return ;
+		}
 		File f = StorageUtils.INSTANCE.read(file.getFilepath());
 		if(f!=null) {
 			download(ctx, f, file.getFilename());

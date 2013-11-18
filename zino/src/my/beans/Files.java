@@ -11,7 +11,10 @@ import my.db.DBbean;
  *
  */
 public class Files extends DBbean {
-	public static Files INSTANCE = new Files();
+	public static final transient Files INSTANCE = new Files();
+	
+	public static final byte STATUS_LOCK = 0x01; //不允许普通用户下载
+	public static final byte STATUS_UNLOCK = 0x00;//公开的，可下载
 
 	private long user;
 	private String filename;
@@ -21,6 +24,20 @@ public class Files extends DBbean {
 	private byte status;
 	private Timestamp createTime;
 	
+	/**
+	 * 文件状态提示
+	 * @param s
+	 * @return
+	 */
+	public static String status(int s) {
+		switch(s){
+		case Files.STATUS_LOCK:
+			return "私有";
+		case Files.STATUS_UNLOCK:
+		default :
+			return "公开";
+		}
+	}
 	/**
 	 * 文件下载次数+1
 	 */

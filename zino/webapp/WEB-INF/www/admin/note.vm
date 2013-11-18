@@ -7,9 +7,7 @@
 
 <style>
 	.table th {text-align:center;background:#ccc}
-	.width10 {width:10%}
-	.width20 {width:20%}
-	.width50 {width:50%}
+	.width10 a {margin-left:10px}
 </style>
 ##参数1：-1所有user的note
 #set($notes = $Note.list(0, $p, $size))
@@ -17,17 +15,17 @@
 #set($count = $Note.count(0))
 <table class="table table-condensed table-bordered">
     <thead><tr>
-        <th class="width10">id</th>
-		<th class="width60">title</th>
-        <th class="width10">User</th>
-        <th class="width20">时间</th>
-		<th class="width10">操作</th>
+        <th>id</th>
+		<th>title</th>
+        <th>User</th>
+        <th>时间</th>
+		<th>操作</th>
 	</tr></thead>
     <tbody>
 	#foreach($n in $notes)
 		<tr>
             <td class="width10">$n.id</td>
-            <td class="width60"><a href="$link.link("note?id=")$n.id">$format.prefix($format.html($n.prefixText()),35)</a></td>
+            <td class="width50"><a href="$link.link("note?id=")$n.id">$format.prefix($format.html($n.prefixText()),35)</a></td>
 			#set($user = $User.Get($n.user))
             <td class="width10">
 				#if($user)$format.html($user.name)#else佚名#end

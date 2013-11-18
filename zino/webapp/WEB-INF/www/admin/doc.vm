@@ -8,6 +8,7 @@
 <style>
 	.table th {text-align:center;background:#ccc}
 	.input-append {margin-bottom:0}
+	select { width:auto;margin-bottom:0;float:right;}
 </style>
 ##参数1 用户id， -1所有
 ##参数2 是否归档， -1所有
@@ -45,12 +46,14 @@
 		});
 	</script>
 </div>
+#set($status=[0,1])
 <table class="table table-condensed table-bordered">
     <thead><tr>
         <th>id</th>
 		<th>文件名</th>
         <th>文件链接</th>
         <th>用户</th>
+        <th>状态</th>
         <th>时间</th>
         <th>下载次数</th>
 		<th>操作</th>
@@ -58,14 +61,23 @@
     <tbody>
 	#foreach($d in $docs)
 		<tr>
-            <td>$d.id</td>
+            <td class="width5">$d.id</td>
             <td><a href="$link.action("file/download?id=")$d.id">$format.html($d.filename)</a></td>
-            <td>http://www.zinor.net/action/file/download?id=$d.id</a></td>
+            <td>/action/file/download?id=$d.id</a></td>
 			#set($user = $User.Get($d.user))
-            <td>#if($user)$format.html($user.name)#end</td>
-            <td>$format.date("yyyy-MM-dd HH:mm:ss",$d.createTime)</td>
-            <td>$d.downloadCount</td>
-            <td class="doc-remove"><a href="#" ref="$d.id" title="删除"><i class="icon-remove"></i></a></td>
+            <td class="width5">#if($user)$format.html($user.name)#end</td>
+            <td class="width10">
+                <span id="s$d.id">$Doc.status($d.status)</span>
+				<a href="javascript:;" class="edit pull-right" ref="$d.id">修改</a>
+				<select id="$d.id" style="display:none">
+					#foreach($s in $status)
+                        <option #if($d.status==$s)selected#end value="$s">$Doc.status($s)</option>
+					#end
+                </select>
+			</td>
+            <td class="width15">$format.date("yyyy-MM-dd HH:mm:ss",$d.createTime)</td>
+            <td class="width10">$d.downloadCount</td>
+            <td class="doc-remove width5"><a href="#" ref="$d.id" title="删除"><i class="icon-remove"></i></a></td>
 		</tr>
 	#end
 	</tbody>
@@ -84,5 +96,34 @@
 				obj.parents("tr").remove();
 			});
 		});
+		$(".edit").click(function(){
+			obj = $(this);
+			var id = obj.attr("ref");
+			obj.hide();
+			var select = $("#"+id);
+			var span = $("#s"+id);
+			select.live("blur",function(){
+				$(this).hide();
+				$(".edit").show();
+			})
+			select.live("change",function(){
+				var tip = $(this).find("option:selected").text();
+				var s = $(this).val();
+				changeStatus(id,s);
+				$(this).hide();
+				span.html(tip);
+			});
+			select.show();
+			select.focus();
+		});
+		function changeStatus(id, s) {
+			var params = {
+				"id":id,
+				"s":s
+			};
+			ajax("$link.action("file/changeDocAuth")",params,function(msg){
+			if(msg.error){alert(msg.msg);return;};
+		});
+		}
 	});
 </script>
