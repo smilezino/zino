@@ -40,7 +40,7 @@
     							</script>
 							#end
 						#else
-							<li><a href="$link.link("login")"><strong>login</strong></a></li>
+							<li><a href="javascript:;" id="login-modal"><strong>login</strong></a></li>
 						#end
                     </ul>
                 </div>
@@ -54,6 +54,86 @@
 			<p class="text-center">&copy; zinor.net</p>
 		</div>
     </div>
+	#if(!$g_user)
+		<div id="login" class="modal hide fade">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h3>登录</h3>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" id="login-form" action="$link.action("user/login")">
+                    <fieldset>
+                        <div class="control-group">
+                            <label class="control-label" for="username"><i class="icon-user"></i></label>
+                            <div class="controls">
+                				<input type="text" class="input" name="username" id="username">
+                                <span id="err-username" class="help-inline"></span>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                			<label class="control-label" for="pwd"><i class="icon-lock"></i></label>
+                            <div class="controls">
+                				<input type="password" class="input" name="pwd" id="pwd">
+                				<span id="err-pwd" class="help-inline error"></span>
+                            </div>
+                        </div>
+                            <div class="control-group" style="margin-left:90px">
+                            <input id="login-btn" type="button" class="btn" value="Sign In" style="margin-right:20px">
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+            <div class="modal-footer">
+                ##<a href="javascript:;" class="btn btn-primary" id="collection-btn">确定</a>
+            </div>
+        </div>
+        <script>
+			$(function(){
+				$("#login-modal").click(function(){
+					$("#login").modal();
+					$("#login").on('shown',function(){
+						$("#username").focus();
+					});
+				});
+				
+				$("#login-btn").click(function(){
+        			login();
+        		});
+        		$("body").keyup(function(event){
+        			if(event.which==13)
+        				login();
+        		});
+			});
+			function login(){
+        		var u = $("#username");
+        		var p = $("#pwd");
+        		if(u.val().trim().length<=0) {
+        			u.parents(".control-group").addClass("error");
+        			$("#err-username").html("请输入用户名或email");
+        			u.focus();
+        			return ;
+        		}
+        		if(p.val().trim().length<=0) {
+        			p.parents(".control-group").addClass("error");
+        			$("#err-pwd").html("请输入密码");
+        			p.focus();
+        			return ;
+        		}
+        		var params = {
+        			"username":u.val(),
+        			"pwd":p.val()
+        		};
+        		ajax("$link.action("user/login")",params,function(msg) {
+        			if(msg.error) {
+        				u.parents(".control-group").addClass("error");
+        				$("#err-username").html(msg.msg);
+        				return;
+        			}
+        			location.reload();
+        		});
+        	}
+		</script>
+	#end
 	<script type="text/javascript">
         var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
         document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fc615d3ad3a56b8ef1cd2f512ed41064f' type='text/javascript'%3E%3C/script%3E"));
