@@ -12,6 +12,11 @@
 	.nav-list>li:last-child>a{border-bottom:2px solid #e5e5e5}
 	.nav-list>li{overflow:hidden}
 	textarea {height: 260px;width:100%;background-color: #FFF;}
+	.md-help ul {border:1px solid #ccc;padding:10px 0 10px 30px;border: 1px solid #e3e3e3;
+        -webkit-border-radius: 4px;
+        -moz-border-radius: 4px;
+        border-radius: 4px;}
+	.md-help li {line-height:180%;}
 </style>
 #set($notes = $Note.list($g_user.id,1,5))
 <form id="note-form">
@@ -30,6 +35,21 @@
             <div class="cmd-btn">
     			<input id="btn-post" class="btn btn-primary input-btn" type="button" value="保存" />
     		</div>
+        </div>
+		
+		<div class="span3 md-help">
+			<ul>
+	           <li>回车  = 换行</li>
+	           <li>*斜体* ， **粗体**</li>
+	           <li>行首4空格  = 代码块</li>
+               <li>`代码` = 行内代码</li>
+	           <li>行首&gt; = 引用</li>
+	           <li>行首- = 无序列表</li>
+	           <li>行首1. = 有序列表</li>
+	           <li>&lt;http://zinor.net&gt; = 链接网址</li>
+	           <li>[文字](http://url) = 链接文字 </li>
+	           <li>![说明](http://imgurl) = 图片</li>
+	        </ul>
         </div>
     </div>
 </div>
