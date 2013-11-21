@@ -8,7 +8,15 @@ body {
 	
 }
 
-p {text-indent:2em}
+.blog-content p {
+	text-indent:2em;
+	word-wrap: break-word;
+	word-break: break-all;
+}
+
+.blog-content li {
+	line-height:180%
+}
 
 .blog-content img {
 	border: 1px solid #e5e5e5;

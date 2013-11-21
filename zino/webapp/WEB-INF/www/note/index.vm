@@ -29,8 +29,10 @@
             <div class="row-fluid bs-docs-sidebar">
         		<div class="span3">
 					<ul class="nav nav-list">
-            				<li><a href="$link.link("note/edit?id=")$note.id">编辑</a></li>
-            			</ul>
+						<li class="nav-header"></li>
+        				<li><a href="$link.link("note/new")">新建记事</a></li>
+        				<li><a href="$link.link("note/edit?id=")$note.id">编辑</a></li>
+        			</ul>
         			<ul class="nav nav-list">
         				<li class="nav-header">最近记事</li>
         				#foreach($n in $notes)

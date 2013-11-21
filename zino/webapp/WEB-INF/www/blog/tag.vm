@@ -3,12 +3,23 @@
 #set($active = "blog")
 
 <style>
+	#content {text-align:center;position:relative}
+	#content a {font-size:16px;cursor:default; color:black}
+	#content a:hover {color:black}
 	.nav-header {padding:20px 0 5px 0;text-align:center;font-size:16px;color:#666}
 	.badge {padding:4px 15px;background:#888;color:white}
 	.badge:hover {background:#08c}
 	.tag>a {text-decoration:none; color:black}
 	.badgeNum {line-height:20px;margin-left:5px}
-	.tag {dispaly:block;float:left;margin:10px 10px 0 0}
+	.tag {display:block;float:left;margin:10px 10px 0 0}
+	.collection-active a {color:black;background:#eee;}
+	.nav-list>li>a {display:block;margin:0 0 -1px 0;border:1px solid #e5e5e5;padding: 5px 14px;}
+	.nav-list>li:last-child>a{border-bottom:2px solid #e5e5e5}
+	.nav-list>li{overflow:hidden;white-space: nowrap}
+	.content-fixed {position:fixed; top:20px; width:181px}
+	@media (min-width: 1200px) {
+		.content-fixed {position:fixed; top:20px; width:231px}
+	}
 	.blog-list {font-size:16px}
 	.blog-list ul {margin-left:0}
 	.blog-list li {list-style:none;border-bottom:1px dashed #ccc;padding:10px 0}
@@ -88,6 +99,8 @@
 				#else
 					<li><a href="$link.link("blog/post")">投稿</a></li>
 				#end
+            </ul>
+			<ul class="nav nav-list bs-docs-sidenav">
 				<li class="nav-header"><span><a href="$link.link("blog/tag")">标签</a></span></li>
                 <li>
 					#foreach($tag in $tags)

@@ -38,6 +38,7 @@ $blog.addViewCount()
 				<li class="nav-header"></li>
                 
 				#if($g_user && ($g_user.IsManager() || $g_user.id == $blog.user))
+                    <li><a href="$link.link("blog/new")">新建博客</a></li>
                     <li><a href="$link.link("blog/edit?id=")$blog.id">修改</a></li>
 				#else
 					<li><a href="$link.link("blog/post")">投稿</a></li>

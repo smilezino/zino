@@ -183,5 +183,6 @@ public class StorageUtils {
 				put("xlsx","application/vnd.ms-excel");
 				put("pptx","application/vnd.ms-powerpoint");
 				put("chm","application/octet-stream");
+				put("crx","application/octet-stream");
 			}};
 }

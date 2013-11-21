@@ -24,8 +24,8 @@
     <tbody>
 	#foreach($n in $notes)
 		<tr>
-            <td class="width10">$n.id</td>
-            <td class="width50"><a href="$link.link("note?id=")$n.id">$format.prefix($format.html($n.prefixText()),35)</a></td>
+            <td class="width5">$n.id</td>
+            <td class="width55"><a href="$link.link("note?id=")$n.id">$format.prefix($format.html($n.prefixText()),35)</a></td>
 			#set($user = $User.Get($n.user))
             <td class="width10">
 				#if($user)$format.html($user.name)#else佚名#end

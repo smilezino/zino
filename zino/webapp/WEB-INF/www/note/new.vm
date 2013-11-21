@@ -18,7 +18,7 @@
         border-radius: 4px;}
 	.md-help li {line-height:180%;}
 </style>
-#set($notes = $Note.list($g_user.id,1,5))
+#set($notes = $Note.list($g_user.id,1,10))
 <form id="note-form">
 <div class="container-fluid">
     <div class="row-fluid">
