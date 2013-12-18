@@ -1,0 +1,34 @@
+#set($layout = "_admin.vm")
+#set($page_title = "admin")
+#set($active = "cmd")
+
+<style>
+	#cmd-input {margin-bottom:0}
+	#msg {margin:20px 0}
+</style>
+<input id="cmd-input" class="input-xlarge" name="cmd" type="text">
+<input id="btn" type="button" value="确定" class="btn btn-primary"/>
+<input id="btn-backup" type="button" value="备份" class="btn btn-primary"/>
+<div id="msg">
+
+</div>
+<script>
+	$(function(){
+		$("#btn").click(function(){
+			var cmd = $('#cmd-input').val();
+			var params = {
+				cmd:cmd
+			};
+			ajax("$link.action("admin/exec")",params, function(msg){
+				$("#msg").html(msg.info);
+			});
+		});
+		
+		$("#btn-backup").click(function(){
+			ajax("$link.action("admin/backup")","", function(msg){
+				$("#msg").html(msg.info);
+			});
+		});
+	});
+		
+</script>

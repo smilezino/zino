@@ -24,6 +24,7 @@
                         <li#if($active&&$active=="note") class="active"#end><a href="$link.link("admin/note")"><strong>Note</strong></a></li>
                         <li#if($active&&$active=="view") class="active"#end><a href="$link.link("admin/view")"><strong>View</strong></a></li>
                         <li#if($active&&$active=="doc") class="active"#end><a href="$link.link("admin/doc")"><strong>Doc</strong></a></li>
+                        <li#if($active&&$active=="cmd") class="active"#end><a href="$link.link("admin/cmd")"><strong>Cmd</strong></a></li>
                     </ul>
                     
                     <ul class="nav pull-right">
