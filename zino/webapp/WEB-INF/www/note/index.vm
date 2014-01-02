@@ -19,6 +19,8 @@
         -moz-border-radius: 3px;
         border-radius: 3px;}
 </style>
+<link href='$link.css("prettify/prettify.css")' rel='stylesheet' type='text/css'/>
+<script src='$link.css("prettify/prettify.js")' type='text/javascript'></script>
 #if($g_user)
 	#set($id = $link.param("id",0))
 	#set($note = $Note.Get($id))
