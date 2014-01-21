@@ -1,0 +1,4 @@
+#set($layout = "_error.vm")
+#set($page_title = "您没有访问权限")
+<p><span>4</span><span>0</span><span>3</span></p>
+<p>抱歉，您没有访问权限(´･ω･`)</p>

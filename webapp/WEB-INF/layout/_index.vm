@@ -1,0 +1,142 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+        <title>$page_title</title>
+		<link rel="shortcut icon" type="image/x-icon" href="$link.img("favicon.ico")" />
+        <script type="text/javascript" src="$link.js("jquery-1.8.3.min.js")"></script>
+        <script type="text/javascript" src="$link.js("jquery.form.js")"></script>
+		<script type="text/javascript" src="$link.js("common.js")"></script>
+        <script type="text/javascript" src="$link.bootstrap("js/bootstrap.js")"></script>
+		<script type="text/javascript" src='$link.js("floatScroll.js")'></script>
+		<link rel="stylesheet" type="text/css" href="$link.bootstrap("css/bootstrap.css")" />
+		<link rel="stylesheet" type="text/css" href="$link.css("style.css")" />
+		<link rel="stylesheet" type="text/css" href="$link.css("docs.css")" />
+	</head>
+	<body data-spy="scroll" data-target=".bs-docs-sidebar">
+        <div class="navbar navbar-inverse">
+            <div class="navbar-inner">
+                <div class="container">
+                    <ul class="nav">
+                        <li#if(!$active) class="active"#end><a href="$link.root()"><strong>Home</strong></a></li>
+                        <li#if($active&&$active=="blog") class="active"#end><a href="$link.link("blog")"><strong>Blog</strong></a></li>
+                        <li#if($active&&$active=="note") class="active"#end><a href="$link.link("note")"><strong>Note</strong></a></li>
+                        <li#if($active&&$active=="view") class="active"#end><a href="$link.link("view")"><strong>View</strong></a></li>
+                    </ul>
+                    
+                    <ul class="nav pull-right">
+						#if($g_user)
+							#if($g_user.IsManager())
+								<li><a href="$link.link("admin")"><strong>管理</strong></a></li>
+							#else
+    							<li><a href="javascript:void(0);" id="loginout"><strong>loginout</strong></a></li>
+                                <script>
+    								$(function(){
+    									$("#loginout").click(function(){
+    										ajax("$link.action("user/loginout")","",function(msg){
+    											location.reload();
+    										});
+    									});
+    								});
+    							</script>
+							#end
+						#else
+							<li><a href="javascript:;" id="login-modal"><strong>login</strong></a></li>
+						#end
+                    </ul>
+                </div>
+            </div>
+        </div>
+    <div class="container">
+		${screen_content}
+        <div class="clearfix"></div>
+		<div style="margin:50px 0">
+			<hr />
+			<p class="text-center">&copy; zinor.net</p>
+		</div>
+    </div>
+	#if(!$g_user)
+		<div id="login" class="modal hide fade">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h3>登录</h3>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" id="login-form" action="$link.action("user/login")">
+                    <fieldset>
+                        <div class="control-group">
+                            <label class="control-label" for="username"><i class="icon-user"></i></label>
+                            <div class="controls">
+                				<input type="text" class="input" name="username" id="username">
+                                <span id="err-username" class="help-inline"></span>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                			<label class="control-label" for="pwd"><i class="icon-lock"></i></label>
+                            <div class="controls">
+                				<input type="password" class="input" name="pwd" id="pwd">
+                				<span id="err-pwd" class="help-inline error"></span>
+                            </div>
+                        </div>
+                            <div class="control-group" style="margin-left:90px">
+                            <input id="login-btn" type="button" class="btn" value="Sign In" style="margin-right:20px">
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+            <div class="modal-footer">
+                ##<a href="javascript:;" class="btn btn-primary" id="collection-btn">确定</a>
+            </div>
+        </div>
+        <script>
+			$(function(){
+				$("#login-modal").click(function(){
+					$("#login").modal();
+					$("#login").on('shown',function(){
+						$("#username").focus();
+					});
+				});
+				
+				$("#login-btn").click(function(){
+        			login();
+        		});
+        		$("body").keyup(function(event){
+        			if(event.which==13)
+        				login();
+        		});
+			});
+			function login(){
+        		var u = $("#username");
+        		var p = $("#pwd");
+        		if(u.val().trim().length<=0) {
+        			u.parents(".control-group").addClass("error");
+        			$("#err-username").html("请输入用户名或email");
+        			u.focus();
+        			return ;
+        		}
+        		if(p.val().trim().length<=0) {
+        			p.parents(".control-group").addClass("error");
+        			$("#err-pwd").html("请输入密码");
+        			p.focus();
+        			return ;
+        		}
+        		var params = {
+        			"username":u.val(),
+        			"pwd":p.val()
+        		};
+        		ajax("$link.action("user/login")",params,function(msg) {
+        			if(msg.error) {
+        				u.parents(".control-group").addClass("error");
+        				$("#err-username").html(msg.msg);
+        				return;
+        			}
+        			location.reload();
+        		});
+        	}
+		</script>
+	#end
+	<script type="text/javascript">
+        var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+        document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fc615d3ad3a56b8ef1cd2f512ed41064f' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+  </body>
+</html>

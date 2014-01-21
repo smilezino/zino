@@ -1,0 +1,181 @@
+#set($layout = "_index.vm")
+#set($page_title = "Tag - Blog")
+#set($active = "blog")
+
+<style>
+	#content {text-align:center;position:relative}
+	#content a {font-size:16px;cursor:default; color:black}
+	#content a:hover {color:black}
+	.nav-header {padding:20px 0 5px 0;text-align:center;font-size:16px;color:#666}
+	.badge {padding:4px 15px;background:#888;color:white}
+	.badge:hover {background:#08c}
+	.tag>a {text-decoration:none; color:black}
+	.badgeNum {line-height:20px;margin-left:5px}
+	.tag {display:block;float:left;margin:10px 10px 0 0}
+	.collection-active a {color:black;background:#eee;}
+	.nav-list>li>a {display:block;margin:0 0 -1px 0;border:1px solid #e5e5e5;padding: 5px 14px;}
+	.nav-list>li:last-child>a{border-bottom:2px solid #e5e5e5}
+	.nav-list>li{overflow:hidden;white-space: nowrap}
+	.content-fixed {position:fixed; top:20px; width:181px}
+	@media (min-width: 1200px) {
+		.content-fixed {position:fixed; top:20px; width:231px}
+	}
+	.blog-list {font-size:16px}
+	.blog-list ul {margin-left:0}
+	.blog-list li {list-style:none;border-bottom:1px dashed #ccc;padding:10px 0}
+	##.blog-list li:hover {background:#eee;}
+	.blog-list li a {margin-left:5px}
+	.blog-list .pull-right {font-size:14px}
+	h1 span {font-size:28px;}
+</style>
+#set($p = $link.param("p",1))
+#set($size = 16)
+#set($t = $link.param("p1",""))
+
+#if($t == "")
+	#set($tags = $Tag.listTagByBlog(100000))
+	<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span3 bs-docs-sidebar content">
+			<ul class="nav nav-list bs-docs-sidenav">
+				<li class="nav-header"></li>
+				#if($g_user)
+                    <li><a href="$link.link("blog/new")">发表博文</a></li>
+				#else
+					<li><a href="$link.link("blog/post")">投稿</a></li>
+				#end
+				#**<li class="nav-header"><span><a href="$link.link("blog/tag")">标签</a></span></li>
+                <li>
+					#foreach($tag in $tags)
+						#set($tag_count = $Tag.countByBlogTag($tag.id))
+						<span class="tag"><a href="$link.link("blog/tag/")$format.encode_url($tag.tag)"><span class="badge">$format.html($tag.tag)</span><span class="badgeNum">x $tag_count</span></a></span>
+					#end
+				</li>
+				**#
+			</ul>
+        </div>
+        <div class="span9">
+    			<div class="page-header">
+                    <h1>标签大全</h1>
+                </div>
+    			<div class="tag-list">
+					#foreach($tag in $tags)
+						#set($tag_count = $Tag.countByBlogTag($tag.id))
+						<span class="tag"><a href="$link.link("blog/tag/")$format.encode_url($tag.tag)"><span class="badge">$format.html($tag.tag)</span><span class="badgeNum">x $tag_count</span></a></span>
+					#end
+                </div>
+        </div>
+    </div>
+    </div>
+#else
+	
+#if($g_user.IsManager())
+	##参数1：-1所有，1草稿，0正常
+	##参数2：-1所有，1投稿，0正常
+	##参数3：是否根据合集id筛选，-1否
+	##参数4：标签，空列出所有标签
+	##参数5: 页码
+	##参数6: 每页个数
+	#set($blogs = $Blog.listByFilter(-1, -1, -1, $t, $p, $size))
+	##参数1：-1所有，1草稿，0正常
+	##参数2：-1所有，1投稿，0正常
+	##参数3：是否根据合集id筛选，-1否
+	##参数4：标签，空 所有标签
+	#set($count = $Blog.countByFilter(-1, -1, -1, $t))
+#else
+	#set($blogs = $Blog.listByFilter(0, 0, -1, $t, $p, $size))
+	#set($count = $Blog.countByFilter(0, 0, -1, $t))
+#end
+##blog的tag Type为1
+#set($tags = $Tag.listTagByBlog(10))
+
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span3 bs-docs-sidebar content">
+			<ul class="nav nav-list bs-docs-sidenav">
+				<li class="nav-header"></li>
+				#if($g_user)
+                    <li><a href="$link.link("blog/new")">发表博文</a></li>
+				#else
+					<li><a href="$link.link("blog/post")">投稿</a></li>
+				#end
+            </ul>
+			<ul class="nav nav-list bs-docs-sidenav">
+				<li class="nav-header"><span><a href="$link.link("blog/tag")">标签</a></span></li>
+                <li>
+					#foreach($tag in $tags)
+						#set($tag_count = $Tag.countByBlogTag($tag.id))
+						<span class="tag"><a href="$link.link("blog/tag/")$format.encode_url($tag.tag)"><span class="badge">$format.html($tag.tag)</span><span class="badgeNum">x $tag_count</span></a></span>
+					#end
+				</li>
+			</ul>
+        </div>
+        <div class="span9">
+    			<div class="page-header">
+                    <h1>标签<span>：$t</span></h1>
+                </div>
+    			<div class="blog-list">
+					<ul class="">
+					#foreach($b in $blogs)
+						<li>
+							<i class="icon-stop"></i>
+							#if($b.draft == 1)
+                            <span>(草稿)</span>
+							#end
+							#set($collect = $BlogCollection.Get($b.collection))
+							#if($collect)
+								<a href="$link.link("blog?id=")$b.id">$format.html($collect.name) -- $format.html($b.title)</a>
+							#else
+								<a href="$link.link("blog?id=")$b.id">$format.html($b.title)</a>
+							#end
+							<span class="pull-right">
+								<span>$format.date("yyyy-MM-dd HH:mm", $b.createTime)</span>
+								#if($g_user.IsManager())
+									#if($b.status==1)
+										<a class="blog-accept" href="#" title="采纳" ref="$b.id"><i class="icon-ok"></i></a>
+									#end
+									<a class="blog-edit" href="$link.link("blog/edit?id=")$b.id" title="编辑" ref="$b.id"><i class="icon-edit"></i></a>
+									<a class="blog-delete" href="#" title="删除" ref="$b.id"><i class="icon-remove"></i></a>
+								#end
+							</span>
+						</li>
+					#end
+					</ul>
+				</div>
+				#pager("",$count,$size)
+        </div>
+    </div>
+</div>
+
+#if($g_user.IsManager())
+<script>
+	$(function(){
+		$(".blog-accept").click(function(){
+			var id = $(this).attr("ref");
+			var params = {
+				"id":id
+			};
+			ajax("$link.action("blog/accept")",params,function(msg){
+				if(msg.error){alert(msg.msg);return;}
+				location.reload();
+			})
+		});
+		
+		$(".blog-delete").click(function(){
+			var id = $(this).attr("ref");
+			var params = {
+				"id":id
+			};
+			if(confirm("确定删除？")) {
+				ajax("$link.action("blog/delete")",params,function(msg){
+					if(msg.error){alert(msg.msg);return;}
+					location.reload();
+				});
+			
+			}
+		});
+	});
+
+</script>
+#end
+#end

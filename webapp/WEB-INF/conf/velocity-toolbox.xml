@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<toolbox>
+	<tool>
+		<key>link</key>
+		<scope>request</scope>
+		<class>my.toolbox.LinkTool</class>
+	</tool>
+	<tool>
+		<key>resource</key>
+		<scope>request</scope>
+		<class>my.toolbox.ResourceTool</class>
+	</tool>
+	<tool>
+		<key>format</key>
+		<scope>application</scope>
+		<class>my.toolbox.FormatTool</class>
+	</tool>
+	<tool>
+		<key>User</key>
+		<scope>application</scope>
+		<class>my.beans.User</class>
+	</tool>
+	<tool>
+		<key>Todo</key>
+		<scope>application</scope>
+		<class>my.beans.View</class>
+	</tool>
+	<tool>
+		<key>Blog</key>
+		<scope>application</scope>
+		<class>my.beans.Blog</class>
+	</tool>
+	<tool>
+		<key>BlogCollection</key>
+		<scope>application</scope>
+		<class>my.beans.BlogCollection</class>
+	</tool>
+	<tool>
+		<key>Tag</key>
+		<scope>application</scope>
+		<class>my.beans.Tag</class>
+	</tool>
+	<tool>
+		<key>Note</key>
+		<scope>application</scope>
+		<class>my.beans.Notes</class>
+	</tool>
+	<tool>
+		<key>Doc</key>
+		<scope>application</scope>
+		<class>my.beans.Files</class>
+	</tool>
+</toolbox>

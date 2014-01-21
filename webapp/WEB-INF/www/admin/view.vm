@@ -1,0 +1,55 @@
+#set($layout = "_admin.vm")
+#set($page_title = "admin")
+#set($active = "view")
+
+#set($p = $link.param("p",1))
+#set($size = 16)
+
+<style>
+	.table th {text-align:center;background:#ccc}
+</style>
+##参数1 用户id， -1所有
+##参数2 是否归档， -1所有
+#set($views = $Todo.list($p, $size))
+#set($count = $Todo.count())
+<table class="table table-condensed table-bordered">
+    <thead><tr>
+        <th>id</th>
+		<th>标题</th>
+        <th>用户</th>
+        <th>归档</th>
+        <th>时间</th>
+		<th>操作</th>
+	</tr></thead>
+    <tbody>
+	#foreach($v in $views)
+		<tr class="view">
+            <td class="width5">$v.id</td>
+            <td class="view-url width65">
+				<a href="$v.url" ref="$v.id" target="_blank"#if($v.status==1) class="viewed"#elseif($v.status==8) class="archive" title="已存档"#else title="未浏览"#end>$v.title</a>
+			</td>
+			#set($user = $User.Get($v.user))
+            <td class="width5">#if($user)$format.html($user.name)#end</td>
+            <td class="width5">#if($v.status == 8)是#end</td>
+            <td class="width15">$format.date("yyyy-MM-dd HH:mm",$v.createTime)</td>
+            <td class="view-remove width5"><a href="#" ref="$v.id" title="删除"><i class="icon-remove"></i></a></td>
+		</tr>
+	#end
+	</tbody>
+</table>
+#pager("",$count,$size)	
+<script>
+	$(function(){
+		$(".view-remove a").click(function(){
+			obj = $(this);
+			var id = obj.attr("ref");
+			var params = {
+				"id":id
+			};
+			ajax("$link.action("view/delete")",params,function(msg){
+				if(msg.error){alert(msg.msg);return;}
+				obj.parents("tr").remove();
+			});
+		});
+	});
+</script>

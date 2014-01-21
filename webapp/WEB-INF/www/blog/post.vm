@@ -1,0 +1,95 @@
+#set($layout = "_index.vm")
+#set($page_title = "发表 Blog - By smile zino")
+#set($active = "blog")
+
+#invoke("widget/js.vm")
+
+<form id="blog-form">
+<div class="row">
+	<div class="span4" id="md-help">
+		<div class="span3" style="float:left;margin-left:0">
+			<div class="well">
+			<ul class="unstyled">
+	           <li>行尾2空格 + 1回车  = 换行</li>
+	           <li>连续2回车 = 空行分段</li>
+	           <li>*斜体* ， **粗体**</li>
+	           <li>行首4空格  = 代码块</li>
+               <li>`代码` = 行内代码</li>
+	           <li>行首&gt; = 引用</li>
+	           <li>行首- = 无序列表</li>
+	           <li>行首1. = 有序列表</li>
+	           <li>&lt;http://zinor.net&gt; = 链接网址</li>
+	           <li>[文字](http://url) = 链接文字 </li>
+	           <li>![说明](http://imgurl) = 图片</li>
+	        </ul>
+	        </div>
+	     </div>
+	     <div class="clearfix"></div>
+	     <h4>HTML 代码：</h4>
+	     <div id="wmd-output" class="wmd-panel"></div>      
+    </div>
+	<div class="span8">
+		<input class="input-block-level" type="text" name="title" placeholder="标题"/>
+		<div id="wmd-editor" class="wmd-panel">
+			<div id="wmd-button-bar"></div>
+			<textarea id="wmd-input" name="text"></textarea>
+			<input class="input-tag" id="input-tag" type="text" placeholder="标签" /> <a id="btn-tag" class="info" href="javascript:;">添加</a>
+            <div id="tags">
+			</div>
+		</div>
+        <div class="clearfix"></div>
+		<h4>预览：</h4>
+		<div id="wmd-preview" class="wmd-panel"></div>
+        <div class="cmd-btn">
+			<input id="btn-post" class="btn btn-primary input-btn" type="button" value="投递" />
+			##<input id="btn-draft" class="btn btn-primary input-btn" type="button" value="存为草稿" />
+			
+			##<input class="tag-input" type="text" placeholder="标签"/>
+            ##<a href="#">添加</a>
+			##<div class="prepend">
+              ##<span class="tag">adasdasd</span>
+              ##<span class="add-on"><i class="icon-remove"></i></span>
+            ##</div>
+		</div>
+    </div>
+</div>
+</form>
+<script>
+	$(function(){
+		$("#btn-post").click(function(){
+			var options = {
+    			url:"$link.action("blog/post")",
+    			dataType:"json",
+    			type:"POST",
+    			beforeSubmit:function(){},
+    			success:function(msg){
+    				if(unLogin(msg)) {
+						location.href = "/login";
+						return ;
+					}
+    				if(msg.error){alert(msg.msg);return;}
+    				location.href = "$link.link("blog?id=")"+msg.id;
+    			}
+    		};
+			$("#blog-form").ajaxSubmit(options);
+		});
+		
+		$("#btn-draft").click(function(){
+			var options = {
+    			url:"$link.action("blog/draft")",
+    			dataType:"json",
+    			type:"POST",
+    			beforeSubmit:function(){},
+    			success:function(msg){
+    				if(unLogin(msg)) {
+						location.href = "/login";
+						return ;
+					}
+    				if(msg.error){alert(msg.msg);return;}
+    				location.href = "$link.link("blog/draft?id=")"+msg.id;
+    			}
+    		};
+			$("#blog-form").ajaxSubmit(options);
+		});
+	});
+</script>

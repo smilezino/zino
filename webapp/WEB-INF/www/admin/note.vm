@@ -1,0 +1,60 @@
+#set($layout = "_admin.vm")
+#set($page_title = "admin")
+#set($active = "note")
+
+#set($p = $link.param("p",1))
+#set($size = 16)
+
+<style>
+	.table th {text-align:center;background:#ccc}
+	.width10 a {margin-left:10px}
+</style>
+##参数1：-1所有user的note
+#set($notes = $Note.list(0, $p, $size))
+
+#set($count = $Note.count(0))
+<table class="table table-condensed table-bordered">
+    <thead><tr>
+        <th>id</th>
+		<th>title</th>
+        <th>User</th>
+        <th>时间</th>
+		<th>操作</th>
+	</tr></thead>
+    <tbody>
+	#foreach($n in $notes)
+		<tr>
+            <td class="width5">$n.id</td>
+            <td class="width55"><a href="$link.link("note?id=")$n.id">$format.prefix($format.html($n.prefixText()),35)</a></td>
+			#set($user = $User.Get($n.user))
+            <td class="width10">
+				#if($user)$format.html($user.name)#else佚名#end
+			</td>
+            <td class="width20">$format.date("yyyy-MM-dd HH:mm:ss",$n.createTime)</td>
+            <td class="width10">
+				<a class="note-edit" href="$link.link("note/edit?id=")$n.id" title="编辑" ref="$n.id"><i class="icon-edit"></i></a>
+				<a class="note-delete" href="#" title="删除" ref="$n.id"><i class="icon-remove"></i></a>
+			</td>
+        </tr>
+	#end
+	</tbody>
+</table>
+#pager("",$count,$size)	
+<script>
+	$(function(){
+	
+		$(".note-delete").click(function(){
+			var id = $(this).attr("ref");
+			var params = {
+				"id":id
+			};
+			if(confirm("确定删除？")) {
+				ajax("$link.action("note/delete")",params,function(msg){
+					if(msg.error){alert(msg.msg);return;}
+					location.reload();
+				});
+			
+			}
+		});
+	});
+</script>
