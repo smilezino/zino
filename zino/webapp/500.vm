@@ -1,4 +1,0 @@
-#set($layout = "_error.vm")
-#set($page_title = "应用程序出错")
-<p><span>5</span><span>0</span><span>0</span></p>
-<p>应用程序出错啦 &gt;.&lt; </p>
