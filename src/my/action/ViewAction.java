@@ -5,6 +5,14 @@ import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.List;
 
+import org.apache.commons.httpclient.DefaultHttpMethodRetryHandler;
+import org.apache.commons.httpclient.HttpClient;
+import org.apache.commons.httpclient.HttpMethod;
+import org.apache.commons.httpclient.HttpStatus;
+import org.apache.commons.httpclient.methods.GetMethod;
+import org.apache.commons.httpclient.params.HttpMethodParams;
+import org.jsoup.Jsoup;
+
 import com.google.gson.Gson;
 
 import my.beans.View;
@@ -27,10 +35,25 @@ public class ViewAction {
 		View form = ctx.form(View.class);
 		if(form==null || form.getUrl()==null || form.getUrl().length()<=0)
 			throw ctx.error("form_empty");
+		form.setTitle(this.getTitleFromUrl(form.getTitle(), form.getUrl()));
 		form.setUser(user.getId());
 		form.setCreateTime(new Timestamp(Calendar.getInstance().getTimeInMillis()));
 		long id = form.Save();
 		ctx.output_json("id", id);
+	}
+	
+	private String getTitleFromUrl(String title, String url) {
+		HttpClient client = new HttpClient();
+		HttpMethod method = new GetMethod(url);
+		method.getParams().setParameter(HttpMethodParams.RETRY_HANDLER, new DefaultHttpMethodRetryHandler());
+		try {
+			int statusCode = client.executeMethod(method);
+			if(statusCode == HttpStatus.SC_OK) {
+				String html = method.getResponseBodyAsString();
+				title = Jsoup.parse(html).select("title").text();
+			}
+		}catch(Exception e) { }
+		return title;
 	}
 	/**
 	 * 标记为已做
