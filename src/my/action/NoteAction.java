@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.Calendar;
 
+import my.beans.Files;
 import my.beans.Notes;
 import my.beans.User;
 import my.service.Annotation;
@@ -71,6 +72,23 @@ public class NoteAction {
 			throw ctx.error("no_permission");
 		}
 		bean.UpdateField("text", form.getText());
+		ctx.output_json("id", id);
+	}
+	
+	/**
+	 * 设置note是否公开
+	 * @param ctx
+	 * @throws IOException
+	 */
+	public void changeStatus(RequestContext ctx) throws IOException {
+		User user = ctx.user();
+		long id = ctx.id();
+		int status = ctx.param("s", Notes.STATUS_UNPOST);
+		Notes bean = Notes.INSTANCE.Get(id);
+		if(bean==null || !(bean.getUser()==user.getId() || user.IsManager())) {
+			throw ctx.error("no_permission");
+		}
+		bean.UpdateField("status", status);
 		ctx.output_json("id", id);
 	}
 	

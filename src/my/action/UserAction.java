@@ -74,6 +74,20 @@ public class UserAction {
 	}
 	
 	/**
+	 * Ajax 获取用户登录信息
+	 * @param ctx
+	 * @throws IOException
+	 */
+	public void status(RequestContext ctx) throws IOException {
+		User user = ctx.user();
+		if(user==null) {
+			ctx.output_json(new String[]{"status"}, new String[]{"0"});
+			return ;
+		}
+		ctx.output_json(new String[]{"status","role"}, new String[]{"1", String.valueOf(user.getRole())});
+	}
+	
+	/**
 	 * 修改密码
 	 * @param ctx
 	 * @throws IOException

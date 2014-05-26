@@ -18,6 +18,51 @@ function ajax(the_url,the_param,succ_callback){
 		}
 	});
 }
+
+function ajax_login(the_url, the_param, succ_callback) {
+	login = checkLogin();
+	if(login) {
+		$.ajax({
+			type:'POST',
+			dataType:'JSON',
+			url:the_url,
+			data:the_param,
+			success:function(msg){
+				if(unLogin(msg)) {
+					location.href = "/login";
+				}
+				succ_callback(msg);
+			},
+			error:function(html){
+				alert("提交数据失败，请稍候再试");
+			}
+		});
+	}else{
+		showLogin();
+	}
+}
+function showLogin() {
+	$("#login").modal();
+	$("#login").on('shown',function(){
+		$("#username").focus();
+	});
+}
+function checkLogin() {
+	return $.ajax({
+		type:'POST',
+		dataType:'JSON',
+		url:'/action/user/status',
+		success:function(msg){
+			if(msg.status==0) {
+				return false;
+			}
+			return true;
+		},
+		error:function(html){
+			alert("提交数据失败，请稍候再试");
+		}
+	});
+}
 function unLogin(msg) {
 	if(msg.unlogin)
 		return true;

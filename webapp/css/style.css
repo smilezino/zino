@@ -9,7 +9,7 @@ body {
 }
 
 .blog-content p {
-	text-indent:2em;
+	/*text-indent:2em;*/
 	word-wrap: break-word;
 	word-break: break-all;
 }

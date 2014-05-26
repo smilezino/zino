@@ -16,7 +16,8 @@ import my.db.QueryHelper;
  *
  */
 public class Notes extends DBbean {
-	
+	public static final int STATUS_UNPOST = 0;
+	public static final int STATUS_POST = 1;
 	public static final Notes INSTANCE = new Notes();
 	private long user;
 	private String title;
