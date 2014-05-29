@@ -138,7 +138,7 @@ $blog.addViewCount()
             </ul>
 			<ul class="nav nav-list">
 				<li class="nav-header">标签</li>
-                <li>
+                <li class="tags">
 					#foreach($tag in $tags)
 						#set($tag_count = $Tag.countByBlogTag($tag.id))
 						<span class="tag"><a href="$link.link("blog/tag/")$format.encode_url($tag.tag)"><span class="badge">$format.html($tag.tag)</span><span class="badgeNum">x $tag_count</span></a></span>
