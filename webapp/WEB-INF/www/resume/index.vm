@@ -1,0 +1,24 @@
+#set($layout = "_admin.vm")
+#set($page_title = "Resume - zinor.net")
+#set($active = "resume")
+
+#set($id = $link.lparam("id", 0))
+#set($resume = $Resume.Get($id))
+
+<style>
+    h1 small {
+        font-size: 12.5px
+    }
+</style>
+#if($resume)
+
+<div class="page-header">
+    <h1>关于我
+        <small>更新于 $format.date("yyyy-MM-dd HH:mm", $resume.updateTime) <a href="$link.link("resume/edit?id=")$resume.id">edit</a>
+        </small>
+    </h1>
+</div>
+<div>
+    $resume.markdown()
+</div>
+#end

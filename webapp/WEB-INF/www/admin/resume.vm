@@ -1,0 +1,62 @@
+#set($layout = "_admin.vm")
+#set($page_title = "admin resume")
+#set($active = "resume")
+
+#set($p = $link.param("p",1))
+#set($size = 16)
+
+<style>
+	.table th {text-align:center;background:#ccc}
+	.input-append {margin-bottom:0}
+	select { width:auto;margin-bottom:0;float:right;}
+    .width10 a {margin-left:10px}
+    tr:first-child {background-color: #8deca0}
+</style>
+#set($resumes = $Resume.list($p, $size))
+#set($count = $Resume.Count())
+
+<table class="table table-condensed table-bordered">
+    <thead><tr>
+        <th>id</th>
+        <th>链接</th>
+        <th>创建时间</th>
+        <th>更新时间</th>
+        <th>用户</th>
+        <th>浏览次数</th>
+		<th>操作</th>
+	</tr></thead>
+    <tbody>
+	#foreach($r in $resumes)
+		<tr>
+            <td class="width5">$r.id</td>
+            <td><a href="$link.link("resume?id=")$r.id">$link.link("resume?id=")$r.id</a></td>
+            <td class="width20">$format.date("yyyy-MM-dd HH:mm:ss",$r.createTime)</td>
+            <td class="width20">$format.date("yyyy-MM-dd HH:mm:ss",$r.updateTime)</td>
+            #set($user = $User.Get($r.user))
+            <td class="width5">#if($user)$format.html($user.name)#end</td>
+            <td class="width10">$r.viewCount</td>
+            <td class="width10">
+                <a class="resume-edit" href="$link.link("resume/edit?id=")$r.id" title="编辑" ref="$n.id"><i class="icon-edit"></i></a>
+                <a class="resume-delete" href="#" title="删除" ref="$r.id"><i class="icon-remove"></i></a>
+            </td>
+		</tr>
+	#end
+	</tbody>
+</table>
+#pager("",$count,$size)	
+<script>
+	$(function(){
+        $(".resume-delete").click(function(){
+            var id = $(this).attr("ref");
+            var params = {
+                "id":id
+            };
+            if(confirm("确定删除？")) {
+                ajax("$link.action("resume/delete")",params,function(msg){
+                    if(msg.error){alert(msg.msg);return;}
+                    location.reload();
+                });
+            }
+        });
+	});
+</script>

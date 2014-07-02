@@ -3,7 +3,7 @@ $.floatScroll = {
     defaults: {
     	direction: "top",
         distance: 0,
-        css: 'fixed', 
+        css: 'fixed'
     }
 }
 $.fn.floatScroll = function(map){
@@ -18,13 +18,13 @@ $.fn.floatScroll = function(map){
 	    	objTop = $this.offset().top,
 	    	objHeight = $this.height();
     	$window.scroll(function() {
-    		scollTop = $(document).scrollTop();
-    		console.log("scollTop:"+scollTop);
+    		scrollTop = $(document).scrollTop();
+    		console.log("scollTop:"+scrollTop);
     		console.log("objTop  :"+objTop);
     		console.log("distance:"+opts.distance);
-    		console.log("wheight :"+windowHeight);
+    		console.log("height :"+windowHeight);
     		if(opts.direction=="top"){
-            	var scoll = opts.distance + scollTop - objTop > 0;
+            	var scoll = opts.distance + scrollTop - objTop > 0;
             	console.log("top:"+scoll);
         		if(scoll) {
         			$this.addClass(opts.css);
@@ -33,8 +33,8 @@ $.fn.floatScroll = function(map){
         			objTop = $this.offset().top;
         		}
     		}else{
-	        	var scoll = windowHeight + scollTop - objHeight;
-	    		if(scoll < objTop) {
+	        	var scroll = windowHeight + scrollTop - objHeight;
+	    		if(scroll < objTop) {
 	    			$this.addClass(opts.css);
 	    		}else {
 	    			$this.removeClass(opts.css);

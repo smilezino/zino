@@ -51,4 +51,9 @@
 		<scope>application</scope>
 		<class>my.beans.Files</class>
 	</tool>
+    <tool>
+        <key>Resume</key>
+        <scope>application</scope>
+        <class>my.beans.Resume</class>
+    </tool>
 </toolbox>

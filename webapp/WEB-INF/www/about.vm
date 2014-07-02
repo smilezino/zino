@@ -1,57 +1,20 @@
 #set($layout = "_index.vm")
 #set($page_title = "关于我 - By smile zino")
 
+#set($resume = $Resume.resume())
 <style>
-	p {text-indent:32px}
-	.iwell {padding-left:10px}
-	.li {text-indent:48px}
-	.li>li {margin:5px 0}
+    h1 small {
+        font-size: 12.5px
+    }
 </style>
 <div class="page-header">
-  <h1>关于我 <small>about me</small></h1>
+    <h1>关于我
+        <small>更新于 $format.date("yyyy-MM-dd HH:mm", $resume.updateTime)</small>
+    </h1>
 </div>
 <div class="iwell">
-    <p>郑锋，一位程序员。2013届本科毕业生，热爱计算机，享受编程带来的乐趣！</p>
-    <p>由于才毕业，并没有太多的社会工作经验。但专业技能基本功还算扎实，尤其C语言和计算机体系系统知识：</p>
-	<div class="iwell li">
-		<li>熟悉C/C++、Java、Python等语言，熟悉常用算法数据结构</li>
-        <li>熟悉Linux环境，熟悉Linux平台开发环境的搭建</li>
-        <li>了解Shell编程，了解Makefile的编写</li>
-        <li>了解TCP/IP协议，熟悉基于C的Socket及多线程编程</li>
-        <li>熟悉J2EE规范下JSP、servlet编程，熟悉Struts2，Spring，Hibernate框架</li>
-        <li>熟悉HTML，CSS，Javascript及jQuery框架</li>
-        <li>熟悉git版本控制工具</li>
-        <li>英语CET4级, 能够流畅地阅读英文技术文档，及进行简单的英语会话</li>
-    </div>
-    <p></p>
-	<h3>一些项目</h3>
-    <p>1. <strong><a href="http://www.zinor.net" target="_blank">zinor.net</a></strong></p>
-    <div class="iwell">
-        <p>个人网站兼博客，目前还在开发中，用于实现自己的各种idea和记录自己在工作学习中的点滴。</p>
-        <p>项目地址：<a href="https://github.com/smilezino/zino" target="_blank">https://github.com/smilezino/zino</a></p>
-	</div>
-	<p>2. <strong>教师职称评教系统</strong></p>
-    <div class="iwell">
-        <p>在校期间给学校做的一个系统。从系统的分析设计，到最后系统的部署全部独立完成。系统采用java，纯servlet开发，未使用任何框架，数据库采用mysql。</p>
-        <p>该系统的代码托管在 <a href="https://github.com/smilezino/ahut" target="_blank">https://github.com/smilezino/ahut</a></p>
-	</div>
-	<p>3. <strong>linux下局域网聊天工具</strong></p>
-    <div class="iwell">
-        <p>使用C语言编写，界面采用GTK+库</p>
-	</div>
-    <p>4. <strong>其他</strong></p>
-    <div class="iwell">
-        <p><a href="http://www.zinor.net/view" target="_blank">view it later</a>，chrome浏览器插件</p>
-        <p>在校期间还做过很多小工具：用MFC编写的定时关机工具，批量修改文件名工具，局域网查询本机IP地址工具，贪吃蛇小游戏等等。</p>
-	</div>
-	<h3>实习经历</h3>
-    <p>2012-12 至 2013-06，在<a href="http://www.oschina.net" target="_blank">Oschina</a>
-		实习，负责网站的开发及维护，完成了在线简历模块，博客目录自动生成功能，招聘广告等。由于深圳离家太远，无奈离开。</p>
-    <h3>联系方式</h3>
-    <p>QQ：<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=619828889&site=qq&menu=yes">619828889</a></p>
-    <p>邮箱：<a href="mailto:smile.zino@gmail.com">smile.zino@gmail.com</a></p>
-    <p>Github：<a href="https://github.com/smilezino" target="_blank">https://github.com/smilezino</a></p>
-    <p>Twitter：<a href="https://twitter.com/smilezino" target="_blank">https://twitter.com/smilezino</a></p>
-    <p>新浪微博：<a href="http://weibo.com/u/1852322741" target="_blank">http://weibo.com/u/1852322741</a></p>
-	
+    #if($resume)
+        $resume.incViewCount()
+        $resume.markdown()
+    #end
 </div>
