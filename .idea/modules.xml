@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/zino/zino.iml" filepath="$PROJECT_DIR$/zino/zino.iml" />
+      <module fileurl="file://$PROJECT_DIR$/zino.iml" filepath="$PROJECT_DIR$/zino.iml" />
     </modules>
   </component>
 </project>
