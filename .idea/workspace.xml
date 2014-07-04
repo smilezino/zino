@@ -67,28 +67,57 @@
       <file leaf-file-name="resume.vm" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/webapp/WEB-INF/www/admin/resume.vm">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="45" selection-start="355" selection-end="355" vertical-scroll-proportion="-8.142858" vertical-offset="0" max-vertical-offset="1273">
+            <state line="12" column="45" selection-start="355" selection-end="355" vertical-scroll-proportion="0.0" vertical-offset="228" max-vertical-offset="1273">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="user.vm" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="user.vm" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/webapp/WEB-INF/www/admin/user.vm">
           <provider selected="true" editor-type-id="text-editor">
             <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1957">
               <folding>
-                <element signature="n#style#0;n#td#3;n#tr#0;n#tbody#0;n#table#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#select#0;n#td#3;n#tr#0;n#tbody#0;n#table#0;n#!!top" expanded="true" />
+                <marker date="1390661673000" expanded="false" signature="852:863" placeholder="..." />
+                <marker date="1390661673000" expanded="false" signature="1061:1073" placeholder="..." />
+                <marker date="1390661673000" expanded="true" signature="1468:2256" placeholder="{...}" />
+                <marker date="1390661673000" expanded="true" signature="1508:1784" placeholder="{...}" />
+                <marker date="1390661673000" expanded="true" signature="1573:1591" placeholder="{...}" />
+                <marker date="1390661673000" expanded="true" signature="1616:1780" placeholder="{...}" />
+                <marker date="1390661673000" expanded="true" signature="1681:1773" placeholder="{...}" />
+                <marker date="1390661673000" expanded="true" signature="1819:2251" placeholder="{...}" />
+                <marker date="1390661673000" expanded="true" signature="1968:2017" placeholder="{...}" />
+                <marker date="1390661673000" expanded="true" signature="2053:2208" placeholder="{...}" />
+                <marker date="1390661673000" expanded="true" signature="2290:2455" placeholder="{...}" />
+                <marker date="1390661673000" expanded="true" signature="2307:2339" placeholder="{...}" />
+                <marker date="1390661673000" expanded="true" signature="2403:2450" placeholder="{...}" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="note.vm" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/webapp/WEB-INF/www/admin/note.vm">
+      <file leaf-file-name="Files.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/my/beans/Files.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="9" column="4" selection-start="184" selection-end="213" vertical-scroll-proportion="-4.75" vertical-offset="38" max-vertical-offset="1235">
+            <state line="49" column="6" selection-start="834" selection-end="834" vertical-scroll-proportion="0.0" vertical-offset="931" max-vertical-offset="2394">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DBbean.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/my/db/DBbean.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="20" column="13" selection-start="412" selection-end="412" vertical-scroll-proportion="0.0" vertical-offset="380" max-vertical-offset="5624">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="doc.vm" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/webapp/WEB-INF/www/admin/doc.vm">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="128" column="31" selection-start="3840" selection-end="3840" vertical-scroll-proportion="0.6179159" vertical-offset="2094" max-vertical-offset="2641">
               <folding />
             </state>
           </provider>
@@ -97,7 +126,7 @@
       <file leaf-file-name="edit.vm" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/webapp/WEB-INF/www/resume/edit.vm">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="2" column="24" selection-start="97" selection-end="97" vertical-scroll-proportion="-1.3571428" vertical-offset="0" max-vertical-offset="1824">
+            <state line="2" column="24" selection-start="97" selection-end="97" vertical-scroll-proportion="0.0" vertical-offset="38" max-vertical-offset="1824">
               <folding />
             </state>
           </provider>
@@ -106,7 +135,7 @@
       <file leaf-file-name="js.vm" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/webapp/WEB-INF/www/blog/widget/js.vm">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="17" column="27" selection-start="848" selection-end="848" vertical-scroll-proportion="-8.142858" vertical-offset="95" max-vertical-offset="2033">
+            <state line="17" column="27" selection-start="848" selection-end="848" vertical-scroll-proportion="0.0" vertical-offset="323" max-vertical-offset="2033">
               <folding />
             </state>
           </provider>
@@ -115,7 +144,7 @@
       <file leaf-file-name="_admin.vm" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/webapp/WEB-INF/layout/_admin.vm">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="81" selection-start="766" selection-end="766" vertical-scroll-proportion="-6.107143" vertical-offset="57" max-vertical-offset="1235">
+            <state line="12" column="81" selection-start="766" selection-end="766" vertical-scroll-proportion="0.0" vertical-offset="228" max-vertical-offset="1235">
               <folding />
             </state>
           </provider>
@@ -124,16 +153,7 @@
       <file leaf-file-name="_index.vm" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/webapp/WEB-INF/layout/_index.vm">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="9" column="8" selection-start="624" selection-end="697" vertical-scroll-proportion="-6.107143" vertical-offset="0" max-vertical-offset="2793">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ResumeAction.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/my/action/ResumeAction.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="17" column="24" selection-start="352" selection-end="352" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1311">
+            <state line="9" column="8" selection-start="624" selection-end="697" vertical-scroll-proportion="0.0" vertical-offset="171" max-vertical-offset="2793">
               <folding />
             </state>
           </provider>
@@ -142,7 +162,7 @@
       <file leaf-file-name="about.vm" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/webapp/WEB-INF/www/about.vm">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="18" column="8" selection-start="406" selection-end="406" vertical-scroll-proportion="-12.214286" vertical-offset="0" max-vertical-offset="475">
+            <state line="18" column="8" selection-start="406" selection-end="406" vertical-scroll-proportion="0.0" vertical-offset="342" max-vertical-offset="475">
               <folding />
             </state>
           </provider>
@@ -170,6 +190,8 @@
         <option value="$PROJECT_DIR$/webapp/WEB-INF/www/about.vm" />
         <option value="$PROJECT_DIR$/webapp/WEB-INF/layout/_admin.vm" />
         <option value="$PROJECT_DIR$/webapp/js/floatScroll.js" />
+        <option value="$PROJECT_DIR$/src/my/beans/Files.java" />
+        <option value="$PROJECT_DIR$/webapp/WEB-INF/www/admin/doc.vm" />
       </list>
     </option>
   </component>
@@ -241,10 +263,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="PackagesPane">
-        <subPane />
-      </pane>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -263,164 +281,12 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="zino" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="zino" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="zino" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="zino" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WEB-INF" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="zino" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="zino" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WEB-INF" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="www" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="zino" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="zino" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WEB-INF" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="www" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="admin" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="zino" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="zino" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WEB-INF" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="layout" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="zino" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="zino" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WEB-INF" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="conf" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="zino" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="zino" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="zino" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="zino" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="beans" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
+      <pane id="PackagesPane">
+        <subPane />
+      </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -452,6 +318,12 @@
     </key>
   </component>
   <component name="RunManager" selected="Tomcat Server.zino">
+    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin" singleton="true">
+      <module name="" />
+      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m" />
+      <option name="PROGRAM_PARAMETERS" />
+      <method />
+    </configuration>
     <configuration default="true" type="GrailsRunConfigurationType" factoryName="Grails" singleton="true">
       <module name="" />
       <setting name="vmparams" value="" />
@@ -460,12 +332,6 @@
       <setting name="passParentEnv" value="true" />
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <setting name="launchBrowser" value="false" />
-      <method />
-    </configuration>
-    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin" singleton="true">
-      <module name="" />
-      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m" />
-      <option name="PROGRAM_PARAMETERS" />
       <method />
     </configuration>
     <configuration default="true" type="Remote" factoryName="Remote">
@@ -493,23 +359,17 @@
       <option name="trusted" value="true" />
       <method />
     </configuration>
-    <configuration default="true" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <option name="myFilePath" />
-      <option name="GLUE" />
-      <option name="myNameFilter" />
-      <option name="myGeneratedName" />
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
       <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
       <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="" />
-      <envs />
       <method />
     </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
@@ -540,17 +400,23 @@
       <listeners />
       <method />
     </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
+    <configuration default="true" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="myFilePath" />
+      <option name="GLUE" />
+      <option name="myNameFilter" />
+      <option name="myGeneratedName" />
       <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
       <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="" />
+      <envs />
       <method />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -587,41 +453,6 @@
       </option>
       <envs />
       <patterns />
-      <method />
-    </configuration>
-    <configuration default="true" type="FlashRunConfigurationType" factoryName="Flash App">
-      <option name="BCName" value="" />
-      <option name="IOSSimulatorSdkPath" value="" />
-      <option name="adlOptions" value="" />
-      <option name="airProgramParameters" value="" />
-      <option name="appDescriptorForEmulator" value="Android" />
-      <option name="debugTransport" value="USB" />
-      <option name="debuggerSdkRaw" value="BC SDK" />
-      <option name="emulator" value="NexusOne" />
-      <option name="emulatorAdlOptions" value="" />
-      <option name="fastPackaging" value="true" />
-      <option name="fullScreenHeight" value="0" />
-      <option name="fullScreenWidth" value="0" />
-      <option name="launchUrl" value="false" />
-      <option name="launcherParameters">
-        <LauncherParameters>
-          <option name="browserFamily" value="FIREFOX" />
-          <option name="launcherType" value="OSDefault" />
-          <option name="newPlayerInstance" value="false" />
-          <option name="playerPath" value="/Applications/Flash Player Debugger.app" />
-        </LauncherParameters>
-      </option>
-      <option name="mobileRunTarget" value="Emulator" />
-      <option name="moduleName" value="" />
-      <option name="overriddenMainClass" value="" />
-      <option name="overriddenOutputFileName" value="" />
-      <option name="overrideMainClass" value="false" />
-      <option name="runTrusted" value="true" />
-      <option name="screenDpi" value="0" />
-      <option name="screenHeight" value="0" />
-      <option name="screenWidth" value="0" />
-      <option name="url" value="http://" />
-      <option name="usbDebugPort" value="7936" />
       <method />
     </configuration>
     <configuration default="true" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 7.0.50" ALTERNATIVE_JRE_ENABLED="false" ALTERNATIVE_JRE_PATH="">
@@ -688,6 +519,41 @@
           <option name="PROGRAM_PARAMETERS" value="" />
         </SHUTDOWN>
       </ConfigurationWrapper>
+      <method />
+    </configuration>
+    <configuration default="true" type="FlashRunConfigurationType" factoryName="Flash App">
+      <option name="BCName" value="" />
+      <option name="IOSSimulatorSdkPath" value="" />
+      <option name="adlOptions" value="" />
+      <option name="airProgramParameters" value="" />
+      <option name="appDescriptorForEmulator" value="Android" />
+      <option name="debugTransport" value="USB" />
+      <option name="debuggerSdkRaw" value="BC SDK" />
+      <option name="emulator" value="NexusOne" />
+      <option name="emulatorAdlOptions" value="" />
+      <option name="fastPackaging" value="true" />
+      <option name="fullScreenHeight" value="0" />
+      <option name="fullScreenWidth" value="0" />
+      <option name="launchUrl" value="false" />
+      <option name="launcherParameters">
+        <LauncherParameters>
+          <option name="browserFamily" value="FIREFOX" />
+          <option name="launcherType" value="OSDefault" />
+          <option name="newPlayerInstance" value="false" />
+          <option name="playerPath" value="/Applications/Flash Player Debugger.app" />
+        </LauncherParameters>
+      </option>
+      <option name="mobileRunTarget" value="Emulator" />
+      <option name="moduleName" value="" />
+      <option name="overriddenMainClass" value="" />
+      <option name="overriddenOutputFileName" value="" />
+      <option name="overrideMainClass" value="false" />
+      <option name="runTrusted" value="true" />
+      <option name="screenDpi" value="0" />
+      <option name="screenHeight" value="0" />
+      <option name="screenWidth" value="0" />
+      <option name="url" value="http://" />
+      <option name="usbDebugPort" value="7936" />
       <method />
     </configuration>
     <configuration default="false" name="zino" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 8.0.9" ALTERNATIVE_JRE_ENABLED="false" ALTERNATIVE_JRE_PATH="">
@@ -809,11 +675,14 @@
       <workItem from="1404193745304" duration="8645000" />
       <workItem from="1404210545627" duration="896000" />
       <workItem from="1404266797746" duration="6741000" />
+      <workItem from="1404441733457" duration="1788000" />
+      <workItem from="1404486550124" duration="858000" />
+      <workItem from="1404489557660" duration="435000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="30544000" />
+    <option name="totallyTimeSpent" value="33625000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1280" height="711" extended-state="0" />
@@ -833,7 +702,6 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3289689" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3289689" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
@@ -847,6 +715,7 @@
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32792208" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -871,20 +740,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/my/db/QueryHelper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="13" selection-start="640" selection-end="640" vertical-scroll-proportion="0.0" vertical-offset="456" max-vertical-offset="3800" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/my/action/AdminAction.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="88" column="13" selection-start="1869" selection-end="1869" vertical-scroll-proportion="0.0" vertical-offset="1672" max-vertical-offset="2071">
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/my/db/DBbean.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="61" column="19" selection-start="1285" selection-end="1285" vertical-scroll-proportion="0.0" vertical-offset="1159" max-vertical-offset="5624">
@@ -894,9 +749,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/webapp/WEB-INF/www/resume/index.vm">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="0" selection-start="76" selection-end="76" vertical-scroll-proportion="0.0" vertical-offset="57" max-vertical-offset="171">
-          <folding />
-        </state>
+        <state line="3" column="0" selection-start="76" selection-end="76" vertical-scroll-proportion="0.0" vertical-offset="57" max-vertical-offset="171" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/properties/error.properties">
@@ -907,7 +760,33 @@
     <entry file="file://$PROJECT_DIR$/src/my/beans/Resume.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="78" column="5" selection-start="1568" selection-end="1568" vertical-scroll-proportion="0.0" vertical-offset="95" max-vertical-offset="1330">
-          <folding />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#1224#1225#0" expanded="false" />
+            <element signature="e#1249#1250#0" expanded="false" />
+            <element signature="e#1278#1279#0" expanded="false" />
+            <element signature="e#1305#1306#0" expanded="false" />
+            <element signature="e#1343#1344#0" expanded="false" />
+            <element signature="e#1375#1376#0" expanded="false" />
+            <element signature="e#1409#1410#0" expanded="false" />
+            <element signature="e#1437#1438#0" expanded="false" />
+            <element signature="e#1471#1472#0" expanded="false" />
+            <element signature="e#1501#1502#0" expanded="false" />
+            <element signature="e#1547#1548#0" expanded="false" />
+            <element signature="e#1585#1586#0" expanded="false" />
+            <element signature="e#1625#1626#0" expanded="false" />
+            <element signature="e#1658#1659#0" expanded="false" />
+            <element signature="e#1713#1714#0" expanded="false" />
+            <element signature="e#1757#1758#0" expanded="false" />
+            <element signature="e#1797#1798#0" expanded="false" />
+            <element signature="e#1830#1831#0" expanded="false" />
+            <element signature="e#1885#1886#0" expanded="false" />
+            <element signature="e#1929#1930#0" expanded="false" />
+            <element signature="e#1963#1964#0" expanded="false" />
+            <element signature="e#1995#1996#0" expanded="false" />
+            <element signature="e#2043#2044#0" expanded="false" />
+            <element signature="e#2085#2086#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -925,11 +804,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/my/action/AdminAction.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="88" column="13" selection-start="1869" selection-end="1869" vertical-scroll-proportion="0.0" vertical-offset="1672" max-vertical-offset="2071">
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
+        <state line="88" column="13" selection-start="1869" selection-end="1869" vertical-scroll-proportion="0.0" vertical-offset="1672" max-vertical-offset="2071" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/my/db/DBbean.java">
@@ -947,7 +822,33 @@
     <entry file="file://$PROJECT_DIR$/src/my/beans/Resume.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="78" column="5" selection-start="1568" selection-end="1568" vertical-scroll-proportion="0.0" vertical-offset="399" max-vertical-offset="1634">
-          <folding />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#1224#1225#0" expanded="false" />
+            <element signature="e#1249#1250#0" expanded="false" />
+            <element signature="e#1278#1279#0" expanded="false" />
+            <element signature="e#1305#1306#0" expanded="false" />
+            <element signature="e#1343#1344#0" expanded="false" />
+            <element signature="e#1375#1376#0" expanded="false" />
+            <element signature="e#1409#1410#0" expanded="false" />
+            <element signature="e#1437#1438#0" expanded="false" />
+            <element signature="e#1471#1472#0" expanded="false" />
+            <element signature="e#1501#1502#0" expanded="false" />
+            <element signature="e#1547#1548#0" expanded="false" />
+            <element signature="e#1585#1586#0" expanded="false" />
+            <element signature="e#1625#1626#0" expanded="false" />
+            <element signature="e#1658#1659#0" expanded="false" />
+            <element signature="e#1713#1714#0" expanded="false" />
+            <element signature="e#1757#1758#0" expanded="false" />
+            <element signature="e#1797#1798#0" expanded="false" />
+            <element signature="e#1830#1831#0" expanded="false" />
+            <element signature="e#1885#1886#0" expanded="false" />
+            <element signature="e#1929#1930#0" expanded="false" />
+            <element signature="e#1963#1964#0" expanded="false" />
+            <element signature="e#1995#1996#0" expanded="false" />
+            <element signature="e#2043#2044#0" expanded="false" />
+            <element signature="e#2085#2086#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -965,11 +866,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/my/action/AdminAction.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="88" column="13" selection-start="1869" selection-end="1869" vertical-scroll-proportion="0.0" vertical-offset="1672" max-vertical-offset="2071">
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
+        <state line="88" column="13" selection-start="1869" selection-end="1869" vertical-scroll-proportion="0.0" vertical-offset="1672" max-vertical-offset="2071" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/my/db/DBbean.java">
@@ -987,7 +884,33 @@
     <entry file="file://$PROJECT_DIR$/src/my/beans/Resume.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="29" column="11" selection-start="562" selection-end="562" vertical-scroll-proportion="0.0" vertical-offset="551" max-vertical-offset="1330">
-          <folding />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#1224#1225#0" expanded="false" />
+            <element signature="e#1249#1250#0" expanded="false" />
+            <element signature="e#1278#1279#0" expanded="false" />
+            <element signature="e#1305#1306#0" expanded="false" />
+            <element signature="e#1343#1344#0" expanded="false" />
+            <element signature="e#1375#1376#0" expanded="false" />
+            <element signature="e#1409#1410#0" expanded="false" />
+            <element signature="e#1437#1438#0" expanded="false" />
+            <element signature="e#1471#1472#0" expanded="false" />
+            <element signature="e#1501#1502#0" expanded="false" />
+            <element signature="e#1547#1548#0" expanded="false" />
+            <element signature="e#1585#1586#0" expanded="false" />
+            <element signature="e#1625#1626#0" expanded="false" />
+            <element signature="e#1658#1659#0" expanded="false" />
+            <element signature="e#1713#1714#0" expanded="false" />
+            <element signature="e#1757#1758#0" expanded="false" />
+            <element signature="e#1797#1798#0" expanded="false" />
+            <element signature="e#1830#1831#0" expanded="false" />
+            <element signature="e#1885#1886#0" expanded="false" />
+            <element signature="e#1929#1930#0" expanded="false" />
+            <element signature="e#1963#1964#0" expanded="false" />
+            <element signature="e#1995#1996#0" expanded="false" />
+            <element signature="e#2043#2044#0" expanded="false" />
+            <element signature="e#2085#2086#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1000,11 +923,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/my/action/AdminAction.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="88" column="13" selection-start="1869" selection-end="1869" vertical-scroll-proportion="0.0" vertical-offset="1672" max-vertical-offset="2071">
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
+        <state line="88" column="13" selection-start="1869" selection-end="1869" vertical-scroll-proportion="0.0" vertical-offset="1672" max-vertical-offset="2071" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/my/db/DBbean.java">
@@ -1088,42 +1007,19 @@
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-1.341603" vertical-offset="703" max-vertical-offset="2679" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/my/db/DBbean.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="150" column="32" selection-start="3581" selection-end="3581" vertical-scroll-proportion="0.0" vertical-offset="2453" max-vertical-offset="5415">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/my/action/AdminAction.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="72" column="0" selection-start="1499" selection-end="1499" vertical-scroll-proportion="0.0" vertical-offset="784" max-vertical-offset="1349">
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
+        <state line="72" column="0" selection-start="1499" selection-end="1499" vertical-scroll-proportion="0.0" vertical-offset="784" max-vertical-offset="1349" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/webapp/WEB-INF/www/resume/index.vm">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="0" selection-start="69" selection-end="93" vertical-scroll-proportion="-1.3571428" vertical-offset="0" max-vertical-offset="551">
-          <folding />
-        </state>
+        <state line="2" column="0" selection-start="69" selection-end="93" vertical-scroll-proportion="-1.3571428" vertical-offset="0" max-vertical-offset="551" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/webapp/WEB-INF/www/resume/new.vm">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="22" selection-start="22" selection-end="22" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1767">
-          <folding>
-            <marker date="1404267978000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1404267978000" expanded="false" signature="-1:-1" placeholder="..." />
-            <marker date="1404267978000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1404267978000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1404267978000" expanded="true" signature="-1:-1" placeholder="{&quot;url&quot;: &quot;$link.action(&quot;resume/post&quot;)&quot;...}" />
-            <marker date="1404267978000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1404267978000" expanded="true" signature="-1:-1" placeholder="{...}" />
-          </folding>
-        </state>
+        <state line="0" column="22" selection-start="22" selection-end="22" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1767" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/my/beans/Notes.java">
@@ -1135,16 +1031,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/webapp/WEB-INF/www/admin/note.vm">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="4" selection-start="184" selection-end="213" vertical-scroll-proportion="-4.75" vertical-offset="38" max-vertical-offset="1235">
-          <folding />
-        </state>
+        <state line="9" column="4" selection-start="184" selection-end="213" vertical-scroll-proportion="0.0" vertical-offset="171" max-vertical-offset="1235" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/my/action/ResumeAction.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="24" selection-start="352" selection-end="352" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1311">
-          <folding />
-        </state>
+        <state line="17" column="24" selection-start="352" selection-end="352" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1311" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/my/beans/Resume.java">
@@ -1182,60 +1074,90 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/webapp/WEB-INF/www/about.vm">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="8" selection-start="406" selection-end="406" vertical-scroll-proportion="-12.214286" vertical-offset="0" max-vertical-offset="475">
+        <state line="18" column="8" selection-start="406" selection-end="406" vertical-scroll-proportion="0.0" vertical-offset="342" max-vertical-offset="475">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/webapp/WEB-INF/www/admin/resume.vm">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="45" selection-start="355" selection-end="355" vertical-scroll-proportion="-8.142858" vertical-offset="0" max-vertical-offset="1273">
+        <state line="12" column="45" selection-start="355" selection-end="355" vertical-scroll-proportion="0.0" vertical-offset="228" max-vertical-offset="1273">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/webapp/WEB-INF/www/blog/widget/js.vm">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="27" selection-start="848" selection-end="848" vertical-scroll-proportion="-8.142858" vertical-offset="95" max-vertical-offset="2033">
+        <state line="17" column="27" selection-start="848" selection-end="848" vertical-scroll-proportion="0.0" vertical-offset="323" max-vertical-offset="2033">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/webapp/WEB-INF/www/resume/edit.vm">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="24" selection-start="97" selection-end="97" vertical-scroll-proportion="-1.3571428" vertical-offset="0" max-vertical-offset="1824">
+        <state line="2" column="24" selection-start="97" selection-end="97" vertical-scroll-proportion="0.0" vertical-offset="38" max-vertical-offset="1824">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/webapp/WEB-INF/layout/_index.vm">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="8" selection-start="624" selection-end="697" vertical-scroll-proportion="-6.107143" vertical-offset="0" max-vertical-offset="2793">
+        <state line="9" column="8" selection-start="624" selection-end="697" vertical-scroll-proportion="0.0" vertical-offset="171" max-vertical-offset="2793">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/webapp/WEB-INF/layout/_admin.vm">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="81" selection-start="766" selection-end="766" vertical-scroll-proportion="-6.107143" vertical-offset="57" max-vertical-offset="1235">
+        <state line="12" column="81" selection-start="766" selection-end="766" vertical-scroll-proportion="0.0" vertical-offset="228" max-vertical-offset="1235">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/webapp/js/floatScroll.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="18" selection-start="292" selection-end="292" vertical-scroll-proportion="0.47079647" vertical-offset="0" max-vertical-offset="1007">
-          <folding />
-        </state>
+        <state line="14" column="18" selection-start="292" selection-end="292" vertical-scroll-proportion="0.47079647" vertical-offset="0" max-vertical-offset="1007" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/webapp/WEB-INF/www/admin/user.vm">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1957">
           <folding>
-            <element signature="n#style#0;n#td#3;n#tr#0;n#tbody#0;n#table#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#select#0;n#td#3;n#tr#0;n#tbody#0;n#table#0;n#!!top" expanded="true" />
+            <marker date="1390661673000" expanded="false" signature="852:863" placeholder="..." />
+            <marker date="1390661673000" expanded="false" signature="1061:1073" placeholder="..." />
+            <marker date="1390661673000" expanded="true" signature="1468:2256" placeholder="{...}" />
+            <marker date="1390661673000" expanded="true" signature="1508:1784" placeholder="{...}" />
+            <marker date="1390661673000" expanded="true" signature="1573:1591" placeholder="{...}" />
+            <marker date="1390661673000" expanded="true" signature="1616:1780" placeholder="{...}" />
+            <marker date="1390661673000" expanded="true" signature="1681:1773" placeholder="{...}" />
+            <marker date="1390661673000" expanded="true" signature="1819:2251" placeholder="{...}" />
+            <marker date="1390661673000" expanded="true" signature="1968:2017" placeholder="{...}" />
+            <marker date="1390661673000" expanded="true" signature="2053:2208" placeholder="{...}" />
+            <marker date="1390661673000" expanded="true" signature="2290:2455" placeholder="{...}" />
+            <marker date="1390661673000" expanded="true" signature="2307:2339" placeholder="{...}" />
+            <marker date="1390661673000" expanded="true" signature="2403:2450" placeholder="{...}" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/my/db/DBbean.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="20" column="13" selection-start="412" selection-end="412" vertical-scroll-proportion="0.0" vertical-offset="2793" max-vertical-offset="5415">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/my/beans/Files.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="49" column="6" selection-start="834" selection-end="834" vertical-scroll-proportion="0.0" vertical-offset="513" max-vertical-offset="2337">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webapp/WEB-INF/www/admin/doc.vm">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="128" column="31" selection-start="3840" selection-end="3840" vertical-scroll-proportion="0.6179159" vertical-offset="2094" max-vertical-offset="2641">
+          <folding />
         </state>
       </provider>
     </entry>

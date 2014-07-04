@@ -2,6 +2,7 @@ package my.beans;
 
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import my.db.DBbean;
 
@@ -44,6 +45,16 @@ public class Files extends DBbean {
 	public void count() {
 		UpdateField("downloadCount", downloadCount+1);
 	}
+
+    /**
+     *
+     * @param page
+     * @param size
+     * @return
+     */
+    public List<Files> list(int page, int size) {
+        return (List<Files>) this.List(page, size, "1=1 ORDER BY id DESC");
+    }
 	
 	public long getUser() {
 		return user;

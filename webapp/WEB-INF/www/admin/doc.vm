@@ -9,10 +9,12 @@
 	.table th {text-align:center;background:#ccc}
 	.input-append {margin-bottom:0}
 	select { width:auto;margin-bottom:0;float:right;}
+    .status1 {color: red; background-color: red}
+    .status0 {color: #8deca0; background-color: #8deca0}
 </style>
 ##参数1 用户id， -1所有
 ##参数2 是否归档， -1所有
-#set($docs = $Doc.List($p, $size))
+#set($docs = $Doc.list($p, $size))
 #set($count = $Doc.Count())
 <div>
 	<form id="docUpload" method="POST" action="$link.action("file/uploadDoc")" enctype="multipart/form-data">
@@ -67,7 +69,7 @@
 			#set($user = $User.Get($d.user))
             <td class="width5">#if($user)$format.html($user.name)#end</td>
             <td class="width10">
-                <span id="s$d.id">$Doc.status($d.status)</span>
+                <span id="s$d.id" class="status$d.status" title="$Doc.status($d.status)">$Doc.status($d.status)</span>
 				<a href="javascript:;" class="edit pull-right" ref="$d.id">修改</a>
 				<select id="$d.id" style="display:none">
 					#foreach($s in $status)
@@ -107,11 +109,14 @@
 				$(".edit").show();
 			})
 			select.live("change",function(){
-				var tip = $(this).find("option:selected").text();
+				var tip = "status"+$(this).find("option:selected").val();
+				var title = $(this).find("option:selected").text;
 				var s = $(this).val();
 				changeStatus(id,s);
 				$(this).hide();
-				span.html(tip);
+                span.removeClass();
+				span.addClass(tip);
+                span.setAttribute("title", title);
 			});
 			select.show();
 			select.focus();
