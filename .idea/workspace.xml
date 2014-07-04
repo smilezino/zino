@@ -76,48 +76,47 @@
       <file leaf-file-name="user.vm" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/webapp/WEB-INF/www/admin/user.vm">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1957">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="1957">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Files.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/my/beans/Files.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="50" column="18" selection-start="853" selection-end="853" vertical-scroll-proportion="0.23362832" vertical-offset="761" max-vertical-offset="1824">
               <folding>
-                <marker date="1390661673000" expanded="false" signature="852:863" placeholder="..." />
-                <marker date="1390661673000" expanded="false" signature="1061:1073" placeholder="..." />
-                <marker date="1390661673000" expanded="true" signature="1468:2256" placeholder="{...}" />
-                <marker date="1390661673000" expanded="true" signature="1508:1784" placeholder="{...}" />
-                <marker date="1390661673000" expanded="true" signature="1573:1591" placeholder="{...}" />
-                <marker date="1390661673000" expanded="true" signature="1616:1780" placeholder="{...}" />
-                <marker date="1390661673000" expanded="true" signature="1681:1773" placeholder="{...}" />
-                <marker date="1390661673000" expanded="true" signature="1819:2251" placeholder="{...}" />
-                <marker date="1390661673000" expanded="true" signature="1968:2017" placeholder="{...}" />
-                <marker date="1390661673000" expanded="true" signature="2053:2208" placeholder="{...}" />
-                <marker date="1390661673000" expanded="true" signature="2290:2455" placeholder="{...}" />
-                <marker date="1390661673000" expanded="true" signature="2307:2339" placeholder="{...}" />
-                <marker date="1390661673000" expanded="true" signature="2403:2450" placeholder="{...}" />
+                <element signature="e#900#946#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Files.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/my/beans/Files.java">
+      <file leaf-file-name="Notes.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/my/beans/Notes.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="49" column="6" selection-start="834" selection-end="834" vertical-scroll-proportion="0.0" vertical-offset="931" max-vertical-offset="2394">
+            <state line="74" column="35" selection-start="1654" selection-end="1654" vertical-scroll-proportion="0.0" vertical-offset="767" max-vertical-offset="1729">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DBbean.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/my/db/DBbean.java">
+      <file leaf-file-name="QueryHelper.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/my/db/QueryHelper.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="20" column="13" selection-start="412" selection-end="412" vertical-scroll-proportion="0.0" vertical-offset="380" max-vertical-offset="5624">
-              <folding />
+            <state line="124" column="4" selection-start="3189" selection-end="3235" vertical-scroll-proportion="0.0" vertical-offset="1735" max-vertical-offset="3344">
+              <folding>
+                <element signature="e#3189#3235#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="doc.vm" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="doc.vm" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/webapp/WEB-INF/www/admin/doc.vm">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="128" column="31" selection-start="3840" selection-end="3840" vertical-scroll-proportion="0.6179159" vertical-offset="2094" max-vertical-offset="2641">
+            <state line="128" column="31" selection-start="3840" selection-end="3840" vertical-scroll-proportion="-12.071428" vertical-offset="2094" max-vertical-offset="2641">
               <folding />
             </state>
           </provider>
@@ -159,15 +158,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="about.vm" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/webapp/WEB-INF/www/about.vm">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="18" column="8" selection-start="406" selection-end="406" vertical-scroll-proportion="0.0" vertical-offset="342" max-vertical-offset="475">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
     </leaf>
   </component>
   <component name="FindManager">
@@ -190,8 +180,8 @@
         <option value="$PROJECT_DIR$/webapp/WEB-INF/www/about.vm" />
         <option value="$PROJECT_DIR$/webapp/WEB-INF/layout/_admin.vm" />
         <option value="$PROJECT_DIR$/webapp/js/floatScroll.js" />
-        <option value="$PROJECT_DIR$/src/my/beans/Files.java" />
         <option value="$PROJECT_DIR$/webapp/WEB-INF/www/admin/doc.vm" />
+        <option value="$PROJECT_DIR$/src/my/beans/Files.java" />
       </list>
     </option>
   </component>
@@ -278,6 +268,38 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="zino" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="zino" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="zino" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="zino" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="zino" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="beans" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -677,12 +699,12 @@
       <workItem from="1404266797746" duration="6741000" />
       <workItem from="1404441733457" duration="1788000" />
       <workItem from="1404486550124" duration="858000" />
-      <workItem from="1404489557660" duration="435000" />
+      <workItem from="1404489557660" duration="863000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="33625000" />
+    <option name="totallyTimeSpent" value="34053000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1280" height="711" extended-state="0" />
@@ -970,11 +992,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/my/db/QueryHelper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="13" selection-start="640" selection-end="640" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3344" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/my/service/RequestContext.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="213" column="16" selection-start="6223" selection-end="6223" vertical-scroll-proportion="0.33214286" vertical-offset="3272" max-vertical-offset="7353" />
@@ -1020,13 +1037,6 @@
     <entry file="file://$PROJECT_DIR$/webapp/WEB-INF/www/resume/new.vm">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="22" selection-start="22" selection-end="22" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1767" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/my/beans/Notes.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="13" selection-start="278" selection-end="278" vertical-scroll-proportion="-1.3684211" vertical-offset="691" max-vertical-offset="1729">
-          <folding />
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/webapp/WEB-INF/www/admin/note.vm">
@@ -1119,27 +1129,6 @@
         <state line="14" column="18" selection-start="292" selection-end="292" vertical-scroll-proportion="0.47079647" vertical-offset="0" max-vertical-offset="1007" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/webapp/WEB-INF/www/admin/user.vm">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1957">
-          <folding>
-            <marker date="1390661673000" expanded="false" signature="852:863" placeholder="..." />
-            <marker date="1390661673000" expanded="false" signature="1061:1073" placeholder="..." />
-            <marker date="1390661673000" expanded="true" signature="1468:2256" placeholder="{...}" />
-            <marker date="1390661673000" expanded="true" signature="1508:1784" placeholder="{...}" />
-            <marker date="1390661673000" expanded="true" signature="1573:1591" placeholder="{...}" />
-            <marker date="1390661673000" expanded="true" signature="1616:1780" placeholder="{...}" />
-            <marker date="1390661673000" expanded="true" signature="1681:1773" placeholder="{...}" />
-            <marker date="1390661673000" expanded="true" signature="1819:2251" placeholder="{...}" />
-            <marker date="1390661673000" expanded="true" signature="1968:2017" placeholder="{...}" />
-            <marker date="1390661673000" expanded="true" signature="2053:2208" placeholder="{...}" />
-            <marker date="1390661673000" expanded="true" signature="2290:2455" placeholder="{...}" />
-            <marker date="1390661673000" expanded="true" signature="2307:2339" placeholder="{...}" />
-            <marker date="1390661673000" expanded="true" signature="2403:2450" placeholder="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/my/db/DBbean.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="20" column="13" selection-start="412" selection-end="412" vertical-scroll-proportion="0.0" vertical-offset="2793" max-vertical-offset="5415">
@@ -1147,17 +1136,42 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/my/beans/Files.java">
+    <entry file="file://$PROJECT_DIR$/webapp/WEB-INF/www/admin/doc.vm">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="49" column="6" selection-start="834" selection-end="834" vertical-scroll-proportion="0.0" vertical-offset="513" max-vertical-offset="2337">
+        <state line="128" column="31" selection-start="3840" selection-end="3840" vertical-scroll-proportion="-12.071428" vertical-offset="2094" max-vertical-offset="2641">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/webapp/WEB-INF/www/admin/doc.vm">
+    <entry file="file://$PROJECT_DIR$/webapp/WEB-INF/www/admin/user.vm">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="128" column="31" selection-start="3840" selection-end="3840" vertical-scroll-proportion="0.6179159" vertical-offset="2094" max-vertical-offset="2641">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1957">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/my/beans/Notes.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="74" column="35" selection-start="1654" selection-end="1654" vertical-scroll-proportion="0.0" vertical-offset="767" max-vertical-offset="1729">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/my/db/QueryHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="124" column="4" selection-start="3189" selection-end="3235" vertical-scroll-proportion="0.0" vertical-offset="1735" max-vertical-offset="3344">
+          <folding>
+            <element signature="e#3189#3235#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/my/beans/Files.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="50" column="18" selection-start="853" selection-end="853" vertical-scroll-proportion="0.23362832" vertical-offset="761" max-vertical-offset="1824">
+          <folding>
+            <element signature="e#900#946#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

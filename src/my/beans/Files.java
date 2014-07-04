@@ -52,6 +52,7 @@ public class Files extends DBbean {
      * @param size
      * @return
      */
+    @SuppressWarnings({ "rawtypes", "unchecked" })
     public List<Files> list(int page, int size) {
         return (List<Files>) this.List(page, size, "1=1 ORDER BY id DESC");
     }
