@@ -54,7 +54,7 @@ public class Files extends DBbean {
      */
     @SuppressWarnings({ "rawtypes", "unchecked" })
     public List<Files> list(int page, int size) {
-        return (List<Files>) this.List(page, size, "1=1 ORDER BY id DESC");
+        return (List<Files>) List(page, size, "1=1 ORDER BY id DESC");
     }
 	
 	public long getUser() {

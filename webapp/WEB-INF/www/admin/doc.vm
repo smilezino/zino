@@ -116,6 +116,7 @@
 				$(this).hide();
                 span.removeClass();
 				span.addClass(tip);
+                span.html(title);
                 span.setAttribute("title", title);
 			});
 			select.show();

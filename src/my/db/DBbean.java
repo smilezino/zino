@@ -191,7 +191,6 @@ abstract public class DBbean implements Serializable{
 	}
 	/**
 	 * 获取此对象的记录数
-	 * @param filter
 	 * @return
 	 */
 	public long Count() {
