@@ -18,10 +18,9 @@ import org.apache.commons.dbutils.DbUtils;
  * @author smile
  * @date 2013-2-4 下午10:15:28
  */
-public class DBbean implements Serializable{
+abstract public class DBbean implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private long __key_id;
-	private String __table_name;
 	public long getId() { return __key_id; }
 	public void setId(long id) { this.__key_id = id; }
 	
@@ -29,9 +28,7 @@ public class DBbean implements Serializable{
 	 * 子类须覆盖此方法
 	 * @return
 	 */
-	protected String TableName() {
-		return __table_name;
-	}
+	abstract protected String TableName();
 	/**
 	 * 返回对象对应的缓存区域名
 	 * 

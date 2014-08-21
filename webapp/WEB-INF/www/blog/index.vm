@@ -25,7 +25,7 @@
 	}
 	
 </style>
-#if($blog && ($blog.status==0 || $g_user.IsManager()))
+#if($blog && ($blog.draft==0 || $g_user.IsManager()) && ($blog.status==0 || $g_user.IsManager()))
 $blog.addViewCount()
 #set($user = $User.Get($blog.user))
 #set($page_title = $format.html($blog.title) + " - Blog")

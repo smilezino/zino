@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+import my.utils.HtmlUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -63,7 +64,7 @@ public class Blog extends DBbean{
 	 */
 	public String markdown() {
 		MarkdownProcessor m = new MarkdownProcessor();
-		return m.markdown(text);
+		return HtmlUtils.filter(m.markdown(text));
 	}
 	
 	/**
