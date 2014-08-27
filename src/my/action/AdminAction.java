@@ -1,14 +1,11 @@
 package my.action;
 
-import my.beans.Resume;
 import my.beans.User;
 import my.service.Annotation;
 import my.service.RequestContext;
-import my.toolbox.FormatTool;
 import my.utils.CommandUtils;
 
 import java.io.IOException;
-import java.util.Date;
 
 /**
  * 超级管理员执行的action

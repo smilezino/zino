@@ -9,23 +9,19 @@ import org.jsoup.safety.Whitelist;
  * Created by zino on 8/21/14.
  */
 public class HtmlUtils {
-    public final static Whitelist whiteList = Whitelist.basicWithImages();
+    public final static Whitelist whiteList = Whitelist.basic();
+
     static {
-        whiteList.addTags("embed","object","param","p","span","pre","div","h1","h2","h3","h4","h5","table","tbody","tr","th","td","ul","li");
-//        whiteList.addAttributes("span", "style");
-//        whiteList.addAttributes("pre", "class");
-//        whiteList.addAttributes("div", "class", "align");
-//        whiteList.addAttributes("a", "target");
-//        whiteList.addAttributes("table", "style","border","bordercolor","cellpadding","cellspacing", "align");
-//        whiteList.addAttributes("img", "style","border", "align");
-//        whiteList.addAttributes("th", "style", "align","rowspan", "colspan");
-//        whiteList.addAttributes("td", "style", "align","rowspan", "colspan");
-//        whiteList.addAttributes("object", "width", "height","classid","codebase","data","type");
-//        whiteList.addAttributes("param", "name", "value");
-//        whiteList.addAttributes("embed", "src","quality","width","height","allowFullScreen","allowScriptAccess","flashvars","name","type","pluginspage");
+        whiteList.addTags("embed", "object", "param", "p", "span", "pre", "div", "h1",
+                "h2", "h3", "h4", "h5", "h6", "table", "tbody", "tr", "th", "td", "ul", "li",
+                "strong", "em", "img");
+        whiteList.addAttributes("a", "target");
+        whiteList.addAttributes("pre", "class");
+        whiteList.addAttributes("img", "src");
     }
+
     public static String filter(String html) {
-        if(StringUtils.isBlank(html)) {
+        if (StringUtils.isBlank(html)) {
             return "";
         }
         return Jsoup.clean(html, whiteList);
