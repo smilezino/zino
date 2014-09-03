@@ -83,7 +83,7 @@
         						<li>
         							<span class="pull-right">
                                         <a class="note-edit" href="$link.link("note/edit?id=")$n.id" title="编辑"><span class="edit">编辑</span></a>
-                                       <a class="note-del" href="javascript:;" title="编辑" ref="$n.id"><span class="edit">删除</span></a>
+                                       <a class="note-del" href="javascript:;" title="删除" ref="$n.id"><span class="edit">删除</span></a>
                                     </span>
             						<span class="badge">$n.title</span>
                                     <span class="note-line">
